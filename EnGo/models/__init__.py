@@ -33,7 +33,8 @@ def create_admin_user(username):
     )
     permission.add()
     user = User(
-        username=username
+        username=username,
+        password="0000"
     )
     user.add()
     user_permission = UserPermission(
