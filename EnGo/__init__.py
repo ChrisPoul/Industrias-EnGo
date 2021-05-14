@@ -10,6 +10,11 @@ def create_app(test_config=None):
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = "dev"
 
+    if test_config is None:
+        app.config.from_pyfile('config.py', silent=True)
+    else:
+        app.config.from_mapping(test_config)
+
     from .models import db, init_db_command
     db.init_app(app)
     app.cli.add_command(init_db_command)
