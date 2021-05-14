@@ -3,8 +3,8 @@ from flask import (
     session, request
 )
 from . import permission_required
-from EnGo.models.permission import Permission
-from EnGo.models.user import User, UserPermission
+from EnGo.models.permission import Permission, UserPermission
+from EnGo.models.user import User
 
 bp = Blueprint('admin', __name__, url_prefix="/admin")
 

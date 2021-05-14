@@ -1,5 +1,6 @@
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    ForeignKey
 )
 from EnGo.models import db, MyModel
 
@@ -27,3 +28,9 @@ class Permission(db.Model, MyModel):
 
     def search(name):
         return Permission.query.filter_by(name=name).first()
+
+
+class UserPermission(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)
