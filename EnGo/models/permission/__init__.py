@@ -22,5 +22,8 @@ class Permission(db.Model, MyModel):
     def get(id):
         return Permission.query.get(id)
 
+    def get_all():
+        return Permission.query.all()
+
     def search(name):
         return Permission.query.filter_by(name=name).first()
