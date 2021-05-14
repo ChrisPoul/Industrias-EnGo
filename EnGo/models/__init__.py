@@ -22,6 +22,25 @@ class MyModel:
 def init_db():
     db.drop_all()
     db.create_all()
+    create_admin_user("Chris")
+
+
+def create_admin_user(username):
+    from .permission import Permission
+    from .user import User, UserPermission
+    permission = Permission(
+        name="admin"
+    )
+    permission.add()
+    user = User(
+        username=username
+    )
+    user.add()
+    user_permission = UserPermission(
+        user_id=user.id,
+        permission_id=permission.id
+    )
+    user_permission.add()
 
 
 @click.command("init-db")

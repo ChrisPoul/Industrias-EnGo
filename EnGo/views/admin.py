@@ -1,16 +1,23 @@
 from flask import (
     Blueprint, render_template, g,
-    session
+    session, request
 )
 from . import permission_required
 from EnGo.models.permission import Permission
+from EnGo.models.user import User, UserPermission
 
 bp = Blueprint('admin', __name__, url_prefix="/admin")
 
 
-@bp.route("/main_page")
+@bp.route("/main_page", methods=('POST', 'GET'))
 @permission_required("admin")
 def main_page():
+    if request.method == "POST":
+        username = request.form['username']
+        user = User(
+            username=username
+        )
+        user.add()
 
     return render_template(
         "admin/main-page.html"
