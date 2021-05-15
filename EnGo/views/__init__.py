@@ -8,10 +8,11 @@ from EnGo.models.permission import Permission
 
 def permission_required(permission_names):
     def decorator(view_func):
+        @functools.wraps(view_func)
         def wrapped_view(*args, **kwargs):
             view_name = request.endpoint
             set_view_permissions(view_name, permission_names)
-            if g.user.has_permission(view_name):
+            if g.user.has_permission(view_name) is False:
                 return redirect(
                     url_for('home.main_page')
                 )

@@ -1,4 +1,11 @@
 <nav>
+    {% if g.user %}
+    {% if g.user.has_permission(request.endpoint) %}
+    <a href="{{ url_for('admin.main_page') }}">
+        Admin Page
+    </a>
+    {% endif %}
+    {% endif %}
     <a href="{{ url_for('home.main_page') }}">
         Pagina Principal
     </a>
