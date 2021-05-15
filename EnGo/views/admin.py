@@ -24,16 +24,3 @@ def main_page():
     return render_template(
         "admin/main-page.html"
     )
-
-
-@bp.before_app_request
-def load_loged_in_user():
-    try:
-        user_id = session["user_id"]
-    except KeyError:
-        user_id = None
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = User.get(user_id)

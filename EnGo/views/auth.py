@@ -6,23 +6,6 @@ from flask import (
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-@bp.route("/register", methods=('POST', 'GET'))
-def register():
-    if request.method == "POST":
-        auth = Auth()
-        error = auth.register()
-
-        if not error:
-            return redirect(
-                url_for('auth.login')
-            )
-        flash(error)
-        
-    return render_template(
-        "auth/register.html"
-    )
-
-
 @bp.route("/login", methods=('POST', 'GET'))
 def login():
     if request.method == "POST":
@@ -37,4 +20,14 @@ def login():
 
     return render_template(
         "auth/login.html"
+    )
+
+
+@bp.route("/logout")
+def logout():
+    auth = Auth()
+    auth.logout()
+
+    return redirect(
+        url_for("auth.login")
     )
