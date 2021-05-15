@@ -1,5 +1,6 @@
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    ForeignKey
 )
 from EnGo.models import db, MyModel
 
@@ -31,6 +32,15 @@ class User(db.Model, MyModel):
     def has_permission(self):
         if self.is_admin():
             return True
+        
+        return False
+
+    def is_admin(self):
+        for permission in self.permissions:
+            if permission.name == "admin":
+                return True
+
+        return False
         
 
 class UserPermission(db.Model, MyModel):

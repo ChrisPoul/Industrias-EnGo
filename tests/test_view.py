@@ -7,8 +7,7 @@ class UserTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.view = View(
-            name="Test",
-            permission_id=1
+            name="Test"
         )
         self.view.add()
 
@@ -17,8 +16,7 @@ class TestAdd(Test):
 
     def test_should_add_view(self):
         view = View(
-            name="Test",
-            permission_id=1
+            name="Test"
         )
         view.add()
 
@@ -61,8 +59,7 @@ class TestGetAll(UserTest):
     def setUp(self):
         UserTest.setUp(self)
         self.view2 = View(
-            name="Test2",
-            permission_id=1
+            name="Test2"
         )
         self.view2.add()
 
