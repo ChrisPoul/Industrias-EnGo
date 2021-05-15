@@ -24,10 +24,20 @@ class ViewPermissionTest(Test):
 class TestAddPermissions(ViewPermissionTest):
 
     def test_should_add_permissions_to_view_given_list_of_permissions(self):
+        self.assertEqual(len(self.view.permissions), 0)
         permissions = [self.permission1, self.permission2]
         self.view.add_permissions(permissions)
 
         self.assertEqual(self.view.permissions, permissions)
+
+
+class TestAddPermission(ViewPermissionTest):
+
+    def test_should_add_permission_to_view_given_a_permission_object(self):
+        self.assertEqual(len(self.view.permissions), 0)
+        self.view.add_permission(self.permission1)
+
+        self.assertEqual(self.view.permissions, [self.permission1])
 
 
 class TestUpdatePermissions(ViewPermissionTest):

@@ -29,11 +29,14 @@ class View(db.Model, MyModel):
 
     def add_permissions(self, permissions):
         for permission in permissions:
-            view_permission = ViewPermission(
-                view_id=self.id,
-                permission_id=permission.id
-            )
-            view_permission.add()
+            self.add_permission(permission)
+
+    def add_permission(self, permission):
+        view_permission = ViewPermission(
+            view_id=self.id,
+            permission_id=permission.id
+        )
+        view_permission.add()
 
     def update_permissions(self, permissions):
         self.delete_permissions()
