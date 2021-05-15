@@ -27,3 +27,13 @@ class User(db.Model, MyModel):
 
     def search(username):
         return User.query.filter_by(username=username).first()
+
+    def has_permission(self):
+        if self.is_admin():
+            return True
+        
+
+class UserPermission(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)

@@ -3,7 +3,6 @@ from flask import (
     flash
 )
 from . import permission_required
-from EnGo.models.permission import Permission, UserPermission
 from EnGo.models.user.auth import Auth
 
 bp = Blueprint('admin', __name__, url_prefix="/admin")

@@ -26,8 +26,7 @@ def init_db():
 
 
 def create_admin_user(username):
-    from .permission import Permission, UserPermission
-    from .user import User
+    from .user import User, UserPermission
     permission = Permission(
         name="admin"
     )
