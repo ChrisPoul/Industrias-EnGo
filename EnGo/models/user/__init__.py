@@ -13,7 +13,6 @@ class User(db.Model, MyModel):
     user_permissions = db.relationship(
         'UserPermission',
         backref="user",
-        lazy=True,
         cascade="all, delete-orphan"
     )
 

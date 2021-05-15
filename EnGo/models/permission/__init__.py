@@ -1,5 +1,6 @@
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    Text
 )
 from EnGo.models import db, MyModel
 
@@ -7,6 +8,7 @@ from EnGo.models import db, MyModel
 class Permission(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     name = Column(String(50), nullable=False, unique=True)
+    description = Column(Text, nullable=True, unique=False)
     view_permissions = db.relationship(
         "ViewPermission",
         backref="permission",
