@@ -12,45 +12,95 @@ class UserPermissionTest(Test):
         name="admin"
         )
         self.admin_permission.add()
+        self.admin_view = View(
+            name="Admin View"
+        )
+        self.admin_view.add()
+        self.admin_view_premission = ViewPermission(
+            view_id=self.admin_view.id,
+            permission_id=self.admin_permission.id
+        )
+        self.admin_view_premission.add()
+        self.admin_user = User(
+            username="Admin User",
+            password="0000"
+        )
+        self.admin_user.add()
         self.quality_permission = Permission(
             name="quality"
         )
         self.quality_permission.add()
-        self.view = View(
-            name="Test View"
+        self.quality_view = View(
+            name="Quality View"
         )
-        self.view.add()
-        self.view_admin_permission = ViewPermission(
-            view_id=self.view.id,
-            permission_id=self.admin_permission.id
+        self.quality_view.add()
+        self.quality_view_premission = ViewPermission(
+            view_id=self.quality_view.id,
+            permission_id=self.quality_permission.id
         )
-        self.view_admin_permission.add()
-        self.user = User(
-            username="Admin User",
+        self.quality_view_premission.add()
+        self.normal_user = User(
+            username="Normal User",
             password="0000"
         )
-        self.user.add()
+        self.normal_user.add()
 
 
 class TestHasPermission(UserPermissionTest):
 
-    def test_should_return_true_given_admin_user(self):
+    def test_should_return_true_given_admin_user_and_admin_view(self):
         user_permission = UserPermission(
-            user_id=self.user.id,
+            user_id=self.admin_user.id,
             permission_id=self.admin_permission.id
         )
         user_permission.add()
         
-        self.assertTrue(self.user.has_permission())
+        self.assertTrue(self.admin_user.has_permission("Admin View"))
+
+    def test_should_return_true_given_admin_user_and_any_view(self):
+        user_permission = UserPermission(
+            user_id=self.admin_user.id,
+            permission_id=self.admin_permission.id
+        )
+        user_permission.add()
+        
+        self.assertTrue(self.admin_user.has_permission("Quality View"))
+
+    def test_should_return_false_given_normal_user_and_admin_view(self):
+        user_permission = UserPermission(
+            user_id=self.normal_user.id,
+            permission_id=self.quality_permission.id
+        )
+        user_permission.add()
+
+        self.assertFalse(self.normal_user.has_permission("Admin View"))
+
+    def test_should_return_true_given_normal_user_with_permissions_required_for_view(self):
+        user_permission = UserPermission(
+            user_id=self.normal_user.id,
+            permission_id=self.quality_permission.id
+        )
+        user_permission.add()
+
+        self.assertTrue(self.normal_user.has_permission("Quality View"))
 
 
 class TestIsAdmin(UserPermissionTest):
 
     def test_should_return_true_given_admin_user(self):
         user_permission = UserPermission(
-            user_id=self.user.id,
+            user_id=self.admin_user.id,
             permission_id=self.admin_permission.id
         )
         user_permission.add()
         
-        self.assertTrue(self.user.is_admin())
+        self.assertTrue(self.admin_user.is_admin())
+
+    def test_should_return_false_given_normal_user(self):
+        user_permission = UserPermission(
+            user_id=self.normal_user.id,
+            permission_id=self.quality_permission.id
+        )
+        user_permission.add()
+        
+        self.assertFalse(self.normal_user.is_admin())

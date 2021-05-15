@@ -9,7 +9,7 @@ class Permission(db.Model, MyModel):
     name = Column(String(50), nullable=False, unique=True)
     view_permissions = db.relationship(
         "ViewPermission",
-        backref="parent",
+        backref="permission",
         cascade="all, delete-orphan"
     )
     user_permissions = db.relationship(

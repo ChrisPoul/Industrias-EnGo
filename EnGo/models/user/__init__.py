@@ -3,6 +3,7 @@ from sqlalchemy import (
     ForeignKey
 )
 from EnGo.models import db, MyModel
+from EnGo.models.view import View
 
 
 class User(db.Model, MyModel):
@@ -29,9 +30,13 @@ class User(db.Model, MyModel):
     def search(username):
         return User.query.filter_by(username=username).first()
 
-    def has_permission(self):
+    def has_permission(self, view_name):
         if self.is_admin():
             return True
+        view = View.search(view_name)
+        for permission in self.permissions:
+            if permission in set(view.permissions):
+                return True
         
         return False
 
