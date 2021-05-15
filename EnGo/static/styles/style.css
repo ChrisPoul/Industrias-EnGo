@@ -7,6 +7,10 @@ body {
 header {
     width: 100%;
     height: fit-content;
+    margin: 0 1em;
+}
+nav a {
+    margin: 0.6em;
 }
 section {
     margin-left: 10%;
