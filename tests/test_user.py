@@ -50,7 +50,7 @@ class TestGet(UserTest):
 
         self.assertEqual(user, self.user)
 
-    def test_shoul_return_none_given_invalid_id(self):
+    def test_should_return_none_given_invalid_id(self):
         user = User.get(2)
 
         self.assertEqual(user, None)
