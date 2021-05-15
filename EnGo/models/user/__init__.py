@@ -33,6 +33,12 @@ class User(db.Model, MyModel):
     def has_permission(self, view_name):
         if self.is_admin():
             return True
+        if self.has_view_permissions(view_name):
+            return True
+        
+        return False
+
+    def has_view_permissions(self, view_name):
         view = View.search(view_name)
         for permission in self.permissions:
             if permission in set(view.permissions):

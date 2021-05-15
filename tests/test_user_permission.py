@@ -84,6 +84,45 @@ class TestHasPermission(UserPermissionTest):
 
         self.assertTrue(self.normal_user.has_permission("Quality View"))
 
+    
+class TestHasViewPermissions(UserPermissionTest):
+
+    def test_should_return_true_given_admin_user_and_admin_view(self):
+        user_permission = UserPermission(
+            user_id=self.admin_user.id,
+            permission_id=self.admin_permission.id
+        )
+        user_permission.add()
+        
+        self.assertTrue(self.admin_user.has_view_permissions("Admin View"))
+
+    def test_should_return_false_given_admin_user_and_non_admin_view(self):
+        user_permission = UserPermission(
+            user_id=self.admin_user.id,
+            permission_id=self.admin_permission.id
+        )
+        user_permission.add()
+        
+        self.assertFalse(self.admin_user.has_view_permissions("Quality View"))
+
+    def test_should_return_true_given_user_with_permissions_required_for_view(self):
+        user_permission = UserPermission(
+            user_id=self.normal_user.id,
+            permission_id=self.quality_permission.id
+        )
+        user_permission.add()
+
+        self.assertTrue(self.normal_user.has_view_permissions("Quality View"))
+
+    def test_should_return_false_given_user_without_permissions_required_for_view(self):
+        user_permission = UserPermission(
+            user_id=self.normal_user.id,
+            permission_id=self.quality_permission.id
+        )
+        user_permission.add()
+
+        self.assertFalse(self.normal_user.has_view_permissions("Admin View"))
+
 
 class TestIsAdmin(UserPermissionTest):
 
