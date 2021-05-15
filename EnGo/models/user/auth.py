@@ -5,9 +5,9 @@ from flask import (
 from . import User
 
 
-class Auth:
+class UserAuth:
 
-    def login(self):
+    def login_user(self):
         username = request.form["username"]
         password = request.form["password"]
         error = None
@@ -24,7 +24,7 @@ class Auth:
 
         return error
 
-    def register(self):
+    def register_user(self):
         username = request.form['username']
         password = request.form['password']
         error = None
@@ -44,8 +44,12 @@ class Auth:
 
         return error
 
-    def logout(self):
+    def logout_user(self):
         session.clear()
+
+    def delete_user(self, user_id):
+        user = User.get(user_id)
+        user.delete()
 
     def load_loged_in_user(self):
         try:

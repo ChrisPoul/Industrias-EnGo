@@ -11,7 +11,7 @@ auth = UserAuth()
 @bp.route("/login", methods=('POST', 'GET'))
 def login():
     if request.method == "POST":
-        error = auth.login()
+        error = auth.login_user()
         if not error:
             return redirect(
                 url_for('home.main_page')
@@ -25,7 +25,7 @@ def login():
 
 @bp.route("/logout")
 def logout():
-    auth.logout()
+    auth.logout_user()
 
     return redirect(
         url_for("auth.login")
