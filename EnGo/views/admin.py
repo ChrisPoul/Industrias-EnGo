@@ -7,7 +7,7 @@ from . import permission_required
 bp = Blueprint('admin', __name__, url_prefix="/admin")
 
 @bp.route("/main_page", methods=('POST', 'GET'))
-@permission_required("admin")
+@permission_required(["admin"])
 def main_page():
 
     return render_template(

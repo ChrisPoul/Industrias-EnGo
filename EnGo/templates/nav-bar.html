@@ -3,9 +3,11 @@
         Pagina Principal
     </a>
     {% if g.user %}
+    {% if g.user.has_permission(request.endpoint) %}
     <a href="{{ url_for('auth.register') }}">
         Registrar Empleado
     </a>
+    {% endif %}
     <a href="{{ url_for('auth.logout') }}">
         Logout
     </a>
