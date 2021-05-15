@@ -2,6 +2,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
 )
+from EnGo.models.user.auth import Auth
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -31,3 +32,9 @@ def logout():
     return redirect(
         url_for("auth.login")
     )
+
+
+@bp.before_app_request
+def load_loged_in_user():
+    auth = Auth()
+    auth.load_loged_in_user()
