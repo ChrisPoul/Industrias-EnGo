@@ -1,5 +1,13 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>{%block title %}Admin Page{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
 <form method="post">
     <input name="username" id="username" placeholder="Username...">
     <input name="password" id="password" placeholder="Password...">
     <input type="submit">
 </form>
+{% endblock %}
