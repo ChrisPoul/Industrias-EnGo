@@ -27,6 +27,22 @@ class View(db.Model, MyModel):
     def search(name):
         return View.query.filter_by(name=name).first()
 
+    def update_permissions(self, permissions):
+        self.delete_permissions()
+        self.add_permissions(permissions)
+
+    def delete_permissions(self):
+        for view_permission in self.view_permissions:
+            view_permission.delete()
+
+    def add_permissions(self, permissions):
+        for permission in permissions:
+            view_permission = ViewPermission(
+                view_id=view.id,
+                permission_id=permission.id
+            )
+            view_permission.add()
+
 
 class ViewPermission(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
