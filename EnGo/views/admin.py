@@ -14,7 +14,7 @@ bp = Blueprint('admin', __name__, url_prefix="/admin")
 def main_page():
     if request.method == "POST":
         username = request.form['username']
-        password = request.password['password']
+        password = request.form['password']
         user = User(
             username=username,
             password=password
