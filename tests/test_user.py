@@ -66,7 +66,20 @@ class TestGetAll(UserTest):
         )
         self.user2.add()
 
-    def test_should_return_all_users(self):
+    def test_should_return_list_of_all_users(self):
         users = User.get_all()
 
         self.assertEqual(users, [self.user, self.user2])
+
+
+class TestSearch(UserTest):
+
+    def test_should_return_permission_given_valid_username(self):
+        user = User.search("Test")
+
+        self.assertEqual(user, self.user)
+
+    def test_should_return_none_given_invalid_username(self):
+        user = User.search("Non existent name")
+
+        self.assertEqual(user, None)
