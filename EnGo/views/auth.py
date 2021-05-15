@@ -5,12 +5,12 @@ from flask import (
 from EnGo.models.user.auth import Auth
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")
+auth = Auth()
 
 
 @bp.route("/login", methods=('POST', 'GET'))
 def login():
     if request.method == "POST":
-        auth = Auth()
         error = auth.login()
 
         if not error:
@@ -26,7 +26,6 @@ def login():
 
 @bp.route("/logout")
 def logout():
-    auth = Auth()
     auth.logout()
 
     return redirect(
@@ -36,5 +35,4 @@ def logout():
 
 @bp.before_app_request
 def load_loged_in_user():
-    auth = Auth()
     auth.load_loged_in_user()
