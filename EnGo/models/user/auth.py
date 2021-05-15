@@ -1,6 +1,5 @@
 from flask import (
-    redirect, url_for, session,
-    request, g
+    session, request, g
 )
 from . import User
 
@@ -61,14 +60,3 @@ class UserAuth:
             g.user = None
         else:
             g.user = User.get(user_id)
-
-
-def login_required(view):
-    def wrapped_view(**kwargs):
-        if g.user is None:
-            return redirect(
-                url_for('auth.login')
-            )
-        return view(**kwargs)
-
-    return wrapped_view
