@@ -19,6 +19,8 @@ class UserValidation:
             self.error = self.validate_empty_value(attribute)
             if self.error:
                 return self.error
+        
+        return self.error
 
     def validate_empty_value(self, attribute):
         value = getattr(self.user, attribute)
