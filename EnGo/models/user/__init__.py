@@ -5,6 +5,11 @@ from sqlalchemy import (
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
 
+user_attributes = [
+    "username",
+    "password"
+]
+
 
 class User(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -16,10 +21,6 @@ class User(db.Model, MyModel):
         cascade="all, delete-orphan"
     )
 
-    @property
-    def permissions(self):
-        return [user_permission.permission for user_permission in self.user_permissions]
-
     def get(id):
         return User.query.get(id)
 
@@ -28,6 +29,15 @@ class User(db.Model, MyModel):
 
     def search(username):
         return User.query.filter_by(username=username).first()
+
+    @property
+    def permissions(self):
+        return [user_permission.permission for user_permission in self.user_permissions]
+
+    @property
+    def validation(self):
+        from .validation import UserValidation
+        return UserValidation(self)
 
     def has_permission(self, view_name):
         if self.is_admin():

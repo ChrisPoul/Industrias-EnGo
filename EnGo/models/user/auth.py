@@ -28,17 +28,12 @@ class UserAuth:
         password = request.form['password']
         error = None
 
-        user = User.search(username)
-        if user:
-            error = "Nombre de usuario no disponible"
-        if password == "":
-            error = "Contraseña invalida"
-
+        user = User(
+            username=username,
+            password=password
+        )
+        error = user.validation.validate()
         if not error:
-            user = User(
-                username=username,
-                password=password
-            )
             user.add()
 
         return error
