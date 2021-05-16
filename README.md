@@ -1,1 +1,1 @@
-An integrated system for a business 
+This project is ment to integrate every aspect of a EnGo Industries, a business dedicaded to the manufacturing of automobile parts and metal cages.
