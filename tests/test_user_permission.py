@@ -9,7 +9,7 @@ class UserPermissionTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.admin_permission = Permission(
-        name="admin"
+        permission_name="admin"
         )
         self.admin_permission.add()
         self.admin_view = View(
@@ -27,7 +27,7 @@ class UserPermissionTest(Test):
         )
         self.admin_user.add()
         self.quality_permission = Permission(
-            name="quality"
+            permission_name="quality"
         )
         self.quality_permission.add()
         self.quality_view = View(

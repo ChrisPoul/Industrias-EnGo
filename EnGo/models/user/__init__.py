@@ -57,7 +57,7 @@ class User(db.Model, MyModel):
 
     def is_admin(self):
         for permission in self.permissions:
-            if permission.name == "admin":
+            if permission.permission_name == "admin":
                 return True
 
         return False

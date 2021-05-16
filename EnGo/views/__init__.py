@@ -61,7 +61,7 @@ def get_permission(name):
     permission = Permission.search(name)
     if not permission:
         permission = Permission(
-            name=name
+            permission_name=name
         )
         permission.add()
     

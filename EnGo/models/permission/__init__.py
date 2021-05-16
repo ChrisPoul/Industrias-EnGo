@@ -4,10 +4,15 @@ from sqlalchemy import (
 )
 from EnGo.models import db, MyModel
 
+permission_attributes = [
+    "permission_name",
+    "description"
+]
+
 
 class Permission(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
-    name = Column(String(50), nullable=False, unique=True)
+    permission_name = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=True, unique=False)
     view_permissions = db.relationship(
         "ViewPermission",
@@ -27,4 +32,9 @@ class Permission(db.Model, MyModel):
         return Permission.query.all()
 
     def search(name):
-        return Permission.query.filter_by(name=name).first()
+        return Permission.query.filter_by(permission_name=name).first()
+
+    @property
+    def validation(self):
+        from .validation import PermissionValidation
+        return PermissionValidation(self)

@@ -29,7 +29,7 @@ def create_admin_user(username):
     from .permission import Permission
     from .user import User, UserPermission
     permission = Permission(
-        name="admin"
+        permission_name="admin"
     )
     permission.add()
     user = User(

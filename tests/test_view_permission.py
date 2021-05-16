@@ -8,11 +8,11 @@ class ViewPermissionTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.permission1 = Permission(
-            name="Permission 1"
+            permission_name="Permission 1"
         )
         self.permission1.add()
         self.permission2 = Permission(
-            name="Permission 2"
+            permission_name="Permission 2"
         )
         self.permission2.add()
         self.view = View(

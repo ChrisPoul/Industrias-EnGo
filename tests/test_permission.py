@@ -7,7 +7,7 @@ class PermissionTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.permission = Permission(
-            name="Test"
+            permission_name="Test"
         )
         self.permission.add()
 
@@ -16,7 +16,7 @@ class TestAdd(Test):
 
     def test_should_add_permission(self):
         permission = Permission(
-            name="Test"
+            permission_name="Test"
         )
         permission.add()
 
@@ -26,11 +26,11 @@ class TestAdd(Test):
 class TestUpdate(PermissionTest):
 
     def test_should_update_permission(self):
-        self.permission.name = "New name"
+        self.permission.permission_name = "New permission_name"
         self.permission.update()
         self.db.session.rollback()
 
-        self.assertEqual(self.permission.name, "New name")
+        self.assertEqual(self.permission.permission_name, "New permission_name")
 
 
 class TestDelete(PermissionTest):
@@ -59,7 +59,7 @@ class TestGetAll(PermissionTest):
     def setUp(self):
         PermissionTest.setUp(self)
         self.permission2 = Permission(
-            name="Test2"
+            permission_name="Test2"
         )
         self.permission2.add()
 
@@ -77,6 +77,6 @@ class TestSearch(PermissionTest):
         self.assertEqual(permission, self.permission)
 
     def test_should_return_none_given_invalid_name(self):
-        permission = Permission.search("Non existent name")
+        permission = Permission.search("Non existent permission_name")
 
         self.assertEqual(permission, None)
