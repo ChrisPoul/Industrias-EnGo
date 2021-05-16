@@ -113,3 +113,8 @@ class TestValidateUniqueValues(UserValidationTest):
         error = user.validation.validate_unique_values()
 
         self.assertNotEqual(error, None)
+
+    def test_should_not_return_error_when_validating_registered_user(self):
+        error = self.user.validation.validate_unique_values()
+
+        self.assertEqual(error, None)

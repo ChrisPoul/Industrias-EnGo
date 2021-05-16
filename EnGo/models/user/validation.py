@@ -28,7 +28,7 @@ class UserValidation:
     def validate_unique_values(self):
         from . import User
         user = User.search(self.user.username)
-        if user:
+        if user and user is not self.user:
             self.error = "Nombre de usuario no disponible"
         
         return self.error
