@@ -40,7 +40,7 @@ def set_view_permissions(view_name, permission_names):
     permissions = get_permissions(permission_names)
     if not view:
         view = View(
-            name=view_name
+            view_name=view_name
         )
         view.add()
         view.add_permissions(permissions)

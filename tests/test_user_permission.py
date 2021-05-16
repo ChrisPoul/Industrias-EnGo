@@ -13,7 +13,7 @@ class UserPermissionTest(Test):
         )
         self.admin_permission.add()
         self.admin_view = View(
-            name="Admin View"
+            view_name="Admin View"
         )
         self.admin_view.add()
         self.admin_view_premission = ViewPermission(
@@ -31,7 +31,7 @@ class UserPermissionTest(Test):
         )
         self.quality_permission.add()
         self.quality_view = View(
-            name="Quality View"
+            view_name="Quality View"
         )
         self.quality_view.add()
         self.quality_view_premission = ViewPermission(

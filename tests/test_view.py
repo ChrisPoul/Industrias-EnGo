@@ -7,7 +7,7 @@ class UserTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.view = View(
-            name="Test"
+            view_name="Test"
         )
         self.view.add()
 
@@ -16,7 +16,7 @@ class TestAdd(Test):
 
     def test_should_add_view(self):
         view = View(
-            name="Test"
+            view_name="Test"
         )
         view.add()
 
@@ -26,11 +26,11 @@ class TestAdd(Test):
 class TestUpdate(UserTest):
 
     def test_should_update_view(self):
-        self.view.name = "New name"
+        self.view.view_name = "New name"
         self.view.update()
         self.db.session.rollback()
 
-        self.assertEqual(self.view.name, "New name")
+        self.assertEqual(self.view.view_name, "New name")
 
 
 class TestDelete(UserTest):
@@ -59,7 +59,7 @@ class TestGetAll(UserTest):
     def setUp(self):
         UserTest.setUp(self)
         self.view2 = View(
-            name="Test2"
+            view_name="Test2"
         )
         self.view2.add()
 

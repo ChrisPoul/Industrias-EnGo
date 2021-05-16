@@ -16,7 +16,7 @@ class ViewPermissionTest(Test):
         )
         self.permission2.add()
         self.view = View(
-            name="Test View"
+            view_name="Test View"
         )
         self.view.add()
 
