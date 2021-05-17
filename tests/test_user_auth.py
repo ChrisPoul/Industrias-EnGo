@@ -136,3 +136,9 @@ class TestLoadLogedInUser(UserAuthTest):
         self.auth.load_loged_in_user()
 
         self.assertEqual(g.user, self.user)
+
+    def test_should_set_user_as_null_given_invalid_user_id(self):
+        session["user_id"] = 100
+        self.auth.load_loged_in_user()
+
+        self.assertEqual(g.user, None)
