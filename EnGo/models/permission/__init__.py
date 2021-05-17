@@ -35,6 +35,14 @@ class Permission(db.Model, MyModel):
         return Permission.query.filter_by(permission_name=name).first()
 
     @property
+    def views(self):
+        return [view_permission.view for view_permission in self.view_permissions]
+
+    @property
+    def users(self):
+        return [user_permission.user for user_permission in self.user_permissions]
+
+    @property
     def validation(self):
         from .validation import PermissionValidation
         return PermissionValidation(self)
