@@ -1,5 +1,5 @@
 from flask import url_for, session, g
-from .setup import Test
+from . import Test
 from EnGo.models.user import User
 from EnGo.models.user.auth import UserAuth
 

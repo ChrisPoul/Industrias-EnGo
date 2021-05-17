@@ -1,4 +1,4 @@
-from .setup import Test
+from . import Test
 from EnGo.models.permission import Permission
 from EnGo.models.user import User, UserPermission
 from EnGo.models.view import View, ViewPermission
