@@ -31,7 +31,7 @@ class AuthViewTest(Test):
 
 class TestRegisterView(AuthViewTest):
 
-    def test_should_return_valid_response_given_logged_in_user_is_admin(self):
+    def test_should_grant_access_given_logged_in_user_is_admin(self):
         with self.client.session_transaction() as session:
             session["user_id"] = self.admin_user.id
         response = self.client.get(
@@ -52,7 +52,7 @@ class TestRegisterView(AuthViewTest):
 
 class TestLoginView(AuthViewTest):
 
-    def test_should_return_valid_response_given_no_loged_in_user(self):
+    def test_should_grant_access_given_no_loged_in_user(self):
         response = self.client.get(
             url_for('auth.login')
         )
