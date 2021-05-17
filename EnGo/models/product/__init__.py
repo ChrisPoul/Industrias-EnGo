@@ -1,4 +1,3 @@
-from sqlalchemy.sql.expression import false
 from EnGo.models import db, MyModel
 from sqlalchemy import (
     Column, Integer, String,
