@@ -59,6 +59,28 @@ class TestUpdateView(ProductViewTest):
                 url_for("product.update", id=self.product.id),
                 data=product_data
             )
-        self.db.rollback()
+        self.db.session.rollback()
         
         self.assertEqual(self.product.code, "New Code")
+
+
+class TestDeleteView(ProductViewTest):
+
+    def test_should_delete_product(self):
+        with self.client as client:
+            client.get(
+                url_for("product.delete", id=self.product.id)
+            )
+
+        self.assertNotIn(self.product, self.db.session)
+
+
+class TestProductsView(ProductViewTest):
+
+    def test_should_return_valid_response(self):
+        with self.client as client:
+            response = client.get(
+                url_for("product.products")
+            )
+
+        self.assert200(response)
