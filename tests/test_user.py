@@ -8,7 +8,7 @@ class UserTest(Test):
         Test.setUp(self)
         self.user = User(
             username="Test",
-            password="test password"
+            password="0000"
         )
         self.user.add()
 
@@ -18,7 +18,7 @@ class TestAdd(Test):
     def test_should_add_user(self):
         user = User(
             username="Test",
-            password="test password"
+            password="0000"
         )
         user.add()
 
@@ -62,7 +62,7 @@ class TestGetAll(UserTest):
         UserTest.setUp(self)
         self.user2 = User(
             username="Test2",
-            password="test password"
+            password="0000"
         )
         self.user2.add()
 
