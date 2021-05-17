@@ -2,6 +2,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
 )
+from . import permission_required, login_required
 from EnGo.models.product import Product
 
 bp = Blueprint("product", __name__, url_prefix="/product")
@@ -14,6 +15,8 @@ product_heads = dict(
 
 
 @bp.route("/products")
+@permission_required(["contaduría"])
+@login_required
 def products():
 
     return render_template(
@@ -22,6 +25,8 @@ def products():
 
 
 @bp.route("/add", methods=('POST', 'GET'))
+@permission_required(["contaduría"])
+@login_required
 def add():
     if request.method == "POST":
         product = Product(
@@ -39,6 +44,8 @@ def add():
 
 
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
+@permission_required(["contaduría"])
+@login_required
 def update(id):
     product = Product.get(id)
     if request.method == "POST":
@@ -52,7 +59,9 @@ def update(id):
     )
 
 
-@bp.route("/delete/<int:id>", methods=('POST', 'GET'))
+@bp.route("/delete/<int:id>")
+@permission_required(["contaduría"])
+@login_required
 def delete(id):
     product = Product.get(id)
     product.delete()
