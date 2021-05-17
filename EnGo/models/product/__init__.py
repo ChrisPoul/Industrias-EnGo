@@ -20,3 +20,9 @@ class Product(db.Model, MyModel):
 
     def search(search_term):
         return Product.query.filter_by(code=search_term).first()
+
+    @property
+    def validation(self):
+        from .validation import ProductValidation 
+        return ProductValidation(self)
+
