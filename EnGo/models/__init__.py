@@ -53,3 +53,12 @@ def init_db_command():
 
 def commit_to_db():
     db.session.commit()
+
+
+def has_nums(some_string):
+    nums = "1234567890"
+    for char in some_string:
+        if char in nums:
+            return True
+
+    return False

@@ -1,4 +1,5 @@
 from . import permission_attributes
+from EnGo.models import has_nums
 
 
 class PermissionValidation:
@@ -28,7 +29,10 @@ class PermissionValidation:
             return "No se pueden dejar campos vacíos"
 
     def validate_name(self):
-        pass
+        if has_nums(self.permission.permission_name):
+            self.error = "El nombre no puede llevar números"
+        
+        return self.error
 
     def validate_unique_values(self):
         from . import Permission

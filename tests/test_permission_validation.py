@@ -80,6 +80,14 @@ class TestValidateName(PermissionValidationTest):
 
         self.assertEqual(error, None)
 
+    def test_should_return_error_given_invalid_name(self):
+        permission = Permission(
+            permission_name="production2",
+        )
+        error = permission.validation.validate_name()
+
+        self.assertNotEqual(error, None)
+
 
 class TestValidateUniqueValues(PermissionValidationTest):
 

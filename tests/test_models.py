@@ -1,5 +1,7 @@
 from .setup import Test
-from EnGo.models import commit_to_db, create_admin_user
+from EnGo.models import (
+    commit_to_db, create_admin_user, has_nums
+)
 from EnGo.models.user import User
 
 
@@ -29,4 +31,13 @@ class TestCreateAdminUser(Test):
 
         self.assertEqual(user.username, "Admin")
         self.assertEqual(len(user.permissions), 1)
+
+
+class TestHasNums(Test):
+
+    def test_should_return_false_given_string_with_no_numbers(self):
+        self.assertFalse(has_nums("string with no numbers"))
+
+    def test_should_return_true_given_string_with_numbers(self):
+        self.assertTrue(has_nums("s0m3 number5"))
 
