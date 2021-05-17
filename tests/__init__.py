@@ -23,7 +23,7 @@ class Test(TestCase):
         self.db.session.remove()
         self.db.drop_all()
 
-    def request_context(self, url, data):
+    def request_context(self, url, data={}):
         with self.client:
             with self.app.test_request_context(url, data=data) as request_context:
                 return request_context

@@ -1,6 +1,6 @@
 from flask import (
     Blueprint, render_template, request,
-    flash, redirect, url_for
+    flash, redirect, url_for, g
 )
 from . import permission_required
 from EnGo.models.user.auth import UserAuth
@@ -26,6 +26,10 @@ def register():
 
 @bp.route("/login", methods=('POST', 'GET'))
 def login():
+    if g.user:
+        return redirect(
+            url_for('home.main_page')
+        )
     if request.method == "POST":
         error = auth.login_user()
         if not error:
