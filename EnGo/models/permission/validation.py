@@ -10,10 +10,8 @@ class PermissionValidation:
 
     def validate(self):
         self.validate_empty_values()
-        if not self.error:
-            self.validate_name()
-        if not self.error:
-            self.validate_unique_values()
+        self.validate_name()
+        self.validate_unique_values()
 
         return self.error
 

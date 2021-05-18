@@ -9,8 +9,7 @@ class UserValidation:
 
     def validate(self):
         self.validate_empty_values()
-        if not self.error:
-            self.validate_unique_values()
+        self.validate_unique_values()
         
         return self.error
 

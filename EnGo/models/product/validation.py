@@ -9,10 +9,8 @@ class ProductValidation:
     
     def validate(self):
         self.validate_empty_values()
-        if not self.error:
-            self.validate_unique_values()
-        if not self.error:
-            self.validate_price()
+        self.validate_unique_values()
+        self.validate_price()
         
         return self.error
     
