@@ -27,3 +27,7 @@ class Test(TestCase):
         with self.client:
             with self.app.test_request_context(url, data=data) as request_context:
                 return request_context
+
+    def login_user(self, user):
+        with self.client.session_transaction() as session:
+            session["user_id"] = user.id
