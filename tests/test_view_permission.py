@@ -1,5 +1,5 @@
 from . import Test
-from EnGo.models.view import View, ViewPermission
+from EnGo.models.view import View
 from EnGo.models.permission import Permission
 
 

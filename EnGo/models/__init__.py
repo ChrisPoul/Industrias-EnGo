@@ -27,21 +27,17 @@ def init_db():
 
 def create_admin_user(username):
     from .permission import Permission
-    from .user import User, UserPermission
-    permission = Permission(
+    from .user import User
+    admin_permission = Permission(
         permission_name="admin"
     )
-    permission.add()
-    user = User(
+    admin_permission.add()
+    admin_user = User(
         username=username,
         password="0000"
     )
-    user.add()
-    user_permission = UserPermission(
-        user_id=user.id,
-        permission_id=permission.id
-    )
-    user_permission.add()
+    admin_user.add()
+    admin_user.add_permission(admin_permission)
 
 
 @click.command("init-db")

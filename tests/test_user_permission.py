@@ -1,7 +1,7 @@
 from . import Test
 from EnGo.models.permission import Permission
-from EnGo.models.user import User, UserPermission
-from EnGo.models.view import View, ViewPermission
+from EnGo.models.user import User
+from EnGo.models.view import View
 
 
 class UserPermissionTest(Test):

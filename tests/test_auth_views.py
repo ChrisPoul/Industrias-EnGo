@@ -1,6 +1,6 @@
 from . import Test
 from flask import url_for
-from EnGo.models.user import User, UserPermission
+from EnGo.models.user import User
 from EnGo.models.permission import Permission
 
 
@@ -8,20 +8,16 @@ class AuthViewTest(Test):
 
     def setUp(self):
         Test.setUp(self)
+        self.admin_permission = Permission(
+            permission_name="admin",
+        )
+        self.admin_permission.add()
         self.admin_user = User(
             username="Admin User",
             password="0000"
         )
         self.admin_user.add()
-        self.permission = Permission(
-            permission_name="admin",
-        )
-        self.permission.add()
-        user_permission = UserPermission(
-            user_id=self.admin_user.id,
-            permission_id=self.permission.id
-        )
-        user_permission.add()
+        self.admin_user.add_permission(self.admin_permission)
         self.normal_user = User(
             username="Normal User",
             password="0000"

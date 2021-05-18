@@ -1,7 +1,7 @@
 from . import Test
 from flask import url_for
 from EnGo.models.permission import Permission
-from EnGo.models.user import User, UserPermission
+from EnGo.models.user import User
 from EnGo.models.product import Product
 
 
@@ -15,20 +15,16 @@ class ProductViewTest(Test):
             price=10
         )
         self.product.add()
-        permission = Permission(
+        accounting_permission = Permission(
             permission_name="contaduría"
         )
-        permission.add()
+        accounting_permission.add()
         accounting_user = User(
             username="Accounting User",
             password="0000"
         )
         accounting_user.add()
-        user_permission = UserPermission(
-            user_id=accounting_user.id,
-            permission_id=permission.id
-        )
-        user_permission.add()
+        accounting_user.add_permission(accounting_permission)
         with self.client.session_transaction() as session:
             session["user_id"] = accounting_user.id
         self.normal_user = User(

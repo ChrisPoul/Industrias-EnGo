@@ -2,7 +2,7 @@ import functools
 from flask import (
     request, g, redirect, url_for
 )
-from EnGo.models.view import View, ViewPermission
+from EnGo.models.view import View
 from EnGo.models.permission import Permission
 
 
