@@ -4,6 +4,12 @@ from sqlalchemy import (
     Column, String, Integer
 )
 
+customer_attributes = [
+    'customer_name',
+    'address',
+    'rfc'
+]
+
 
 class Customer(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -25,3 +31,8 @@ class Customer(db.Model, MyModel):
             customers = Customer.query.filter_by(rfc=search_term).all()
         
         return customers
+
+    @property
+    def validation(self):
+        from .validation import CustomerValidation
+        return CustomerValidation(self)
