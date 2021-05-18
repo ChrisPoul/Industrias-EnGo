@@ -14,11 +14,11 @@ class HomeTest(Test):
         self.user.add()
 
 
+
 class TestMainPage(HomeTest):
 
     def test_should_grant_access_given_loged_in_user(self):
-        with self.client.session_transaction() as session:
-            session["user_id"] = self.user.id
+        self.login_user(self.user)
         response = self.client.get(
             url_for('home.main_page')
         )
