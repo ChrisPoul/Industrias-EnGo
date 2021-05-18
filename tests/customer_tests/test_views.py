@@ -1,29 +1,13 @@
 from . import CustomerTest
 from flask import url_for
 from EnGo.models.customer import Customer
-from EnGo.models.user import User
-from EnGo.models.permission import Permission
 
 
 class CustomerViewTest(CustomerTest):
 
     def setUp(self):
         CustomerTest.setUp(self)
-        self.normal_user = User(
-            username="Normal User",
-            password="0000"
-        )
-        self.normal_user.add()
-        accounting_permission = Permission(
-            permission_name="contaduría"
-        )
-        accounting_permission.add()
-        self.accounting_user = User(
-            username="Accounting User",
-            password="0000"
-        )
-        self.accounting_user.add()
-        self.accounting_user.add_permission(accounting_permission)
+        self.create_test_users()
 
 
 class TestCustomersView(CustomerViewTest):

@@ -1,6 +1,8 @@
 from flask_testing import TestCase
 from EnGo import create_app
 from EnGo.models import db
+from EnGo.models.permission import Permission
+from EnGo.models.user import User
 
 
 class Test(TestCase):
@@ -27,6 +29,23 @@ class Test(TestCase):
         with self.client:
             with self.app.test_request_context(url, data=data) as request_context:
                 return request_context
+
+    def create_test_users(self):
+        accounting_permission = Permission(
+            permission_name="contaduría"
+        )
+        accounting_permission.add()
+        self.accounting_user = User(
+            username="Accounting User",
+            password="0000"
+        )
+        self.accounting_user.add()
+        self.accounting_user.add_permission(accounting_permission)
+        self.normal_user = User(
+            username="Normal User",
+            password="0000"
+        )
+        self.normal_user.add()
 
     def login_user(self, user):
         with self.client.session_transaction() as session:

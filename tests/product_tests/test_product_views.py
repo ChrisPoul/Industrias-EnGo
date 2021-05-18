@@ -9,21 +9,7 @@ class ProductViewTest(ProductTest):
 
     def setUp(self):
         ProductTest.setUp(self)
-        accounting_permission = Permission(
-            permission_name="contaduría"
-        )
-        accounting_permission.add()
-        self.accounting_user = User(
-            username="Accounting User",
-            password="0000"
-        )
-        self.accounting_user.add()
-        self.accounting_user.add_permission(accounting_permission)
-        self.normal_user = User(
-            username="Normal User",
-            password="0000"
-        )
-        self.normal_user.add()
+        self.create_test_users()
 
 
 class TestAddView(ProductViewTest):
