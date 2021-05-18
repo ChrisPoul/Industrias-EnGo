@@ -1,26 +1,21 @@
 from flask import url_for, session, g
-from . import Test
+from . import UserTest
 from EnGo.models.user import User
 from EnGo.models.user.auth import UserAuth
 
 
-class UserAuthTest(Test):
+class UserAuthTest(UserTest):
 
     def setUp(self):
-        Test.setUp(self)
+        UserTest.setUp(self)
         self.auth = UserAuth()
-        self.user = User(
-            username="Test",
-            password="0000"
-        )
-        self.user.add()
 
 
 class TestLoginUser(UserAuthTest):
 
     def test_should_login_user_given_valid_credentials(self):
         user_credentials = dict(
-            username="Test",
+            username="Test User",
             password="0000"
         )
         url = url_for('auth.login')
@@ -43,7 +38,7 @@ class TestLoginUser(UserAuthTest):
 
     def test_should_return_none_given_valid_credentials(self):
         user_credentials = dict(
-            username="Test",
+            username="Test User",
             password="0000"
         )
         url = url_for('auth.login')
@@ -114,7 +109,7 @@ class TestRegisterUser(UserAuthTest):
 class TestLogoutUser(UserAuthTest):
 
     def test_should_logout_user(self):
-        session["user_id"] = 1
+        self.login_user(self.user)
         self.auth.logout_user()
 
         with self.assertRaises(KeyError):
@@ -124,7 +119,7 @@ class TestLogoutUser(UserAuthTest):
 class TestDeleteUser(UserAuthTest):
 
     def test_should_delete_user_given_valid_user_id(self):
-        self.auth.delete_user(1)
+        self.auth.delete_user(self.user.id)
 
         self.assertNotIn(self.user, self.db.session)
 
@@ -132,7 +127,7 @@ class TestDeleteUser(UserAuthTest):
 class TestLoadLogedInUser(UserAuthTest):
 
     def test_should_add_user_to_g_given_valid_user_id_in_session(self):
-        session["user_id"] = 1
+        session["user_id"] = self.user.id
         self.auth.load_loged_in_user()
 
         self.assertEqual(g.user, self.user)

@@ -8,28 +8,13 @@ class AuthViewTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
-        self.admin_permission = Permission(
-            permission_name="admin",
-        )
-        self.admin_permission.add()
-        self.admin_user = User(
-            username="Admin User",
-            password="0000"
-        )
-        self.admin_user.add()
-        self.admin_user.add_permission(self.admin_permission)
-        self.normal_user = User(
-            username="Normal User",
-            password="0000"
-        )
-        self.normal_user.add()
+        self.create_test_users()
 
 
 class TestRegisterView(AuthViewTest):
 
     def test_should_grant_access_given_logged_in_user_is_admin(self):
-        with self.client.session_transaction() as session:
-            session["user_id"] = self.admin_user.id
+        self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.register')
         )
@@ -37,6 +22,7 @@ class TestRegisterView(AuthViewTest):
         self.assert200(response)
 
     def test_should_return_redirect_given_logged_in_user_is_not_admin(self):
+        self.login_user(self.normal_user)
         with self.client.session_transaction() as session:
             session["user_id"] = self.normal_user.id
         response = self.client.get(
@@ -48,16 +34,15 @@ class TestRegisterView(AuthViewTest):
 
 class TestLoginView(AuthViewTest):
 
-    def test_should_grant_access_given_no_loged_in_user(self):
+    def test_should_return_valid_response_given_no_loged_in_user(self):
         response = self.client.get(
             url_for('auth.login')
         )
 
         self.assert200(response)
 
-    def test_should_return_redirect_given_logged_in_user(self):
-        with self.client.session_transaction() as session:
-            session["user_id"] = self.normal_user.id
+    def test_should_redirect_given_logged_in_user(self):
+        self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.login')
         )
@@ -68,8 +53,7 @@ class TestLoginView(AuthViewTest):
 class TestLogoutView(AuthViewTest):
 
     def test_should_redirect_given_loged_in_user(self):
-        with self.client.session_transaction() as session:
-            session["user_id"] = self.normal_user.id
+        self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.logout')
         )
