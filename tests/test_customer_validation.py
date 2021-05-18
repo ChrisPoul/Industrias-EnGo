@@ -14,7 +14,39 @@ class CustomerValidationTest(Test):
         self.customer.add()
 
 
-class TestCustomerValidateEmptyValues(CustomerValidationTest):
+class TestValidate(CustomerValidationTest):
+
+    def test_should_not_return_error_given_valid_customer(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            rfc="Unique RFC"
+        )
+        error = customer.validation.validate()
+
+        self.assertEqual(error, None)
+    
+    def test_should_return_error_given_empty_value(self):
+        customer = Customer(
+            customer_name="",
+            address="Test Address",
+            rfc="Unique RFC"
+        )
+        error = customer.validation.validate()
+
+        self.assertNotEqual(error, None)
+    
+    def test_should_return_error_given_repeated_value(self):
+        customer = Customer(
+            customer_name="Unique Name",
+            address="Unique Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate()
+
+        self.assertNotEqual(error, None)
+
+class TestValidateEmptyValues(CustomerValidationTest):
 
     def test_should_not_return_error_given_no_empty_values(self):
         customer = Customer(

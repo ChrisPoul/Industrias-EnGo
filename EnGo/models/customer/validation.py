@@ -9,6 +9,9 @@ class CustomerValidation:
         
     def validate(self):
         self.validate_empty_values()
+        self.validate_unique_values()
+
+        return self.error
     
     def validate_empty_values(self):
         for attribute in customer_attributes:
