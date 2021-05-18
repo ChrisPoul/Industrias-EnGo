@@ -36,3 +36,8 @@ class Customer(db.Model, MyModel):
     def validation(self):
         from .validation import CustomerValidation
         return CustomerValidation(self)
+    
+    @property
+    def request(self):
+        from .request import CustomerRequest
+        return CustomerRequest(self)
