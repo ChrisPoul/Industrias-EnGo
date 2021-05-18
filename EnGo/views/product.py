@@ -12,10 +12,13 @@ product_heads = dict(
     description="Descripción",
     price="Precio"
 )
+permission_names = [
+    "contaduría"
+]
 
 
 @bp.route("/products")
-@permission_required(["contaduría"])
+@permission_required(permission_names)
 @login_required
 def products():
 
@@ -25,7 +28,7 @@ def products():
 
 
 @bp.route("/add", methods=('POST', 'GET'))
-@permission_required(["contaduría"])
+@permission_required(permission_names)
 @login_required
 def add():
     if request.method == "POST":
@@ -44,7 +47,7 @@ def add():
 
 
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
-@permission_required(["contaduría"])
+@permission_required(permission_names)
 @login_required
 def update(id):
     product = Product.get(id)
@@ -59,7 +62,7 @@ def update(id):
 
 
 @bp.route("/delete/<int:id>")
-@permission_required(["contaduría"])
+@permission_required(permission_names)
 @login_required
 def delete(id):
     product = Product.get(id)

@@ -4,7 +4,7 @@ from flask import (
 )
 from EnGo.models import customer
 from EnGo.models.customer import Customer
-from . import update_obj_attrs
+from . import login_required, permission_required, update_obj_attrs
 
 bp = Blueprint('customer', __name__, url_prefix='/customer')
 
@@ -13,9 +13,14 @@ customer_heads = dict(
     address="Dirección",
     rfc="RFC"
 )
+permission_names = [
+    "contaduría"
+]
 
 
 @bp.route('/customers')
+@permission_required(permission_names)
+@login_required
 def customers():
     return render_template(
         'customer/customers.html'
@@ -23,6 +28,8 @@ def customers():
 
 
 @bp.route('/add', methods=("POST", "GET"))
+@permission_required(permission_names)
+@login_required
 def add():
     if request.method == 'POST':
         customer = Customer(
@@ -39,6 +46,8 @@ def add():
 
 
 @bp.route('/update/<int:id>', methods=("POST", 'GET'))
+@permission_required(permission_names)
+@login_required
 def update(id):
     customer = Customer.get(id)
     if request.method == "POST":
@@ -53,6 +62,8 @@ def update(id):
 
 
 @bp.route('/delete/<int:id>')
+@permission_required(permission_names)
+@login_required
 def delete(id):
     customer = Customer.get(id)
     customer.delete()
