@@ -61,6 +61,13 @@ class User(db.Model, MyModel):
                 return True
 
         return False
+
+    def add_permission(self, permission):
+        user_permission = UserPermission(
+            user_id=self.id,
+            permission_id=permission.id
+        )
+        user_permission.add()
         
 
 class UserPermission(db.Model, MyModel):
