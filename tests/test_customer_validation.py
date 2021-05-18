@@ -134,6 +134,10 @@ class TestValidateUniqueValues(CustomerValidationTest):
 
         self.assertNotEqual(error, None)
 
+    def test_should_not_return_error_given_customer_already_in_db(self):
+        error = self.customer.validation.validate_unique_values()
+
+        self.assertEqual(error, None)
 
 class TestValidateUniqueValue(CustomerValidationTest):
 

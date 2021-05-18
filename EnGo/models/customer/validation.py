@@ -36,8 +36,8 @@ class CustomerValidation:
     
     def validate_unique_value(self, attribute):
         value = getattr(self.customer, attribute)
-        customer = Customer.search(value)
-        if customer:
+        customers = Customer.search(value)
+        if customers and self.customer not in customers:
             self.error = "Valor ya existente"
         
         return self.error
