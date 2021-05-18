@@ -139,6 +139,34 @@ class TestValidateUniqueValues(CustomerValidationTest):
 
         self.assertEqual(error, None)
 
+    def test_should_not_return_error_given_two_customers_with_empty_rfc(self):
+        self.customer.rfc = ""
+        self.customer.update()
+        customer = Customer(
+            customer_name="Valid Name",
+            address="Valid Address",
+            rfc=""
+        )
+        error = customer.validation.validate_unique_values()
+
+        self.assertEqual(error, None)
+
+
+class TestValidateOptionalUniqueValue(CustomerValidationTest):
+    
+    def test_should_not_return_error_given_two_customers_with_empty_name(self):
+        self.customer.customer_name = ""
+        self.customer.update()
+        customer = Customer(
+            customer_name="",
+            address="Valid Address",
+            rfc="Test RFC"
+        )
+        error = customer.validation.validate_optional_unique_value('customer_name')
+        
+        self.assertEqual(error, None)
+
+
 class TestValidateUniqueValue(CustomerValidationTest):
 
     def test_should_not_return_error_given_unique_name(self):

@@ -30,7 +30,14 @@ class CustomerValidation:
     def validate_unique_values(self):
         for attribute in customer_attributes:
             if attribute == "rfc":
-                self.validate_unique_value(attribute)
+                self.validate_optional_unique_value(attribute)
+        
+        return self.error
+    
+    def validate_optional_unique_value(self, attribute):
+        value = getattr(self.customer, attribute)
+        if value != "":
+            self.validate_unique_value(attribute)
         
         return self.error
     
@@ -39,5 +46,5 @@ class CustomerValidation:
         customers = Customer.search(value)
         if customers and self.customer not in customers:
             self.error = "Valor ya existente"
-        
+
         return self.error
