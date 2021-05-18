@@ -66,3 +66,8 @@ def get_permission(name):
         permission.add()
     
     return permission
+
+
+def update_obj_attrs(obj, heads):
+    for attribute in heads:
+        setattr(obj, attribute, request.form[attribute])

@@ -4,6 +4,7 @@ from flask import (
 )
 from EnGo.models import customer
 from EnGo.models.customer import Customer
+from . import update_obj_attrs
 
 bp = Blueprint('customer', __name__, url_prefix='/customer')
 
@@ -41,8 +42,7 @@ def add():
 def update(id):
     customer = Customer.get(id)
     if request.method == "POST":
-        for attribute in customer_heads:
-            setattr(customer, attribute, request.form[attribute])
+        update_obj_attrs(customer, customer_heads)
         error = customer.request.update()
         flash(error)
 

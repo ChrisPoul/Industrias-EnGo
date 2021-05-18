@@ -2,7 +2,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
 )
-from . import permission_required, login_required
+from . import permission_required, login_required, update_obj_attrs
 from EnGo.models.product import Product
 
 bp = Blueprint("product", __name__, url_prefix="/product")
@@ -49,8 +49,7 @@ def add():
 def update(id):
     product = Product.get(id)
     if request.method == "POST":
-        for attribute in product_heads:
-            setattr(product, attribute, request.form[attribute])
+        update_obj_attrs(product, product_heads)
         product.request.update()
 
     return render_template(
