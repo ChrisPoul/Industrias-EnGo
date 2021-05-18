@@ -31,4 +31,7 @@ def create_app(test_config=None):
     from .views import product
     app.register_blueprint(product.bp)
 
+    from .views import customer
+    app.register_blueprint(customer.bp)
+
     return app
