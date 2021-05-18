@@ -7,14 +7,14 @@ class ViewPermissionTest(Test):
 
     def setUp(self):
         Test.setUp(self)
-        self.permission1 = Permission(
-            permission_name="Permission 1"
+        self.admin_permission = Permission(
+            permission_name="admin"
         )
-        self.permission1.add()
-        self.permission2 = Permission(
-            permission_name="Permission 2"
+        self.admin_permission.add()
+        self.quality_permission = Permission(
+            permission_name="quality"
         )
-        self.permission2.add()
+        self.quality_permission.add()
         self.view = View(
             view_name="Test View"
         )
@@ -24,7 +24,7 @@ class ViewPermissionTest(Test):
 class TestAddPermissions(ViewPermissionTest):
 
     def test_should_add_permissions_to_view_given_list_of_permissions(self):
-        permissions = [self.permission1, self.permission2]
+        permissions = [self.admin_permission, self.quality_permission]
         self.view.add_permissions(permissions)
 
         self.assertEqual(self.view.permissions, permissions)
@@ -33,23 +33,19 @@ class TestAddPermissions(ViewPermissionTest):
 class TestAddPermission(ViewPermissionTest):
 
     def test_should_add_permission_to_view_given_a_permission_object(self):
-        self.view.add_permission(self.permission1)
+        self.view.add_permission(self.admin_permission)
 
-        self.assertEqual(self.view.permissions, [self.permission1])
+        self.assertIn(self.admin_permission, self.view.permissions)
 
 
 class TestUpdatePermissions(ViewPermissionTest):
 
     def setUp(self):
         ViewPermissionTest.setUp(self)
-        view_permission = ViewPermission(
-            view_id=self.view.id,
-            permission_id=self.permission1.id
-        )
-        view_permission.add()
+        self.view.add_permission(self.admin_permission)
 
     def test_should_update_view_permissions_given_list_of_permissions(self):
-        permissions = [self.permission1, self.permission2]
+        permissions = [self.admin_permission, self.quality_permission]
         self.view.update_permissions(permissions)
 
         self.assertEqual(self.view.permissions, permissions)
@@ -59,19 +55,10 @@ class TestDeletePermissions(ViewPermissionTest):
 
     def setUp(self):
         ViewPermissionTest.setUp(self)
-        view_permission1 = ViewPermission(
-            view_id=self.view.id,
-            permission_id=self.permission1.id
-        )
-        view_permission1.add()
-        view_permission2 = ViewPermission(
-            view_id=self.view.id,
-            permission_id=self.permission2.id
-        )
-        view_permission2.add()
+        permissions = [self.admin_permission, self.quality_permission]
+        self.view.add_permissions(permissions)
 
     def test_should_delete_all_view_permissions(self):
-        permissions = [self.permission1, self.permission2]
         self.view.delete_permissions()
 
         self.assertEqual(len(self.view.permissions), 0)
