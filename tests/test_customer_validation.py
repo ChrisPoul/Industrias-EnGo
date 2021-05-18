@@ -11,6 +11,7 @@ class CustomerValidationTest(Test):
             address="Test Address",
             rfc="TESTRFC 123"
         )
+        self.customer.add()
 
 
 class TestCustomerValidateEmptyValues(CustomerValidationTest):
@@ -56,3 +57,70 @@ class TestCustomerValidateEmptyValues(CustomerValidationTest):
         self.assertEqual(error, None)
     
 
+class TestValidateEmptyValue(CustomerValidationTest):
+
+    def test_should_not_return_error_given_non_empty_name(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate_empty_value("customer_name")
+
+        self.assertEqual(error, None)
+
+    def test_should_return_error_given_empty_name(self):
+        customer = Customer(
+            customer_name="",
+            address="Test Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate_empty_value("customer_name")
+
+        self.assertNotEqual(error, None)
+
+
+class TestValidateUniqueValues(CustomerValidationTest):
+
+    def test_should_not_return_error_given_unique_rfc(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            rfc="Unique RFC"
+        )
+        error = customer.validation.validate_unique_values()
+
+        self.assertEqual(error, None)
+    
+    def test_should_return_error_given_repeated_rfc(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate_unique_values()
+
+        self.assertNotEqual(error, None)
+
+
+class TestValidateUniqueValue(CustomerValidationTest):
+
+    def test_should_not_return_error_given_unique_name(self):
+        customer = Customer(
+            customer_name="Unique Name",
+            address="Test Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate_unique_value("customer_name")
+
+        self.assertEqual(error, None)
+
+    def test_should_return_error_given_repeated_name(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            rfc="TESTRFC 123"
+        )
+        error = customer.validation.validate_unique_value("customer_name")
+
+        self.assertNotEqual(error, None)

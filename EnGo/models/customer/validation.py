@@ -23,3 +23,18 @@ class CustomerValidation:
             self.error = "No se pueden dejar campos vacios"
         
         return self.error
+    
+    def validate_unique_values(self):
+        for attribute in customer_attributes:
+            if attribute == "rfc":
+                self.validate_unique_value(attribute)
+        
+        return self.error
+    
+    def validate_unique_value(self, attribute):
+        value = getattr(self.customer, attribute)
+        customer = Customer.search(value)
+        if customer:
+            self.error = "Valor ya existente"
+        
+        return self.error
