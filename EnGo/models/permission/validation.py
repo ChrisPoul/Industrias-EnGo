@@ -19,14 +19,16 @@ class PermissionValidation:
 
     def validate_empty_values(self):
         for attribute in permission_attributes:
-            self.error = self.validate_empty_value(attribute)
-            if self.error:
-                return self.error
+            self.validate_empty_value(attribute)
+            
+        return self.error
 
     def validate_empty_value(self, attribute):
         value = getattr(self.permission, attribute)
         if value == "":
-            return "No se pueden dejar campos vacíos"
+            self.error = "No se pueden dejar campos vacíos"
+        
+        return self.error
 
     def validate_name(self):
         if has_nums(self.permission.permission_name):

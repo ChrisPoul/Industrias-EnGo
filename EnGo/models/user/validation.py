@@ -16,14 +16,16 @@ class UserValidation:
 
     def validate_empty_values(self):
         for attribute in user_attributes:
-            self.error = self.validate_empty_value(attribute)
-            if self.error:
-                return self.error
+            self.validate_empty_value(attribute)
+            
+        return self.error
 
     def validate_empty_value(self, attribute):
         value = getattr(self.user, attribute)
         if value == "":
-            return "No se pueden dejar campos en blanco"
+            self.error = "No se pueden dejar campos en blanco"
+        
+        return self.error
 
     def validate_unique_values(self):
         from . import User
