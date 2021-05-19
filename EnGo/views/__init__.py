@@ -70,4 +70,24 @@ def get_permission(name):
 
 def update_obj_attrs(obj, heads):
     for attribute in heads:
-        setattr(obj, attribute, request.form[attribute])
+        update_obj_attr(obj, attribute)
+
+
+def update_obj_attr(obj, attribute):
+    try:
+        value = request.form[attribute]
+        setattr(obj, attribute, value)
+    except KeyError:
+        pass
+
+
+def get_form(heads):
+    form = {}
+    for key in heads:
+        try:
+            value = request.form[key]
+        except KeyError:
+            value = ""
+        form[key] = value
+
+    return form
