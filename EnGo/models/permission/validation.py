@@ -1,5 +1,8 @@
 from . import permission_attributes
 from EnGo.models import has_nums
+from EnGo.errors.messages import (
+    empty_value_error, repeated_value_error
+)
 
 
 class PermissionValidation:
@@ -24,7 +27,7 @@ class PermissionValidation:
     def validate_empty_value(self, attribute):
         value = getattr(self.permission, attribute)
         if value == "":
-            self.error = "No se pueden dejar campos vacíos"
+            self.error = empty_value_error
         
         return self.error
 
@@ -38,7 +41,7 @@ class PermissionValidation:
         from . import Permission
         permission = Permission.search(self.permission.permission_name)
         if permission and permission is not self.permission:
-            self.error = "Ese nombre no está disponible"
+            self.error = repeated_value_error
 
         return self.error
     

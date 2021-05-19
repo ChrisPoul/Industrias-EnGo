@@ -1,4 +1,7 @@
 from . import Customer, customer_attributes
+from EnGo.errors.messages import (
+    repeated_value_error, empty_value_error
+)
 
 
 class CustomerValidation:
@@ -23,7 +26,7 @@ class CustomerValidation:
     def validate_empty_value(self, attribute):
         value = getattr(self.customer, attribute)
         if value == "":
-            self.error = "No se pueden dejar campos vacios"
+            self.error = empty_value_error
         
         return self.error
     
@@ -45,6 +48,6 @@ class CustomerValidation:
         value = getattr(self.customer, attribute)
         customers = Customer.search(value)
         if customers and self.customer not in customers:
-            self.error = "Valor ya existente"
+            self.error = repeated_value_error
 
         return self.error

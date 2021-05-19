@@ -1,4 +1,7 @@
 from . import user_attributes
+from EnGo.errors.messages import (
+    repeated_value_error, empty_value_error
+)
 
 
 class UserValidation:
@@ -22,7 +25,7 @@ class UserValidation:
     def validate_empty_value(self, attribute):
         value = getattr(self.user, attribute)
         if value == "":
-            self.error = "No se pueden dejar campos en blanco"
+            self.error = empty_value_error
         
         return self.error
 
@@ -30,6 +33,6 @@ class UserValidation:
         from . import User
         user = User.search(self.user.username)
         if user and user is not self.user:
-            self.error = "Nombre de usuario no disponible"
+            self.error = repeated_value_error
         
         return self.error

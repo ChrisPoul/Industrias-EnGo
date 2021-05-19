@@ -1,4 +1,7 @@
 from . import Product
+from EnGo.errors.messages import (
+    repeated_value_error, empty_value_error
+)
 
 
 class ProductValidation:
@@ -16,14 +19,14 @@ class ProductValidation:
     
     def validate_empty_values(self):
         if self.product.code == "":
-            self.error = "No se pueden dejar campos vacios"
+            self.error = empty_value_error
         
         return self.error
 
     def validate_unique_values(self):
         product = Product.search(self.product.code)
         if product and product is not self.product:
-            self.error = "Ese código no está disponible"
+            self.error = repeated_value_error
 
         return self.error
 
