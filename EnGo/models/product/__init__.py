@@ -42,3 +42,6 @@ class SoldProduct(db.Model, MyModel):
     receipt_id = Column(Integer, ForeignKey('receipt.id'), nullable=False)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
 
+    def get(id):
+        return SoldProduct.query.get(id)
+
