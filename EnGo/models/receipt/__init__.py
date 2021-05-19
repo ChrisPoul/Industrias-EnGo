@@ -1,13 +1,15 @@
 from EnGo.models import db, MyModel
 from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, DateTime
+    Column, Integer, DateTime,
+    ForeignKey
 )
 
 
 class Receipt(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     date = Column(DateTime, nullable=False, default=datetime.now)
+    customer_id = Column(Integer, ForeignKey('customer.id'), nullable=False)
     sold_products = db.relationship(
         'SoldProduct',
         backref="receipt",

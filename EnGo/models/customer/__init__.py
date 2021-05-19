@@ -16,6 +16,11 @@ class Customer(db.Model, MyModel):
     customer_name = Column(String(100), nullable=False, unique=False)
     address = Column(String(200), nullable=False, unique=False)
     rfc = Column(String(20), nullable=True, unique=False)
+    receipts = db.relationship(
+        'Receipt',
+        backref="customer",
+        cascade="all, delete-orphan"
+    )
 
     def get(id):
         return Customer.query.get(id)

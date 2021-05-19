@@ -7,7 +7,7 @@ class TestAdd(ReceiptTest):
 
     def test_should_add_receipt(self):
         receipt = Receipt(
-            date=datetime.now()
+            customer_id=self.customer.id
         )
         receipt.add()
 
@@ -52,14 +52,6 @@ class TestGetAll(ReceiptTest):
         receipts = Receipt.get_all()
 
         self.assertEqual(receipts, [self.receipt])
-
-
-class TestAddCustomer(ReceiptTest):
-
-    def test_should_add_customer_to_receipt(self):
-        self.receipt.add_customer(self.customer)
-
-        self.assertEqual(self.receipt.customer, self.customer)
 
 
 class TestAddProduct(ReceiptTest):

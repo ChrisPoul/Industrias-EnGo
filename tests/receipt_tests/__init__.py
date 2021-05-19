@@ -9,8 +9,6 @@ class ReceiptTest(Test):
 
     def setUp(self):
         Test.setUp(self)
-        self.receipt = Receipt()
-        self.receipt.add()
         self.customer = Customer(
             customer_name="Test Name",
             address="Test Address",
@@ -27,3 +25,7 @@ class ReceiptTest(Test):
             price=10
         )
         self.product_2.add()
+        self.receipt = Receipt(
+            customer_id=self.customer.id
+        )
+        self.receipt.add()
