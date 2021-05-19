@@ -3,38 +3,6 @@ from EnGo.models.receipt import Receipt
 from EnGo.models.product import Product
 
 
-class TestAddProduct(ReceiptTest):
-
-    def test_should_add_product_given_existent_product_values(self):
-        product = Product(
-            code="Code 1",
-            price=20
-        )
-        self.receipt.request.add_product(product)
-
-        self.assertIn(self.product_1, self.receipt.products)
-    
-    def test_should_add_product_to_db_and_receipt_given_valid_new_product(self):
-        product = Product(
-            code="New Code",
-            price=20
-        )
-        self.receipt.request.add_product(product)
-
-        self.assertIn(product, self.db.session)
-        self.assertIn(product, self.receipt.products)
-
-    def test_should_not_add_product_to_db_or_receipt_given_invalid_new_product(self):
-        product = Product(
-            code="",
-            price=10
-        )
-        self.receipt.request.add_product(product)
-
-        self.assertNotIn(product, self.db.session)
-        self.assertNotIn(product, self.receipt.products)
-    
-
 class TestEdit(ReceiptTest):
 
     def test_should_update_customer_given_valid_customer_and_valid_products(self):
@@ -96,3 +64,37 @@ class TestEdit(ReceiptTest):
         self.receipt.request.edit(product)
 
         self.assertIn(self.product_2, self.receipt.products)
+
+
+class TestAddProduct(ReceiptTest):
+
+    def test_should_add_product_given_existent_product_values(self):
+        product = Product(
+            code="Code 1",
+            price=20
+        )
+        self.receipt.request.add_product(product)
+
+        self.assertIn(self.product_1, self.receipt.products)
+    
+    def test_should_add_product_to_db_and_receipt_given_valid_new_product(self):
+        product = Product(
+            code="New Code",
+            price=20
+        )
+        self.receipt.request.add_product(product)
+
+        self.assertIn(product, self.db.session)
+        self.assertIn(product, self.receipt.products)
+
+    def test_should_not_add_product_to_db_or_receipt_given_invalid_new_product(self):
+        product = Product(
+            code="",
+            price=10
+        )
+        self.receipt.request.add_product(product)
+
+        self.assertNotIn(product, self.db.session)
+        self.assertNotIn(product, self.receipt.products)
+    
+

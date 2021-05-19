@@ -24,3 +24,4 @@ class ReceiptRequest:
         error = product.request.add()
         if not error:
             self.receipt.add_product(product)
+    
