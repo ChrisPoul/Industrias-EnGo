@@ -52,3 +52,19 @@ class TestGetAll(ReceiptTest):
         receipts = Receipt.get_all()
 
         self.assertEqual(receipts, [self.receipt])
+
+
+class TestAddCustomer(ReceiptTest):
+
+    def test_should_add_customer_to_receipt(self):
+        self.receipt.add_customer(self.customer)
+
+        self.assertEqual(self.receipt.customer, self.customer)
+
+
+class TestAddProduct(ReceiptTest):
+
+    def test_should_add_product_to_receipt(self):
+        self.receipt.add_product(self.product_1)
+
+        self.assertEqual(self.receipt.products, [self.product_1])
