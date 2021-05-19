@@ -6,8 +6,9 @@ from werkzeug.utils import redirect
 from .customer import customer_heads
 from .product import product_heads
 from EnGo.models.customer import Customer
+from EnGo.models.product import Product, SoldProduct
 from EnGo.models.receipt import Receipt
-from . import update_obj_attrs
+from . import update_obj_attrs, get_form
 
 bp = Blueprint('receipt', __name__)
 
@@ -49,16 +50,61 @@ def edit(id):
     receipt = Receipt.get(id)
     if request.method == "POST":
         update_obj_attrs(receipt.customer, customer_heads)
-        error = receipt.request.edit()
-        print(error)
+        update_receipt_products(receipt)
+        product = get_product_to_add()
+        error = receipt.request.edit(product)
 
     return render_template(
         'receipt/edit.html'
     )
 
 
-def update_products(products):
-    update_products(receipt.products)
-    for product in products:
-        for attribute in product_heads:
-            setattr(product, attribute, request.form[f"{attribute}_{product.id}"])
+@bp.route("/remove_product/<int:id>")
+def remove_product(id):
+    sold_product = SoldProduct.get(id)
+    receipt_id = sold_product.receipt.id
+    sold_product.delete()
+
+    return redirect(
+        url_for('receipt.edit', id=receipt_id)
+    )
+
+
+@bp.route("/delete/<int:id>")
+def delete(id):
+    receipt = Receipt.get(id)
+    receipt.delete()
+
+    return redirect(
+        url_for('customer.customers')
+    )
+
+
+def get_product_to_add():
+    form = get_form(product_heads)
+    product = Product(
+        code=form["code"],
+        description=form["description"],
+        price=form["price"]
+    )
+
+    return product
+
+
+def update_receipt_products(receipt):
+    for product in receipt.products:
+        update_receipt_product(product)
+
+
+def update_receipt_product(product):
+    for attribute in product_heads:
+        update_product_attr(product, attribute)
+
+
+def update_product_attr(product, attribute):
+    unique_key = f"{attribute}_{product.id}"
+    try:
+        value = request.form[unique_key]
+        setattr(product, attribute, value)
+    except KeyError:
+        pass

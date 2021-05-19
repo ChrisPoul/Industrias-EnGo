@@ -8,7 +8,6 @@ class ReceiptRequest:
     
     def edit(self, product=None):
         error = self.receipt.validation.validate()
-        print(error)
         if not error:
             self.receipt.update()
             if product:
