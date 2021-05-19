@@ -74,5 +74,17 @@ class TestAddView(ReceiptViewTest):
         self.assertStatus(response, 302)
 
 
-        
+class TestEditView(ReceiptViewTest):
 
+    def test_should_update_receipt_products_given_valid_product_data(self):
+        self.receipt.add_product(self.product_1)
+        product_data = dict(
+            code_1="New Code"
+        )
+        with self.client as client:
+            client.post(
+                url_for('receipt.edit', id=self.receipt.id),
+                data=product_data
+            )
+
+        self.assertEqual(self.product_1.code, 'New Code')

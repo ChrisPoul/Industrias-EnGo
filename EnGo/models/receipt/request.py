@@ -12,6 +12,8 @@ class ReceiptRequest:
             self.receipt.update()
             if product:
                 self.add_product(product)
+                
+        return error
 
     def add_product(self, product_to_add):
         product = Product.search(product_to_add.code)
