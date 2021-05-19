@@ -7,6 +7,7 @@ from .customer import customer_heads
 from .product import product_heads
 from EnGo.models.customer import Customer
 from EnGo.models.receipt import Receipt
+from . import update_obj_attrs
 
 bp = Blueprint('receipt', __name__)
 
@@ -43,16 +44,21 @@ def add():
     )
 
 
-@bp.route('/edit/<int:id>', methods=("POST", "GET"))
+@bp.route("/edit/<int:id>", methods=('POST', 'GET'))
 def edit(id):
     receipt = Receipt.get(id)
-    if request.method == 'POST':
-        for product in receipt.products:
-            for attribute in product_heads:
-                setattr(product, attribute, request.form[f"{attribute}_{product.id}"])
+    if request.method == "POST":
+        update_obj_attrs(receipt.customer, customer_heads)
         error = receipt.request.edit()
-        flash(error)
+        print(error)
 
     return render_template(
         'receipt/edit.html'
     )
+
+
+def update_products(products):
+    update_products(receipt.products)
+    for product in products:
+        for attribute in product_heads:
+            setattr(product, attribute, request.form[f"{attribute}_{product.id}"])

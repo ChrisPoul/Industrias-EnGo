@@ -76,15 +76,17 @@ class TestAddView(ReceiptViewTest):
 
 class TestEditView(ReceiptViewTest):
 
-    def test_should_update_receipt_products_given_valid_product_data(self):
-        self.receipt.add_product(self.product_1)
-        product_data = dict(
-            code_1="New Code"
+    def test_should_update_receipt_customer_given_valid_customer_data(self):
+        customer_data = dict(
+            customer_name="New Name",
+            address="New Address",
+            rfc="New RFC"
         )
         with self.client as client:
             client.post(
                 url_for('receipt.edit', id=self.receipt.id),
-                data=product_data
+                data=customer_data
             )
+        self.db.session.rollback()
 
-        self.assertEqual(self.product_1.code, 'New Code')
+        self.assertEqual(self.customer.customer_name, 'New Name')
