@@ -8,12 +8,21 @@ from .product import product_heads
 from EnGo.models.customer import Customer
 from EnGo.models.product import Product, SoldProduct
 from EnGo.models.receipt import Receipt
-from . import update_obj_attrs, get_form
+from . import (
+    login_required, permission_required,
+    update_obj_attrs, get_form
+)
 
 bp = Blueprint('receipt', __name__)
 
+permissions = [
+    "contaduría"
+]
+
 
 @bp.route('/receipt', methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
 def add():
     if request.method == "POST":
         error = None
@@ -46,6 +55,8 @@ def add():
 
 
 @bp.route("/edit/<int:id>", methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
 def edit(id):
     receipt = Receipt.get(id)
     if request.method == "POST":
@@ -60,6 +71,8 @@ def edit(id):
 
 
 @bp.route("/remove_product/<int:id>")
+@permission_required(permissions)
+@login_required
 def remove_product(id):
     sold_product = SoldProduct.get(id)
     receipt_id = sold_product.receipt.id
@@ -71,6 +84,8 @@ def remove_product(id):
 
 
 @bp.route("/delete/<int:id>")
+@permission_required(permissions)
+@login_required
 def delete(id):
     receipt = Receipt.get(id)
     receipt.delete()
