@@ -28,6 +28,11 @@ class Receipt(db.Model, MyModel):
         return ReceiptValidation(self)
 
     @property
+    def request(self):
+        from .request import ReceiptRequest
+        return ReceiptRequest(self)
+
+    @property
     def products(self):
         return [sold_product.product for sold_product in self.sold_products]
 
