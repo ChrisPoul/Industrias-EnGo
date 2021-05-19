@@ -13,13 +13,13 @@ customer_heads = dict(
     address="Dirección",
     rfc="RFC"
 )
-permission_names = [
+permissions = [
     "contaduría"
 ]
 
 
 @bp.route('/customers')
-@permission_required(permission_names)
+@permission_required(permissions)
 @login_required
 def customers():
     return render_template(
@@ -28,7 +28,7 @@ def customers():
 
 
 @bp.route('/add', methods=("POST", "GET"))
-@permission_required(permission_names)
+@permission_required(permissions)
 @login_required
 def add():
     if request.method == 'POST':
@@ -46,7 +46,7 @@ def add():
 
 
 @bp.route('/update/<int:id>', methods=("POST", 'GET'))
-@permission_required(permission_names)
+@permission_required(permissions)
 @login_required
 def update(id):
     customer = Customer.get(id)
@@ -62,7 +62,7 @@ def update(id):
 
 
 @bp.route('/delete/<int:id>')
-@permission_required(permission_names)
+@permission_required(permissions)
 @login_required
 def delete(id):
     customer = Customer.get(id)
