@@ -3,6 +3,7 @@ from sqlalchemy import (
     Column, Integer, String,
     Text, ForeignKey
 )
+from EnGo.models.receipt import Receipt
 
 
 class Product(db.Model, MyModel):
