@@ -11,5 +11,8 @@
     <input name="{{ head }}" id="{{ head }}" value="{{ product[head] }}">
     {% endfor %}
     <input type="submit">
+    <a href="{{ url_for('product.delete', id=product.id) }}">
+        <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
+    </a>
 </form>
 {% endblock %}

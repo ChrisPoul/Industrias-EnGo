@@ -60,7 +60,13 @@ def update(id):
     product = Product.get(id)
     if request.method == "POST":
         update_obj_attrs(product, product_heads)
-        product.request.update()
+        error = product.request.update()
+        if not error:
+            return redirect(
+                url_for('product.products')
+            )
+        flash(error)
+
 
     return render_template(
         "product/update.html",
