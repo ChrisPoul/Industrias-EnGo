@@ -21,9 +21,12 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def products():
+    products = Product.get_all()
 
     return render_template(
-        "product/products.html"
+        "product/products.html",
+        product_heads=product_heads,
+        products=products
     )
 
 
@@ -38,11 +41,15 @@ def add():
             price=request.form["price"]
         )
         error = product.request.add()
-
+        if not error:
+            return redirect(
+                url_for('product.products')
+            )
         flash(error)
 
     return render_template(
-        "product/add.html"
+        "product/add.html",
+        product_heads=product_heads
     )
 
 
