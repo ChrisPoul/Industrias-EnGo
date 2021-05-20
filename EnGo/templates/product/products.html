@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+<a href="{{ url_for('product.add') }}">
+    Añadir producto
+</a>
 <table>
     <thead>
         {% for head in product_heads %}
