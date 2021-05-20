@@ -26,6 +26,11 @@
                 {{ customer[head] }}
             </td>
             {% endfor %}
+            <td>
+                <a href="{{ url_for('customer.update', id=customer.id) }}">
+                    Editar
+                </a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
