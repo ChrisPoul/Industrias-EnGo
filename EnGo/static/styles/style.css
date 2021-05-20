@@ -1,4 +1,4 @@
-*{
+* {
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -51,7 +51,6 @@ section {
     text-align: center;
     
 }
-
 h1 {
     color: #377ba8;
     display: flex;
@@ -82,4 +81,9 @@ input {
 input[type=submit] {
     font-weight: 600;
     padding: 0.5em;
+}
+
+th, td {
+    margin: 1em;
+    padding: 1em;
 }

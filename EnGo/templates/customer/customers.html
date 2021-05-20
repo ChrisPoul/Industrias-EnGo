@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Clientes{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <a href="{{ url_for('customer.add') }}">
+        Añadir Cliente
+    </a>
+</div>
+<table>
+    <thead>
+        {% for head in customer_heads %}
+        <th>
+            {{ customer_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            {% for head in customer_heads %}
+            <td>
+                {{ customer[head] }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

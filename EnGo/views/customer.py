@@ -22,8 +22,11 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def customers():
+    customers = Customer.get_all()
     return render_template(
-        'customer/customers.html'
+        'customer/customers.html',
+        customer_heads=customer_heads,
+        customers=customers
     )
 
 
@@ -38,6 +41,10 @@ def add():
             rfc=request.form['rfc']
         )
         error = customer.request.add()
+        if not error:
+            return redirect(
+                url_for('customer.customers')
+            )
         flash(error)
 
     return render_template(
