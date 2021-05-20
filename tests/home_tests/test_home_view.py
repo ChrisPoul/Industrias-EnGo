@@ -1,4 +1,4 @@
-from . import Test
+from tests import Test
 from flask import url_for
 from EnGo.models.user import User
 

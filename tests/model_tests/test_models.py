@@ -1,4 +1,4 @@
-from . import Test
+from tests import Test
 from EnGo.models import (
     commit_to_db, create_admin_user, has_nums
 )
