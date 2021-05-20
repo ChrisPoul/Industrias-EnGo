@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block header %}
-    {% block title %}Añadir Cliente{% endblock %}
+    <h1>{% block title %}Añadir Cliente{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
     {% for head in customer_heads %}
-    <label for="{{ head }}">{{ customer_heads }}</label>
+    <label for="{{ head }}">{{ customer_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}">
     {% endfor %}
     <input type="submit">
