@@ -75,6 +75,9 @@ form label {
 form input {
     margin: 0.5em;
     padding: 0.4em;
+}
+
+input {
     border: 1px solid gray;
     border-radius: 5px;
 }
