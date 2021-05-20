@@ -66,8 +66,15 @@ form {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    border-radius: 5px;  
+}
+form label {
+    margin: 0.5em;
+    margin-bottom: 0;
+    font-size: 0.9em;
 }
 form input {
     margin: 0.5em;
+    padding: 0.4em;
+    border: 1px solid gray;
+    border-radius: 5px;
 }
