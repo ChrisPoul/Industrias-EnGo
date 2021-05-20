@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block header %}
-<h1>{%block title %}Login{% endblock %}</h1>
+<h1>{%block title %}Registrar Empleado{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post" class="auth">
     <input name="username" id="username" placeholder="Nombre de usuario...">
     <input name="password" id="password" placeholder="Contraseña...">
-    <input type="submit">
+    <input type="submit" value="Registrar">
 </form>
 {% endblock %}

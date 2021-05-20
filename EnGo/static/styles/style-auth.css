@@ -1,8 +1,11 @@
 .auth {
-    background-color: rgba(161, 178, 187, 0.432);
+    background-color: rgba(161, 178, 187, 0.329);
     border-radius: 1em;
-    padding: 1em;
+    padding: 1.5em 1em;
 }
 .auth input[type=submit] {
+    color: white;
+    font-weight: 600;
+    background-color: rgba(34, 57, 139, 0.788);
     margin-top: 1em;
 }

@@ -21,7 +21,7 @@ def register():
             flash(error)
 
     return render_template(
-        "auth/login-register.html"
+        "auth/register.html"
     )
 
 
@@ -40,7 +40,7 @@ def login():
         flash(error)
 
     return render_template(
-        "auth/login-register.html"
+        "auth/login.html"
     )
 
 
