@@ -1,18 +1,17 @@
 <nav>
-    {% if g.user %}
-    {% if g.user.has_permission(request.endpoint) %}
-    <a href="{{ url_for('admin.main_page') }}">
-        Admin Page
-    </a>
-    {% endif %}
-    {% endif %}
     <a href="{{ url_for('home.main_page') }}">
         Pagina Principal
     </a>
     {% if g.user %}
     {% if g.user.has_permission(request.endpoint) %}
+    <a href="{{ url_for('admin.main_page') }}">
+        Admin Page
+    </a>
     <a href="{{ url_for('auth.register') }}">
         Registrar Empleado
+    </a>
+    <a href="{{ url_for('customer.customers') }}">
+        Clientes
     </a>
     {% endif %}
     <a href="{{ url_for('auth.logout') }}">
