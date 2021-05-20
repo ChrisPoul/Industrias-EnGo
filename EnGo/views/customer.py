@@ -41,7 +41,8 @@ def add():
         flash(error)
 
     return render_template(
-        'customer/add.html'
+        'customer/add.html',
+        customer_heads=customer_heads
     )
 
 
