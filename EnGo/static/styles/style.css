@@ -12,8 +12,8 @@ body {
 header {
     display: flex;
     width: 100vw;
-    height: 3em;
     margin: 0;
+    padding: 0.7em;
     align-items: center;
     justify-content: center;
     background-color:rgba(192, 192, 192, 0.87)
@@ -21,10 +21,9 @@ header {
 
 nav {
     display: flex;
-    width: 101%;
+    width: 100%;
     background-color: #4189b9be;
     justify-content: center;
-    height: 4em;
 }
 nav a {
     display: flex;
