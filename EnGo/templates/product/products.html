@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Productos{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<table>
+    <thead>
+        {% for head in product_heads %}
+        <th>
+            {{ head }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for product in products %}
+        <tr>
+            {% for head in product_heads %}
+            <td>
+                {{ product[head] }}
+            </td>
+            {% endfor %}
+            <td>
+                <a href="{{ url_for('product.update', id=product.id) }}">
+                    Editar
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

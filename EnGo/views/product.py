@@ -22,7 +22,7 @@ permissions = [
 @login_required
 def products():
     products = Product.get_all()
-
+    
     return render_template(
         "product/products.html",
         product_heads=product_heads,
