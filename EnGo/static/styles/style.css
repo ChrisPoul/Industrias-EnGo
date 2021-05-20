@@ -80,3 +80,7 @@ input {
     border: 1px solid gray;
     border-radius: 5px;
 }
+input[type=submit] {
+    font-weight: 600;
+    padding: 0.5em;
+}
