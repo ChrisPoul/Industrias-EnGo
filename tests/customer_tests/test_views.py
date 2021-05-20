@@ -2,6 +2,9 @@ from . import CustomerTest
 from flask import url_for
 from EnGo.models.customer import Customer
 
+### LOGED IN USER HAS PERMISSISON (LUHP) ###
+### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
+
 
 class CustomerViewTest(CustomerTest):
 
@@ -12,7 +15,7 @@ class CustomerViewTest(CustomerTest):
 
 class TestCustomersView(CustomerViewTest):
 
-    def test_should_return_valid_response_given_logged_in_user_has_permission(self):
+    def test_should_return_valid_response_given_LUHP(self):
         self.login_user(self.accounting_user)
         with self.client as client:
             response = client.get(
@@ -21,7 +24,7 @@ class TestCustomersView(CustomerViewTest):
         
         self.assert200(response)
 
-    def test_should_redirect_given_logged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
@@ -33,7 +36,7 @@ class TestCustomersView(CustomerViewTest):
 
 class TestAddView(CustomerViewTest):
 
-    def test_should_add_customer_given_valid_customer_data_and_logged_in_user_has_permission(self):
+    def test_should_add_customer_given_valid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         customer_data = dict(
             customer_name="Valid Name",
@@ -48,7 +51,7 @@ class TestAddView(CustomerViewTest):
 
         self.assertEqual(len(Customer.get_all()), 2)
     
-    def test_should_not_add_customer_given_invalid_customer_data_and_logged_in_user_has_permission(self):
+    def test_should_not_add_customer_given_invalid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         customer_data = dict(
             customer_name="",
@@ -63,7 +66,7 @@ class TestAddView(CustomerViewTest):
         
         self.assertEqual(len(Customer.get_all()), 1)
 
-    def test_should_redirect_given_logged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
@@ -75,7 +78,7 @@ class TestAddView(CustomerViewTest):
 
 class TestUpdateView(CustomerViewTest):
 
-    def test_should_update_customer_given_valid_customer_data_and_logged_in_user_has_permission(self):
+    def test_should_update_customer_given_valid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         customer_data = dict(
             customer_name="New Name", 
@@ -91,7 +94,7 @@ class TestUpdateView(CustomerViewTest):
         
         self.assertEqual(self.customer.customer_name, "New Name")
 
-    def test_should_not_update_customer_given_invalid_customer_data_and_logged_in_user_has_permission(self):
+    def test_should_not_update_customer_given_invalid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         customer_data = dict(
             customer_name="", 
@@ -107,7 +110,7 @@ class TestUpdateView(CustomerViewTest):
 
         self.assertNotEqual(self.customer.customer_name, "")
 
-    def test_should_redirect_given_logged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
@@ -119,7 +122,7 @@ class TestUpdateView(CustomerViewTest):
 
 class DeleteCustomerView(CustomerViewTest):
 
-    def test_should_delete_customer_given_logged_in_user_has_permission(self):
+    def test_should_delete_customer_given_LUHP(self):
         self.login_user(self.accounting_user)
         with self.client as client:
             client.get(
@@ -128,7 +131,7 @@ class DeleteCustomerView(CustomerViewTest):
         
         self.assertNotIn(self.customer, self.db.session)
 
-    def test_should_redirect_and_not_delete_customer_given_loged_in_user_does_not_have_permission(self):
+    def test_should_redirect_and_not_delete_customer_given_LUHNP(self):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(

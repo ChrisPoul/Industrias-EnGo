@@ -3,6 +3,8 @@ from flask import url_for
 from EnGo.models.user import User
 from EnGo.models.permission import Permission
 
+### LOGED IN USER (LU) ###
+
 
 class AuthViewTest(UserTest):
 
@@ -13,7 +15,7 @@ class AuthViewTest(UserTest):
 
 class TestRegisterView(AuthViewTest):
 
-    def test_should_grant_access_given_logged_in_user_is_admin(self):
+    def test_should_grant_access_given_LU_is_admin(self):
         self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.register')
@@ -21,7 +23,7 @@ class TestRegisterView(AuthViewTest):
 
         self.assert200(response)
 
-    def test_should_return_redirect_given_logged_in_user_is_not_admin(self):
+    def test_should_return_redirect_given_LU_is_not_admin(self):
         self.login_user(self.normal_user)
         with self.client.session_transaction() as session:
             session["user_id"] = self.normal_user.id
@@ -34,14 +36,14 @@ class TestRegisterView(AuthViewTest):
 
 class TestLoginView(AuthViewTest):
 
-    def test_should_return_valid_response_given_no_loged_in_user(self):
+    def test_should_return_valid_response_given_no_LU(self):
         response = self.client.get(
             url_for('auth.login')
         )
 
         self.assert200(response)
 
-    def test_should_redirect_given_logged_in_user(self):
+    def test_should_redirect_given_LU(self):
         self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.login')
@@ -52,7 +54,7 @@ class TestLoginView(AuthViewTest):
 
 class TestLogoutView(AuthViewTest):
 
-    def test_should_redirect_given_loged_in_user(self):
+    def test_should_redirect_given_LU(self):
         self.login_user(self.admin_user)
         response = self.client.get(
             url_for('auth.logout')
@@ -60,7 +62,7 @@ class TestLogoutView(AuthViewTest):
         
         self.assertStatus(response, 302)
 
-    def test_should_redirect_given_no_loged_in_user(self):
+    def test_should_redirect_given_no_LU(self):
         response = self.client.get(
             url_for('auth.logout')
         )

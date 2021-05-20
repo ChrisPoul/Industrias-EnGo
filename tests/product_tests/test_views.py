@@ -4,6 +4,9 @@ from EnGo.models.permission import Permission
 from EnGo.models.user import User
 from EnGo.models.product import Product
 
+### LOGED IN USER HAS PERMISSISON (LUHP) ###
+### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
+
 
 class ProductViewTest(ProductTest):
 
@@ -14,7 +17,7 @@ class ProductViewTest(ProductTest):
 
 class TestAddView(ProductViewTest):
 
-    def test_should_add_product_given_valid_product_data_and_loged_in_user_has_permission(self):
+    def test_should_add_product_given_valid_product_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         product_data = dict(
             code="Valid Code",
@@ -29,7 +32,7 @@ class TestAddView(ProductViewTest):
 
         self.assertEqual(len(Product.get_all()), 2)
 
-    def test_should_not_add_product_given_invalid_product_data_and_loged_in_user_has_permission(self):
+    def test_should_not_add_product_given_invalid_product_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         product_data = dict(
             code="",
@@ -44,7 +47,7 @@ class TestAddView(ProductViewTest):
 
         self.assertEqual(len(Product.get_all()), 1)
 
-    def test_should_redirect_given_loged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
             url_for("product.add")
@@ -55,7 +58,7 @@ class TestAddView(ProductViewTest):
 
 class TestUpdateView(ProductViewTest):
 
-    def test_should_update_product_given_valid_product_data_and_loged_in_user_has_permission(self):
+    def test_should_update_product_given_valid_product_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         product_data = dict(
             code="New Code",
@@ -71,7 +74,7 @@ class TestUpdateView(ProductViewTest):
         
         self.assertEqual(self.product.code, "New Code")
 
-    def test_should_redirect_given_loged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
             url_for("product.update", id=1)
@@ -82,7 +85,7 @@ class TestUpdateView(ProductViewTest):
 
 class TestDeleteView(ProductViewTest):
 
-    def test_should_delete_product_given_loged_in_user_has_permission(self):
+    def test_should_delete_product_given_LUHP(self):
         self.login_user(self.accounting_user)
         with self.client as client:
             client.get(
@@ -91,7 +94,7 @@ class TestDeleteView(ProductViewTest):
 
         self.assertNotIn(self.product, self.db.session)
 
-    def test_should_redirect_given_loged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
             url_for("product.delete", id=1)
@@ -102,7 +105,7 @@ class TestDeleteView(ProductViewTest):
 
 class TestProductsView(ProductViewTest):
 
-    def test_should_return_valid_response_given_loged_in_user_has_permission(self):
+    def test_should_return_valid_response_given_LUHP(self):
         self.login_user(self.accounting_user)
         with self.client as client:
             response = client.get(
@@ -111,7 +114,7 @@ class TestProductsView(ProductViewTest):
 
         self.assert200(response)
 
-    def test_should_redirect_given_loged_in_user_does_not_have_permission(self):
+    def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
             url_for("product.products")

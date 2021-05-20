@@ -2,6 +2,8 @@ from . import Test
 from flask import url_for
 from EnGo.models.user import User
 
+### LOGED IN USER (LU) ###
+
 
 class HomeTest(Test):
 
@@ -17,7 +19,7 @@ class HomeTest(Test):
 
 class TestMainPage(HomeTest):
 
-    def test_should_grant_access_given_loged_in_user(self):
+    def test_should_grant_access_given_LU(self):
         self.login_user(self.user)
         response = self.client.get(
             url_for('home.main_page')
@@ -25,7 +27,7 @@ class TestMainPage(HomeTest):
 
         self.assert200(response)
 
-    def test_should_grant_access_given_no_loged_in_user(self):
+    def test_should_grant_access_given_no_LU(self):
         response = self.client.get(
             url_for('home.main_page')
         )
