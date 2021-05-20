@@ -22,7 +22,7 @@ class MyModel:
 def init_db():
     db.drop_all()
     db.create_all()
-    create_admin_user("Chris")
+    create_admin_user("Admin")
 
 
 def create_admin_user(username):
