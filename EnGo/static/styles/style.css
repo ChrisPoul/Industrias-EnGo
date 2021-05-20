@@ -87,3 +87,24 @@ th, td {
     margin: 1em;
     padding: 1em;
 }
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+}
+.search-bar input {
+    margin: 0;
+    padding: 0.3em;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: none;
+    border-radius: 5px 0px 0px 5px;
+}
+.search-bar button{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: none;
+    border-radius:  0px 5px 5px 0px;
+}

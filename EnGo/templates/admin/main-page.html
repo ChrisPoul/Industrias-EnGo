@@ -6,6 +6,13 @@
 
 {% block content %}
 <div>
-    This page will serve as a configuration hub
+    {% include 'admin/search-bar.html' %}
+</div>
+<div>
+    {% for user in users %}
+    <a href="#">
+        {{ user.username }}
+    </a>
+    {% endfor %}
 </div>
 {% endblock %}
