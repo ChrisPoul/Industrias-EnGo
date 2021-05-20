@@ -64,6 +64,7 @@ form {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    width: 50vmax;
 }
 form label {
     margin: 0.5em;
