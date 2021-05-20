@@ -13,7 +13,7 @@ header {
     display: flex;
     width: 100vw;
     margin: 0;
-    padding: 0.7em;
+    padding: 0.5em;
     align-items: center;
     justify-content: center;
     background-color:rgba(192, 192, 192, 0.87)
