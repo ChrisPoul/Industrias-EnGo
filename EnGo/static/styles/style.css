@@ -12,7 +12,7 @@ body {
 header {
     display: flex;
     width: 100%;
-    padding: 0.5em;
+    padding: 0.5em 0;
     align-items: center;
     justify-content: center;
     background-color:rgba(192, 192, 192, 0.87)
@@ -21,7 +21,6 @@ header {
 nav {
     display: flex;
     width: 100%;
-    padding: 0 0.5em;
     background-color: #4189b9be;
     justify-content: center;
 }
@@ -43,7 +42,7 @@ nav a:last-child {
 section {
     display: flex;
     justify-content: center;
-    margin: 3vmax 10%;
+    margin: 3vmax auto;
 }
 .flash {
     padding: 1em;
