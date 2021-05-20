@@ -43,7 +43,7 @@ nav a:last-child {
 section {
     display: flex;
     justify-content: center;
-    margin: 2em 10%;
+    margin: 3vmax 10%;
 }
 .flash {
     padding: 1em;
