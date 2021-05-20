@@ -61,10 +61,15 @@ def update(id):
     if request.method == "POST":
         update_obj_attrs(customer, customer_heads)
         error = customer.request.update()
+        if not error:
+            return redirect(
+                url_for('customer.customers')
+            )
         flash(error)
 
     return render_template(
         'customer/update.html',
+        customer_heads=customer_heads,
         customer=customer
     )
 
