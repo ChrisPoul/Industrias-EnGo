@@ -32,4 +32,4 @@ class TestMainPage(HomeTest):
             url_for('home.main_page')
         )
 
-        self.assert200(response)
+        self.assertStatus(response, 302)
