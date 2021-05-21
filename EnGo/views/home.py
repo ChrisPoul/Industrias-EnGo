@@ -1,7 +1,7 @@
 from flask import (
     Blueprint, render_template
 )
-from . import permission_required, login_required
+from . import login_required
 
 bp = Blueprint('home', __name__)
 
