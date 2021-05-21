@@ -1,0 +1,25 @@
+<table>
+    <thead>
+        {% for head in user_heads %}
+        <th>
+            {{ user_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            {% for head in user_heads %}
+            <td>
+                {{ user[head] }}
+            </td>
+            {% endfor %}
+            <td>
+                <a href="{{ url_for('user.update', id=user.id) }}">
+                    Editar
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -21,9 +21,12 @@ permissions = [
 
 @bp.route("/users")
 def users():
+    users = User.get_all()
 
     return render_template(
-        "user/users.html"
+        "user/users.html",
+        user_heads=user_heads,
+        users=users
     )
 
 
