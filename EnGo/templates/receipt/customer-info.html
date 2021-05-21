@@ -1,13 +1,11 @@
-<form method="post">
-    <table>
-        <tr>
-            {% for head in customer_heads %}
-            <td>
-                <strong>{{ customer_heads[head] }}: </strong>
-                <input name="{{ head }}" id="{{ head }}">
-            </td>
-            {% endfor %}
-        </tr>
-    </table>
-    <input type="submit">
-</form>
+<table>
+    <tr>
+        {% for head in customer_heads %}
+        <td>
+            <strong>{{ customer_heads[head] }}: </strong>
+            <input name="{{ head }}" id="{{ head }}" 
+                {% if receipt %}value="{{ receipt.customer[head] }}"{% endif %}>
+        </td>
+        {% endfor %}
+    </tr>
+</table>

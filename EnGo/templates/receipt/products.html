@@ -1,0 +1,10 @@
+<table class="products">
+    <thead>
+        {% for head in product_heads %}
+        <th>
+            {{ product_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    {% include "receipt/products-body.html" %}
+</table>

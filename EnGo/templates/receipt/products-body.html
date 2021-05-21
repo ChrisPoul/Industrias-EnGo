@@ -1,0 +1,19 @@
+<tbody>
+    {% for product in receipt.products %}
+    <tr>
+        {% for head in product_heads %}
+        <td>
+            <input name="{{ product.get_unique_key(head) }}" id="{{ product.get_unique_key(head) }}" 
+                value="{{ product[head] }}">
+        </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    <tr>
+        {% for head in product_heads %}
+        <td>
+            <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
+        </td>
+        {% endfor %}
+    </tr>
+</tbody>

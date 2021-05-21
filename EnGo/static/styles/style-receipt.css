@@ -1,3 +1,12 @@
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: white;
+    margin: 0;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 nav {
     display: flex;
     width: 100%;
@@ -23,15 +32,17 @@ section {
     display: flex;
     justify-content: center;
 }
+table{
+    width: 100%;
+}
 tr {
     display: flex;
 }
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
+td, th {
     padding: 0.5em;
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 .flash {
     padding: 1em;
@@ -41,4 +52,8 @@ td {
 }
 strong {
     margin-right: 0.2em;
+}
+.products td, th {
+    border: 1px solid black;
+    border-collapse: collapse;
 }

@@ -10,9 +10,10 @@ from EnGo.models.product import Product, SoldProduct
 from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
-    update_obj_attrs, get_form
+    update_obj_attrs, get_form, get_empty_form
 )
 from .customer import customer_heads
+from .product import product_heads
 
 bp = Blueprint('receipt', __name__)
 
@@ -61,14 +62,23 @@ def add():
 @login_required
 def edit(id):
     receipt = Receipt.get(id)
+    form = get_form(product_heads)
     if request.method == "POST":
         update_obj_attrs(receipt.customer, customer_heads)
         update_receipt_products(receipt)
         product = get_product_to_add()
         error = receipt.request.edit(product)
+        if error:
+            flash(error)
+        else:
+            form = get_empty_form(product_heads)
 
     return render_template(
-        'receipt/edit.html'
+        'receipt/edit.html',
+        customer_heads=customer_heads,
+        product_heads=product_heads,
+        receipt=receipt,
+        form=form
     )
 
 
@@ -119,9 +129,8 @@ def update_receipt_product(product):
 
 
 def update_product_attr(product, attribute):
-    unique_key = f"{attribute}_{product.id}"
     try:
-        value = request.form[unique_key]
+        value = request.form[product.get_unique_key(attribute)]
         setattr(product, attribute, value)
     except KeyError:
         pass

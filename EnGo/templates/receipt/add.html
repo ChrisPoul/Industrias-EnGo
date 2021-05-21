@@ -1,5 +1,8 @@
 {% extends "receipt/base.html" %}
 
 {% block content %}
-{% include "receipt/customer-info.html" %}
+<form method="post">
+    {% include "receipt/customer-info.html" %}
+    <input type="submit">
+</form>
 {% endblock %}
