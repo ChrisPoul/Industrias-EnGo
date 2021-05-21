@@ -28,8 +28,8 @@ def create_app(test_config=None):
     from .views import home
     app.register_blueprint(home.bp)
 
-    from .views import auth
-    app.register_blueprint(auth.bp)
+    from .views import user
+    app.register_blueprint(user.bp)
 
     from .views import admin
     app.register_blueprint(admin.bp)

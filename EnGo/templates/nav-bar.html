@@ -7,7 +7,7 @@
     <a href="{{ url_for('admin.main_page') }}">
         Admin Page
     </a>
-    <a href="{{ url_for('auth.register') }}">
+    <a href="{{ url_for('user.register') }}">
         Registrar Empleado
     </a>
     <a href="{{ url_for('customer.customers') }}">
@@ -17,11 +17,11 @@
         Productos
     </a>
     {% endif %}
-    <a href="{{ url_for('auth.logout') }}">
+    <a href="{{ url_for('user.logout') }}">
         Logout
     </a>
     {% else %}
-    <a href="{{ url_for('auth.login') }}">
+    <a href="{{ url_for('user.login') }}">
         Login
     </a>
     {% endif %}

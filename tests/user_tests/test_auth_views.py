@@ -25,7 +25,7 @@ class TestRegisterView(AuthViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('auth.register'),
+                url_for('user.register'),
                 data=user_credentials
             )
         
@@ -39,7 +39,7 @@ class TestRegisterView(AuthViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('auth.register'),
+                url_for('user.register'),
                 data=user_credentials
             )
 
@@ -48,7 +48,7 @@ class TestRegisterView(AuthViewTest):
     def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
-                url_for('auth.register')
+                url_for('user.register')
             )
 
         self.assertStatus(response, 302)
@@ -63,7 +63,7 @@ class TestLoginView(AuthViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('auth.login'),
+                url_for('user.login'),
                 data=user_credentials
             )
         with self.client.session_transaction() as session:
@@ -76,7 +76,7 @@ class TestLoginView(AuthViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('auth.login'),
+                url_for('user.login'),
                 data=user_credentials
             )
         with self.client.session_transaction() as session:
@@ -86,7 +86,7 @@ class TestLoginView(AuthViewTest):
     def test_should_redirect_given_LU(self):
         self.login_user(self.admin_user)
         response = self.client.get(
-            url_for('auth.login')
+            url_for('user.login')
         )
         
         self.assertStatus(response, 302)
@@ -98,7 +98,7 @@ class TestLogoutView(AuthViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             client.get(
-                url_for('auth.logout')
+                url_for('user.logout')
             )
         
         with self.client.session_transaction() as session:
@@ -108,14 +108,14 @@ class TestLogoutView(AuthViewTest):
     def test_should_redirect_given_LU(self):
         self.login_user(self.admin_user)
         response = self.client.get(
-            url_for('auth.logout')
+            url_for('user.logout')
         )
         
         self.assertStatus(response, 302)
 
     def test_should_redirect_given_no_LU(self):
         response = self.client.get(
-            url_for('auth.logout')
+            url_for('user.logout')
         )
         
         self.assertStatus(response, 302)
@@ -125,3 +125,15 @@ class TestUpdateView(AuthViewTest):
 
     def test_should_update_user_given_valid_user_data(self):
         pass
+
+
+class TestDeleteView(AuthViewTest):
+
+    def test_should_delete_user_given_LUHP(self):
+        self.login_user(self.admin_user)
+        with self.client as client:
+            client.get(
+                url_for('user.delete', id=self.normal_user.id)
+            )
+
+        self.assertNotIn(self.normal_user, self.db.session)

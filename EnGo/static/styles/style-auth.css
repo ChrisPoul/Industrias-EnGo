@@ -1,11 +1,11 @@
-.auth {
+.user {
     background-color: rgba(161, 178, 187, 0.329);
     border-radius: 1em;
     padding: 1.5em 1em;
     margin-top: 1vmax;
     width: auto;
 }
-.auth input[type=submit] {
+.user input[type=submit] {
     color: white;
     background-color: rgba(34, 57, 139, 0.788);
     margin-top: 1em;

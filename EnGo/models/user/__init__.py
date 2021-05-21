@@ -39,6 +39,11 @@ class User(db.Model, MyModel):
         from .validation import UserValidation
         return UserValidation(self)
 
+    @property
+    def request(self):
+        from .request import UserRequest
+        return UserRequest(self)
+
     def has_permission(self, view_name):
         if self.is_admin():
             return True
