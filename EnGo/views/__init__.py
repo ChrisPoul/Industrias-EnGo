@@ -91,3 +91,11 @@ def get_form(heads):
         form[key] = value
 
     return form
+
+
+def get_empty_form(heads):
+    form = {}
+    for key in heads:
+        form[key] = ""
+
+    return form
