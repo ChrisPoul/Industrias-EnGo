@@ -8,14 +8,14 @@ from EnGo.models.permission import Permission
 ### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
 
 
-class AuthViewTest(UserTest):
+class UserViewTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
         self.create_test_users()
 
 
-class TestRegisterView(AuthViewTest):
+class TestRegisterView(UserViewTest):
 
     def test_should_register_user_given_valid_credentials_and_LUHP(self):
         self.login_user(self.admin_user)
@@ -54,7 +54,7 @@ class TestRegisterView(AuthViewTest):
         self.assertStatus(response, 302)
 
 
-class TestLoginView(AuthViewTest):
+class TestLoginView(UserViewTest):
 
     def test_should_login_user_given_valid_credentials_and_no_LU(self):
         user_credentials = dict(
@@ -92,7 +92,7 @@ class TestLoginView(AuthViewTest):
         self.assertStatus(response, 302)
 
 
-class TestLogoutView(AuthViewTest):
+class TestLogoutView(UserViewTest):
 
     def test_should_logout_user_given_LU(self):
         self.login_user(self.normal_user)
@@ -121,13 +121,13 @@ class TestLogoutView(AuthViewTest):
         self.assertStatus(response, 302)
     
 
-class TestUpdateView(AuthViewTest):
+class TestUpdateView(UserViewTest):
 
     def test_should_update_user_given_valid_user_data(self):
         pass
 
 
-class TestDeleteView(AuthViewTest):
+class TestDeleteView(UserViewTest):
 
     def test_should_delete_user_given_LUHP(self):
         self.login_user(self.admin_user)
