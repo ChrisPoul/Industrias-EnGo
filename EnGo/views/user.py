@@ -71,6 +71,8 @@ def login():
 
 
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
 def update(id):
     user = User.get(id)
     if request.method == "POST":

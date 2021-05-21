@@ -123,7 +123,8 @@ class TestLogoutView(UserViewTest):
 
 class TestUpdateView(UserViewTest):
 
-    def test_should_update_user_given_valid_user_data(self):
+    def test_should_update_user_given_valid_user_data_and_LUHP(self):
+        self.login_user(self.admin_user)
         user_data = dict(
             username="New Username",
             password="New password"
@@ -137,7 +138,8 @@ class TestUpdateView(UserViewTest):
 
         self.assertEqual(self.user.username, "New Username")
 
-    def test_should_not_update_user_given_invalid_user_data(self):
+    def test_should_not_update_user_given_invalid_user_data_and_LUHP(self):
+        self.login_user(self.admin_user)
         user_data = dict(
             username="",
             password="0000"
@@ -150,6 +152,15 @@ class TestUpdateView(UserViewTest):
         self.db.session.rollback()
 
         self.assertNotEqual(self.user.username, "")
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.update', id=self.user.id)
+            )
+
+        self.assertStatus(response, 302)
 
 
 class TestDeleteView(UserViewTest):
