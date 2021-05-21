@@ -1,14 +1,31 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="es">
 
-{% block header %}
-<h1>{%block title %}Iniciar Sesión{% endblock %}</h1>
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - EnGo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-user.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<header>
+    <br>
+</header>
+<div style="margin-top: 10vh;">
+    <h1>Iniciar Sesión</h1>
+</div>
+{% for message in get_flashed_messages() %}
+<div class="flash">{{ message }}</div>
+{% endfor %}
+<section>
+    <form method="post" class="user">
+        {% for head in user_heads %}
+        <input name="{{ head }}" id="{{ head }}" placeholder="{{ user_heads[head] }}...">
+        {% endfor %}
+        <input type="submit" value="Iniciar Sesión">
+    </form>
+</section>
 
-{% block content %}
-<form method="post" class="user">
-    {% for head in user_heads %}
-    <input name="{{ head }}" id="{{ head }}" placeholder="{{ user_heads[head] }}...">
-    {% endfor %}
-    <input type="submit" value="Iniciar Sesión">
-</form>
-{% endblock %}
+</html>

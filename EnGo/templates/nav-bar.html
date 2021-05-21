@@ -1,8 +1,8 @@
 <nav>
+    {% if g.user %}
     <a href="{{ url_for('home.main_page') }}">
         Pagina Principal
     </a>
-    {% if g.user %}
     {% if g.user.has_permission('admin.main_page') %}
     <a href="{{ url_for('admin.main_page') }}">
         Admin Page
@@ -25,10 +25,6 @@
     {% endif %}
     <a href="{{ url_for('user.logout') }}">
         Logout
-    </a>
-    {% else %}
-    <a href="{{ url_for('user.login') }}">
-        Login
     </a>
     {% endif %}
 </nav>
