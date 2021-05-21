@@ -1,11 +1,14 @@
 from flask import (
     Blueprint, render_template
 )
+from . import permission_required, login_required
 
 bp = Blueprint('home', __name__)
 
 
 @bp.route('/')
+@permission_required([])
+@login_required
 def main_page():
 
     return render_template(
