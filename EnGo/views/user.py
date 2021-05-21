@@ -43,9 +43,10 @@ def register():
         )
         error = user.request.register()
         if not error:
-            flash("El usuario se registro correctamente")
-        else:
-            flash(error)
+            return redirect(
+                url_for('user.users')
+            )
+        flash(error)
 
     return render_template(
         "user/register.html",
@@ -85,6 +86,11 @@ def update(id):
     if request.method == "POST":
         update_obj_attrs(user, user_heads)
         error = user.request.update()
+        if not error:
+            return redirect(
+                url_for('user.users')
+            )
+        flash(error)
 
     return render_template(
         "user/update.html",
