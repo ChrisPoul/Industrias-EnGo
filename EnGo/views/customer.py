@@ -9,7 +9,7 @@ from . import login_required, permission_required, update_obj_attrs
 bp = Blueprint('customer', __name__, url_prefix='/customer')
 
 customer_heads = dict(
-    customer_name='Nombre del cliente',
+    customer_name='Nombre',
     address="Dirección",
     rfc="RFC"
 )
