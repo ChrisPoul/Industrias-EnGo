@@ -10,5 +10,9 @@
     <input name="{{ head }}" id="{{ head }}" value="{{ user[head] }}">
     {% endfor %}
     <input type="submit" value="Guardar Cambios">
+    <a href="{{ url_for('user.delete', id=user.id) }}">
+        <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">
+    </a>
 </form>
+
 {% endblock %}

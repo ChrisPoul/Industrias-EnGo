@@ -82,7 +82,7 @@ input {
     border: 1px solid gray;
     border-radius: 5px;
 }
-input[type=submit] {
+input[type=submit], input[type=button] {
     font-weight: 600;
     padding: 0.5em;
 }
