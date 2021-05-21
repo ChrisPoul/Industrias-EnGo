@@ -12,6 +12,7 @@ from . import (
     login_required, permission_required,
     update_obj_attrs, get_form
 )
+from .customer import customer_heads
 
 bp = Blueprint('receipt', __name__)
 
@@ -51,6 +52,7 @@ def add():
     
     return render_template(
         'receipt/add.html',
+        customer_heads=customer_heads
     )
 
 

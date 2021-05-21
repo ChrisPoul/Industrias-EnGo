@@ -23,6 +23,11 @@
         Productos
     </a>
     {% endif %}
+    {% if g.user.has_permission('receipt.add') %}
+    <a href="{{ url_for('receipt.add') }}">
+        Crear Recibo
+    </a>
+    {% endif %}
     <a href="{{ url_for('user.logout') }}">
         Logout
     </a>
