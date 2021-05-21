@@ -52,6 +52,35 @@ class TestAddPermission(UserPermissionTest):
         self.assertIn(self.quality_permission, user.permissions)
 
 
+class TestAddPermissions(UserPermissionTest):
+
+    def test_should_add_permissions_to_user_given_list_of_permissions(self):
+        permissions = [self.admin_permission, self.quality_permission]
+        self.user.add_permissions(permissions)
+
+        self.assertEqual(self.user.permissions, permissions)
+
+
+class TestRemovePermissions(UserPermissionTest):
+
+    def test_should_remove_all_user_permissions(self):
+        permissions = [self.admin_permission, self.quality_permission]
+        self.user.add_permissions(permissions)
+        self.user.remove_permissions()
+
+        self.assertEqual(self.user.permissions, [])
+
+    
+class TestUpdatePermissions(UserPermissionTest):
+
+    def test_should_update_user_permissions_given_list_of_permissions(self):
+        self.user.add_permission(self.admin_permission)
+        permissions = [self.quality_permission]
+        self.user.update_permissions(permissions)
+
+        self.assertEqual(self.user.permissions, permissions)
+
+
 class TestHasPermission(UserPermissionTest):
 
     def test_should_return_true_given_admin_user_and_admin_view(self):

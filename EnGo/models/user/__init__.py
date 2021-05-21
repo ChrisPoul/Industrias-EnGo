@@ -73,6 +73,18 @@ class User(db.Model, MyModel):
             permission_id=permission.id
         )
         user_permission.add()
+    
+    def add_permissions(self, permissions):
+        for permission in permissions:
+            self.add_permission(permission)
+    
+    def remove_permissions(self):
+        for user_permission in self.user_permissions:
+            user_permission.delete()
+
+    def update_permissions(self, permissions):
+        self.remove_permissions()
+        self.add_permissions(permissions)
         
 
 class UserPermission(db.Model, MyModel):
