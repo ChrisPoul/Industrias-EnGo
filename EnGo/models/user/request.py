@@ -26,3 +26,10 @@ class UserRequest:
             self.user.add()
 
         return error
+
+    def update(self):
+        error = self.user.validation.validate()
+        if not error:
+            self.user.update()
+
+        return error
