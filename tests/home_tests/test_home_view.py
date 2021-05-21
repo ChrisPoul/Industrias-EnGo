@@ -27,7 +27,7 @@ class TestMainPage(HomeTest):
 
         self.assert200(response)
 
-    def test_should_grant_access_given_no_LU(self):
+    def test_should_redirect_given_no_LU(self):
         response = self.client.get(
             url_for('home.main_page')
         )

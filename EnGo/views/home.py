@@ -7,7 +7,6 @@ bp = Blueprint('home', __name__)
 
 
 @bp.route('/')
-@permission_required([])
 @login_required
 def main_page():
 
