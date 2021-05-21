@@ -15,6 +15,27 @@ class UserViewTest(UserTest):
         self.create_test_users()
 
 
+class TestUsersView(UserViewTest):
+
+    def test_should_return_valid_response_given_LUHP(self):
+        self.login_user(self.admin_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.users')
+            )
+        
+        self.assert200(response)
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.users')
+            )
+
+        self.assertStatus(response, 302)
+
+
 class TestRegisterView(UserViewTest):
 
     def test_should_register_user_given_valid_credentials_and_LUHP(self):

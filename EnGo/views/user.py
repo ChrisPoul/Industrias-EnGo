@@ -20,6 +20,8 @@ permissions = [
 
 
 @bp.route("/users")
+@permission_required(permissions)
+@login_required
 def users():
     users = User.get_all()
 
@@ -86,7 +88,8 @@ def update(id):
 
     return render_template(
         "user/update.html",
-        user_heads=user_heads
+        user_heads=user_heads,
+        user=user
     )
 
 
