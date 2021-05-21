@@ -2,10 +2,18 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from . import permission_required, login_required
+from . import (
+    permission_required, login_required,
+    update_obj_attrs
+)
 from EnGo.models.user import User
 
 bp = Blueprint("user", __name__, url_prefix="/user")
+
+user_heads = dict(
+    username="Nombre de usuario",
+    password="Contraseña"
+)
 permissions = [
     "admin"
 ]
@@ -59,6 +67,18 @@ def login():
 
     return render_template(
         "user/login.html"
+    )
+
+
+@bp.route("/update/<int:id>", methods=('POST', 'GET'))
+def update(id):
+    user = User.get(id)
+    if request.method == "POST":
+        update_obj_attrs(user, user_heads)
+        error = user.request.update()
+
+    return render_template(
+        "user/update.html"
     )
 
 

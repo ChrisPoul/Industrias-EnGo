@@ -124,7 +124,32 @@ class TestLogoutView(UserViewTest):
 class TestUpdateView(UserViewTest):
 
     def test_should_update_user_given_valid_user_data(self):
-        pass
+        user_data = dict(
+            username="New Username",
+            password="New password"
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update', id=self.user.id),
+                data=user_data
+            )
+        self.db.session.rollback()
+
+        self.assertEqual(self.user.username, "New Username")
+
+    def test_should_not_update_user_given_invalid_user_data(self):
+        user_data = dict(
+            username="",
+            password="0000"
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update', id=self.user.id),
+                data=user_data
+            )
+        self.db.session.rollback()
+
+        self.assertNotEqual(self.user.username, "")
 
 
 class TestDeleteView(UserViewTest):
