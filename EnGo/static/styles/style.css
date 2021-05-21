@@ -41,14 +41,12 @@ nav a:last-child {
 
 section {
     display: flex;
-    flex-direction: column;
-    text-align: center;
     justify-content: center;
     margin: 3vmax auto;
 }
 section div {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
 }
 .flash {
     padding: 1em;

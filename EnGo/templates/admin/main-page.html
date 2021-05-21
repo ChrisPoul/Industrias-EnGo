@@ -5,10 +5,15 @@
 {% endblock %}
 
 {% block content %}
+<a href="{{ url_for('user.register') }}">
+    Registrar Empleado
+</a>
 <div>
-    {% include 'admin/search-bar.html' %}
-</div>
-<div>
-    {% include "user/users-table.html" %}
+    <div>
+        {% include 'admin/search-bar.html' %}
+    </div>
+    <div>
+        {% include "user/users-table.html" %}
+    </div>
 </div>
 {% endblock %}
