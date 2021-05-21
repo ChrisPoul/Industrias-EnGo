@@ -36,6 +36,9 @@ class Product(db.Model, MyModel):
         from .request import ProductRequest
         return ProductRequest(self)
 
+    def get_unique_key(self, attribute):
+        return f"{attribute}_{self.id}"
+
 
 class SoldProduct(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
