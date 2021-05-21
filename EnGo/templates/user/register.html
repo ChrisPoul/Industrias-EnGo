@@ -6,8 +6,9 @@
 
 {% block content %}
 <form method="post" class="user">
-    <input name="username" id="username" placeholder="Nombre de usuario...">
-    <input name="password" id="password" placeholder="Contraseña...">
+    {% for head in user_heads %}
+    <input name="{{ head }}" id="{{ head }}" placeholder="{{ user_heads[head] }}...">
+    {% endfor %}
     <input type="submit" value="Registrar">
 </form>
 {% endblock %}

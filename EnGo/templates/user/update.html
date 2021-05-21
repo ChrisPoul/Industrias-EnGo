@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>{%block title %}Editar Usuario{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post" class="user">
+    {% for head in user_heads %}
+    <input name="{{ head }}" id="{{ head }}" value="{{ user[head] }}">
+    {% endfor %}
+    <input type="submit" value="Guardar Cambios">
+</form>
+{% endblock %}

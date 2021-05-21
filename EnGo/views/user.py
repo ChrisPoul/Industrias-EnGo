@@ -43,7 +43,8 @@ def register():
             flash(error)
 
     return render_template(
-        "user/register.html"
+        "user/register.html",
+        user_heads=user_heads
     )
 
 
@@ -66,7 +67,8 @@ def login():
         flash(error)
 
     return render_template(
-        "user/login.html"
+        "user/login.html",
+        user_heads=user_heads
     )
 
 
@@ -80,7 +82,8 @@ def update(id):
         error = user.request.update()
 
     return render_template(
-        "user/update.html"
+        "user/update.html",
+        user_heads=user_heads
     )
 
 
