@@ -9,10 +9,6 @@
     {% include 'admin/search-bar.html' %}
 </div>
 <div>
-    {% for user in users %}
-    <a href="#">
-        {{ user.username }}
-    </a>
-    {% endfor %}
+    {% include "user/users-table.html" %}
 </div>
 {% endblock %}
