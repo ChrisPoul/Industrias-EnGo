@@ -9,6 +9,7 @@
     {% for head in user_heads %}
     <input name="{{ head }}" id="{{ head }}" value="{{ user[head] }}">
     {% endfor %}
+    {% include "user/permissions-dropdown.html" %}
     <input type="submit" value="Guardar Cambios">
     <a href="{{ url_for('user.delete', id=user.id) }}">
         <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">

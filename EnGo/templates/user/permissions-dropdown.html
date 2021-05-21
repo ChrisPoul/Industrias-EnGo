@@ -1,0 +1,9 @@
+<div class="permissions-checkbox">
+    {% for permission in permissions %}
+    <div>
+        <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
+            {% if permission in user.permissions %}checked{% endif %}>
+        <label for="{{ permission.permission_name }}">{{ permission.permission_name }}</label>
+    </div>
+    {% endfor %}
+</div>

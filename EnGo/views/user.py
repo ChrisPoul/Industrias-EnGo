@@ -7,6 +7,7 @@ from . import (
     update_obj_attrs
 )
 from EnGo.models.user import User
+from EnGo.models.permission import Permission
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -83,20 +84,33 @@ def login():
 @login_required
 def update(id):
     user = User.get(id)
+    permissions = Permission.get_all()
     if request.method == "POST":
         update_obj_attrs(user, user_heads)
+        checked_permissions = get_checked_permissions(permissions)
+        user.update_permissions(checked_permissions)
         error = user.request.update()
-        if not error:
-            return redirect(
-                url_for('user.users')
-            )
-        flash(error)
+        if error:
+            flash(error)
 
     return render_template(
         "user/update.html",
         user_heads=user_heads,
-        user=user
+        user=user,
+        permissions=permissions
     )
+
+
+def get_checked_permissions(permissions):
+    checked_permissions = []
+    for permission in permissions:
+        try:
+            permission_id = request.form[permission.permission_name]
+            checked_permissions.append(permission)
+        except KeyError:
+            pass
+
+    return checked_permissions
 
 
 @bp.route("/logout")

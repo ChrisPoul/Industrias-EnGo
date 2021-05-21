@@ -54,6 +54,8 @@ class User(db.Model, MyModel):
 
     def has_view_permissions(self, view_name):
         view = View.search(view_name)
+        if len(view.permissions) == 0:
+            return True
         for permission in self.permissions:
             if permission in set(view.permissions):
                 return True
