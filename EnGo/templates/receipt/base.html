@@ -8,7 +8,11 @@
     <title>Receipt - EnGo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-receipt.css') }}">
 </head>
+{% if receipt %}
+{% if not receipt.done %}
 {% include "nav-bar.html" %}
+{% endif %}
+{% endif %}
 {% for message in get_flashed_messages() %}
 <div class="flash">{{ message }}</div>
 {% endfor %}

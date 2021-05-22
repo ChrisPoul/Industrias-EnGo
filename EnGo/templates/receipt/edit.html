@@ -9,5 +9,8 @@
         {% include "receipt/products.html" %}
     </div>
     <input type="submit">
+    <a href="{{ url_for('receipt.done', id=receipt.id) }}">
+        <input type="button" value="Finalizar">
+    </a>
 </form>
 {% endblock %}

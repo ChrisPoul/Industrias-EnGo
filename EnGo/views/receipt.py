@@ -84,6 +84,21 @@ def edit(id):
     )
 
 
+@bp.route("/done/<int:id>")
+@permission_required(permissions)
+@login_required
+def done(id):
+    receipt = Receipt.get(id)
+    receipt.done = True
+
+    return render_template(
+        "receipt/done.html",
+        customer_heads=customer_heads,
+        product_heads=product_heads,
+        receipt=receipt
+    )
+
+
 @bp.route("/remove_product/<int:id>")
 @permission_required(permissions)
 @login_required

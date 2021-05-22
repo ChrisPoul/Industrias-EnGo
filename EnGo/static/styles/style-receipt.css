@@ -29,8 +29,12 @@ nav a:last-child {
 }
 
 section {
+    padding-top: 3vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    max-width: 21.6cm;
+    margin: auto;
 }
 table{
     width: 100%;
@@ -51,10 +55,13 @@ td, th {
     text-align: center;
 }
 strong {
-    margin-right: 0.2em;
+    margin-right: 0.5em;
 }
 input {
     width: 100%;
+}
+.customer td {
+    justify-content: center;
 }
 .products td, th {
     border: 1px solid black;

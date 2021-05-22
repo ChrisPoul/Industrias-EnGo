@@ -2,7 +2,16 @@
 
 {% block content %}
 <form method="post">
-    {% include "receipt/customer-info.html" %}
+    <table>
+        <tr>
+            {% for head in customer_heads %}
+            <td>
+                <strong>{{ customer_heads[head] }}:</strong>
+                <input name="{{ head }}" id="{{ head }}">
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
     <input type="submit">
 </form>
 {% endblock %}

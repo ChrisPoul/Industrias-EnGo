@@ -244,6 +244,27 @@ class TestEditView(ReceiptViewTest):
         self.assertStatus(response, 302)
 
 
+class TestDoneView(ReceiptViewTest):
+
+    def test_should_return_valid_response_given_LUHP(self):
+        self.login_user(self.admin_user)
+        with self.client as client:
+            response = client.get(
+                url_for('receipt.done', id=self.receipt.id)
+            )
+        
+        self.assert200(response)
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('receipt.done', id=self.receipt.id)
+            )
+
+        self.assertStatus(response, 302)
+
+
 class TestRemoveProduct(ReceiptViewTest):
 
     def test_should_remove_product_from_receipt_and_LUHP(self):

@@ -3,6 +3,9 @@
     <tr>
         {% for head in product_heads %}
         <td class="{{ head }}">
+            {% if receipt.done %}
+            {{ sold_product.product[head] }}
+            {% else %}
             <input name="{{ sold_product.product.get_unique_key(head) }}" 
                 id="{{ sold_product.product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
             {% if head == "price" %}
@@ -10,10 +13,12 @@
                 X
             </a>
             {% endif %}
+            {% endif %}
         </td>
         {% endfor %}
     </tr>
     {% endfor %}
+    {% if not receipt.done %}
     <tr>
         {% for head in product_heads %}
         <td class="{{ head }}">
@@ -21,4 +26,5 @@
         </td>
         {% endfor %}
     </tr>
+    {% endif %}
 </tbody>
