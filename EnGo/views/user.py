@@ -90,8 +90,11 @@ def update(id):
         checked_permissions = get_checked_permissions(permissions)
         user.update_permissions(checked_permissions)
         error = user.request.update()
-        if error:
-            flash(error)
+        if not error:
+            return redirect(
+                url_for('user.users')
+            )
+        flash(error)
 
     return render_template(
         "user/update.html",
