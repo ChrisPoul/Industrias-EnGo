@@ -54,16 +54,6 @@ class TestEdit(ReceiptTest):
         self.db.session.rollback()
 
         self.assertNotEqual(self.product_1.code, "New Code")
-    
-    def test_should_add_products_given_valid_customer_and_valid_products(self):
-        product = Product(
-            code="Code 2",
-            price=10
-        )
-        self.receipt.add_product(self.product_1)
-        self.receipt.request.edit(product)
-
-        self.assertIn(self.product_2, self.receipt.products)
 
 
 class TestAddProduct(ReceiptTest):
