@@ -5,13 +5,12 @@ class ReceiptRequest:
 
     def __init__(self, receipt):
         self.receipt = receipt
+        self.error = None
     
-    def edit(self, product=None):
+    def edit(self):
         error = self.receipt.validation.validate()
         if not error:
             self.receipt.update()
-            if product:
-                self.add_product(product)
                 
         return error
 
@@ -21,9 +20,11 @@ class ReceiptRequest:
             self.receipt.add_product(product)
         else:
             self.add_new_product(product_to_add)
+
+        return self.error
     
     def add_new_product(self, product):
-        error = product.request.add()
-        if not error:
+        self.error = product.request.add()
+        if not self.error:
             self.receipt.add_product(product)
     

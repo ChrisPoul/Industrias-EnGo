@@ -53,7 +53,19 @@ td, th {
 strong {
     margin-right: 0.2em;
 }
+input {
+    width: 100%;
+}
 .products td, th {
     border: 1px solid black;
     border-collapse: collapse;
+}
+.code {
+    width: 30%;
+}
+.price {
+    width: 10%;
+}
+.price input {
+    margin-right: 1em;
 }

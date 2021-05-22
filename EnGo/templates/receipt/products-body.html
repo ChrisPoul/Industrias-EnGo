@@ -1,17 +1,22 @@
 <tbody>
-    {% for product in receipt.products %}
+    {% for sold_product in receipt.sold_products %}
     <tr>
         {% for head in product_heads %}
-        <td>
-            <input name="{{ product.get_unique_key(head) }}" id="{{ product.get_unique_key(head) }}" 
-                value="{{ product[head] }}">
+        <td class="{{ head }}">
+            <input name="{{ sold_product.product.get_unique_key(head) }}" 
+                id="{{ sold_product.product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
+            {% if head == "price" %}
+            <a href="{{ url_for('receipt.remove_product', id=sold_product.id) }}">
+                X
+            </a>
+            {% endif %}
         </td>
         {% endfor %}
     </tr>
     {% endfor %}
     <tr>
         {% for head in product_heads %}
-        <td>
+        <td class="{{ head }}">
             <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
         </td>
         {% endfor %}

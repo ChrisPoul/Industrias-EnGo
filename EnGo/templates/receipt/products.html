@@ -1,7 +1,7 @@
 <table class="products">
     <thead>
         {% for head in product_heads %}
-        <th>
+        <th class="{{ head }}">
             {{ product_heads[head] }}
         </th>
         {% endfor %}

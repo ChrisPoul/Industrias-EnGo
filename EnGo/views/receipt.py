@@ -66,12 +66,14 @@ def edit(id):
     if request.method == "POST":
         update_obj_attrs(receipt.customer, customer_heads)
         update_receipt_products(receipt)
-        product = get_product_to_add()
-        error = receipt.request.edit(product)
-        if error:
-            flash(error)
+        error = receipt.request.edit()
+        if not error:
+            product = get_product_to_add()
+            error = receipt.request.add_product(product)
+            if not error:
+                form = get_empty_form(product_heads)
         else:
-            form = get_empty_form(product_heads)
+            flash(error)
 
     return render_template(
         'receipt/edit.html',
