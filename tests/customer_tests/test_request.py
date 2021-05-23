@@ -27,6 +27,15 @@ class TestAdd(CustomerTest):
 
 class TestUpdate(CustomerTest):
 
+    def setUp(self):
+        CustomerTest.setUp(self)
+        self.customer2 = Customer(
+            customer_name="Name Two",
+            address="Address Two",
+            rfc="RFC Two"
+        )
+        self.customer2.add()
+
     def test_should_update_customer_given_valid_change(self):
         self.customer.customer_name = "New Name"
         self.customer.request.update()
@@ -35,8 +44,8 @@ class TestUpdate(CustomerTest):
         self.assertEqual(self.customer.customer_name, "New Name")
 
     def test_should_not_update_customer_given_invalid_change(self):
-        self.customer.customer_name = ""
-        self.customer.request.update()
+        self.customer2.rfc = "Test RFC"
+        self.customer2.request.update()
         self.db.session.rollback()
 
-        self.assertNotEqual(self.customer.customer_name, "")
+        self.assertNotEqual(self.customer2.rfc, "Test RFC")

@@ -47,7 +47,7 @@ class CustomerValidation:
     def validate_unique_value(self, attribute):
         value = getattr(self.customer, attribute)
         customers = Customer.search(value)
-        if customers and self.customer not in customers:
+        if customers and len(customers) > 1:
             self.error = repeated_value_error
 
         return self.error
