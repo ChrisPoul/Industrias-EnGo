@@ -40,7 +40,8 @@ class Receipt(db.Model, MyModel):
         from EnGo.models.product import SoldProduct
         sold_product = SoldProduct(
             receipt_id=self.id,
-            product_id=product.id
+            product_id=product.id,
+            price=product.price
         )
         sold_product.add()
 

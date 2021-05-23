@@ -67,12 +67,18 @@ input {
     border: 1px solid black;
     border-collapse: collapse;
 }
+.quantity {
+    max-width: 10%;
+}
 .code {
-    width: 30%;
+    max-width: 30%;
 }
 .price {
-    width: 10%;
+    max-width: 10%;
 }
 .price input {
     margin-right: 1em;
+}
+.total {
+    max-width: 5%;
 }
