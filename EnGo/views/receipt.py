@@ -28,12 +28,7 @@ permissions = [
 def add():
     if request.method == "POST":
         error = None
-        customer = None
-        for head in customer_heads:
-            customers = Customer.search(request.form[head])
-            if len(customers) != 0:
-                customer = customers[-1]
-                break
+        customer = search_for_customer()
         if not customer:
             customer = Customer(
                 customer_name=request.form['customer_name'],
@@ -55,6 +50,18 @@ def add():
         'receipt/add.html',
         customer_heads=customer_heads
     )
+
+
+def search_for_customer():
+    customer = None
+    for head in customer_heads:
+        value = request.form[head]
+        customers = Customer.search(value)
+        if len(customers) != 0 and value != "":
+            customer = customers[-1]
+            break
+
+    return customer
 
 
 @bp.route("/edit/<int:id>", methods=('POST', 'GET'))

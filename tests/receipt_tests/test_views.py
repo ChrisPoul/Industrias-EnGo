@@ -12,6 +12,12 @@ class ReceiptViewTest(ReceiptTest):
 
     def setUp(self):
         ReceiptTest.setUp(self)
+        customer2 = Customer(
+            customer_name="Name Two",
+            address="Address Two",
+            rfc=""
+        )
+        customer2.add()
         self.create_test_users()
 
 
@@ -47,7 +53,23 @@ class TestAddView(ReceiptViewTest):
                 data=customer_data
             )
     
-        self.assertEqual(len(Receipt.get_all()), len(prev_receipts))
+        self.assertEqual(Receipt.get_all(), prev_receipts)
+
+    def test_should_not_add_receipt_given_empty_values_and_LUHP(self):
+        self.login_user(self.accounting_user)
+        customer_data = dict(
+            customer_name="",
+            address="",
+            rfc=""
+        )
+        prev_receipts = Receipt.get_all()
+        with self.client as client:
+            client.post(
+                url_for('receipt.add'),
+                data=customer_data
+            )
+    
+        self.assertEqual(Receipt.get_all(), prev_receipts)
     
     def test_should_add_receipt_and_new_customer_given_valid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
