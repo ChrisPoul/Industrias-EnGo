@@ -4,7 +4,10 @@ from flask import (
 )
 from EnGo.models import customer
 from EnGo.models.customer import Customer
-from . import login_required, permission_required, update_obj_attrs
+from . import (
+    login_required, permission_required,
+    update_obj_attrs, get_form
+)
 
 bp = Blueprint('customer', __name__, url_prefix='/customer')
 
@@ -34,6 +37,7 @@ def customers():
 @permission_required(permissions)
 @login_required
 def add():
+    form = get_form(customer_heads)
     if request.method == 'POST':
         customer = Customer(
             customer_name=request.form['customer_name'],
@@ -49,7 +53,8 @@ def add():
 
     return render_template(
         'customer/add.html',
-        customer_heads=customer_heads
+        customer_heads=customer_heads,
+        form=form
     )
 
 

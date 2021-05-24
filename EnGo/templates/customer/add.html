@@ -8,7 +8,7 @@
 <form method="post">
     {% for head in customer_heads %}
     <label for="{{ head }}">{{ customer_heads[head] }}:</label>
-    <input name="{{ head }}" id="{{ head }}">
+    <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
     {% endfor %}
     <input type="submit">
 </form>
