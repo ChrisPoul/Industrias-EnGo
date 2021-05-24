@@ -79,7 +79,7 @@ input {
     text-align: justify;
 }
 .price {
-    max-width: 6%;
+    max-width: 7%;
 }
 .price input {
     text-align: center;
@@ -88,5 +88,5 @@ input {
     margin-right: 1em;
 }
 .total {
-    max-width: 5%;
+    max-width: 8%;
 }

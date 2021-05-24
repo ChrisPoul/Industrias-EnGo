@@ -99,3 +99,35 @@ def get_empty_form(heads):
         form[key] = ""
 
     return form
+
+
+def format_price(price, iva=None):
+    price = float(price)
+    if iva:
+        price = price * iva
+    price = round(price, 2)
+    price = str(price)
+    price_int, price_dec = price.split(".")
+    price_int = add_comma_separators_to_num(price_int)
+    price_dec = format_decimal_of_price(price_dec)
+    formated_price = f"${price_int}.{price_dec}"
+
+    return formated_price
+
+
+def add_comma_separators_to_num(num):
+    num = str(num)
+    formated_num = ""
+    for i, digit in enumerate(num[::-1], start=1):
+        formated_num += digit
+        if i % 3 == 0:
+            formated_num += ","
+    formated_num = formated_num[::-1]
+
+    return formated_num
+
+
+def format_decimal_of_price(decimal):
+    if len(decimal) == 1:
+        decimal += "0"
+    return decimal

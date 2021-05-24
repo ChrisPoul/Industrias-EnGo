@@ -5,6 +5,8 @@
         {% if receipt.done %}
         {% if head == "code" or head == "description" %}
         {{ sold_product.product[head] }}
+        {% elif head == "total" or head == "price" %}
+        {{ format_price(sold_product[head]) }}
         {% else %}
         {{ sold_product[head] }}
         {% endif %}
@@ -13,7 +15,7 @@
         <input name="{{ sold_product.get_unique_key(head) }}" 
             id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
         {% elif head == "total" %}
-        {{ sold_product.total }}
+        {{ format_price(sold_product[head]) }}
         {% else %}
         <input name="{{ sold_product.get_unique_key(head) }}" 
             id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product[head] }}">

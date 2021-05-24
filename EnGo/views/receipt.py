@@ -10,7 +10,8 @@ from EnGo.models.product import Product, SoldProduct
 from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
-    update_obj_attrs, get_form, get_empty_form
+    update_obj_attrs, get_form, get_empty_form,
+    format_price
 )
 from .customer import customer_heads
 
@@ -92,6 +93,7 @@ def edit(id):
         'receipt/edit.html',
         customer_heads=customer_heads,
         product_heads=product_heads,
+        format_price=format_price,
         receipt=receipt,
         form=form
     )
@@ -141,6 +143,7 @@ def done(id):
         "receipt/done.html",
         customer_heads=customer_heads,
         product_heads=product_heads,
+        format_price=format_price,
         receipt=receipt
     )
 
