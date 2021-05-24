@@ -16,7 +16,7 @@ user_heads = dict(
     password="Contraseña"
 )
 permissions = [
-    "admin"
+    "recursos humanos"
 ]
 
 
@@ -37,6 +37,7 @@ def users():
 @permission_required(permissions)
 @login_required
 def register():
+    permissions = Permission.get_all()
     if request.method == "POST":
         user = User(
             username=request.form["username"],
@@ -44,6 +45,8 @@ def register():
         )
         error = user.request.register()
         if not error:
+            checked_permissions = get_checked_permissions(permissions)
+            user.add_permissions(checked_permissions)
             return redirect(
                 url_for('user.users')
             )
@@ -51,7 +54,8 @@ def register():
 
     return render_template(
         "user/register.html",
-        user_heads=user_heads
+        user_heads=user_heads,
+        permissions=permissions
     )
 
 

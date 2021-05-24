@@ -9,6 +9,7 @@
     {% for head in user_heads %}
     <input name="{{ head }}" id="{{ head }}" placeholder="{{ user_heads[head] }}...">
     {% endfor %}
+    {% include "user/permissions-dropdown.html" %}
     <input type="submit" value="Registrar">
 </form>
 {% endblock %}
