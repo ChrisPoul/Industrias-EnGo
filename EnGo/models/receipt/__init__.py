@@ -31,6 +31,17 @@ class Receipt(db.Model, MyModel):
         return total
 
     @property
+    def folio(self):
+        id = str(self.id)
+        folio = ""
+        num_of_zeros = 5 - len(id)
+        for _ in range(num_of_zeros):
+            folio += "0"
+        folio += id
+
+        return folio
+
+    @property
     def validation(self):
         from .validation import ReceiptValidation
         return ReceiptValidation(self)
