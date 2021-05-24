@@ -19,7 +19,7 @@ bp = Blueprint('receipt', __name__)
 product_heads = dict(
     quantity="Cantidad",
     code="Código",
-    description="Descripcción",
+    description="Descripción",
     price="Precio",
     total="Total"
 )

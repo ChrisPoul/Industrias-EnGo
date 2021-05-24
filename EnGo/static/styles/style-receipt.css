@@ -48,7 +48,7 @@ td, th {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 .flash {
     padding: 1em;
@@ -72,10 +72,14 @@ input {
     max-width: 10%;
 }
 .code {
-    max-width: 30%;
+    max-width: 12%;
+}
+.description {
+    justify-content: left;
+    text-align: justify;
 }
 .price {
-    max-width: 5%;
+    max-width: 6%;
 }
 .price input {
     text-align: center;
