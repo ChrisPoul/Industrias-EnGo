@@ -11,12 +11,15 @@ from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
     update_obj_attrs, get_form, get_empty_form,
-    format_price
+    format_price, format_date
 )
-from .customer import customer_heads
 
 bp = Blueprint('receipt', __name__)
 
+customer_heads = dict(
+    customer_name="Nombre",
+    address="Dirección"
+)
 product_heads = dict(
     quantity="Cantidad",
     code="Código",
@@ -40,7 +43,7 @@ def add():
             customer = Customer(
                 customer_name=request.form['customer_name'],
                 address=request.form['address'],
-                rfc=request.form['rfc']
+                rfc=""
             )
             error = customer.request.add()
         if not error:
@@ -90,10 +93,11 @@ def edit(id):
             flash(error)
 
     return render_template(
-        'receipt/edit.html',
+        'receipt/receipt.html',
         customer_heads=customer_heads,
         product_heads=product_heads,
         format_price=format_price,
+        format_date=format_date,
         receipt=receipt,
         form=form
     )
@@ -140,10 +144,11 @@ def done(id):
     receipt.done = True
 
     return render_template(
-        "receipt/done.html",
+        "receipt/receipt.html",
         customer_heads=customer_heads,
         product_heads=product_heads,
         format_price=format_price,
+        format_date=format_date,
         receipt=receipt
     )
 

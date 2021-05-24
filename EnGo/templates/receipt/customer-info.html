@@ -1,15 +1,12 @@
-<table class="customer">
-    <tr>
-        {% for head in customer_heads %}
-        <td>
-            <strong>{{ customer_heads[head] }}:</strong>
-            {% if receipt.done %}
-            {{ receipt.customer[head] }}
-            {% else %}
-            <input name="{{ head }}" id="{{ head }}" 
-                {% if receipt %}value="{{ receipt.customer[head] }}"{% endif %}>
-            {% endif %}
-        </td>
-        {% endfor %}
-    </tr>
-</table>
+
+{% for head in customer_heads %}
+<div>
+    <strong>{{ customer_heads[head] }}:</strong>
+    {% if receipt.done %}
+    {{ receipt.customer[head] }}
+    {% else %}
+    <input name="{{ head }}" id="{{ head }}" 
+        {% if receipt %}value="{{ receipt.customer[head] }}"{% endif %}>
+    {% endif %}
+</div>
+{% endfor %}

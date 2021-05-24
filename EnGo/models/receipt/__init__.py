@@ -33,7 +33,7 @@ class Receipt(db.Model, MyModel):
     @property
     def folio(self):
         id = str(self.id)
-        folio = ""
+        folio = "REM "
         num_of_zeros = 5 - len(id)
         for _ in range(num_of_zeros):
             folio += "0"
