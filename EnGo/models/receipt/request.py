@@ -16,7 +16,7 @@ class ReceiptRequest:
 
     def add_product(self, product_to_add):
         product = Product.search(product_to_add.code)
-        if product:
+        if product and product not in set(self.receipt.products):
             self.receipt.add_product(product)
         else:
             self.add_new_product(product_to_add)

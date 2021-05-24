@@ -66,8 +66,18 @@ class TestAddProduct(ReceiptTest):
         self.receipt.request.add_product(product)
 
         self.assertIn(self.product_1, self.receipt.products)
+
+    def test_should_not_add_product_given_product_already_in_receipt(self):
+        self.receipt.add_product(self.product_1)
+        product = Product(
+            code="Code 1",
+            price=20
+        )
+        self.receipt.request.add_product(product)
+
+        self.assertEqual(self.receipt.products, [self.product_1])
     
-    def test_should_add_product_to_db_and_receipt_given_valid_new_product(self):
+    def test_should_create_new_product_and_add_it_to_receipt_given_valid_new_product(self):
         product = Product(
             code="New Code",
             price=20
