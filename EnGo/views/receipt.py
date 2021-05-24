@@ -124,7 +124,6 @@ def update_product_attr(sold_product, attribute):
         value = request.form[sold_product.get_unique_key(attribute)]
         if attribute == "code" or attribute == "description":
             setattr(sold_product.product, attribute, value)
-            print(sold_product.product.description)
         else:
             setattr(sold_product, attribute, value)
     except KeyError:
