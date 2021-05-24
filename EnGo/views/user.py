@@ -23,11 +23,17 @@ permissions = [
 ]
 
 
-@bp.route("/users")
+@bp.route("/users", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def users():
     users = User.get_all()
+    if request.method == "POST":
+        user = User.search(request.form['username'])
+        if user:
+            return redirect(
+                url_for('user.update', id=user.id)
+            )
 
     return render_template(
         "user/users.html",

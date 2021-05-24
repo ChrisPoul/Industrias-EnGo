@@ -1,6 +1,5 @@
 from flask import (
-    Blueprint, render_template, request,
-    flash
+    Blueprint, render_template, request
 )
 from . import permission_required, login_required
 from .user import users_heads
@@ -13,6 +12,12 @@ bp = Blueprint('admin', __name__, url_prefix="/admin")
 @login_required
 def main_page():
     users = User.get_all()
+    if request.method == "POST":
+        user = User.search(request.form['username'])
+        if user:
+            return redirect(
+                url_for('user.update', id=user.id)
+            )
 
     return render_template(
         "admin/main-page.html",
