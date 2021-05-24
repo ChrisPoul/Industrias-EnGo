@@ -114,6 +114,10 @@ def get_empty_form(heads):
     return form
 
 
+def format_date(date):
+    return date.strftime("%d/%m/%Y")
+
+
 def format_price(price, iva=None):
     price = float(price)
     if iva:
