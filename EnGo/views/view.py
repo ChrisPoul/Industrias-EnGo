@@ -1,5 +1,6 @@
 from flask import (
-    Blueprint, render_template, request
+    Blueprint, render_template, request,
+    redirect, url_for
 )
 from EnGo.models.permission import Permission
 from EnGo.models.view import View
@@ -16,8 +17,12 @@ def update(id):
     if request.method == "POST":
         checked_permissions = get_checked_permissions()
         view.update_permissions(checked_permissions)
+        return redirect(
+            url_for('admin.main_page')
+        )
 
     return render_template(
         'view/update.html',
-        permissions=permissions
+        permissions=permissions,
+        view=view
     )
