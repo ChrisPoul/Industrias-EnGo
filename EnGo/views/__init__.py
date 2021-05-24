@@ -68,6 +68,19 @@ def get_permission(name):
     return permission
 
 
+def get_checked_permissions():
+    permissions = Permission.get_all()
+    checked_permissions = []
+    for permission in permissions:
+        try:
+            permission_id = request.form[permission.permission_name]
+            checked_permissions.append(permission)
+        except KeyError:
+            pass
+
+    return checked_permissions
+
+
 def update_obj_attrs(obj, heads):
     for attribute in heads:
         update_obj_attr(obj, attribute)
