@@ -1,9 +1,11 @@
 <tr>
     <td rowspan="3">
+        {% if not receipt.done %}
         <input type="submit">
         <a href="{{ url_for('receipt.done', id=receipt.id) }}">
             <input type="button" value="Finalizar">
         </a>
+        {% endif %}
     </td>
     <td class="total">
         {{ receipt.total }}

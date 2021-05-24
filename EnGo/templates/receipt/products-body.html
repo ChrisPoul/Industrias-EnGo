@@ -18,7 +18,7 @@
         <input name="{{ sold_product.get_unique_key(head) }}" 
             id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product[head] }}">
         {% endif %}
-        {% if head == "price" %}
+        {% if head == "total" %}
         <a href="{{ url_for('receipt.remove_product', id=sold_product.id) }}">
             X
         </a>

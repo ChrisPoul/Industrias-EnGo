@@ -48,6 +48,7 @@ td, th {
     display: flex;
     flex-direction: row;
     width: 100%;
+    justify-content: space-evenly;
 }
 .flash {
     padding: 1em;
@@ -74,9 +75,12 @@ input {
     max-width: 30%;
 }
 .price {
-    max-width: 10%;
+    max-width: 5%;
 }
 .price input {
+    text-align: center;
+}
+.total input {
     margin-right: 1em;
 }
 .total {
