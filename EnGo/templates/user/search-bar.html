@@ -1,0 +1,11 @@
+<datalist id="usernames">
+    {% for username in autocomplete.get_data("users", "username") %}
+    <option>{{ username }}</option>
+    {% endfor %}
+</datalist>
+<form method='post' class="search-bar" autocomplete="off">
+    <input class="search-bar" name="search-bar" 
+        placeholder="Buscar empleado..."
+        list="usernames">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>

@@ -1,28 +1,35 @@
-<a href="{{ url_for('user.register') }}">
-    Registrar Empleado
-</a>
-<table>
-    <thead>
-        {% for head in user_heads %}
-        <th>
-            {{ user_heads[head] }}
-        </th>
-        {% endfor %}
-    </thead>
-    <tbody>
-        {% for user in users %}
-        <tr>
+<div>
+    <div>
+        <a href="{{ url_for('user.register') }}">
+            Registrar Empleado
+        </a>
+    </div>
+    <div>
+        {% include "user/search-bar.html" %}
+    </div>
+    <table>
+        <thead>
             {% for head in user_heads %}
-            <td>
-                {{ user[head] }}
-            </td>
+            <th>
+                {{ user_heads[head] }}
+            </th>
             {% endfor %}
-            <td>
-                <a href="{{ url_for('user.update', id=user.id) }}">
-                    Editar
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                {% for head in user_heads %}
+                <td>
+                    {{ user[head] }}
+                </td>
+                {% endfor %}
+                <td>
+                    <a href="{{ url_for('user.update', id=user.id) }}">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
