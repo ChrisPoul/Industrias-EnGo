@@ -1,43 +1,41 @@
-<tbody>
-    {% for sold_product in receipt.sold_products %}
-    <tr>
-        {% for head in product_heads %}
-        <td class="{{ head }}">
-            {% if receipt.done %}
-            {% if head == "code" or head == "description" %}
-            {{ sold_product.product[head] }}
-            {% else %}
-            {{ sold_product[head] }}
-            {% endif %}
-            {% else %}
-            {% if head == "code" or head == "description" %}
-            <input name="{{ sold_product.get_unique_key(head) }}" 
-                id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
-            {% elif head == "total" %}
-            {{ sold_product.total }}
-            {% else %}
-            <input name="{{ sold_product.get_unique_key(head) }}" 
-                id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product[head] }}">
-            {% endif %}
-            {% if head == "price" %}
-            <a href="{{ url_for('receipt.remove_product', id=sold_product.id) }}">
-                X
-            </a>
-            {% endif %}
-            {% endif %}
-        </td>
-        {% endfor %}
-    </tr>
+{% for sold_product in receipt.sold_products %}
+<tr>
+    {% for head in product_heads %}
+    <td class="{{ head }}">
+        {% if receipt.done %}
+        {% if head == "code" or head == "description" %}
+        {{ sold_product.product[head] }}
+        {% else %}
+        {{ sold_product[head] }}
+        {% endif %}
+        {% else %}
+        {% if head == "code" or head == "description" %}
+        <input name="{{ sold_product.get_unique_key(head) }}" 
+            id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
+        {% elif head == "total" %}
+        {{ sold_product.total }}
+        {% else %}
+        <input name="{{ sold_product.get_unique_key(head) }}" 
+            id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product[head] }}">
+        {% endif %}
+        {% if head == "price" %}
+        <a href="{{ url_for('receipt.remove_product', id=sold_product.id) }}">
+            X
+        </a>
+        {% endif %}
+        {% endif %}
+    </td>
     {% endfor %}
-    {% if not receipt.done %}
-    <tr>
-        {% for head in product_heads %}
-        <td class="{{ head }}">
-            {% if head != "total" %}
-            <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
-            {% endif %}
-        </td>
-        {% endfor %}
-    </tr>
-    {% endif %}
-</tbody>
+</tr>
+{% endfor %}
+{% if not receipt.done %}
+<tr>
+    {% for head in product_heads %}
+    <td class="{{ head }}">
+        {% if head != "total" %}
+        <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
+        {% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endif %}

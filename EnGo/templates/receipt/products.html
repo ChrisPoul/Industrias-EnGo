@@ -1,10 +1,11 @@
 <table class="products">
     <thead>
-        {% for head in product_heads %}
-        <th class="{{ head }}">
-            {{ product_heads[head] }}
-        </th>
-        {% endfor %}
+        {% include "receipt/products-head.html" %}
     </thead>
-    {% include "receipt/products-body.html" %}
+    <tbody>
+        {% include "receipt/products-body.html" %}
+    </tbody>
+    <tfoot>
+        {% include "receipt/products-foot.html" %}
+    </tfoot>
 </table>

@@ -1,0 +1,11 @@
+<tr>
+    <td rowspan="3">
+        <input type="submit">
+        <a href="{{ url_for('receipt.done', id=receipt.id) }}">
+            <input type="button" value="Finalizar">
+        </a>
+    </td>
+    <td class="total">
+        {{ receipt.total }}
+    </td>
+</tr>

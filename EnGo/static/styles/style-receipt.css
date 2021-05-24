@@ -38,6 +38,7 @@ section {
 }
 table{
     width: 100%;
+    border-collapse: collapse;
 }
 tr {
     display: flex;
@@ -65,7 +66,6 @@ input {
 }
 .products td, th {
     border: 1px solid black;
-    border-collapse: collapse;
 }
 .quantity {
     max-width: 10%;

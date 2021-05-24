@@ -23,6 +23,14 @@ class Receipt(db.Model, MyModel):
         return Receipt.query.all()
 
     @property
+    def total(self):
+        total = 0
+        for sold_product in self.sold_products:
+            total += sold_product.total
+
+        return total
+
+    @property
     def validation(self):
         from .validation import ReceiptValidation
         return ReceiptValidation(self)
