@@ -45,7 +45,7 @@ class Receipt(db.Model, MyModel):
         return [sold_product.product for sold_product in self.sold_products]
 
     def add_product(self, product):
-        from EnGo.models.product import SoldProduct
+        from EnGo.models.sold_product import SoldProduct
         sold_product = SoldProduct(
             receipt_id=self.id,
             product_id=product.id,

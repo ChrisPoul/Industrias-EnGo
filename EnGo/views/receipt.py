@@ -6,7 +6,7 @@ from werkzeug.utils import redirect
 from .customer import customer_heads
 from .product import product_heads
 from EnGo.models.customer import Customer
-from EnGo.models.product import Product, SoldProduct
+from EnGo.models.product import Product
 from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
@@ -152,6 +152,7 @@ def done(id):
 @permission_required(permissions)
 @login_required
 def remove_product(id):
+    from EnGo.models.sold_product import SoldProduct
     sold_product = SoldProduct.get(id)
     receipt_id = sold_product.receipt.id
     sold_product.delete()

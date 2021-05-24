@@ -10,6 +10,8 @@ class ReceiptValidation:
         self.validate_customer()
         if not self.error:
             self.validate_products()
+        if not self.error:
+            self.validate_sold_products()
 
         return self.error
 
@@ -24,4 +26,7 @@ class ReceiptValidation:
             if self.error:
                 break
 
+        return self.error
+
+    def validate_sold_products(self):
         return self.error
