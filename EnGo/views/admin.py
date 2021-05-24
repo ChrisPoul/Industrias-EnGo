@@ -3,7 +3,7 @@ from flask import (
     flash
 )
 from . import permission_required, login_required
-from .user import user_heads
+from .user import users_heads
 from EnGo.models.user import User
 
 bp = Blueprint('admin', __name__, url_prefix="/admin")
@@ -16,6 +16,6 @@ def main_page():
 
     return render_template(
         "admin/main-page.html",
-        user_heads=user_heads,
+        user_heads=users_heads,
         users=users
     )

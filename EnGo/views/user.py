@@ -11,8 +11,11 @@ from EnGo.models.permission import Permission
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
+users_heads = dict(
+    username="Nombre de Usuario"
+)
 user_heads = dict(
-    username="Nombre de usuario",
+    users_heads,
     password="Contraseña"
 )
 permissions = [
@@ -28,7 +31,7 @@ def users():
 
     return render_template(
         "user/users.html",
-        user_heads=user_heads,
+        user_heads=users_heads,
         users=users
     )
 
