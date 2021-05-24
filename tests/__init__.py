@@ -31,16 +31,16 @@ class Test(TestCase):
                 return request_context
 
     def create_test_users(self):
-        admin_permission = Permission(
+        self.admin_permission = Permission(
             permission_name="admin",
         )
-        admin_permission.add()
+        self.admin_permission.add()
         self.admin_user = User(
             username="Admin User",
             password="0000"
         )
         self.admin_user.add()
-        self.admin_user.add_permission(admin_permission)
+        self.admin_user.add_permission(self.admin_permission)
         accounting_permission = Permission(
             permission_name="contaduría"
         )
