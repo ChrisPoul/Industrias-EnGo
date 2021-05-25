@@ -10,8 +10,7 @@ from EnGo.models.product import Product
 from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
-    update_obj_attrs, get_form, get_empty_form,
-    format_price, format_date
+    update_obj_attrs, get_form, get_empty_form
 )
 
 bp = Blueprint('receipt', __name__)
@@ -96,8 +95,6 @@ def edit(id):
         'receipt/receipt.html',
         customer_heads=customer_heads,
         product_heads=product_heads,
-        format_price=format_price,
-        format_date=format_date,
         receipt=receipt,
         form=form
     )
@@ -147,8 +144,6 @@ def done(id):
         "receipt/receipt.html",
         customer_heads=customer_heads,
         product_heads=product_heads,
-        format_price=format_price,
-        format_date=format_date,
         receipt=receipt
     )
 

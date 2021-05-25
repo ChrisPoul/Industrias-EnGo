@@ -2,8 +2,19 @@ from flask import Blueprint
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
+from . import (
+    format_price, format_date
+)
 
 bp = Blueprint("global_context", __name__)
+
+
+@bp.app_context_processor
+def inject_formaters():
+    return dict(
+        format_price=format_price,
+        format_date=format_date
+    )
 
 
 @bp.app_context_processor
