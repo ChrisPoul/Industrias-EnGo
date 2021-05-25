@@ -1,0 +1,11 @@
+<datalist id="views">
+    {% for view_name in autocomplete.get_data("views", "view_name") %}
+    <option>{{ view_name }}</option>
+    {% endfor %}
+</datalist>
+<form method='post' class="search-bar" autocomplete="off">
+    <input class="search-bar" name="search_term"
+        placeholder="Buscar pagina..."
+        list="views">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>

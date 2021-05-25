@@ -1,21 +1,6 @@
-<table>
-    <thead>
-        <th>
-            Pagina
-        </th>
-    </thead>
-    <tbody>
-        {% for view in views %}
-        <tr>
-            <td>
-                {{ view.view_name }}
-            </td>
-            <td>
-                <a href="{{ url_for('view.update', id=view.id) }}">
-                    Editar
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div class="header">
+    {% include 'view/search-bar.html' %}
+</div>
+<div class="container">
+    {% include 'view/views-table.html' %}
+</div>

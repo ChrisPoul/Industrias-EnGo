@@ -16,10 +16,16 @@ def main_page():
     users = User.get_all()
     views = View.get_all()
     if request.method == "POST":
-        user = User.search(request.form['username'])
+        search_term = request.form['search_term']
+        user = User.search(search_term)
         if user:
             return redirect(
                 url_for('user.update', id=user.id)
+            )
+        view = View.search(search_term)
+        if view:
+            return redirect(
+                url_for('view.update', id=view.id)
             )
 
     return render_template(

@@ -2,6 +2,7 @@ from flask import Blueprint
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
+from EnGo.models.view import View
 from . import (
     format_price, format_date
 )
@@ -30,7 +31,8 @@ class Autocomplete:
         self.groups = dict(
             users=User.get_all(),
             products=Product.get_all(),
-            customers = Customer.get_all()
+            customers = Customer.get_all(),
+            views=View.get_all()
         )
 
     def get_data(self, group, attribute):

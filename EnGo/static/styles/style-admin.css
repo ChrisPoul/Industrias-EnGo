@@ -11,3 +11,6 @@
     max-width: min-content;
     margin: 0 0 0 6em;
 }
+.admin div {
+    margin-left: 2em;
+}
