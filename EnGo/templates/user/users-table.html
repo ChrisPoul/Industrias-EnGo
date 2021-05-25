@@ -1,36 +1,34 @@
-<div>
-    <div class="heading">
-        <a href="{{ url_for('user.register') }}" class="add-button">
-            <input type="button" value="Añadir Empleado">
-        </a>
-        {% include "user/search-bar.html" %}
-    </div>
-    <div class="container">
-        <table>
-            <thead>
+<div class="heading">
+    <a href="{{ url_for('user.register') }}" class="add-button">
+        <input type="button" value="Añadir Empleado">
+    </a>
+    {% include "user/search-bar.html" %}
+</div>
+<div class="container">
+    <table>
+        <thead>
+            {% for head in user_heads %}
+            <th>
+                {{ user_heads[head] }}
+            </th>
+            {% endfor %}
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
                 {% for head in user_heads %}
-                <th>
-                    {{ user_heads[head] }}
-                </th>
-                {% endfor %}
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    {% for head in user_heads %}
-                    <td>
-                        {% if head == "username" %}
-                        <a href="{{ url_for('user.update', id=user.id) }}">
-                            {{ user[head] }}
-                        </a>
-                        {% else %}
+                <td>
+                    {% if head == "username" %}
+                    <a href="{{ url_for('user.update', id=user.id) }}">
                         {{ user[head] }}
-                        {% endif %}
-                    </td>
-                    {% endfor %}
-                </tr>
+                    </a>
+                    {% else %}
+                    {{ user[head] }}
+                    {% endif %}
+                </td>
                 {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
