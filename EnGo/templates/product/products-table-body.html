@@ -7,7 +7,7 @@
             {{ product[head] }}
         </a>
         {% elif head == 'price' %}
-        {{ product[head] }}
+        {{ format_price(product[head]) }}
         {% else %}
         {{ product[head] }}
         {% endif %}
