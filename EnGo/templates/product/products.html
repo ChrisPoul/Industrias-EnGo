@@ -5,32 +5,39 @@
 {% endblock %}
 
 {% block content %}
-<a href="{{ url_for('product.add') }}">
-    Añadir producto
-</a>
-<table>
-    <thead>
-        {% for head in product_heads %}
-        <th>
-            {{ product_heads[head] }}
-        </th>
-        {% endfor %}
-    </thead>
-    <tbody>
-        {% for product in products %}
-        <tr>
-            {% for head in product_heads %}
-            <td>
-                {{ product[head] }}
-            </td>
-            {% endfor %}
-            <td>
-                <a href="{{ url_for('product.update', id=product.id) }}">
-                    Editar
-                </a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<div>
+    <div class="heading">
+        <a href="{{ url_for('product.add') }}" class="add-button">
+            <input type="button" value="Añadir Producto">
+        </a>
+    </div>
+    <div class="container">
+        <table>
+            <thead>
+                {% for head in product_heads %}
+                <th>
+                    {{ product_heads[head] }}
+                </th>
+                {% endfor %}
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    {% for head in product_heads %}
+                    <td>
+                        {% if head == 'code' %}
+                        <a href="{{ url_for('product.update', id=product.id) }}">
+                            {{ product[head] }}
+                        </a>
+                        {% else %}
+                        {{ product[head] }}
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

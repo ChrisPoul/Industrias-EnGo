@@ -76,7 +76,6 @@ form input {
     margin: 0.5em;
     padding: 0.4em;
 }
-
 input {
     border: 1px solid gray;
     border-radius: 5px;
@@ -86,13 +85,44 @@ input[type=submit], input[type=button] {
     padding: 0.5em;
 }
 
+table {
+    margin-top: 1em;
+    border-collapse: collapse;
+}
 th, td {
     margin: 1em;
-    padding: 1em;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid black;
 }
 
+.heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 1.8em;
+    margin-bottom: 0.5em;
+}
+.heading form {
+    display: flex;
+    justify-content: flex-end;
+    text-align: right;
+    width: auto;
+}
+.add-button {
+    display: flex;
+    justify-content: center;
+}
+.add-button input {
+    background-color: #377ba8;
+    color:rgb(255, 255, 255);
+    border: none;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+
+}
 .search-bar {
     flex-direction: row;
+    margin-left: 2em;
 }
 .search-bar input {
     margin: 0;
@@ -109,4 +139,11 @@ th, td {
     border-right: 1px solid black;
     border-left: none;
     border-radius:  0px 5px 5px 0px;
+}
+
+.container {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em;
+    padding-top: 0;
 }
