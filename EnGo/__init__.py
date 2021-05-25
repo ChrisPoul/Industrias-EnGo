@@ -25,8 +25,8 @@ def create_app(test_config=None):
     db.init_app(app)
     app.cli.add_command(init_db_command)
 
-    from .views import autocomplete
-    app.register_blueprint(autocomplete.bp)
+    from .views import global_context
+    app.register_blueprint(global_context.bp)
 
     from .views import home
     app.register_blueprint(home.bp)

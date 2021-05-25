@@ -3,7 +3,7 @@ from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
 
-bp = Blueprint("autocomplete", __name__)
+bp = Blueprint("global_context", __name__)
 
 
 @bp.app_context_processor
