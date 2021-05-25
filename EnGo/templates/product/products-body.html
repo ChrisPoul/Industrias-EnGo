@@ -1,0 +1,9 @@
+<div class="heading">
+    <a href="{{ url_for('product.add') }}" class="add-button">
+        <input type="button" value="Añadir Producto">
+    </a>
+    {% include 'product/search-bar.html' %}
+</div>
+<div class="container">
+    {% include 'product/products-table.html' %}
+</div>

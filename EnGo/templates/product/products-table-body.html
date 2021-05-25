@@ -1,0 +1,17 @@
+{% for product in products %}
+<tr>
+    {% for head in product_heads %}
+    <td>
+        {% if head == 'code' %}
+        <a href="{{ url_for('product.update', id=product.id) }}">
+            {{ product[head] }}
+        </a>
+        {% elif head == 'price' %}
+        {{ product[head] }}
+        {% else %}
+        {{ product[head] }}
+        {% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endfor %}

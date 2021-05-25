@@ -1,0 +1,12 @@
+<table>
+    <thead>
+        {% for head in product_heads %}
+        <th>
+            {{ product_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% include "product/products-table-body.html" %}
+    </tbody>
+</table>

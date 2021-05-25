@@ -6,39 +6,6 @@
 
 {% block content %}
 <div>
-    <div class="heading">
-        <a href="{{ url_for('product.add') }}" class="add-button">
-            <input type="button" value="Añadir Producto">
-        </a>
-        {% include 'product/search-bar.html' %}
-    </div>
-    <div class="container">
-        <table>
-            <thead>
-                {% for head in product_heads %}
-                <th>
-                    {{ product_heads[head] }}
-                </th>
-                {% endfor %}
-            </thead>
-            <tbody>
-                {% for product in products %}
-                <tr>
-                    {% for head in product_heads %}
-                    <td>
-                        {% if head == 'code' %}
-                        <a href="{{ url_for('product.update', id=product.id) }}">
-                            {{ product[head] }}
-                        </a>
-                        {% else %}
-                        {{ product[head] }}
-                        {% endif %}
-                    </td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    {% include "product/products-body.html" %}
 </div>
 {% endblock %}
