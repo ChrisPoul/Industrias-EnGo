@@ -90,6 +90,9 @@ table a {
 thead {
     background-color: rgba(128, 128, 128, 0.637);
 }
+.logo {
+    max-width: fit-content;
+}
 .customer td {
     justify-content: center;
 }

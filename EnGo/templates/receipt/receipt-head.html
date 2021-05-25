@@ -1,5 +1,12 @@
 <table class="head">
     <tr>
+        <td class="logo" colspan="5">
+            <a href="{{ url_for('home.main_page') }}">
+                <img src="{{ url_for('static', filename='images/logo.jpeg') }}">
+            </a>
+        </td>
+    </tr>
+    <tr>
         <td>
             {% include "receipt/customer-info.html" %}
         </td>
