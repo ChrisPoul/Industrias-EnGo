@@ -29,7 +29,7 @@ permissions = [
 def users():
     users = User.get_all()
     if request.method == "POST":
-        user = User.search(request.form['username'])
+        user = User.search(request.form['search_term'])
         if user:
             return redirect(
                 url_for('user.update', id=user.id)

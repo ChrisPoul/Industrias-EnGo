@@ -23,7 +23,7 @@ permissions = [
 def products():
     products = Product.get_all()
     if request.method == "POST":
-        product = Product.search(request.form['code'])
+        product = Product.search(request.form['search_term'])
         if product:
             return redirect(
                 url_for('product.update', id=product.id)
