@@ -1,6 +1,6 @@
 <datalist id="customers">
-    {% for code in autocomplete.get_data("customers", "customer_name") %}
-    <option>{{ code }}</option>
+    {% for customer_name in autocomplete.get_data("customers", "customer_name") %}
+    <option>{{ customer_name }}</option>
     {% endfor %}
 </datalist>
 <form method='post' class="search-bar" autocomplete="off">
