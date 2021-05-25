@@ -21,11 +21,14 @@ permissions = [
 ]
 
 
-@bp.route('/customers')
+@bp.route('/customers', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def customers():
     customers = Customer.get_all()
+    if request.method == "POST":
+        customers = Customer.search(request.form["search_term"])
+
     return render_template(
         'customer/customers.html',
         customer_heads=customer_heads,

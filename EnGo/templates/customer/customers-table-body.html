@@ -1,0 +1,15 @@
+{% for customer in customers %}
+<tr>
+    {% for head in customer_heads %}
+    <td>
+        {% if head == "customer_name" %}
+        <a href="{{ url_for('customer.update', id=customer.id) }}">
+            {{ customer[head] }}
+        </a>
+        {% else %}
+        {{ customer[head] }}
+        {% endif %}
+    </td>
+    {% endfor %}
+</tr>
+{% endfor %}

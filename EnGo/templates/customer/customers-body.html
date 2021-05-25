@@ -1,0 +1,9 @@
+<div class="heading">
+    <a href="{{ url_for('customer.add') }}" class="add-button">
+        <input type="button" value="Añadir Cliente">
+    </a>
+    {% include "customer/search-bar.html" %}
+</div>
+<div class="container">
+    {% include "customer/customers-table.html" %}
+</div>
