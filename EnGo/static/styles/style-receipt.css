@@ -63,8 +63,26 @@ td, th {
 strong {
     margin-right: 0.5em;
 }
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2em;
+}
 input {
     width: 100%;
+}
+input[type=submit] {
+    width: min-content;
+    background-color: rgba(100, 148, 237, 0.616);
+}
+input[type=button] {
+    background-color:rgba(144, 238, 144, 0.685);
+}
+input[type=button], input[type=submit] {
+    border: none;
+    border-radius: 5px;
+    padding: 0.5em 3em;
+    height: max-content;
 }
 table a {
     color: red;
