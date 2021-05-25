@@ -17,11 +17,17 @@ permissions = [
 ]
 
 
-@bp.route("/products")
+@bp.route("/products", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
 def products():
     products = Product.get_all()
+    if request.method == "POST":
+        product = Product.search(request.form['code'])
+        if product:
+            return redirect(
+                url_for('product.update', id=product.id)
+            )
 
     return render_template(
         "product/products.html",
