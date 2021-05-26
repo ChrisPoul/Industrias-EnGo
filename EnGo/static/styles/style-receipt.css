@@ -107,6 +107,9 @@ thead {
 .total {
     max-width: 8%;
 }
+.delete-botton {
+    max-width: 3%;
+}
 .head td {
     display: flex;
     flex-direction: column;

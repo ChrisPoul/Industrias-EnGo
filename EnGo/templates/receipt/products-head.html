@@ -3,3 +3,8 @@
     {{ product_heads[head] }}
 </th>
 {% endfor %}
+{% if not receipt.done %}
+<th class="delete-botton">
+    
+</th>
+{% endif %}
