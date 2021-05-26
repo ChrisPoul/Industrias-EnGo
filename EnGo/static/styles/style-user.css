@@ -21,7 +21,16 @@
     border: 0px;
     background-color: rgba(199, 37, 37, 0.897);
 }
+.update-view {
+    align-items: center;
+    width: fit-content;
+}
+.permissions-checkbox {
+    flex-direction: column;
+    margin: 1em;
+}
 .permissions-checkbox div {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }

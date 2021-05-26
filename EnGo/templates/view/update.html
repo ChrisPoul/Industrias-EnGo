@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block content %}
-<form method=post>
-    {% include 'view/permissions-dropdown.html' %}
-    <input type="submit" value="Guardar cambios">
-</form>
+<div class="container">
+    <form method='post' class="update-view">
+        {% include 'view/permissions-dropdown.html' %}
+        <input type="submit" value="Guardar cambios">
+    </form>
+</div>
 {% endblock %}
