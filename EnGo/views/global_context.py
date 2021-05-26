@@ -21,6 +21,7 @@ def inject_formaters():
 
 @bp.app_context_processor
 def inject_view_and_permissions():
+    session["prev_url"] = request.referrer
     return dict(
         view=View.search(request.endpoint),
         permissions=Permission.get_all()

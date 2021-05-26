@@ -1,6 +1,6 @@
 from flask import (
     Blueprint, render_template, request,
-    redirect, url_for
+    redirect, url_for, session
 )
 from EnGo.models.permission import Permission
 from EnGo.models.view import View
@@ -17,7 +17,7 @@ def update(id):
         checked_permissions = get_checked_permissions()
         view.update_permissions(checked_permissions)
         return redirect(
-            url_for('admin.main_page')
+            session["prev_url"]
         )
 
     return render_template(
