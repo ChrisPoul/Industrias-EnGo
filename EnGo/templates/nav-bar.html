@@ -1,35 +1,44 @@
 <nav>
     {% if g.user %}
-    <a href="{{ url_for('home.main_page') }}">
-        Pagina Principal
-    </a>
-    {% if g.user.has_permission('admin.main_page') %}
-    <a href="{{ url_for('admin.main_page') }}">
-        Admin Page
-    </a>
-    {% endif %}
-    {% if g.user.has_permission('user.users') %}
-    <a href="{{ url_for('user.users') }}">
-        Empleados
-    </a>
-    {% endif %}
-    {% if g.user.has_permission('customer.customers') %}
-    <a href="{{ url_for('customer.customers') }}">
-        Clientes
-    </a>
-    {% endif %}
-    {% if g.user.has_permission('product.products') %}
-    <a href="{{ url_for('product.products') }}">
-        Productos
-    </a>
-    {% endif %}
-    {% if g.user.has_permission('receipt.add') %}
-    <a href="{{ url_for('receipt.add') }}">
-        Crear Recibo
-    </a>
-    {% endif %}
-    <a href="{{ url_for('user.logout') }}">
-        Logout
-    </a>
+    <div>
+        <a href="{{ url_for('home.main_page') }}">
+            Pagina Principal
+        </a>
+        {% if g.user.has_permission('admin.main_page') %}
+        <a href="{{ url_for('admin.main_page') }}">
+            Admin Page
+        </a>
+        {% endif %}
+        {% if g.user.has_permission('user.users') %}
+        <a href="{{ url_for('user.users') }}">
+            Empleados
+        </a>
+        {% endif %}
+        {% if g.user.has_permission('customer.customers') %}
+        <a href="{{ url_for('customer.customers') }}">
+            Clientes
+        </a>
+        {% endif %}
+        {% if g.user.has_permission('product.products') %}
+        <a href="{{ url_for('product.products') }}">
+            Productos
+        </a>
+        {% endif %}
+        {% if g.user.has_permission('receipt.add') %}
+        <a href="{{ url_for('receipt.add') }}">
+            Crear Recibo
+        </a>
+        {% endif %}
+    </div>
+    <div>
+        <a href="{{ url_for('user.logout') }}">
+            Logout
+        </a>
+        {% if g.user.is_admin() and view %}
+        <a href="{{ url_for('view.update', id=view.id ) }}">
+            Configurar Pagina
+        </a>
+        {% endif %}
+    </div>
     {% endif %}
 </nav>

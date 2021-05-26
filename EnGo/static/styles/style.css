@@ -35,8 +35,13 @@ nav a {
 nav a:hover {
     background-color: #33729c9f;
 }
-nav a:last-child {
+nav div {
+    display: flex;
+    flex-direction: row;
     border-right: 1px solid rgba(255, 255, 255, 0.931);
+}
+nav div:last-child {
+    margin-left: auto;
 }
 
 section {

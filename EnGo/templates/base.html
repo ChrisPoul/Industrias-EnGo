@@ -16,9 +16,6 @@
 <header>
     {% block header %}{% endblock %}
 </header>
-<div>
-    {% include 'permissions-dropdown.html' %}
-</div>
 {% for message in get_flashed_messages() %}
 <div class="flash">{{ message }}</div>
 {% endfor %}

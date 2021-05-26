@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
