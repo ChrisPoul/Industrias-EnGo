@@ -15,6 +15,52 @@ class ProductViewTest(ProductTest):
         self.create_test_users()
 
 
+class TestProductsView(ProductViewTest):
+
+    def test_should_return_valid_response_given_LUHP(self):
+        self.login_user(self.accounting_user)
+        with self.client as client:
+            response = client.get(
+                url_for("product.products")
+            )
+
+        self.assert200(response)
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        response = self.client.get(
+            url_for("product.products")
+        )
+        
+        self.assertStatus(response, 302)
+
+    def test_should_redirect_given_valid_search_term_and_LUHP(self):
+        self.login_user(self.accounting_user)
+        search_data = dict(
+            search_term="Test Code"
+        )
+        with self.client as client:
+            response = client.post(
+                url_for('product.products'),
+                data=search_data
+            )
+        
+        self.assertStatus(response, 302)
+
+    def test_should_not_redirect_given_invalid_search_term_and_LUHP(self):
+        self.login_user(self.accounting_user)
+        search_data = dict(
+            search_term="Invalid term"
+        )
+        with self.client as client:
+            response = client.post(
+                url_for('product.products'),
+                data=search_data
+            )
+        
+        self.assert200(response)
+
+
 class TestAddView(ProductViewTest):
 
     def test_should_add_product_given_valid_product_data_and_LUHP(self):
@@ -98,26 +144,6 @@ class TestDeleteView(ProductViewTest):
         self.login_user(self.normal_user)
         response = self.client.get(
             url_for("product.delete", id=1)
-        )
-        
-        self.assertStatus(response, 302)
-
-
-class TestProductsView(ProductViewTest):
-
-    def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.accounting_user)
-        with self.client as client:
-            response = client.get(
-                url_for("product.products")
-            )
-
-        self.assert200(response)
-
-    def test_should_redirect_given_LUHNP(self):
-        self.login_user(self.normal_user)
-        response = self.client.get(
-            url_for("product.products")
         )
         
         self.assertStatus(response, 302)

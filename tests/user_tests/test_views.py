@@ -35,6 +35,32 @@ class TestUsersView(UserViewTest):
 
         self.assertStatus(response, 302)
 
+    def test_should_redirect_given_valid_search_term_and_LUHP(self):
+        self.login_user(self.admin_user)
+        search_data = dict(
+            search_term="Test User"
+        )
+        with self.client as client:
+            response = client.post(
+                url_for('user.users'),
+                data=search_data
+            )
+        
+        self.assertStatus(response, 302)
+
+    def test_should_not_redirect_given_invalid_search_term_and_LUHP(self):
+        self.login_user(self.admin_user)
+        search_data = dict(
+            search_term="Invalid term"
+        )
+        with self.client as client:
+            response = client.post(
+                url_for('user.users'),
+                data=search_data
+            )
+        
+        self.assert200(response)
+
 
 class TestRegisterView(UserViewTest):
 
