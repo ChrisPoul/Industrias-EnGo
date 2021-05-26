@@ -1,13 +1,23 @@
 {% extends "receipt/base.html" %}
 
 {% block content %}
-<form method="post">
+<datalist id="customer_names">
+    {% for customer_name in autocomplete.get_data("customers", "customer_name") %}
+    <option>{{ customer_name }}</option>
+    {% endfor %}
+</datalist>
+<datalist id="addresss">
+    {% for address in autocomplete.get_data("customers", "address") %}
+    <option>{{ address }}</option>
+    {% endfor %}
+</datalist>
+<form method="post" autocomplete="off">
     <table>
         <tr>
             {% for head in customer_heads %}
             <td>
                 <strong>{{ customer_heads[head] }}:</strong>
-                <input name="{{ head }}" id="{{ head }}">
+                <input name="{{ head }}" id="{{ head }}" list="{{ head }}s">
             </td>
             {% endfor %}
         </tr>
