@@ -92,4 +92,12 @@ def delete(id):
     return redirect(
         url_for('customer.customers')
     )
-    
+
+
+@bp.route('/receipts/<int:id>')
+@permission_required(permissions)
+@login_required
+def receipts(id):
+    return render_template(
+        'customer/receipts.html'
+    )
