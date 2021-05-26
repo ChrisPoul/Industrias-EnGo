@@ -20,12 +20,10 @@ nav div {
     flex-direction: row;
     border-right: 1px solid rgba(255, 255, 255, 0.931);
 }
-nav div:last-child {
-    margin-left: auto;
-}
 div.search-bar {
     border: none;
     align-items: center;
     max-width: max-content;
     margin-left: auto;
+    margin-right: 2em;
 }
