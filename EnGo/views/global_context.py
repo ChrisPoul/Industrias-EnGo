@@ -9,13 +9,15 @@ from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
 from . import (
-    format_price, format_date
+    login_required, format_price,
+    format_date
 )
 
 bp = Blueprint("global_context", __name__)
 
 
 @bp.route('/search_bar')
+@login_required
 def search_bar():
     search_term = request.args['search_term']
     bp_name = "customer"
