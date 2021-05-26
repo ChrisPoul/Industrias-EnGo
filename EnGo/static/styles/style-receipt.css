@@ -109,6 +109,10 @@ thead {
 }
 .delete-button {
     max-width: 3%;
+    padding-bottom: 0;
+}
+.delete-button img {
+    max-width: 1.2em;
 }
 .head td {
     display: flex;
