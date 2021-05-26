@@ -1,3 +1,11 @@
-<form action="{{ url_for('global_context.search_bar') }}">
-    <input type="text">
+<datalist id="views">
+    {% for view_name in autocomplete.get_data("views", "view_name") %}
+    <option>{{ view_name }}</option>
+    {% endfor %}
+</datalist>
+<form class="search-bar" action="{{ url_for('global_context.search_bar') }}" autocomplete="off">
+    <input name="search_term"
+        placeholder="Buscar pagina..."
+        list="views">
+    <button type="submit"><i class="fa fa-search"></i></button>
 </form>

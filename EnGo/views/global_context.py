@@ -1,4 +1,8 @@
-from flask import Blueprint, request, session
+from flask import (
+    Blueprint, request, session,
+    redirect
+)
+from flask.helpers import url_for
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
@@ -9,6 +13,34 @@ from . import (
 )
 
 bp = Blueprint("global_context", __name__)
+
+
+@bp.route('/search_bar')
+def search_bar():
+    search_term = request.args['search_term']
+    bp_name = "customer"
+    try:
+        result = Customer.search(search_term)[0]
+    except IndexError:
+        result = None
+    if not result:
+        bp_name = "user"
+        result = User.search(search_term)
+    if not result:
+        bp_name = "view"
+        result = View.search(search_term)
+    if not result:
+        bp_name = "product"
+        result = Product.search(search_term)
+
+    if result:
+        return redirect(
+            url_for(f"{bp_name}.update", id=result.id)
+        )
+    else: 
+        return redirect(
+            session['prev_url']
+        )
 
 
 @bp.app_context_processor
