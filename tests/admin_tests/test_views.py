@@ -4,6 +4,7 @@ from EnGo.models.user import User
 from EnGo.models.permission import Permission
 
 ### LOGED IN USER (LU) ###
+### LOGED IN USER HAS PERMISSION (LUHP) ###
 
 
 class AdminViewTest(AdminTest):
@@ -31,7 +32,7 @@ class TestMainPage(AdminViewTest):
 
         self.assertStatus(response, 302)
     
-    def test_should_redirect_given_valid_user_search_term(self):
+    def test_should_redirect_given_valid_user_search_term_and_LUHP(self):
         self.login_user(self.admin_user)
         search_data = dict(
             search_term="Test User"
@@ -44,7 +45,7 @@ class TestMainPage(AdminViewTest):
         
         self.assertStatus(response, 302)
 
-    def test_should_redirect_given_valid_view_search_term(self):
+    def test_should_redirect_given_valid_view_search_term_and_LUHP(self):
         self.login_user(self.admin_user)
         search_data = dict(
             search_term="Test View"
@@ -57,7 +58,7 @@ class TestMainPage(AdminViewTest):
         
         self.assertStatus(response, 302)
 
-    def test_should_not_redirect_given_invalid_search_term(self):
+    def test_should_not_redirect_given_invalid_search_term_and_LUHP(self):
         self.login_user(self.admin_user)
         search_data = dict(
             search_term="Invalid term"
