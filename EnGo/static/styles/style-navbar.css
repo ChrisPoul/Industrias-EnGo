@@ -1,0 +1,31 @@
+nav {
+    display: flex;
+    width: 100%;
+    background-color: #4189b9be;
+    justify-content: center;
+}
+nav a {
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    border-left: 1px solid rgba(255, 255, 255, 0.931);
+    height: auto;
+    color: rgb(255, 255, 255);
+}
+nav a:hover {
+    background-color: #33729c9f;
+}
+nav div {
+    display: flex;
+    flex-direction: row;
+    border-right: 1px solid rgba(255, 255, 255, 0.931);
+}
+nav div:last-child {
+    margin-left: auto;
+}
+div.search-bar {
+    border: none;
+    align-items: center;
+    max-width: max-content;
+    margin-left: auto;
+}
