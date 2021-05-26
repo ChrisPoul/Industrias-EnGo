@@ -46,7 +46,6 @@ def users():
 @permission_required(permissions)
 @login_required
 def register():
-    permissions = Permission.get_all()
     if request.method == "POST":
         user = User(
             username=request.form["username"],
@@ -63,8 +62,7 @@ def register():
 
     return render_template(
         "user/register.html",
-        user_heads=user_heads,
-        permissions=permissions
+        user_heads=user_heads
     )
 
 
@@ -97,7 +95,6 @@ def login():
 @login_required
 def update(id):
     user = User.get(id)
-    permissions = Permission.get_all()
     if request.method == "POST":
         update_obj_attrs(user, user_heads)
         checked_permissions = get_checked_permissions()
@@ -112,8 +109,7 @@ def update(id):
     return render_template(
         "user/update.html",
         user_heads=user_heads,
-        user=user,
-        permissions=permissions
+        user=user
     )
 
 

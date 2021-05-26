@@ -1,0 +1,16 @@
+<form action="{{ url_for('view.') }}">
+    <div class="permissions-checkbox">
+        {% for permission in permissions %}
+        <div>
+            {% if permission.permission_name != "admin" and not g.user.is_admin() or g.user.is_admin() %}
+            <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
+                {% if view and permission in view.permissions %}
+                checked
+                {% endif %}>
+            <label for="{{ permission.permission_name }}">{{ permission.permission_name }}</label>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <input type="submit" value="Guardar Cambios">
+</form>

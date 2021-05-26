@@ -1,8 +1,9 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
 from EnGo.models.view import View
+from EnGo.models.permission import Permission
 from . import (
     format_price, format_date
 )
@@ -15,6 +16,14 @@ def inject_formaters():
     return dict(
         format_price=format_price,
         format_date=format_date
+    )
+
+
+@bp.app_context_processor
+def inject_view_and_permissions():
+    return dict(
+        view=View.search(request.endpoint),
+        permissions=Permission.get_all()
     )
 
 
