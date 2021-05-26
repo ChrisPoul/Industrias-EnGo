@@ -103,9 +103,31 @@ th, td {
     margin-bottom: 0.5em;
 }
 .heading form {
+    flex-direction: row;
     justify-content: flex-end;
     text-align: right;
-    width: fit-content;
+    width: 100%;
+}
+.heading input {
+    margin: 0;
+    padding: 0.3em;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: none;
+    border-radius: 5px 0px 0px 5px;
+    width: 100%;
+}
+.heading input[type=button] {
+    border-radius: 5px;
+    margin-left: 1em;
+}
+.heading button{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: none;
+    border-radius:  0px 5px 5px 0px;
 }
 .add-button {
     display: flex;
@@ -118,27 +140,6 @@ th, td {
     padding-left: 1.5em;
     padding-right: 1.5em;
 
-}
-.search-bar {
-    flex-direction: row;
-    width: 100%;
-
-}
-.search-bar input {
-    margin: 0;
-    padding: 0.3em;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: none;
-    border-radius: 5px 0px 0px 5px;
-}
-.search-bar button{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    border-right: 1px solid black;
-    border-left: none;
-    border-radius:  0px 5px 5px 0px;
 }
 
 .container {
