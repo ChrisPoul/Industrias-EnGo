@@ -27,6 +27,10 @@ div.search-bar {
     margin-left: auto;
     margin-right: 2em;
 }
+nav .search-bar input,
+nav .search-bar button {
+    border: none;
+}
 .gear-icon {
     padding: 0.1em 0.9em;
 }

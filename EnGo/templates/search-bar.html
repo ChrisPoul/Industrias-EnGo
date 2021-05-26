@@ -1,4 +1,7 @@
 <datalist id="all-search-terms">
+    {% for username in autocomplete.get_data("users", "username") %}
+    <option>{{ username }}</option>
+    {% endfor %}
     {% for customer_name in autocomplete.get_data("customers", "customer_name") %}
     <option>{{ customer_name }}</option>
     {% endfor %}
@@ -7,9 +10,6 @@
     {% endfor %}
     {% for rfc in autocomplete.get_data("customers", "rfc") %}
     <option>{{ rfc }}</option>
-    {% endfor %}
-    {% for username in autocomplete.get_data("users", "username") %}
-    <option>{{ username }}</option>
     {% endfor %}
     {% for view_name in autocomplete.get_data("views", "view_name") %}
     <option>{{ view_name }}</option>
@@ -20,7 +20,7 @@
 </datalist>
 <form class="search-bar" action="{{ url_for('global_context.search_bar') }}" autocomplete="off">
     <input name="search_term"
-        placeholder="Buscar pagina..."
+        placeholder="¿Qué estás buscando?"
         list="all-search-terms">
     <button type="submit"><i class="fa fa-search"></i></button>
 </form>
