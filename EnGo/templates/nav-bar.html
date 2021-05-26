@@ -40,7 +40,7 @@
         {% if g.user.is_admin() and view %}
         {% if request.endpoint != "view.update" %}
         <a href="{{ url_for('view.update', id=view.id ) }}" class="gear-icon">
-            <i class="fa fa-gear" style="font-size: 2em;"></i>
+            <i class="fa fa-gear" style="font-size: 1.6em;"></i>
         </a>
         {% endif %}
         {% endif %}
