@@ -1,3 +1,14 @@
+<datalist id="codes">
+    {% for code in autocomplete.get_data('products', 'code') %}
+    <option>{{ code }}</option>
+    {% endfor %}
+</datalist>
+<datalist id="descriptions">
+    {% for description in autocomplete.get_data('products', 'description') %}
+    <option>{{ description }}</option>
+    {% endfor %}
+</datalist>
+
 {% for sold_product in receipt.sold_products %}
 <tr>
     {% for head in product_heads %}

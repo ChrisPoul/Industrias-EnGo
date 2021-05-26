@@ -9,7 +9,8 @@
 {% else %}
 {% if head == "code" or head == "description" %}
 <input name="{{ sold_product.get_unique_key(head) }}" 
-    id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product.product[head] }}">
+    id="{{ sold_product.get_unique_key(head) }}" 
+    value="{{ sold_product.product[head] }}">
 {% elif head == "total" %}
 {{ format_price(sold_product[head]) }}
 {% else %}
