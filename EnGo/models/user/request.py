@@ -1,4 +1,5 @@
 from flask import session
+from werkzeug.security import check_password_hash
 from . import User
 
 
@@ -12,7 +13,7 @@ class UserRequest:
         error = None
         if not user:
             error = "Nombre de usuario incorrecto"
-        elif self.user.password != user.password:
+        elif not check_password_hash(user.password, self.user.password):
             error = "Contraseña incorrecta"
         if not error:
             session.clear()

@@ -2,12 +2,13 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
+from werkzeug.security import generate_password_hash
+
 from . import (
     permission_required, login_required,
     update_obj_attrs, get_checked_permissions
 )
 from EnGo.models.user import User
-from EnGo.models.permission import Permission
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -47,9 +48,13 @@ def users():
 @login_required
 def register():
     if request.method == "POST":
+        username = request.form['username']
+        password = generate_password_hash(
+            request.form['password']
+        )
         user = User(
-            username=request.form["username"],
-            password=request.form["password"]
+            username=username,
+            password=password
         )
         error = user.request.register()
         if not error:

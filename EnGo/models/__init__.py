@@ -26,6 +26,7 @@ def init_db():
 
 
 def create_admin_user(username):
+    from werkzeug.security import generate_password_hash
     from .permission import Permission
     from .user import User
     admin_permission = Permission(
@@ -34,7 +35,7 @@ def create_admin_user(username):
     admin_permission.add()
     admin_user = User(
         username=username,
-        password="0000"
+        password=generate_password_hash('0000')
     )
     admin_user.add()
     admin_user.add_permission(admin_permission)
