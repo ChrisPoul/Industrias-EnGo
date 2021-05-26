@@ -4,6 +4,9 @@
     <td class="{{ head }}">
         {% if head != "total" and head != "quantity" %}
         <input name="{{ head }}" id="{{ head }}" 
+        {% if head == "price" %}
+        type="number"
+        {% endif %}
         value="{{ form[head] }}" list="{{ head }}s">
         {% endif %}
     </td>

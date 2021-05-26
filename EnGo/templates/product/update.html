@@ -8,7 +8,11 @@
 <form method="post">
     {% for head in product_heads %}
     <label for="{{ head }}">{{ product_heads[head] }}:</label>
-    <input name="{{ head }}" id="{{ head }}" value="{{ product[head] }}">
+    <input name="{{ head }}" id="{{ head }}"
+    {% if head == "price" %}
+    type="number"
+    {% endif %}
+    value="{{ product[head] }}">
     {% endfor %}
     <div>
         <input type="submit" value="Guardar Cambios">
