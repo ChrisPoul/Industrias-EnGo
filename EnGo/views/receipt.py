@@ -23,6 +23,7 @@ product_heads = dict(
     quantity="Cantidad",
     code="Código",
     description="Descripción",
+    unit="Unidad",
     price="Precio",
     total="Total"
 )

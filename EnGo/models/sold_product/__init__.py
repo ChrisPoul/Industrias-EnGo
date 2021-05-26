@@ -1,6 +1,6 @@
 from EnGo.models import db, MyModel
 from sqlalchemy import (
-    Column, Integer, ForeignKey
+    Column, Integer, ForeignKey, String
 )
 
 
@@ -8,6 +8,7 @@ class SoldProduct(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     receipt_id = Column(Integer, ForeignKey('receipt.id'), nullable=False)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    unit = Column(String(10), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
 

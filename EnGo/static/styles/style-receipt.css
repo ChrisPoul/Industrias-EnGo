@@ -112,6 +112,9 @@ thead {
     justify-content: left;
     text-align: justify;
 }
+.unit {
+    max-width: 7%;
+}
 .price {
     max-width: 7%;
 }
