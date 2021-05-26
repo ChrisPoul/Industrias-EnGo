@@ -50,10 +50,27 @@ form label {
     margin: 0.5em;
     margin-bottom: 0;
     font-size: 0.9em;
+    font-weight: 600;
 }
 form input {
     margin: 0.5em;
     padding: 0.4em;
+}
+section form div {
+    flex-direction: row;
+    justify-content: space-between;
+}
+section form input[type=submit], 
+section form input[type=button] {
+    border: none;
+    width: fit-content;
+    padding: 0.5em 2.5em;
+}
+section form input[type=submit] {
+    background-color: rgba(34, 57, 139, 0.788);
+}
+section form input[type=button] {
+    background-color: rgba(199, 37, 37, 0.897);
 }
 input {
     border: 1px solid gray;
@@ -72,6 +89,7 @@ th, td {
     margin: 1em;
     padding: 0.5em 1em;
     border-bottom: 1px solid black;
+    text-align: center;
 }
 
 .heading {
@@ -104,4 +122,6 @@ th, td {
     border-radius: 10px;
     padding: 1em;
     padding-top: 0;
+    height: 100%;
+    text-align: center;
 }

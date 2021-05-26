@@ -10,9 +10,11 @@
     <label for="{{ head }}">{{ customer_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}" value="{{ customer[head] }}">
     {% endfor %}
-    <input type="submit">
-    <a href="{{ url_for('customer.delete', id=customer.id) }}">
-        <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">
-    </a>
+    <div>
+        <input type="submit" value="Guardar Cambios">
+        <a href="{{ url_for('customer.delete', id=customer.id) }}">
+            <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">
+        </a>
+    </div>
 </form>
 {% endblock %}
