@@ -22,7 +22,11 @@
 <section>
     <form method="post" class="user">
         {% for head in user_heads %}
-        <input name="{{ head }}" id="{{ head }}" placeholder="{{ user_heads[head] }}...">
+        <input name="{{ head }}" id="{{ head }}"
+        {% if head == "password" %}
+        type="password"
+        {% endif %} 
+        placeholder="{{ user_heads[head] }}...">
         {% endfor %}
         <input type="submit" value="Iniciar Sesión">
     </form>
