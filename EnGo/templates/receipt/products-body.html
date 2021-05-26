@@ -44,3 +44,12 @@
     {% endfor %}
 </tr>
 {% endif %}
+{% for _ in empty_spaces %}
+<tr>
+    {% for head in product_heads %}
+    <td class="{{ head }}">
+        <br>
+    </td>
+    {% endfor %}
+</tr>
+{% endfor %}

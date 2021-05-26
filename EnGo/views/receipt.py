@@ -79,6 +79,7 @@ def search_for_customer():
 def edit(id):
     receipt = Receipt.get(id)
     form = get_form(product_heads)
+    empty_spaces = get_empty_spaces(receipt.products)
     if request.method == "POST":
         update_obj_attrs(receipt.customer, customer_heads)
         update_receipt_products(receipt)
@@ -95,6 +96,7 @@ def edit(id):
         'receipt/receipt.html',
         customer_heads=customer_heads,
         product_heads=product_heads,
+        empty_spaces=empty_spaces,
         receipt=receipt,
         form=form
     )
@@ -138,12 +140,14 @@ def update_product_attr(sold_product, attribute):
 @login_required
 def done(id):
     receipt = Receipt.get(id)
+    empty_spaces = get_empty_spaces(receipt.products)
     receipt.done = True
 
     return render_template(
         "receipt/receipt.html",
         customer_heads=customer_heads,
         product_heads=product_heads,
+        empty_spaces=empty_spaces,
         receipt=receipt
     )
 
@@ -172,3 +176,10 @@ def delete(id):
     return redirect(
         url_for('customer.customers')
     )
+
+
+def get_empty_spaces(products):
+    empty_spaces_length = 9 - len(products)
+    empty_spaces = range(empty_spaces_length)
+
+    return empty_spaces

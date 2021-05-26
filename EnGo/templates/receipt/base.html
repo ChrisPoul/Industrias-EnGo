@@ -12,6 +12,8 @@
 {% if not receipt.done %}
 {% include "nav-bar.html" %}
 {% endif %}
+{% else %}
+{% include "nav-bar.html" %}
 {% endif %}
 {% for message in get_flashed_messages() %}
 <div class="flash">{{ message }}</div>
