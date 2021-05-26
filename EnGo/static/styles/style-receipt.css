@@ -28,8 +28,13 @@ nav a {
 nav a:hover {
     background-color: #33729c9f;
 }
-nav a:last-child {
+nav div {
+    display: flex;
+    flex-direction: row;
     border-right: 1px solid rgba(255, 255, 255, 0.931);
+}
+nav div:last-child {
+    margin-left: auto;
 }
 
 section {
@@ -39,6 +44,7 @@ section {
     justify-content: center;
     max-width: 21.6cm;
     margin: auto;
+    margin-bottom: 10vh;
 }
 table{
     width: 100%;
@@ -76,7 +82,7 @@ input[type=submit] {
     background-color: rgba(100, 148, 237, 0.616);
 }
 input[type=button] {
-    background-color:rgba(144, 238, 144, 0.685);
+    background-color:rgba(110, 235, 110, 0.726);
 }
 input[type=button], input[type=submit] {
     border: none;
