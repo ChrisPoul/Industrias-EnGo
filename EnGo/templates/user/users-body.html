@@ -1,0 +1,9 @@
+<div class="heading">
+    {% include "user/search-bar.html" %}
+    <a href="{{ url_for('user.register') }}" class="add-button">
+        <input type="button" value="Añadir Empleado">
+    </a>
+</div>
+<div class="container">
+    {% include "user/users-table.html" %}
+</div>
