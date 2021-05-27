@@ -1,3 +1,4 @@
+from EnGo.models import raw_material
 from . import RawMaterialTest
 from EnGo.models.raw_material import RawMaterial
 
@@ -29,3 +30,29 @@ class TestDelete(RawMaterialTest):
         self.raw_material.delete()
 
         self.assertNotIn(self.raw_material, self.db.session)
+
+
+class TestGet(RawMaterialTest):
+
+    def test_sould_return_raw_material_given_valid_id(self):
+        raw_material = RawMaterial.get(self.raw_material.id)
+
+        self.assertEqual(raw_material, self.raw_material)
+
+
+class TestGetAll(RawMaterialTest):
+
+    def test_should_return_all_raw_materials(self):
+        raw_materials = RawMaterial.get_all()
+
+        self.assertEqual(raw_materials, [self.raw_material])
+
+
+class TestSearch(RawMaterialTest):
+
+    def test_should_return_raw_material_given_valid_search_term(self):
+        result = RawMaterial.search(self.raw_material.material_name)
+
+        self.assertEqual(result, self.raw_material)
+
+
