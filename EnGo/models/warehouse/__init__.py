@@ -2,11 +2,17 @@ from sqlalchemy import (
     Column, Integer, String
 )
 from EnGo.models import db, MyModel
+from EnGo.models.finished_product import FinishedProduct
 
 
 class Warehouse(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     address = Column(String(200), nullable=False, unique=True)
+    finished_products = db.relationship(
+        'FinishedProduct',
+        backref="warehouse",
+        cascade="all, delete-orphan"
+    )
 
     def get(id):
         return Warehouse.query.get(id)

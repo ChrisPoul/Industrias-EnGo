@@ -5,6 +5,7 @@ from sqlalchemy import (
 )
 from EnGo.models.receipt import Receipt
 from EnGo.models.sold_product import SoldProduct
+from EnGo.models.finished_product import FinishedProduct
 
 
 class Product(db.Model, MyModel):
@@ -14,6 +15,11 @@ class Product(db.Model, MyModel):
     price = Column(Integer, nullable=False, default=0)
     sold_products = db.relationship(
         'SoldProduct',
+        backref="product",
+        cascade="all, delete-orphan"
+    )
+    finished_products = db.relationship(
+        'FinishedProduct',
         backref="product",
         cascade="all, delete-orphan"
     )
