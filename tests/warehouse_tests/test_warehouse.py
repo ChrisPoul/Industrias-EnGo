@@ -50,8 +50,8 @@ class TestGetAll(WarehouseTest):
 class TestSearch(WarehouseTest):
 
     def test_should_return_warehouse_given_valid_search_term(self):
-        result = Warehouse.search('Test Address')
+        warehouse = Warehouse.search('Test Address')
 
-        self.assertEqual(result, self.warehouse)
+        self.assertEqual(warehouse, self.warehouse)
 
 

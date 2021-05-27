@@ -51,8 +51,8 @@ class TestGetAll(RawMaterialTest):
 class TestSearch(RawMaterialTest):
 
     def test_should_return_raw_material_given_valid_search_term(self):
-        result = RawMaterial.search(self.raw_material.material_name)
+        raw_material = RawMaterial.search(self.raw_material.material_name)
 
-        self.assertEqual(result, self.raw_material)
+        self.assertEqual(raw_material, self.raw_material)
 
 
