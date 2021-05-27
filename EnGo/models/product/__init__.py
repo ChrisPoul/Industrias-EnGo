@@ -1,11 +1,10 @@
 from EnGo.models import db, MyModel
 from sqlalchemy import (
     Column, Integer, String,
-    Text
+    Text, ForeignKey
 )
 from EnGo.models.receipt import Receipt
 from EnGo.models.sold_product import SoldProduct
-from EnGo.models.finished_product import FinishedProduct
 
 
 class Product(db.Model, MyModel):
@@ -43,3 +42,11 @@ class Product(db.Model, MyModel):
         from .request import ProductRequest
         return ProductRequest(self)
 
+
+class FinishedProduct(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    inventory = Column(Integer, nullable=False, default=0)
+    unit = Column(String(10), nullable=False, default="pz")
+    cost = Column(Integer, nullable=False, default=0)

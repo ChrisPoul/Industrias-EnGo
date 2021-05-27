@@ -1,9 +1,7 @@
-from sqlalchemy.orm import relationship
-from EnGo.models.raw_material import RawMaterial
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String, ForeignKey
 )
-from EnGo.models import bought_consumable, db, MyModel
+from EnGo.models import db, MyModel
 
 
 class Consumable(db.Model, MyModel):
@@ -25,3 +23,10 @@ class Consumable(db.Model, MyModel):
     def search(search_term):
         return Consumable.query.filter_by(consumable_name=search_term).first()
 
+
+class BoughtConsumable(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    consumable_id = Column(Integer, ForeignKey('consumable.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    quantity = Column(Integer, nullable=False, default=0)
+    price = Column(Integer, nullable=False, default=0)
