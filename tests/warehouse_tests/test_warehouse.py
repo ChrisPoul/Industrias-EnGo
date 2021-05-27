@@ -37,3 +37,21 @@ class TestGet(WarehouseTest):
         warehouse = Warehouse.get(self.warehouse.id)
 
         self.assertEqual(warehouse, self.warehouse)
+
+
+class TestGetAll(WarehouseTest):
+
+    def test_should_return_all_warehouses(self):
+        warehouses = Warehouse.get_all()
+
+        self.assertEqual(warehouses, [self.warehouse])
+
+
+class TestSearch(WarehouseTest):
+
+    def test_should_return_warehouse_given_valid_search_term(self):
+        result = Warehouse.search('Test Address')
+
+        self.assertEqual(result, self.warehouse)
+
+

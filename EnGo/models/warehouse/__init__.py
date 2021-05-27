@@ -10,3 +10,9 @@ class Warehouse(db.Model, MyModel):
 
     def get(id):
         return Warehouse.query.get(id)
+
+    def get_all():
+        return Warehouse.query.all()
+    
+    def search(search_term):
+        return Warehouse.query.filter_by(address=search_term).first()
