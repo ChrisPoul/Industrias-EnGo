@@ -61,3 +61,12 @@ class TestAddProduct(WarehouseTest):
         self.warehouse.add_product(self.product)
 
         self.assertEqual(self.warehouse.products, [self.product])
+
+
+class TestAddConsumable(WarehouseTest):
+
+    def test_should_add_consumable_to_warehouse_given_product(self):
+        self.warehouse.add_consumable(self.consumable)
+
+        self.assertEqual(self.warehouse.consumables, [self.consumable])
+    

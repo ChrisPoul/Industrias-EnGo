@@ -1,7 +1,9 @@
+from tests import warehouse_tests
 from sqlalchemy import (
     Column, Integer, String
 )
 from EnGo.models import db, MyModel
+from EnGo.models import bought_consumable
 from EnGo.models.bought_consumable import BoughtConsumable
 
 
@@ -39,3 +41,16 @@ class Warehouse(db.Model, MyModel):
             warehouse_id=self.id
         )
         finished_product.add()
+    
+    @property
+    def consumables(self):
+        return [bought_consumable.consumable for bought_consumable in self.bought_consumables]
+
+    def add_consumable(self, consumable):
+        from EnGo.models.bought_consumable import BoughtConsumable
+        bought_consumable = BoughtConsumable(
+            consumable_id=consumable.id,
+            warehouse_id=self.id,
+            price=consumable.price
+        )
+        bought_consumable.add()

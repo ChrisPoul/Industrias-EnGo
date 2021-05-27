@@ -14,7 +14,7 @@ class BoughtConsumable(db.Model, MyModel):
     price = Column(Integer, nullable=False, default=0)
 
     def get(id):
-        return FinishedProduct.query.get(id)
+        return BoughtConsumable.query.get(id)
 
     def get_all():
-        return FinishedProduct.query.all()
+        return BoughtConsumable.query.all()
