@@ -2,7 +2,7 @@ from sqlalchemy import (
     Column, Integer, String
 )
 from EnGo.models import db, MyModel
-from EnGo.models.finished_product import FinishedProduct
+from EnGo.models.bought_consumable import BoughtConsumable
 
 
 class Warehouse(db.Model, MyModel):
@@ -10,6 +10,11 @@ class Warehouse(db.Model, MyModel):
     address = Column(String(200), nullable=False, unique=True)
     finished_products = db.relationship(
         'FinishedProduct',
+        backref="warehouse",
+        cascade="all, delete-orphan"
+    )
+    bought_consumables = db.relationship(
+        'BoughtConsumable',
         backref="warehouse",
         cascade="all, delete-orphan"
     )
