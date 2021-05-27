@@ -2,7 +2,6 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from werkzeug.security import generate_password_hash
 
 from . import (
     permission_required, login_required,
@@ -48,13 +47,9 @@ def users():
 @login_required
 def register():
     if request.method == "POST":
-        username = request.form['username']
-        password = generate_password_hash(
-            request.form['password']
-        )
         user = User(
-            username=username,
-            password=password
+            username=request.form['username'],
+            password=request.form['password']
         )
         error = user.request.register()
         if not error:

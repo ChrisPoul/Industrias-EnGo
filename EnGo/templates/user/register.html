@@ -9,7 +9,7 @@
     {% for head in user_heads %}
     <input name="{{ head }}" id="{{ head }}"
     {% if head == "password" %}
-    type="password"
+    type="password" required
     {% endif %}
     placeholder="{{ user_heads[head] }}...">
     {% endfor %}

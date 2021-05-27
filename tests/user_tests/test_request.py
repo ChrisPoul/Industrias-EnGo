@@ -1,4 +1,5 @@
 from flask import session
+from werkzeug.security import generate_password_hash
 from . import UserTest
 from EnGo.models.user import User
 
@@ -7,6 +8,8 @@ class UserRequestTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
+        self.user.password = generate_password_hash(self.user.password)
+        self.user.update()
 
 
 class TestRegister(UserRequestTest):
@@ -35,7 +38,7 @@ class TestLogin(UserRequestTest):
     def test_should_login_user_given_valid_credentials(self):
         user = User(
             username=self.user.username,
-            password=self.user.password
+            password="0000"
         )
         user.request.login()
 

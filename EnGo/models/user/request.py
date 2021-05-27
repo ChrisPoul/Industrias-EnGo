@@ -1,5 +1,7 @@
 from flask import session
-from werkzeug.security import check_password_hash
+from werkzeug.security import (
+    generate_password_hash, check_password_hash
+)
 from . import User
 
 
@@ -24,6 +26,7 @@ class UserRequest:
     def register(self):
         error = self.user.validation.validate()
         if not error:
+            self.user.password = generate_password_hash(self.user.password)
             self.user.add()
 
         return error

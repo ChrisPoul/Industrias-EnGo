@@ -1,5 +1,6 @@
 from . import UserTest
 from flask import url_for
+from werkzeug.security import generate_password_hash
 from EnGo.models.user import User
 from EnGo.models.permission import Permission
 
@@ -12,6 +13,8 @@ class UserViewTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
+        self.user.password = generate_password_hash(self.user.password)
+        self.user.update()
         self.create_test_users()
 
 
