@@ -125,3 +125,7 @@ th, td {
     height: 100%;
     text-align: center;
 }
+
+.delete-button img {
+    max-width: 1.2em;
+}

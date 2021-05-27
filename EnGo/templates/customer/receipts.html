@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Recibos de {{ customer.customer_name }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <table>
+        <thead>
+            {% for head in receipt_heads %}
+            <th>
+                {{ receipt_heads[head] }}
+            </th>
+            {% endfor %}
+        </thead>
+        <tbody>
+            {% for receipt in customer.receipts %}
+            <tr>
+                {% for head in receipt_heads %}
+                <td>
+                    {% if head == "date" %}
+                    {{ format_date(receipt[head]) }}
+                    {% elif head == "folio" %}
+                    <a href="{{ url_for('receipt.edit', id=receipt.id) }}">
+                        {{ receipt[head] }}
+                    </a>
+                    {% else %}
+                    {{ receipt[head] }}
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td>
+                    <a href="{{ url_for('receipt.delete', id=receipt.id) }}" class="delete-button">
+                        <img src="{{ url_for('static', filename='images/remove.png') }}">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

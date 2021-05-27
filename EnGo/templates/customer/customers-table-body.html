@@ -11,5 +11,10 @@
         {% endif %}
     </td>
     {% endfor %}
+    <td>
+        <a href="{{ url_for('customer.receipts', id=customer.id) }}">
+            Recibos
+        </a>
+    </td>
 </tr>
 {% endfor %}

@@ -16,6 +16,11 @@ customer_heads = dict(
     address="Dirección",
     rfc="RFC"
 )
+receipt_heads = dict(
+    folio="Remisión",
+    date="Fecha",
+    total="Total"
+)
 permissions = [
     "contaduría"
 ]
@@ -98,6 +103,10 @@ def delete(id):
 @permission_required(permissions)
 @login_required
 def receipts(id):
+    customer = Customer.get(id)
+
     return render_template(
-        'customer/receipts.html'
+        'customer/receipts.html',
+        receipt_heads=receipt_heads,
+        customer=customer
     )

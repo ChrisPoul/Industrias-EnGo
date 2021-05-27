@@ -1,6 +1,6 @@
 from flask import (
     Blueprint, render_template, request,
-    flash, url_for
+    flash, url_for, session
 )
 from werkzeug.utils import redirect
 from .customer import customer_heads
@@ -175,7 +175,7 @@ def delete(id):
     receipt.delete()
 
     return redirect(
-        url_for('customer.customers')
+        session['prev_url']
     )
 
 
