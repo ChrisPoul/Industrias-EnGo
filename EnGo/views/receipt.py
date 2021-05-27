@@ -173,9 +173,13 @@ def remove_product(id):
 def delete(id):
     receipt = Receipt.get(id)
     receipt.delete()
+    try:
+        url = session["prev_url"]
+    except KeyError:
+        url = url_for('home.main_page')
 
     return redirect(
-        session['prev_url']
+        url
     )
 
 

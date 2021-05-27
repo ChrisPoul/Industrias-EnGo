@@ -16,8 +16,13 @@ def update(id):
     if request.method == "POST":
         checked_permissions = get_checked_permissions()
         view.update_permissions(checked_permissions)
+        try:
+            url = session["prev_url"]
+        except KeyError:
+            url = url_for('home.main_page')
+
         return redirect(
-            session["prev_url"]
+            url
         )
 
     return render_template(
