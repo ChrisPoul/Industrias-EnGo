@@ -2,6 +2,7 @@ from tests import Test
 from EnGo.models.warehouse import Warehouse
 
 
+
 class WarehouseTest(Test):
 
     def setUp(self):

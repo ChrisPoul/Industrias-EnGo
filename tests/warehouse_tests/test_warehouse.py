@@ -1,4 +1,3 @@
-from EnGo.models import warehouse
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
 
