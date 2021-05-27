@@ -29,3 +29,11 @@ class TestDelete(WarehouseTest):
         self.warehouse.delete()
 
         self.assertNotIn(self.warehouse, self.db.session)
+
+
+class TestGet(WarehouseTest):
+
+    def test_should_return_warehouse_given_valid_id(self):
+        warehouse = Warehouse.get(self.warehouse.id)
+
+        self.assertEqual(warehouse, self.warehouse)
