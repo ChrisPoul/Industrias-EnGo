@@ -157,7 +157,7 @@ def done(id):
 @permission_required(permissions)
 @login_required
 def remove_product(id):
-    from EnGo.models.sold_product import SoldProduct
+    from EnGo.models.product import SoldProduct
     sold_product = SoldProduct.get(id)
     receipt_id = sold_product.receipt.id
     sold_product.delete()

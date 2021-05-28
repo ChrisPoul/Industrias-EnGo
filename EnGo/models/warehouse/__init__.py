@@ -32,7 +32,7 @@ class Warehouse(db.Model, MyModel):
         return [finished_product.product for finished_product in self.finished_products]
 
     def add_product(self, product):
-        from EnGo.models.finished_product import FinishedProduct
+        from EnGo.models.product import FinishedProduct
         finished_product = FinishedProduct(
             product_id=product.id,
             warehouse_id=self.id
