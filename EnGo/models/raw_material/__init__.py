@@ -32,3 +32,8 @@ class RawMaterial(db.Model, MyModel):
         from .validation import RawMaterialValidation
         return RawMaterialValidation(self)
 
+    @property
+    def request(self):
+        from .request import RawMaterialRequest
+        return RawMaterialRequest(self)
+
