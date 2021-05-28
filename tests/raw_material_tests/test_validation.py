@@ -39,3 +39,8 @@ class TestValidateUniqueValues(RawMaterialTest):
         error = raw_material.validation.validate()
 
         self.assertNotEqual(error, None)
+    
+    def test_should_not_return_error_given_raw_material_already_in_db(self):
+        error = self.raw_material.validation.validate()
+
+        self.assertEqual(error, None)

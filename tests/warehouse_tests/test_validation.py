@@ -40,3 +40,8 @@ class TestValidateRepeatedValues(WarehouseTest):
         error = warehouse.validation.validate()
 
         self.assertNotEqual(error, None)
+    
+    def test_should_not_return_error_given_warehouse_already_in_db(self):
+        error = self.warehouse.validation.validate()
+
+        self.assertEqual(error, None)
