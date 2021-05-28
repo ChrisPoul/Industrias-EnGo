@@ -2,11 +2,13 @@
     {% for permission in permissions %}
     <div>
         {% if permission.permission_name != "admin" and not g.user.is_admin() or g.user.is_admin() %}
+        {% if permission.permission_name != "admin" or g.user != user %}
         <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
             {% if user and permission in user.permissions %}
             checked
             {% endif %}>
         <label for="{{ permission.permission_name }}">{{ permission.permission_name }}</label>
+        {% endif %}
         {% endif %}
     </div>
     {% endfor %}

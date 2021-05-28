@@ -10,10 +10,12 @@
     <input name="{{ head }}" id="{{ head }}"
         value="{{ user[head] }}">
     {% endfor %}
-    <a href="{{ url_for('user.update_password', id=user.id) }}">
-        Cambiar contraseña
-    </a>
     {% include "user/permissions-dropdown.html" %}
+    <div class="change-password-link">
+        <a href="{{ url_for('user.update_password', id=user.id) }}">
+            Cambiar contraseña
+        </a>
+    </div>
     <input type="submit" value="Guardar Cambios">
     {% if not user.is_admin() %}
     <a href="{{ url_for('user.delete', id=user.id) }}">

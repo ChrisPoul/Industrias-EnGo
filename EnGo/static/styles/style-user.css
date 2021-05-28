@@ -35,3 +35,10 @@
     flex-direction: row;
     justify-content: flex-start;
 }
+.change-password-link {
+    justify-content: center;
+}
+.change-password-link a {
+    font-size: 0.9em;
+    text-decoration: underline;
+}
