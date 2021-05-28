@@ -49,4 +49,7 @@ def create_app(test_config=None):
     from .views import receipt
     app.register_blueprint(receipt.bp)
 
+    from .views import warehouse
+    app.register_blueprint(warehouse.bp)
+
     return app

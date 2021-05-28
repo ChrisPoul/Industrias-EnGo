@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Añadir Almacén{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% for head in warehouse_heads %}
+    <label for="{{ head }}">{{ warehouse_heads[head] }}:</label>
+    <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
+    {% endfor %}
+    <input type="submit">
+</form>
+{% endblock %}
