@@ -30,6 +30,11 @@ class Consumable(db.Model, MyModel):
     def validation(self):
         from .validation import ConsumableValidation
         return ConsumableValidation(self)
+    
+    @property
+    def request(self):
+        from .request import ConsumableRequest
+        return ConsumableRequest(self)
 
 
 from EnGo.models.warehouse import BoughtConsumable

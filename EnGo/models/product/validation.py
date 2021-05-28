@@ -29,6 +29,8 @@ class ProductValidation:
         return self.error
 
     def validate_price(self):
+        if not self.product.price:
+            self.product.price = 0
         try:
             float(self.product.price)
         except ValueError:

@@ -1,6 +1,8 @@
-from EnGo.models.raw_material import RawMaterial
 from . import WarehouseTest
+from EnGo.models.raw_material import RawMaterial
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.consumable import Consumable
+from EnGo.models.product import Product
 
 
 class TestAdd(WarehouseTest):
@@ -61,3 +63,51 @@ class TestAddRawMaterial(WarehouseTest):
         self.warehouse.request.add_raw_material(raw_material)
 
         self.assertNotIn(raw_material, self.warehouse.raw_materials)
+
+
+class TestAddConsumable(WarehouseTest):
+
+    def test_should_add_consumable_to_warehouse_given_existing_consumable(self):
+        self.warehouse.request.add_consumable(self.consumable)
+
+        self.assertIn(self.consumable, self.warehouse.consumables)
+    
+    def test_should_add_consumable_given_valid_new_consumable(self):
+        consumable = Consumable(
+            consumable_name="New Name"
+        )
+        self.warehouse.request.add_consumable(consumable)
+
+        self.assertIn(consumable, self.warehouse.consumables)
+
+    def test_should_not_add_consumable_to_warehouse_given_invalid_consumable(self):
+        consumable = Consumable(
+            consumable_name=""
+        )
+        self.warehouse.request.add_consumable(consumable)
+
+        self.assertNotIn(consumable, self.warehouse.consumables)
+    
+
+class TestAddProduct(WarehouseTest):
+
+    def test_should_add_product_given_valid_existing_product(self):
+        self.warehouse.request.add_product(self.product)
+
+        self.assertIn(self.product, self.warehouse.products)
+    
+    def test_should_product_given_valid_new_product(self):
+        product = Product(
+            code="New Code"
+        )
+        self.warehouse.request.add_product(product)
+
+        self.assertIn(product, self.warehouse.products)
+
+    def test_should_not_add_product_given_invalid_product(self):
+        product = Product(
+            code=""
+        )
+        self.warehouse.request.add_product(product)
+
+        self.assertNotIn(product, self.warehouse.products)
