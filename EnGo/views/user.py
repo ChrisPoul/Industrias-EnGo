@@ -122,12 +122,12 @@ def update_password(id):
     user = User.get(id)
     password_heads = dict(
         password="Escribe una contraseña...",
-        password_repeated="Repite la contraseña..."
+        password_confirm="Confirma la contraseña..."
     )
     if request.method == "POST":
         password = request.form["password"]
-        password_repeated = request.form["password_repeated"]
-        if password != password_repeated:
+        password_confirm = request.form["password_confirm"]
+        if password != password_confirm:
             error = "Las contraseñas no coinciden"
         else:
             user.password = password

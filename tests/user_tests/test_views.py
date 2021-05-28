@@ -221,7 +221,7 @@ class TestUpdatePassword(UserViewTest):
         self.login_user(self.admin_user)
         password_data = dict(
             password="new password",
-            password_repeated="new password"
+            password_confirm="new password"
         )
         with self.client as client:
             client.post(
@@ -235,7 +235,7 @@ class TestUpdatePassword(UserViewTest):
         self.login_user(self.admin_user)
         password_data = dict(
             password="some password",
-            password_repeated="new password"
+            password_confirm="new password"
         )
         with self.client as client:
             client.post(
