@@ -1,7 +1,6 @@
 from . import user_attributes
-from EnGo.errors.messages import (
-    repeated_value_error, empty_value_error
-)
+from EnGo.errors.messages import repeated_value_error
+from EnGo.models import validate_empty_values
 
 
 class UserValidation:
@@ -17,15 +16,7 @@ class UserValidation:
         return self.error
 
     def validate_empty_values(self):
-        for attribute in user_attributes:
-            self.validate_empty_value(attribute)
-            
-        return self.error
-
-    def validate_empty_value(self, attribute):
-        value = getattr(self.user, attribute)
-        if value == "":
-            self.error = empty_value_error
+        self.error = validate_empty_values(self.user, user_attributes)
         
         return self.error
 

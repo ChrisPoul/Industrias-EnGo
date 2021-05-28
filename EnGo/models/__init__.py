@@ -1,6 +1,7 @@
 import click
 from flask.cli import with_appcontext
 from flask_sqlalchemy import SQLAlchemy
+from EnGo.errors.messages import empty_value_error
 
 db = SQLAlchemy()
 
@@ -59,3 +60,12 @@ def has_nums(some_string):
             return True
 
     return False
+
+
+def validate_empty_values(obj, attributes):
+    for attribute in attributes:
+        value = getattr(obj, attribute)
+        if value == "":
+            return empty_value_error
+        
+    return None

@@ -44,45 +44,6 @@ class TestValidateEmptyValues(UserTest):
         self.assertNotEqual(error, None)
 
 
-class TestValidateEmptyValue(UserTest):
-
-    def test_should_not_return_error_given_non_empty_username(self):
-        user = User(
-            username="Test",
-            password=""
-        )
-        error = user.validation.validate_empty_value("username")
-
-        self.assertEqual(error, None)
-
-    def test_should_not_return_error_given_non_empty_password(self):
-        user = User(
-            username="",
-            password="0000"
-        )
-        error = user.validation.validate_empty_value("password")
-
-        self.assertEqual(error, None)
-
-    def test_should_return_error_given_empty_username(self):
-        user = User(
-            username="",
-            password="0000"
-        )
-        error = user.validation.validate_empty_value("username")
-
-        self.assertNotEqual(error, None)
-
-    def test_should_return_error_given_empty_password(self):
-        user = User(
-            username="Test",
-            password=""
-        )
-        error = user.validation.validate_empty_value("password")
-
-        self.assertNotEqual(error, None)
-
-
 class TestValidateUniqueValues(UserTest):
 
     def test_should_not_return_error_given_unique_username(self):

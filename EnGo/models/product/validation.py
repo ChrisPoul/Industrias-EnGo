@@ -1,7 +1,6 @@
 from . import Product
-from EnGo.errors.messages import (
-    repeated_value_error, empty_value_error
-)
+from EnGo.errors.messages import repeated_value_error
+from EnGo.models import validate_empty_values
 
 
 class ProductValidation:
@@ -18,8 +17,7 @@ class ProductValidation:
         return self.error
     
     def validate_empty_values(self):
-        if self.product.code == "":
-            self.error = empty_value_error
+        self.error = validate_empty_values(self.product, ["code"])
         
         return self.error
 

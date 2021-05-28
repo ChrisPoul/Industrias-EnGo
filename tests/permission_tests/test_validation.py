@@ -40,25 +40,6 @@ class TestValidateEmptyValues(PermissionTest):
         self.assertNotEqual(error, None)
 
 
-class TestValidateEmptyValue(PermissionTest):
-
-    def test_should_not_return_error_given_non_empty_name(self):
-        permission = Permission(
-            permission_name="production",
-        )
-        error = permission.validation.validate_empty_value("permission_name")
-
-        self.assertEqual(error, None)
-
-    def test_should_return_error_given_empty_name(self):
-        permission = Permission(
-            permission_name="",
-        )
-        error = permission.validation.validate_empty_value("permission_name")
-
-        self.assertNotEqual(error, None)
-
-
 class TestValidateName(PermissionTest):
 
     def test_should_not_return_error_given_valid_name(self):

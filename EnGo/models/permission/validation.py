@@ -1,8 +1,7 @@
 from . import permission_attributes
 from EnGo.models import has_nums
-from EnGo.errors.messages import (
-    empty_value_error, repeated_value_error
-)
+from EnGo.errors.messages import repeated_value_error
+from EnGo.models import validate_empty_values
 
 
 class PermissionValidation:
@@ -19,16 +18,8 @@ class PermissionValidation:
         return self.error
 
     def validate_empty_values(self):
-        for attribute in permission_attributes:
-            self.validate_empty_value(attribute)
+        self.error = validate_empty_values(self.permission, permission_attributes)
             
-        return self.error
-
-    def validate_empty_value(self, attribute):
-        value = getattr(self.permission, attribute)
-        if value == "":
-            self.error = empty_value_error
-        
         return self.error
 
     def validate_name(self):

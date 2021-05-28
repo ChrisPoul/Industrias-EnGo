@@ -1,7 +1,6 @@
 from . import Customer, customer_attributes
-from EnGo.errors.messages import (
-    repeated_value_error, empty_value_error
-)
+from EnGo.errors.messages import repeated_value_error
+from EnGo.models import validate_empty_values
 
 
 class CustomerValidation:
@@ -17,17 +16,12 @@ class CustomerValidation:
         return self.error
     
     def validate_empty_values(self):
+        non_optional_attributes = []
         for attribute in customer_attributes:
             if attribute != "rfc":
-                self.validate_empty_value(attribute)
+                non_optional_attributes.append(attribute)
+        self.error = validate_empty_values(self.customer, non_optional_attributes)
          
-        return self.error
-    
-    def validate_empty_value(self, attribute):
-        value = getattr(self.customer, attribute)
-        if value == "":
-            self.error = empty_value_error
-        
         return self.error
     
     def validate_unique_values(self):

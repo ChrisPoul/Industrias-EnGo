@@ -75,29 +75,6 @@ class TestValidateEmptyValues(CustomerTest):
         error = customer.validation.validate_empty_values()
 
         self.assertEqual(error, None)
-    
-
-class TestValidateEmptyValue(CustomerTest):
-
-    def test_should_not_return_error_given_non_empty_name(self):
-        customer = Customer(
-            customer_name="Test Name",
-            address="Test Address",
-            rfc="TESTRFC 123"
-        )
-        error = customer.validation.validate_empty_value("customer_name")
-
-        self.assertEqual(error, None)
-
-    def test_should_return_error_given_empty_name(self):
-        customer = Customer(
-            customer_name="",
-            address="Test Address",
-            rfc="TESTRFC 123"
-        )
-        error = customer.validation.validate_empty_value("customer_name")
-
-        self.assertNotEqual(error, None)
 
 
 class TestValidateUniqueValues(CustomerTest):
