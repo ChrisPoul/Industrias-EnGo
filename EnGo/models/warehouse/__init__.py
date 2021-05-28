@@ -13,6 +13,7 @@ warehouse_attributes = [
 class Warehouse(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     address = Column(String(200), nullable=False, unique=True)
+    date = Column(Datetime, nullable=False, default=datetime.now)
     finished_products = db.relationship(
         'FinishedProduct',
         backref="warehouse",
