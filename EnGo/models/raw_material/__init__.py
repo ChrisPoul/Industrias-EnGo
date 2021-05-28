@@ -1,9 +1,11 @@
-from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    DateTime, ForeignKey
 )
 from EnGo.models import db, MyModel
+
+raw_material_attributes = [
+    "material_name",
+]
 
 
 class RawMaterial(db.Model, MyModel):
@@ -24,6 +26,11 @@ class RawMaterial(db.Model, MyModel):
     
     def search(search_term):
         return RawMaterial.query.filter_by(material_name=search_term).first()
+
+    @property
+    def validation(self):
+        from .validation import RawMaterialValidation
+        return RawMaterialValidation(self)
 
     
 from EnGo.models.warehouse import BoughtRawMaterial
