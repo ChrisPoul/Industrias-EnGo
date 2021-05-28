@@ -39,6 +39,11 @@ class Warehouse(db.Model, MyModel):
         return Warehouse.query.filter_by(address=search_term).first()
     
     @property
+    def request(self):
+        from .request import WarehouseRequest
+        return WarehouseRequest(self)
+    
+    @property
     def validation(self):
         from .validation import WarehouseValidation
         return WarehouseValidation(self)
