@@ -8,11 +8,11 @@
 <form method="post" class="user">
     {% for head in user_heads %}
     <input name="{{ head }}" id="{{ head }}"
-    {% if head == "password" %}
-    type="password"
-    {% endif %}
-    value="{{ user[head] }}">
+        value="{{ user[head] }}">
     {% endfor %}
+    <a href="{{ url_for('user.update_password', id=user.id) }}">
+        Cambiar contraseña
+    </a>
     {% include "user/permissions-dropdown.html" %}
     <input type="submit" value="Guardar Cambios">
     <a href="{{ url_for('user.delete', id=user.id) }}">

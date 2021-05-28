@@ -2,7 +2,6 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-
 from . import (
     permission_required, login_required,
     update_obj_attrs, get_checked_permissions
@@ -95,8 +94,11 @@ def login():
 @login_required
 def update(id):
     user = User.get(id)
+    user_heads = dict(
+        username="Nombre del empleado"
+    )
     if request.method == "POST":
-        update_obj_attrs(user, user_heads)
+        user.username = request.form["username"]
         checked_permissions = get_checked_permissions()
         user.update_permissions(checked_permissions)
         error = user.request.update()
@@ -109,6 +111,28 @@ def update(id):
     return render_template(
         "user/update.html",
         user_heads=user_heads,
+        user=user
+    )
+
+
+@bp.route("/update_password/<int:id>", methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def update_password(id):
+    user = User.get(id)
+    if request.method == "POST":
+        user.password = request.form["password"]
+        error = user.validation.validate()
+        if not error:
+            from werkzeug.security import generate_password_hash
+            user.password = generate_password_hash(user.password)
+            user.update()
+            return redirect(
+                url_for('user.update', id=id)
+            )
+    
+    return render_template(
+        'user/update_password.html',
         user=user
     )
 

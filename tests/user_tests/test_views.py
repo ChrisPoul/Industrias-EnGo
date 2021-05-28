@@ -1,6 +1,8 @@
 from . import UserTest
 from flask import url_for
-from werkzeug.security import generate_password_hash
+from werkzeug.security import (
+    generate_password_hash, check_password_hash
+)
 from EnGo.models.user import User
 from EnGo.models.permission import Permission
 
@@ -211,6 +213,35 @@ class TestUpdateView(UserViewTest):
             )
 
         self.assertStatus(response, 302)
+
+
+class TestUpdatePassword(UserViewTest):
+
+    def test_should_update_user_password_given_valid_password_and_LUHP(self):
+        self.login_user(self.admin_user)
+        password_data = dict(
+            password="new password"
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update_password', id=self.user.id),
+                data=password_data
+            )
+        
+        self.assertTrue(check_password_hash(self.user.password, "new password"))
+
+    def test_should_not_update_password_given_invalid_password_and_LUHP(self):
+        self.login_user(self.admin_user)
+        password_data = dict(
+            password=""
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update_password', id=self.user.id),
+                data=password_data
+            )
+
+        self.assertFalse(check_password_hash(self.user.password, ""))
 
 
 class TestDeleteView(UserViewTest):
