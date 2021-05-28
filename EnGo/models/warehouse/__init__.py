@@ -2,6 +2,7 @@ from sqlalchemy import (
     Column, Integer, String
 )
 from EnGo.models import db, MyModel
+from EnGo.models.raw_material import BoughtRawMaterial
 
 
 class Warehouse(db.Model, MyModel):
@@ -14,6 +15,11 @@ class Warehouse(db.Model, MyModel):
     )
     bought_consumables = db.relationship(
         'BoughtConsumable',
+        backref="warehouse",
+        cascade="all, delete-orphan"
+    )
+    bought_raw_materials = db.relationship(
+        'BoughtRawMaterial',
         backref="warehouse",
         cascade="all, delete-orphan"
     )
@@ -51,3 +57,15 @@ class Warehouse(db.Model, MyModel):
             price=consumable.price
         )
         bought_consumable.add()
+    
+    @property
+    def raw_materials(self):
+        return [bought_raw_material.raw_material for bought_raw_material in self.bought_raw_materials]
+    
+    def add_raw_material(self, raw_material):
+        bought_raw_material = BoughtRawMaterial(
+            raw_material_id=raw_material.id,
+            warehouse_id=self.id,
+            price=raw_material.price
+        )
+        bought_raw_material.add()

@@ -1,3 +1,4 @@
+from EnGo.models.raw_material import RawMaterial
 from tests import Test
 from EnGo.models.warehouse import Warehouse
 from EnGo.models.consumable import Consumable
@@ -20,3 +21,8 @@ class WarehouseTest(Test):
             code="Test Product"
         )
         self.product.add()
+        self.raw_material = RawMaterial(
+            material_name="Test Name",
+            price="10"
+        )
+        self.raw_material.add()

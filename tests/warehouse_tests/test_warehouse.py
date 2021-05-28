@@ -69,4 +69,12 @@ class TestAddConsumable(WarehouseTest):
         self.warehouse.add_consumable(self.consumable)
 
         self.assertEqual(self.warehouse.consumables, [self.consumable])
+
+
+class TestAddRawMaterial(WarehouseTest):
+
+    def test_should_add_raw_material_to_warehouse_given_raw_material(self):
+        self.warehouse.add_raw_material(self.raw_material)
+
+        self.assertEqual(self.warehouse.raw_materials, [self.raw_material])
     
