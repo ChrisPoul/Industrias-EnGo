@@ -120,9 +120,18 @@ def update(id):
 @login_required
 def update_password(id):
     user = User.get(id)
+    password_heads = dict(
+        password="Escribe una contraseña...",
+        password_repeated="Repite la contraseña..."
+    )
     if request.method == "POST":
-        user.password = request.form["password"]
-        error = user.validation.validate()
+        password = request.form["password"]
+        password_repeated = request.form["password_repeated"]
+        if password != password_repeated:
+            error = "Las contraseñas no coinciden"
+        else:
+            user.password = password
+            error = user.validation.validate()
         if not error:
             from werkzeug.security import generate_password_hash
             user.password = generate_password_hash(user.password)
@@ -130,9 +139,11 @@ def update_password(id):
             return redirect(
                 url_for('user.update', id=id)
             )
+        flash(error)
     
     return render_template(
         'user/update_password.html',
+        password_heads=password_heads,
         user=user
     )
 

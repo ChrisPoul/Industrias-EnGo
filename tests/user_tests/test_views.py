@@ -220,7 +220,8 @@ class TestUpdatePassword(UserViewTest):
     def test_should_update_user_password_given_valid_password_and_LUHP(self):
         self.login_user(self.admin_user)
         password_data = dict(
-            password="new password"
+            password="new password",
+            password_repeated="new password"
         )
         with self.client as client:
             client.post(
@@ -233,7 +234,8 @@ class TestUpdatePassword(UserViewTest):
     def test_should_not_update_password_given_invalid_password_and_LUHP(self):
         self.login_user(self.admin_user)
         password_data = dict(
-            password=""
+            password="some password",
+            password_repeated="new password"
         )
         with self.client as client:
             client.post(
