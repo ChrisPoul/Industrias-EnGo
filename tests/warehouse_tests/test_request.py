@@ -53,3 +53,11 @@ class TestAddRawMaterial(WarehouseTest):
         self.warehouse.request.add_raw_material(raw_material)
 
         self.assertIn(raw_material, self.warehouse.raw_materials)
+
+    def test_should_not_add_raw_material_given_invalid_new_raw_material(self):
+        raw_material = RawMaterial(
+            material_name=""
+        )
+        self.warehouse.request.add_raw_material(raw_material)
+
+        self.assertNotIn(raw_material, self.warehouse.raw_materials)
