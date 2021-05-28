@@ -15,9 +15,11 @@
     </a>
     {% include "user/permissions-dropdown.html" %}
     <input type="submit" value="Guardar Cambios">
+    {% if not user.is_admin() %}
     <a href="{{ url_for('user.delete', id=user.id) }}">
         <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">
     </a>
+    {% endif %}
 </form>
 
 {% endblock %}
