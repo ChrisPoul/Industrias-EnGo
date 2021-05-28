@@ -3,6 +3,9 @@ from sqlalchemy import (
 )
 from EnGo.models import db, MyModel
 
+consumable_attributes = [
+    'consumable_name'
+]
 
 class Consumable(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -22,6 +25,11 @@ class Consumable(db.Model, MyModel):
     
     def search(search_term):
         return Consumable.query.filter_by(consumable_name=search_term).first()
+    
+    @property
+    def validation(self):
+        from .validation import ConsumableValidation
+        return ConsumableValidation(self)
 
 
 from EnGo.models.warehouse import BoughtConsumable

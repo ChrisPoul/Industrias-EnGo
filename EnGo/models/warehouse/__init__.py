@@ -4,6 +4,7 @@ from sqlalchemy import (
     ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
+from EnGo.models.raw_material import RawMaterial
 
 warehouse_attributes = [
     'address'
