@@ -32,5 +32,3 @@ class RawMaterial(db.Model, MyModel):
         from .validation import RawMaterialValidation
         return RawMaterialValidation(self)
 
-
-from EnGo.models.warehouse import BoughtRawMaterial

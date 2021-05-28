@@ -59,3 +59,6 @@ class SoldProduct(db.Model, MyModel):
 
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"
+
+
+from EnGo.models.warehouse import FinishedProduct
