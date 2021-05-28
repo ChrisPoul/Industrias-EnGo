@@ -1,7 +1,8 @@
+from datetime import datetime
 from EnGo.models import db, MyModel
 from sqlalchemy import (
     Column, Integer, String,
-    Text, ForeignKey
+    Text, ForeignKey, DateTime
 )
 
 
@@ -67,6 +68,7 @@ class FinishedProduct(db.Model, MyModel):
     inventory = Column(Integer, nullable=False, default=0)
     unit = Column(String(10), nullable=False, default="pz")
     cost = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
         return FinishedProduct.query.get(id)

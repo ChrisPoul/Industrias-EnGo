@@ -1,5 +1,7 @@
+from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    DateTime
 )
 from sqlalchemy.sql.schema import ForeignKey
 from EnGo.models import db, MyModel
@@ -30,6 +32,7 @@ class BoughtRawMaterial(db.Model, MyModel):
     raw_material_id = Column(Integer, ForeignKey('raw_material.id'), nullable=False)
     warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
     price = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
         return BoughtRawMaterial.query.get(id)
