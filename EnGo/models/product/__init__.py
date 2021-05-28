@@ -67,3 +67,6 @@ class FinishedProduct(db.Model, MyModel):
     inventory = Column(Integer, nullable=False, default=0)
     unit = Column(String(10), nullable=False, default="pz")
     cost = Column(Integer, nullable=False, default=0)
+
+    def get(id):
+        return FinishedProduct.query.get(id)

@@ -30,3 +30,6 @@ class BoughtConsumable(db.Model, MyModel):
     warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
+
+    def get(id):
+        return BoughtConsumable.query.get(id)
