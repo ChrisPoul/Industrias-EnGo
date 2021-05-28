@@ -59,16 +59,3 @@ class SoldProduct(db.Model, MyModel):
 
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"
-
-
-class FinishedProduct(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    inventory = Column(Integer, nullable=False, default=0)
-    unit = Column(String(10), nullable=False, default="pz")
-    cost = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return FinishedProduct.query.get(id)

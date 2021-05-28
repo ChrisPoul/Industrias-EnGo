@@ -1,7 +1,5 @@
-from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String,
-    ForeignKey, DateTime
+    Column, Integer, String
 )
 from EnGo.models import db, MyModel
 
@@ -26,13 +24,4 @@ class Consumable(db.Model, MyModel):
         return Consumable.query.filter_by(consumable_name=search_term).first()
 
 
-class BoughtConsumable(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    consumable_id = Column(Integer, ForeignKey('consumable.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    quantity = Column(Integer, nullable=False, default=0)
-    price = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return BoughtConsumable.query.get(id)
+from EnGo.models.warehouse import BoughtConsumable

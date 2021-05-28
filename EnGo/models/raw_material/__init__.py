@@ -1,9 +1,8 @@
 from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    DateTime
+    DateTime, ForeignKey
 )
-from sqlalchemy.sql.schema import ForeignKey
 from EnGo.models import db, MyModel
 
 
@@ -26,14 +25,5 @@ class RawMaterial(db.Model, MyModel):
     def search(search_term):
         return RawMaterial.query.filter_by(material_name=search_term).first()
 
-
-class BoughtRawMaterial(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    raw_material_id = Column(Integer, ForeignKey('raw_material.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    price = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return BoughtRawMaterial.query.get(id)
-
+    
+from EnGo.models.warehouse import BoughtRawMaterial

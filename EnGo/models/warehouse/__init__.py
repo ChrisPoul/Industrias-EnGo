@@ -1,9 +1,9 @@
-from tests import warehouse_tests
+from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
-from EnGo.models.raw_material import BoughtRawMaterial
 
 warehouse_attributes = [
     'address'
@@ -47,7 +47,6 @@ class Warehouse(db.Model, MyModel):
         return [finished_product.product for finished_product in self.finished_products]
 
     def add_product(self, product):
-        from EnGo.models.product import FinishedProduct
         finished_product = FinishedProduct(
             product_id=product.id,
             warehouse_id=self.id
@@ -59,7 +58,6 @@ class Warehouse(db.Model, MyModel):
         return [bought_consumable.consumable for bought_consumable in self.bought_consumables]
 
     def add_consumable(self, consumable):
-        from EnGo.models.consumable import BoughtConsumable
         bought_consumable = BoughtConsumable(
             consumable_id=consumable.id,
             warehouse_id=self.id,
@@ -78,3 +76,42 @@ class Warehouse(db.Model, MyModel):
             price=raw_material.price
         )
         bought_raw_material.add()
+
+
+class BoughtRawMaterial(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    raw_material_id = Column(Integer, ForeignKey('raw_material.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    price = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def get(id):
+        return BoughtRawMaterial.query.get(id)
+
+
+class FinishedProduct(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    inventory = Column(Integer, nullable=False, default=0)
+    unit = Column(String(10), nullable=False, default="pz")
+    cost = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def get(id):
+        return FinishedProduct.query.get(id)
+
+
+class BoughtConsumable(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    consumable_id = Column(Integer, ForeignKey('consumable.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    quantity = Column(Integer, nullable=False, default=0)
+    price = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def get(id):
+        return BoughtConsumable.query.get(id)
+
+
+from EnGo.models.consumable import Consumable
