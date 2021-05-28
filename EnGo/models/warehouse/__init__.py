@@ -1,9 +1,13 @@
+from tests import warehouse_tests
 from sqlalchemy import (
     Column, Integer, String
 )
 from EnGo.models import db, MyModel
 from EnGo.models.raw_material import BoughtRawMaterial
 
+warehouse_attributes = [
+    'address'
+]
 
 class Warehouse(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -32,6 +36,11 @@ class Warehouse(db.Model, MyModel):
     
     def search(search_term):
         return Warehouse.query.filter_by(address=search_term).first()
+    
+    @property
+    def validation(self):
+        from .validation import WarehouseValidation
+        return WarehouseValidation(self)
 
     @property
     def products(self):
