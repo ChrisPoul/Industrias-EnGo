@@ -26,7 +26,7 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def users():
-    users = User.get_all()
+    users = [user for user in User.get_all() if not user.is_admin()]
     if request.method == "POST":
         user = User.search(request.form['search_term'])
         if user:
