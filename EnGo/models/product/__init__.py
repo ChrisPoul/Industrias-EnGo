@@ -63,7 +63,7 @@ class SoldProduct(db.Model, MyModel):
         return f"{attribute}_{self.id}"
 
     def update_product_inventory(self):
-        quantity_change = self.quantity - self.quantity_ref
+        quantity_change = int(self.quantity) - self.quantity_ref
         self.product.inventory -= quantity_change
         self.quantity_ref = self.quantity
 

@@ -10,7 +10,8 @@ bp = Blueprint("product", __name__, url_prefix="/product")
 product_heads = dict(
     code="Código",
     description="Descripción",
-    price="Precio"
+    price="Precio",
+    inventory="Inventario"
 )
 permissions = [
     "contaduría"
