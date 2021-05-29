@@ -10,6 +10,7 @@ class ReceiptRequest:
     def edit(self):
         error = self.receipt.validation.validate()
         if not error:
+            self.receipt.update_product_inventories()
             self.receipt.update()
                 
         return error

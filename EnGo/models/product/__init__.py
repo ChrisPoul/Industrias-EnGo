@@ -11,6 +11,7 @@ class Product(db.Model, MyModel):
     code = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=True, unique=False)
     price = Column(Integer, nullable=False, default=0)
+    inventory = Column(Integer, nullable=False, default=0)
     sold_products = db.relationship(
         'SoldProduct',
         backref="product",
@@ -48,6 +49,7 @@ class SoldProduct(db.Model, MyModel):
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
     unit = Column(String(10), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
+    quantity_ref = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
 
     def get(id):
@@ -59,6 +61,11 @@ class SoldProduct(db.Model, MyModel):
 
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"
+
+    def update_product_inventory(self):
+        quantity_change = self.quantity - self.quantity_ref
+        self.product.inventory += quantity_change
+        self.quantity_ref = self.quantity
 
 
 from EnGo.models.warehouse import FinishedProduct

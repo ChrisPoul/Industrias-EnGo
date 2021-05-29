@@ -64,3 +64,9 @@ class Receipt(db.Model, MyModel):
         )
         sold_product.add()
 
+    def update_product_inventories(self):
+        for sold_product in self.sold_products:
+            sold_product.update_product_inventory()
+
+
+
