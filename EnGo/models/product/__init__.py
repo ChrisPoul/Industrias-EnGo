@@ -64,7 +64,7 @@ class SoldProduct(db.Model, MyModel):
 
     def update_product_inventory(self):
         quantity_change = self.quantity - self.quantity_ref
-        self.product.inventory += quantity_change
+        self.product.inventory -= quantity_change
         self.quantity_ref = self.quantity
 
 
