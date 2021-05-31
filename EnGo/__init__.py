@@ -28,6 +28,9 @@ def create_app(test_config=None):
     from .views import global_context
     app.register_blueprint(global_context.bp)
 
+    from . import errors
+    app.register_blueprint(errors.bp)
+
     from .views import home
     app.register_blueprint(home.bp)
 
