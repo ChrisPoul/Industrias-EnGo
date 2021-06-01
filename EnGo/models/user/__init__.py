@@ -46,15 +46,16 @@ class User(db.Model, MyModel):
         from .request import UserRequest
         return UserRequest(self)
 
-    def has_permissions(self, view_name):
-        if self.is_admin():
-            return True
-        if self.has_view_permissions(view_name):
-            return True
+    def has_permissions(self, permission_names):
+        for permission in self.permissions:
+            if permission.permission_name in set(permission_names):
+                return True
         
         return False
 
     def has_view_permissions(self, view_name):
+        if self.is_admin():
+            return True
         view = View.search(view_name)
         if not view:
             return False
@@ -65,11 +66,7 @@ class User(db.Model, MyModel):
         return False
 
     def is_admin(self):
-        for permission in self.permissions:
-            if permission.permission_name == "admin":
-                return True
-
-        return False
+        return self.has_permissions(["admin"])
 
     def add_permission(self, permission):
         user_permission = UserPermission(
