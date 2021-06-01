@@ -81,21 +81,21 @@ class TestUpdatePermissions(UserPermissionTest):
         self.assertEqual(self.user.permissions, permissions)
 
 
-class TestHasPermission(UserPermissionTest):
+class TestHasPermissions(UserPermissionTest):
 
     def test_should_return_true_given_admin_user_and_admin_view(self):
-        self.assertTrue(self.admin_user.has_permission("Admin View"))
+        self.assertTrue(self.admin_user.has_permissions("Admin View"))
 
     def test_should_return_true_given_admin_user_and_any_view(self):        
-        self.assertTrue(self.admin_user.has_permission("Quality View"))
+        self.assertTrue(self.admin_user.has_permissions("Quality View"))
 
     def test_should_return_false_given_normal_user_and_admin_view(self):
-        self.assertFalse(self.normal_user.has_permission("Admin View"))
+        self.assertFalse(self.normal_user.has_permissions("Admin View"))
 
     def test_should_return_true_given_normal_user_with_permissions_required_for_view(self):
         self.normal_user.add_permission(self.quality_permission)
 
-        self.assertTrue(self.normal_user.has_permission("Quality View"))
+        self.assertTrue(self.normal_user.has_permissions("Quality View"))
 
     
 class TestHasViewPermissions(UserPermissionTest):

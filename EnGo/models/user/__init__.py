@@ -46,7 +46,7 @@ class User(db.Model, MyModel):
         from .request import UserRequest
         return UserRequest(self)
 
-    def has_permission(self, view_name):
+    def has_permissions(self, view_name):
         if self.is_admin():
             return True
         if self.has_view_permissions(view_name):

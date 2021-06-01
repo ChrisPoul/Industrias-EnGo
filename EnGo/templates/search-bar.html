@@ -1,10 +1,10 @@
 <datalist id="all-search-terms">
-    {% if g.user.has_permission("user.update") %}
+    {% if g.user.has_permissions("user.update") %}
     {% for username in autocomplete.get_data("users", "username") %}
     <option>{{ username }}</option>
     {% endfor %}
     {% endif %}
-    {% if g.user.has_permission("customer.update") %}
+    {% if g.user.has_permissions("customer.update") %}
     {% for customer_name in autocomplete.get_data("customers", "customer_name") %}
     <option>{{ customer_name }}</option>
     {% endfor %}
@@ -18,12 +18,12 @@
     <option>{{ rfc }}</option>
     {% endfor %}
     {% endif %}
-    {% if g.user.has_permission("view.update") %}
+    {% if g.user.has_permissions("view.update") %}
     {% for view_name in autocomplete.get_data("views", "view_name") %}
     <option>{{ view_name }}</option>
     {% endfor %}
     {% endif %}
-    {% if g.user.has_permission("product.update") %}
+    {% if g.user.has_permissions("product.update") %}
     {% for product_name in autocomplete.get_data("products", "code") %}
     <option>{{ product_name }}</option>
     {% endfor %}
