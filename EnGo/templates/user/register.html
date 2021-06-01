@@ -7,7 +7,6 @@
 {% block content %}
 <form method="post" class="user">
     {% for head in user_heads %}
-    <label for="{{ head }}">{{ user_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}"
     {% if head == "password" %}
     type="password" required
