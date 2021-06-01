@@ -73,7 +73,8 @@ class TestRegisterView(UserViewTest):
         self.login_user(self.admin_user)
         user_credentials = dict(
             username="Some User",
-            password="0000"
+            password="0000",
+            salary=1000
         )
         with self.client as client:
             client.post(
@@ -87,7 +88,8 @@ class TestRegisterView(UserViewTest):
         self.login_user(self.admin_user)
         user_credentials = dict(
             username="Test",
-            password=""
+            password="",
+            salary=1000
         )
         with self.client as client:
             client.post(
@@ -179,7 +181,7 @@ class TestUpdateView(UserViewTest):
         self.login_user(self.admin_user)
         user_data = dict(
             username="New Username",
-            password="New password"
+            salary=1000
         )
         with self.client as client:
             client.post(
@@ -194,7 +196,8 @@ class TestUpdateView(UserViewTest):
         self.login_user(self.admin_user)
         user_data = dict(
             username="",
-            password="0000"
+            password="0000",
+            salary=1000
         )
         with self.client as client:
             client.post(

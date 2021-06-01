@@ -7,7 +7,8 @@ from EnGo.models.view import View
 
 user_attributes = [
     "username",
-    "password"
+    "password",
+    "salary"
 ]
 
 
@@ -15,6 +16,7 @@ class User(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     username = Column(String(100), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
+    salary = Column(Integer, nullable=False, default=1000)
     user_permissions = db.relationship(
         'UserPermission',
         backref="user",

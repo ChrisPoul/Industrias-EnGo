@@ -13,9 +13,13 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 users_heads = dict(
     username="Nombre de Usuario"
 )
-user_heads = dict(
+user_login_heads = dict(
     users_heads,
     password="Contraseña"
+)
+user_heads = dict(
+    user_login_heads,
+    salary="Salario"
 )
 permissions = [
     "recursos humanos"
@@ -48,7 +52,8 @@ def register():
     if request.method == "POST":
         user = User(
             username=request.form['username'],
-            password=request.form['password']
+            password=request.form['password'],
+            salary=request.form['salary']
         )
         error = user.request.register()
         if not error:
@@ -85,7 +90,7 @@ def login():
 
     return render_template(
         "user/login.html",
-        user_heads=user_heads
+        user_heads=user_login_heads
     )
 
 
@@ -95,10 +100,12 @@ def login():
 def update(id):
     user = User.get(id)
     user_heads = dict(
-        username="Nombre del empleado"
+        username="Nombre del empleado",
+        salary="Salario"
     )
     if request.method == "POST":
         user.username = request.form["username"]
+        user.salary = request.form['salary']
         checked_permissions = get_checked_permissions()
         user.update_permissions(checked_permissions)
         error = user.request.update()
