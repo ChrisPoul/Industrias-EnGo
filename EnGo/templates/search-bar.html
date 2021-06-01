@@ -11,6 +11,9 @@
     {% for address in autocomplete.get_data("customers", "address") %}
     <option>{{ address }}</option>
     {% endfor %}
+    {% for phone in autocomplete.get_data("customers", "phone") %}
+    <option>{{ phone }}</option>
+    {% endfor %}
     {% for rfc in autocomplete.get_data("customers", "rfc") %}
     <option>{{ rfc }}</option>
     {% endfor %}
