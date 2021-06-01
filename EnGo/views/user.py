@@ -10,11 +10,11 @@ from EnGo.models.user import User
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
-users_heads = dict(
+username_head = dict(
     username="Nombre de Usuario"
 )
 user_login_heads = dict(
-    users_heads,
+    username_head,
     password="Contraseña"
 )
 user_heads = dict(
@@ -40,7 +40,7 @@ def users():
 
     return render_template(
         "user/users.html",
-        user_heads=users_heads,
+        user_heads=username_head,
         users=users
     )
 
@@ -100,7 +100,7 @@ def login():
 def update(id):
     user = User.get(id)
     user_heads = dict(
-        username="Nombre del empleado",
+        username_head,
         salary="Salario"
     )
     if request.method == "POST":

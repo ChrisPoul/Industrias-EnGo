@@ -3,7 +3,7 @@ from flask import (
     redirect, url_for
 )
 from . import permission_required, login_required
-from .user import users_heads
+from .user import username_head
 from EnGo.models.user import User
 from EnGo.models.view import View
 
@@ -30,7 +30,7 @@ def main_page():
 
     return render_template(
         "admin/main-page.html",
-        user_heads=users_heads,
+        user_heads=username_head,
         users=users,
         views=views
     )
