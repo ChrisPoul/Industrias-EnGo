@@ -3,8 +3,6 @@ from flask import (
     flash, url_for, session
 )
 from werkzeug.utils import redirect
-from .customer import customer_heads
-from .product import product_heads
 from EnGo.models.customer import Customer
 from EnGo.models.product import Product
 from EnGo.models.receipt import Receipt
@@ -16,6 +14,11 @@ from . import (
 bp = Blueprint('receipt', __name__)
 
 customer_heads = dict(
+    customer_name="Nombre",
+    address="Dirección",
+    phone="Teléfono"
+)
+receipt_customer_heads = dict(
     customer_name="Nombre",
     address="Dirección"
 )
@@ -36,6 +39,7 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def add():
+    form = get_form(customer_heads)
     if request.method == "POST":
         error = None
         customer = search_for_customer()
@@ -43,6 +47,7 @@ def add():
             customer = Customer(
                 customer_name=request.form['customer_name'],
                 address=request.form['address'],
+                phone=request.form['phone'],
                 rfc=""
             )
             error = customer.request.add()
@@ -58,7 +63,8 @@ def add():
     
     return render_template(
         'receipt/add.html',
-        customer_heads=customer_heads
+        customer_heads=customer_heads,
+        form=form
     )
 
 
@@ -82,7 +88,7 @@ def edit(id):
     form = get_form(product_heads)
     empty_spaces = get_empty_spaces(receipt.products)
     if request.method == "POST":
-        update_obj_attrs(receipt.customer, customer_heads)
+        update_obj_attrs(receipt.customer, receipt_customer_heads)
         update_receipt_products(receipt)
         error = receipt.request.edit()
         if not error:
@@ -95,45 +101,12 @@ def edit(id):
 
     return render_template(
         'receipt/receipt.html',
-        customer_heads=customer_heads,
+        customer_heads=receipt_customer_heads,
         product_heads=product_heads,
         empty_spaces=empty_spaces,
         receipt=receipt,
         form=form
     )
-
-
-def get_product_to_add():
-    form = get_form(product_heads)
-    product = Product(
-        code=form["code"],
-        description=form["description"],
-        price=form["price"]
-    )
-
-    return product
-
-
-def update_receipt_products(receipt):
-    for sold_product in receipt.sold_products:
-        update_receipt_product(sold_product)
-
-
-def update_receipt_product(sold_product):
-    for attribute in product_heads:
-        if attribute != "total":
-            update_product_attr(sold_product, attribute)
-
-
-def update_product_attr(sold_product, attribute):
-    try:
-        value = request.form[sold_product.get_unique_key(attribute)]
-        if attribute == "code" or attribute == "description":
-            setattr(sold_product.product, attribute, value)
-        else:
-            setattr(sold_product, attribute, value)
-    except KeyError:
-        pass
 
 
 @bp.route("/done/<int:id>")
@@ -146,7 +119,7 @@ def done(id):
 
     return render_template(
         "receipt/receipt.html",
-        customer_heads=customer_heads,
+        customer_heads=receipt_customer_heads,
         product_heads=product_heads,
         empty_spaces=empty_spaces,
         receipt=receipt
@@ -181,6 +154,39 @@ def delete(id):
     return redirect(
         url
     )
+
+
+def get_product_to_add():
+    form = get_form(product_heads)
+    product = Product(
+        code=form["code"],
+        description=form["description"],
+        price=form["price"]
+    )
+
+    return product
+
+
+def update_receipt_products(receipt):
+    for sold_product in receipt.sold_products:
+        update_receipt_product(sold_product)
+
+
+def update_receipt_product(sold_product):
+    for attribute in product_heads:
+        if attribute != "total":
+            update_product_attr(sold_product, attribute)
+
+
+def update_product_attr(sold_product, attribute):
+    try:
+        value = request.form[sold_product.get_unique_key(attribute)]
+        if attribute == "code" or attribute == "description":
+            setattr(sold_product.product, attribute, value)
+        else:
+            setattr(sold_product, attribute, value)
+    except KeyError:
+        pass
 
 
 def get_empty_spaces(products):

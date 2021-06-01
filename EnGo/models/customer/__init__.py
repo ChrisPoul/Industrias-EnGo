@@ -7,6 +7,7 @@ from sqlalchemy import (
 customer_attributes = [
     'customer_name',
     'address',
+    'phone',
     'rfc'
 ]
 
@@ -15,6 +16,7 @@ class Customer(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     customer_name = Column(String(100), nullable=False, unique=False)
     address = Column(String(200), nullable=False, unique=False)
+    phone = Column(String(15), nullable=False, unique=False, default="")
     rfc = Column(String(20), nullable=True, unique=False)
     receipts = db.relationship(
         'Receipt',
@@ -32,6 +34,8 @@ class Customer(db.Model, MyModel):
         customers = Customer.query.filter_by(customer_name=search_term).all()
         if customers == []:
             customers = Customer.query.filter_by(address=search_term).all()
+        if customers == []:
+            customers = Customer.query.filter_by(phone=search_term).all()
         if customers == []:
             customers = Customer.query.filter_by(rfc=search_term).all()
         

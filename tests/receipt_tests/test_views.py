@@ -28,7 +28,7 @@ class TestAddView(ReceiptViewTest):
         customer_data = dict(
             customer_name="Test Name",
             address="Test Address",
-            rfc="Test RFC"
+            phone="+123 456 7890"
         )
         prev_receipts = Receipt.get_all()
         with self.client as client:
@@ -44,7 +44,7 @@ class TestAddView(ReceiptViewTest):
         customer_data = dict(
             customer_name="",
             address="Invalid Address",
-            rfc="Invalid RFC"
+            phone="Invalid Phone"
         )
         prev_receipts = Receipt.get_all()
         with self.client as client:
@@ -60,7 +60,7 @@ class TestAddView(ReceiptViewTest):
         customer_data = dict(
             customer_name="",
             address="",
-            rfc=""
+            phone=""
         )
         prev_receipts = Receipt.get_all()
         with self.client as client:
@@ -76,7 +76,7 @@ class TestAddView(ReceiptViewTest):
         customer_data = dict(
             customer_name="Valid New Name",
             address="Valid Address",
-            rfc="Valid RFC"
+            phone="+123 456 7890"
         )
         prev_receipts = Receipt.get_all()
         with self.client as client:
@@ -93,7 +93,7 @@ class TestAddView(ReceiptViewTest):
         customer_data = dict(
             customer_name="Valid New Name",
             address="Valid Address",
-            rfc="Valid RFC"
+            phone="+123 456 7890"
         )
         with self.client as client:
             response = client.post(

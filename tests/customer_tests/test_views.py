@@ -67,6 +67,7 @@ class TestAddView(CustomerViewTest):
         customer_data = dict(
             customer_name="Valid Name",
             address="Valid Address",
+            phone="+123 456 7890",
             rfc=""
         )
         with self.client as client:
@@ -82,6 +83,7 @@ class TestAddView(CustomerViewTest):
         customer_data = dict(
             customer_name="",
             address="Valid Address",
+            phone="+123 456 7890",
             rfc=""
         )
         with self.client as client:

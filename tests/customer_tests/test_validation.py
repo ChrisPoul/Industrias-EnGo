@@ -34,6 +34,17 @@ class TestValidate(CustomerTest):
 
         self.assertNotEqual(error, None)
 
+    def test_should_return_error_given_invalid_phone(self):
+        customer = Customer(
+            customer_name="Unique Name",
+            address="Unique Address",
+            rfc="Unique RFC",
+            phone="invalid phone"
+        )
+        error = customer.validation.validate()
+
+        self.assertNotEqual(error, None)
+
 class TestValidateEmptyValues(CustomerTest):
 
     def test_should_not_return_error_given_no_empty_values(self):
@@ -151,5 +162,38 @@ class TestValidateUniqueValue(CustomerTest):
             rfc="TESTRFC 123"
         )
         error = customer.validation.validate_unique_value("customer_name")
+
+        self.assertNotEqual(error, None)
+
+
+class TestValidatePhone(CustomerTest):
+
+    def test_should_not_return_error_given_valid_phone(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            phone="+442 303 2121"
+        )
+        error = customer.validation.validate_phone()
+
+        self.assertEqual(error, None)
+
+    def test_should_not_return_error_given_empty_phone(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            phone=""
+        )
+        error = customer.validation.validate_phone()
+
+        self.assertEqual(error, None)
+
+    def test_should_return_error_given_invalid_phone(self):
+        customer = Customer(
+            customer_name="Test Name",
+            address="Test Address",
+            phone="invalid phone"
+        )
+        error = customer.validation.validate_phone()
 
         self.assertNotEqual(error, None)

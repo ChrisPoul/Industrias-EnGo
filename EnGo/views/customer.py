@@ -14,6 +14,7 @@ bp = Blueprint('customer', __name__, url_prefix='/customer')
 customer_heads = dict(
     customer_name='Nombre',
     address="Dirección",
+    phone="Teléfono",
     rfc="RFC"
 )
 receipt_heads = dict(
@@ -50,6 +51,7 @@ def add():
         customer = Customer(
             customer_name=request.form['customer_name'],
             address=request.form['address'],
+            phone=request.form['phone'],
             rfc=request.form['rfc']
         )
         error = customer.request.add()
