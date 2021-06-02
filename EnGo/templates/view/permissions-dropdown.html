@@ -1,4 +1,5 @@
 <div class="permissions-checkbox">
+    <strong>Permisos:</strong>
     {% for permission in permissions %}
     <div>
         {% if permission.permission_name != "Admin" and not g.user.is_admin() or g.user.is_admin() %}

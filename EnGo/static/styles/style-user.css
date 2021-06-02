@@ -22,10 +22,6 @@
     border: 0px;
     background-color: rgba(199, 37, 37, 0.897);
 }
-.update-view {
-    align-items: center;
-    width: fit-content;
-}
 .permissions-checkbox {
     flex-direction: column;
     margin: 1em;
@@ -35,6 +31,16 @@
     flex-direction: row;
     justify-content: flex-start;
 }
+.permissions-checkbox strong {
+    margin-bottom: 0.5em;
+    padding: auto;
+    text-align: left;
+}
+.permissions-checkbox input {
+    margin-left: 0;
+    margin-top: 0.6em;
+}
+
 .change-password-link {
     justify-content: center;
 }

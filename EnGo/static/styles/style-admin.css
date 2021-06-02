@@ -14,3 +14,21 @@
 .admin div {
     margin-left: 2em;
 }
+.update-view {
+    align-items: center;
+    width: fit-content;
+}
+.image-selection {
+    flex-direction: column;
+    align-items: left;
+    margin-top: 1em;
+}
+.image-selection label {
+    margin: 1em;
+    margin-bottom: 0;
+    text-align: left;
+}
+.update-view input[type=file] {
+    border: none;
+    max-width: fit-content;
+}
