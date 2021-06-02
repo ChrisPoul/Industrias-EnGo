@@ -24,10 +24,10 @@ def create_app(test_config=None):
     from .models import db
     db.init_app(app)
 
-    from .commands.database import init_db_command
-    app.cli.add_command(init_db_command)
-    from .commands.settings import init_settings_command
-    app.cli.add_command(init_settings_command)
+    from .commands import database, settings
+    app.cli.add_command(database.init_db_command)
+    app.cli.add_command(database.modify_tables_command)
+    app.cli.add_command(settings.init_settings_command)
 
     from .views import global_context
     app.register_blueprint(global_context.bp)
