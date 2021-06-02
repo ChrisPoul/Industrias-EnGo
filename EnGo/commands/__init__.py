@@ -1,4 +1,5 @@
 import os
+import json
 import click
 from flask import current_app
 from flask.cli import with_appcontext
@@ -34,13 +35,22 @@ def create_admin_user(username):
     admin_user.add_permission(admin_permission)
 
 
-@click.command("init-db")
+@click.command("init-settings")
+@with_appcontext
 def init_settings_command():
     init_settings()
     click.echo("Initialized Settings")
 
 
 def init_settings():
+    receipt_image_path = os.path.join(current_app.static_folder, "images/logo.jpeg")
+    settings = dict(
+        receipt_image=receipt_image_path
+    )
+    save_settings(settings)
+
+
+def save_settings(settings):
     settings_path = os.path.join(current_app.instance_path, "settings.json")
     with open(settings_path, "w+") as settings_file:
-        pass
+        json.dump(settings, settings_file, indent=4)
