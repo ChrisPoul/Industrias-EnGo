@@ -14,7 +14,7 @@
             {% for head in customer_heads %}
             <td>
                 <strong>{{ customer_heads[head] }}:</strong>
-                <input name="{{ head }}" id="{{ head }}" list="{{ head }}s" class="add"
+                <input name="{{ head }}" id="{{ head }}" list="{{ head }}s"
                     placeholder="Buscar con {{ customer_heads[head] }}..." value="{{ form[head] }}">
             </td>
             {% endfor %}
