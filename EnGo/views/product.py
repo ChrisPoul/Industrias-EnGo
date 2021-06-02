@@ -45,7 +45,8 @@ def add():
         product = Product(
             code=request.form["code"],
             description=request.form["description"],
-            price=request.form["price"]
+            price=request.form["price"],
+            inventory=request.form["inventory"]
         )
         error = product.request.add()
         if not error:
