@@ -8,6 +8,7 @@ from EnGo.models.product import Product
 from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
+from EnGo.commands import get_settings
 from . import (
     login_required, format_price,
     format_date
@@ -59,6 +60,14 @@ def inject_view_and_permissions():
     return dict(
         view=View.search(request.endpoint),
         permissions=Permission.get_all()
+    )
+
+
+@bp.app_context_processor
+def inject_settings():
+    settings = get_settings()
+    return dict(
+        settings=settings
     )
 
 

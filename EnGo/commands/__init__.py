@@ -43,9 +43,8 @@ def init_settings_command():
 
 
 def init_settings():
-    receipt_image_path = os.path.join(current_app.static_folder, "images/logo.jpeg")
     settings = dict(
-        receipt_image=receipt_image_path
+        receipt_image="images/logo.jpeg"
     )
     save_settings(settings)
 
@@ -54,3 +53,11 @@ def save_settings(settings):
     settings_path = os.path.join(current_app.instance_path, "settings.json")
     with open(settings_path, "w+") as settings_file:
         json.dump(settings, settings_file, indent=4)
+
+
+def get_settings():
+    settings_path = os.path.join(current_app.instance_path, "settings.json")
+    with open(settings_path, "r") as settings_file:
+        settings = json.load(settings_file)
+
+    return settings
