@@ -70,9 +70,6 @@ table a {
 thead {
     background-color: rgba(128, 128, 128, 0.637);
 }
-.add {
-    max-width: 40%;
-}
 .logo {
     max-width: fit-content;
 }

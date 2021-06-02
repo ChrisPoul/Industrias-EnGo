@@ -6,7 +6,7 @@
         </a>
         {% if g.user.has_view_permissions('admin.main_page') %}
         <a href="{{ url_for('admin.main_page') }}">
-            Admin Page
+            Admin
         </a>
         {% endif %}
         {% if g.user.has_view_permissions('user.users') %}

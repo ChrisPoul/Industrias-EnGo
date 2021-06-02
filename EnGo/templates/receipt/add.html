@@ -12,7 +12,7 @@
     <table>
         <tr>
             {% for head in customer_heads %}
-            <td class="add">
+            <td>
                 <strong>{{ customer_heads[head] }}:</strong>
                 <input name="{{ head }}" id="{{ head }}" list="{{ head }}s"
                     placeholder="Buscar con {{ customer_heads[head] }}..." value="{{ form[head] }}">
