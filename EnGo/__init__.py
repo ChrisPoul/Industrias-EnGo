@@ -21,8 +21,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from .models import db, init_db_command
+    from .models import db
     db.init_app(app)
+
+    from .commands import init_db_command
     app.cli.add_command(init_db_command)
 
     from .views import global_context
