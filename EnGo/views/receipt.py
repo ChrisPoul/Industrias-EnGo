@@ -163,6 +163,7 @@ def get_product_to_add():
         description=form["description"],
         price=form["price"]
     )
+    product.unit = form["unit"]
 
     return product
 

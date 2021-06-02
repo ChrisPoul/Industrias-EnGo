@@ -22,6 +22,7 @@ class Product(db.Model, MyModel):
         backref="product",
         cascade="all, delete-orphan"
     )
+    unit = "pz"
 
     def get(id):
         return Product.query.get(id)

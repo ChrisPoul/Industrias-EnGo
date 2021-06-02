@@ -60,7 +60,8 @@ class Receipt(db.Model, MyModel):
         sold_product = SoldProduct(
             receipt_id=self.id,
             product_id=product.id,
-            price=product.price
+            price=product.price,
+            unit=product.unit
         )
         sold_product.add()
 
