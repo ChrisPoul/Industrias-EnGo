@@ -17,3 +17,8 @@ class Post(db.Model, MyModel):
 
     def search(search_term):
         return Post.query.filter_by(title=search_term).first()
+    
+    @property
+    def validation(self):
+        from .validation import PostValidation
+        return PostValidation(self)
