@@ -2,7 +2,7 @@
 <tr>
     {% for head in product_heads %}
     <td class="{{ head }}">
-        {% if head != "total" and head != "quantity" %}
+        {% if head != "total" and head != "quantity" and head != "unit" %}
         <input name="{{ head }}" id="{{ head }}" 
         {% if head == "price" %}
         type="number"
