@@ -5,7 +5,7 @@ from flask import (
 )
 from EnGo.models.permission import Permission
 from EnGo.models.view import View
-from EnGo.commands import get_settings, save_settings
+from EnGo.commands.settings import get_settings, save_settings
 from . import get_checked_permissions
 
 

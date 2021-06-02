@@ -8,7 +8,7 @@ from EnGo.models.product import Product
 from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
-from EnGo.commands import get_settings
+from EnGo.commands.settings import get_settings
 from .view import view_heads
 from . import (
     login_required, format_price,
