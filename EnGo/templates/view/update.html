@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}{{ view.view_name }}{% endblock %}</h1>
+    <h1>{% block title %}{{ view_heads[view.view_name] }}{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}

@@ -20,7 +20,7 @@
     {% endif %}
     {% if g.user.has_view_permissions("view.update") %}
     {% for view_name in autocomplete.get_data("views", "view_name") %}
-    <option>{{ view_name }}</option>
+    <option value="{{ view_heads[view_name] }}">{{ view_name }}</option>
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("product.update") %}

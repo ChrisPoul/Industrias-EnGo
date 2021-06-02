@@ -9,6 +9,7 @@ from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
 from EnGo.commands import get_settings
+from .view import view_heads
 from . import (
     login_required, format_price,
     format_date
@@ -59,6 +60,7 @@ def inject_view_and_permissions():
     session["prev_url"] = request.referrer
     return dict(
         view=View.search(request.endpoint),
+        view_heads=view_heads,
         permissions=Permission.get_all()
     )
 
