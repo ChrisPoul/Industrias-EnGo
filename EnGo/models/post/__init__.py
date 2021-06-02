@@ -1,6 +1,8 @@
+from datetime import datetime
 from EnGo.models import db, MyModel
 from sqlalchemy import (
-    Column, Integer, String, Text
+    Column, Integer, String, Text,
+    DateTime
 )
 
 
@@ -8,6 +10,7 @@ class Post(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     title = Column(String(150), nullable=False)
     description = Column(Text, nullable=False)
+    date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
         return Post.query.get(id)
