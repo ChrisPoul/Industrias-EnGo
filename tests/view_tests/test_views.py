@@ -20,7 +20,7 @@ class TestUpdate(ViewsTest):
     def test_should_update_view_permissions_given_LUHP(self):
         self.login_user(self.admin_user)
         permissions_data = dict(
-            admin=self.admin_permission.id
+            Admin=self.admin_permission.id
         )
         with self.client as client:
             client.post(
