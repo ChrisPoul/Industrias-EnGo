@@ -6,7 +6,13 @@
 
 {% block content %}
 <div class="container">
-    <form method='post' class="update-view">
+    <form method='post' enctype="multipart/form-data" class="update-view">
+        {% if view.view_name == "receipt.edit" or view.view_name == "receipt.done" %}
+        <label for="receipt_image">
+            Imagen del Recibo:
+        </label>
+        <input type="file" name="receipt_image" id="receipt_image">
+        {% endif %}
         {% include 'view/permissions-dropdown.html' %}
         <input type="submit" value="Guardar cambios">
     </form>
