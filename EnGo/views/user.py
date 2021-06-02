@@ -22,7 +22,7 @@ user_heads = dict(
     salary="Salario"
 )
 permissions = [
-    "recursos humanos"
+    "Recursos Humanos"
 ]
 
 

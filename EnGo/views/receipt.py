@@ -31,7 +31,7 @@ product_heads = dict(
     total="Total"
 )
 permissions = [
-    "contaduría"
+    "Contaduría"
 ]
 
 

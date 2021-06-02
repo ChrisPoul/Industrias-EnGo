@@ -6,7 +6,7 @@
 }
 .search-bar input {
     margin: 0;
-    padding: 0.3em;
+    padding: 0.5em;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     border-left: 1px solid black;
@@ -29,5 +29,4 @@ nav form {
     justify-content: center;
     flex-direction: column;
     height: 2em;
-    width: 50vmax;
 }

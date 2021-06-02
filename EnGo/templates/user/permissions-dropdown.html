@@ -1,8 +1,8 @@
 <div class="permissions-checkbox">
     {% for permission in permissions %}
     <div>
-        {% if permission.permission_name != "admin" and not g.user.is_admin() or g.user.is_admin() %}
-        {% if permission.permission_name != "admin" or g.user != user %}
+        {% if permission.permission_name != "Admin" and not g.user.is_admin() or g.user.is_admin() %}
+        {% if permission.permission_name != "Admin" or g.user != user %}
         <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
             {% if user and permission in user.permissions %}
             checked

@@ -71,7 +71,7 @@ class TestValidateUniqueValues(PermissionTest):
 
     def test_should_return_error_given_repeated_values(self):
         permission = Permission(
-            permission_name="admin",
+            permission_name="Admin",
         )
         error = permission.validation.validate_unique_values()
 

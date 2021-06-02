@@ -32,7 +32,7 @@ class Test(TestCase):
 
     def create_test_users(self):
         self.admin_permission = Permission(
-            permission_name="admin",
+            permission_name="Admin",
         )
         self.admin_permission.add()
         self.admin_user = User(
@@ -42,7 +42,7 @@ class Test(TestCase):
         self.admin_user.add()
         self.admin_user.add_permission(self.admin_permission)
         accounting_permission = Permission(
-            permission_name="contaduría"
+            permission_name="Contaduría"
         )
         accounting_permission.add()
         self.accounting_user = User(

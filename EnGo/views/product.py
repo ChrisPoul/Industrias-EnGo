@@ -14,7 +14,7 @@ product_heads = dict(
     inventory="Inventario"
 )
 permissions = [
-    "contaduría"
+    "Contaduría"
 ]
 
 

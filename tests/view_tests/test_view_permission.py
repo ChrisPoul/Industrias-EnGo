@@ -8,7 +8,7 @@ class ViewPermissionTest(ViewTest):
     def setUp(self):
         ViewTest.setUp(self)
         self.admin_permission = Permission(
-            permission_name="admin"
+            permission_name="Admin"
         )
         self.admin_permission.add()
         self.quality_permission = Permission(

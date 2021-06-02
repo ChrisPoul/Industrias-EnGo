@@ -9,7 +9,7 @@ class UserPermissionTest(UserTest):
     def setUp(self):
         UserTest.setUp(self)
         self.admin_permission = Permission(
-        permission_name="admin"
+        permission_name="Admin"
         )
         self.admin_permission.add()
         self.admin_view = View(
@@ -84,10 +84,10 @@ class TestUpdatePermissions(UserPermissionTest):
 class TestHasPermissions(UserPermissionTest):
 
     def test_should_return_true_given_user_has_permissions(self):
-        self.assertTrue(self.admin_user.has_permissions(["admin"]))
+        self.assertTrue(self.admin_user.has_permissions(["Admin"]))
 
     def test_should_return_false_given_user_does_not_have_permissions(self):
-        self.assertFalse(self.admin_user.has_permissions(["contaduría"]))
+        self.assertFalse(self.admin_user.has_permissions(["Contaduría"]))
 
 
 class TestHasViewPermissions(UserPermissionTest):

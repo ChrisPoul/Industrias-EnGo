@@ -62,7 +62,7 @@ class TestGetAll(PermissionTest):
 class TestSearch(PermissionTest):
 
     def test_should_return_permission_given_valid_name(self):
-        permission = Permission.search("admin")
+        permission = Permission.search("Admin")
 
         self.assertEqual(permission, self.admin_permission)
 

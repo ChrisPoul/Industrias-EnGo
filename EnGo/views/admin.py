@@ -10,7 +10,7 @@ from EnGo.models.view import View
 bp = Blueprint('admin', __name__, url_prefix="/admin")
 
 @bp.route("/main_page", methods=('POST', 'GET'))
-@permission_required(["admin"])
+@permission_required(["Admin"])
 @login_required
 def main_page():
     users = User.get_all()

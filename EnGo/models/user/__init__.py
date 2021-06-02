@@ -66,7 +66,7 @@ class User(db.Model, MyModel):
         return False
 
     def is_admin(self):
-        return self.has_permissions(["admin"])
+        return self.has_permissions(["Admin"])
 
     def add_permission(self, permission):
         user_permission = UserPermission(

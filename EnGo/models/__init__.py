@@ -31,7 +31,7 @@ def create_admin_user(username):
     from .permission import Permission
     from .user import User
     admin_permission = Permission(
-        permission_name="admin"
+        permission_name="Admin"
     )
     admin_permission.add()
     admin_user = User(
