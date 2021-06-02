@@ -17,9 +17,6 @@
             </td>
             <td>
                 <input name="{{ head }}" id="{{ head }}" list="{{ head }}s"
-                    {% if head == "customer_name" or head == "address" %}
-                    required
-                    {% endif %}
                     placeholder="Busca a un cliente por su {{ customer_heads[head] }} o crea uno nuevo..." 
                     value="{{ form[head] }}">
             </td>
