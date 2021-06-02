@@ -70,6 +70,33 @@ table a {
 thead {
     background-color: rgba(128, 128, 128, 0.637);
 }
+.add-receipt {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 1em 2.5em 1.5em 0;
+    height: 100%;
+    margin-top: 4vh;
+    text-align: center;
+}
+.add-receipt table {
+    margin: 0.5em 1em;
+}
+.add-receipt tr {
+    margin: 1em 0;
+}
+.add-receipt input {
+    padding: 0.1em;
+}
+.label {
+    max-width: 10%;
+    justify-content: left;
+}
+.add-receipt-submit {
+    text-align: right;
+}
+.add-receipt-submit input {
+    padding: 0.6em 1em;
+}
 .logo {
     max-width: fit-content;
 }

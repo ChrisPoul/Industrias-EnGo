@@ -8,18 +8,26 @@
     {% endfor %}
 </datalist>
 {% endfor %}
-<form method="post" autocomplete="off">
+<form method="post" autocomplete="off" class="add-receipt">
     <table>
+        {% for head in customer_heads %}
         <tr>
-            {% for head in customer_heads %}
-            <td>
+            <td class="label">
                 <strong>{{ customer_heads[head] }}:</strong>
-                <input name="{{ head }}" id="{{ head }}" list="{{ head }}s"
-                    placeholder="Buscar con {{ customer_heads[head] }}..." value="{{ form[head] }}">
             </td>
-            {% endfor %}
+            <td>
+                <input name="{{ head }}" id="{{ head }}" list="{{ head }}s"
+                    {% if head == "customer_name" or head == "address" %}
+                    required
+                    {% endif %}
+                    placeholder="Busca a un cliente por su {{ customer_heads[head] }} o crea uno nuevo..." 
+                    value="{{ form[head] }}">
+            </td>
         </tr>
+        {% endfor %}
     </table>
-    <input type="submit" value="Aceptar">
+    <div class="add-receipt-submit">
+        <input type="submit" value="Aceptar">
+    </div>
 </form>
 {% endblock %}
