@@ -135,7 +135,7 @@ def add_comma_separators_to_num(num):
     formated_num = ""
     for i, digit in enumerate(num[::-1], start=1):
         formated_num += digit
-        if i % 3 == 0:
+        if i % 3 == 0 and len(num) % 3 != 0:
             formated_num += ","
     formated_num = formated_num[::-1]
 
