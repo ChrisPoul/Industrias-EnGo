@@ -59,4 +59,7 @@ def create_app(test_config=None):
     from .views import warehouse
     app.register_blueprint(warehouse.bp)
 
+    from .views import post
+    app.register_blueprint(post.bp)
+
     return app

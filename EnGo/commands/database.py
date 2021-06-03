@@ -14,6 +14,8 @@ def init_db():
     db.drop_all()
     db.create_all()
     create_admin_user("Admin")
+    from .settings import init_settings
+    init_settings()
 
 
 def create_admin_user(username):
