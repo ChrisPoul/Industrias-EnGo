@@ -1,6 +1,6 @@
-from . import Warehouse, warehouse_attributes
 from EnGo.errors.messages import repeated_value_error
 from EnGo.models import validate_empty_values
+from EnGo.models.warehouse import Warehouse
 
 
 class WarehouseValidation:
@@ -17,6 +17,9 @@ class WarehouseValidation:
         return self.error
     
     def validate_empty_values(self):
+        warehouse_attributes = [
+            'address'
+        ]
         self.error = validate_empty_values(self.warehouse, warehouse_attributes)
         
         return self.error

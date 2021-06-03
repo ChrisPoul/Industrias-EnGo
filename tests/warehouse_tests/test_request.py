@@ -1,7 +1,6 @@
 from . import WarehouseTest
-from EnGo.models.raw_material import RawMaterial
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.consumable import Consumable
+from EnGo.models.expense import Expense
 from EnGo.models.product import Product
 
 
@@ -41,52 +40,30 @@ class TestUpdate(WarehouseTest):
         self.assertNotEqual(self.warehouse.address, "")
 
 
-class TestAddRawMaterial(WarehouseTest):
+class TestAddExpense(WarehouseTest):
 
-    def test_should_add_raw_material_to_warehouse_given_existent_raw_material(self):
-        self.warehouse.request.add_raw_material(self.raw_material)
+    def test_should_add_expense_to_warehouse_given_existing_expense(self):
+        self.warehouse.request.add_expense(self.expense)
 
-        self.assertIn(self.raw_material, self.warehouse.raw_materials)
+        self.assertIn(self.expense, self.warehouse.expenses)
     
-    def test_should_add_raw_material_given_valid_new_raw_material(self):
-        raw_material = RawMaterial(
-            material_name="New Material"
+    def test_should_add_and_create_expense_given_valid_new_expense(self):
+        expense = Expense(
+            concept="New Name",
+            type="Test Type"
         )
-        self.warehouse.request.add_raw_material(raw_material)
+        self.warehouse.request.add_expense(expense)
 
-        self.assertIn(raw_material, self.warehouse.raw_materials)
+        self.assertIn(expense, self.warehouse.expenses)
 
-    def test_should_not_add_raw_material_given_invalid_new_raw_material(self):
-        raw_material = RawMaterial(
-            material_name=""
+    def test_should_not_add_expense_to_warehouse_given_invalid_expense(self):
+        expense = Expense(
+            concept="",
+            type=""
         )
-        self.warehouse.request.add_raw_material(raw_material)
+        self.warehouse.request.add_expense(expense)
 
-        self.assertNotIn(raw_material, self.warehouse.raw_materials)
-
-
-class TestAddConsumable(WarehouseTest):
-
-    def test_should_add_consumable_to_warehouse_given_existing_consumable(self):
-        self.warehouse.request.add_consumable(self.consumable)
-
-        self.assertIn(self.consumable, self.warehouse.consumables)
-    
-    def test_should_add_consumable_given_valid_new_consumable(self):
-        consumable = Consumable(
-            consumable_name="New Name"
-        )
-        self.warehouse.request.add_consumable(consumable)
-
-        self.assertIn(consumable, self.warehouse.consumables)
-
-    def test_should_not_add_consumable_to_warehouse_given_invalid_consumable(self):
-        consumable = Consumable(
-            consumable_name=""
-        )
-        self.warehouse.request.add_consumable(consumable)
-
-        self.assertNotIn(consumable, self.warehouse.consumables)
+        self.assertNotIn(expense, self.warehouse.expenses)
     
 
 class TestAddProduct(WarehouseTest):

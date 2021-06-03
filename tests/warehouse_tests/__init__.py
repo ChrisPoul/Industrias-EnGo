@@ -1,7 +1,6 @@
-from EnGo.models.raw_material import RawMaterial
 from tests import Test
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.consumable import Consumable
+from EnGo.models.expense import Expense
 from EnGo.models.product import Product
 
 
@@ -13,16 +12,12 @@ class WarehouseTest(Test):
             address="Test Address"
         )
         self.warehouse.add()
-        self.consumable = Consumable(
-            consumable_name="Test Consumable"
+        self.expense = Expense(
+            concept="Test Expense",
+            type="Test Type"
         )
-        self.consumable.add()
+        self.expense.add()
         self.product = Product(
             code="Test Product"
         )
         self.product.add()
-        self.raw_material = RawMaterial(
-            material_name="Test Name",
-            price="10"
-        )
-        self.raw_material.add()

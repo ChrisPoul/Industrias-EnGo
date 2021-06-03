@@ -4,11 +4,7 @@ from sqlalchemy import (
     ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
-from EnGo.models.raw_material import RawMaterial
 
-warehouse_attributes = [
-    'address'
-]
 
 class Warehouse(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -19,13 +15,8 @@ class Warehouse(db.Model, MyModel):
         backref="warehouse",
         cascade="all, delete-orphan"
     )
-    bought_consumables = db.relationship(
-        'BoughtConsumable',
-        backref="warehouse",
-        cascade="all, delete-orphan"
-    )
-    bought_raw_materials = db.relationship(
-        'BoughtRawMaterial',
+    registered_expenses = db.relationship(
+        'RegisteredExpense',
         backref="warehouse",
         cascade="all, delete-orphan"
     )
@@ -61,39 +52,16 @@ class Warehouse(db.Model, MyModel):
         finished_product.add()
     
     @property
-    def consumables(self):
-        return [bought_consumable.consumable for bought_consumable in self.bought_consumables]
+    def expenses(self):
+        return [registered_expense.expense for registered_expense in self.registered_expenses]
 
-    def add_consumable(self, consumable):
-        bought_consumable = BoughtConsumable(
-            consumable_id=consumable.id,
+    def add_expense(self, expense):
+        registered_expense = RegisteredExpense(
+            expense_id=expense.id,
             warehouse_id=self.id,
-            price=consumable.price
+            cost=expense.cost
         )
-        bought_consumable.add()
-    
-    @property
-    def raw_materials(self):
-        return [bought_raw_material.raw_material for bought_raw_material in self.bought_raw_materials]
-    
-    def add_raw_material(self, raw_material):
-        bought_raw_material = BoughtRawMaterial(
-            raw_material_id=raw_material.id,
-            warehouse_id=self.id,
-            price=raw_material.price
-        )
-        bought_raw_material.add()
-
-
-class BoughtRawMaterial(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    raw_material_id = Column(Integer, ForeignKey('raw_material.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    price = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return BoughtRawMaterial.query.get(id)
+        registered_expense.add()
 
 
 class FinishedProduct(db.Model, MyModel):
@@ -109,16 +77,13 @@ class FinishedProduct(db.Model, MyModel):
         return FinishedProduct.query.get(id)
 
 
-class BoughtConsumable(db.Model, MyModel):
+class RegisteredExpense(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
-    consumable_id = Column(Integer, ForeignKey('consumable.id'), nullable=False)
+    expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
     warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=0)
-    price = Column(Integer, nullable=False, default=0)
+    cost = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
-        return BoughtConsumable.query.get(id)
-
-
-from EnGo.models.consumable import Consumable
+        return RegisteredExpense.query.get(id)

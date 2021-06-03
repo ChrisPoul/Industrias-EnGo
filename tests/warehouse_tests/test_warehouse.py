@@ -63,18 +63,10 @@ class TestAddProduct(WarehouseTest):
         self.assertEqual(self.warehouse.products, [self.product])
 
 
-class TestAddConsumable(WarehouseTest):
+class TestAddExpense(WarehouseTest):
 
-    def test_should_add_consumable_to_warehouse_given_product(self):
-        self.warehouse.add_consumable(self.consumable)
+    def test_should_add_expense_to_warehouse_given_expense(self):
+        self.warehouse.add_expense(self.expense)
 
-        self.assertEqual(self.warehouse.consumables, [self.consumable])
-
-
-class TestAddRawMaterial(WarehouseTest):
-
-    def test_should_add_raw_material_to_warehouse_given_raw_material(self):
-        self.warehouse.add_raw_material(self.raw_material)
-
-        self.assertEqual(self.warehouse.raw_materials, [self.raw_material])
+        self.assertEqual(self.warehouse.expenses, [self.expense])
     

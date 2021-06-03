@@ -1,8 +1,4 @@
-
-
-
-from EnGo.models.raw_material import RawMaterial
-from EnGo.models.consumable import Consumable
+from EnGo.models.expense import Expense
 from EnGo.models.product import Product
 
 
@@ -26,33 +22,19 @@ class WarehouseRequest:
         
         return error
     
-    def add_raw_material(self, raw_material_to_add):
-        raw_material = RawMaterial.search(raw_material_to_add.material_name)
-        if raw_material:
-            self.warehouse.add_raw_material(raw_material)
+    def add_expense(self, expense_to_add):
+        expense = Expense.search(expense_to_add.concept)
+        if expense:
+            self.warehouse.add_expense(expense)
         else:
-            self.add_new_raw_material(raw_material_to_add)
+            self.add_new_expense(expense_to_add)
         
         return self.error
         
-    def add_new_raw_material(self, raw_material):
-        self.error = raw_material.request.add()
+    def add_new_expense(self, expense):
+        self.error = expense.request.add()
         if not self.error:
-            self.warehouse.add_raw_material(raw_material)
-    
-    def add_consumable(self, consumable_to_add):
-        consumable = Consumable.search(consumable_to_add.consumable_name)
-        if consumable:
-            self.warehouse.add_consumable(consumable)
-        else:
-            self.add_new_consumable(consumable_to_add)
-        
-        return self.error
-        
-    def add_new_consumable(self, consumable):
-        self.error = consumable.request.add()
-        if not self.error:
-            self.warehouse.add_consumable(consumable)
+            self.warehouse.add_expense(expense)
         
     def add_product(self, product_to_add):
         product = Product.search(product_to_add.code)
