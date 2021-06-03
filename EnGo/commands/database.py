@@ -42,11 +42,13 @@ def modify_tables_command():
 
 
 def modify_tables():
-    from EnGo.models.warehouse import Warehouse
+    from EnGo.models.warehouse import (
+        Warehouse, FinishedProduct, RegisteredExpense
+    )
     Warehouse.__table__.drop(db.engine)
-    from EnGo.models.consumable import Consumable
-    Consumable.__table__.drop(db.engine)
-    from EnGo.models.raw_material import RawMaterial
-    RawMaterial.__table__.drop(db.engine)
-    from EnGo.models.post import Post
+    FinishedProduct.__table__.drop(db.engine)
+    RegisteredExpense.__table__.drop(db.engine)
+    from EnGo.models.expense import Expense
+    Expense.__table__.drop(db.engine)
     db.create_all()
+

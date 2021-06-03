@@ -4,6 +4,7 @@ from sqlalchemy import (
     ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
+from EnGo.models.expense import Expense
 
 
 class Warehouse(db.Model, MyModel):
