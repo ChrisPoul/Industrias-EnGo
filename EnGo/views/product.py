@@ -2,7 +2,10 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
 )
-from . import permission_required, login_required, update_obj_attrs
+from . import (
+    permission_required, login_required, update_obj_attrs,
+    get_form
+)
 from EnGo.models.product import Product
 
 bp = Blueprint("product", __name__, url_prefix="/product")
@@ -41,12 +44,13 @@ def products():
 @permission_required(permissions)
 @login_required
 def add():
+    form = get_form(product_heads)
     if request.method == "POST":
         product = Product(
-            code=request.form["code"],
-            description=request.form["description"],
-            price=request.form["price"],
-            inventory=request.form["inventory"]
+            code=form["code"],
+            description=form["description"],
+            price=form["price"],
+            inventory=form["inventory"]
         )
         error = product.request.add()
         if not error:
@@ -57,7 +61,8 @@ def add():
 
     return render_template(
         "product/add.html",
-        product_heads=product_heads
+        product_heads=product_heads,
+        form=form
     )
 
 

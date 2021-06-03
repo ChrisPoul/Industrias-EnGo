@@ -12,7 +12,7 @@
     {% if head == "price" or head == "inventory" %}
     type="number"
     {% endif %}
-    id="{{ head }}">
+    id="{{ head }}" value="{{ form[head] }}">
     {% endfor %}
     <input type="submit">
 </form>
