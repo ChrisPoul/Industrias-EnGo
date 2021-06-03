@@ -48,4 +48,6 @@ def modify_tables():
     Consumable.__table__.drop(db.engine)
     from EnGo.models.raw_material import RawMaterial
     RawMaterial.__table__.drop(db.engine)
+    from EnGo.models.post import Post
+    Post.__table__.drop(db.engine)
     db.create_all()
