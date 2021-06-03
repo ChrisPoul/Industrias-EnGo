@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Añadir Post{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% for head in post_heads %}
+    <label for="{{ head }}">{{ post_heads[head] }}:</label>
+    {% if head == "description" %}
+    <textarea name="{{ head }}" id="{{ head }}">{{ form[head] }}</textarea>
+    {% else %}
+    <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}">
+    {% endif %}
+    {% endfor %}
+    <input type="submit">
+</form>
+{% endblock %}
