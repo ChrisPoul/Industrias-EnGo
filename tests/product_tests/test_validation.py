@@ -57,11 +57,33 @@ class TestValidateEmptyValues(ProductTest):
 
         self.assertEqual(error, None)
 
-    def test_should_return_error_given_empty_value(self):
+    def test_should_return_error_given_empty_code(self):
         product = Product(
             code="",
             description="Optional description",
             price=10
+        )
+        error = product.validation.validate_empty_values()
+
+        self.assertNotEqual(error, None)
+
+    def test_should_return_error_given_empty_inventory(self):
+        product = Product(
+            code="Valid Code",
+            description="Optional description",
+            price=10,
+            inventory=""
+        )
+        error = product.validation.validate_empty_values()
+
+        self.assertNotEqual(error, None)
+
+    def test_should_return_error_given_empty_price(self):
+        product = Product(
+            code="Valid Code",
+            description="Optional description",
+            price="",
+            inventory=10
         )
         error = product.validation.validate_empty_values()
 

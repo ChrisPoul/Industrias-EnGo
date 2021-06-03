@@ -17,7 +17,12 @@ class ProductValidation:
         return self.error
     
     def validate_empty_values(self):
-        self.error = validate_empty_values(self.product, ["code"])
+        product_attrs = [
+            "code",
+            "price",
+            "inventory"
+        ]
+        self.error = validate_empty_values(self.product, product_attrs)
         
         return self.error
 
