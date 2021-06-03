@@ -19,7 +19,7 @@ user_login_heads = dict(
 )
 user_heads = dict(
     user_login_heads,
-    salary="Salario"
+    salary="Salario Semanal"
 )
 permissions = [
     "Recursos Humanos"
