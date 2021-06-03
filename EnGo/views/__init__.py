@@ -79,8 +79,8 @@ def get_checked_permissions():
     return checked_permissions
 
 
-def update_obj_attrs(obj, heads):
-    for attribute in heads:
+def update_obj_attrs(obj, attributes):
+    for attribute in attributes:
         update_obj_attr(obj, attribute)
 
 
