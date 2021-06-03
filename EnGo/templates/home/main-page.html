@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% block content %}
-<div>
+<div class="posts">
+    {% if g.user.is_admin() %}
+    <a href="{{ url_for('post.add') }}" class="add-button">
+        <input type="button" value="Añadir Post">
+    </a>
+    {% endif %}
     {% include "post/posts.html" %}
 </div>
 {% endblock %}
