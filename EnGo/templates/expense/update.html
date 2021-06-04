@@ -14,6 +14,11 @@
     {% endif %}
     id="{{ head }}" value="{{ expense[head] }}">
     {% endfor %}
-    <input type="submit" value="Guardar Cambios">
+    <div>
+        <input type="submit" value="Guardar Cambios">
+        <a href="{{ url_for('expense.delete', id=expense.id) }}">
+            <input type="button" value="Eliminar" onclick="return confirm('¿Estás seguro?')">
+        </a>
+    </div>
 </form>
 {% endblock %}
