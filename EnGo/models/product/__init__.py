@@ -58,7 +58,17 @@ class SoldProduct(db.Model, MyModel):
 
     @property
     def total(self):
-        return self.quantity * self.price
+        try:
+            total = self.quantity * self.price
+        except TypeError:
+            total = 0
+
+        return total
+
+    @property
+    def validation(self):
+        from .validation import SoldProductValidation
+        return SoldProductValidation(self)
 
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"

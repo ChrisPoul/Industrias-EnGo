@@ -55,6 +55,15 @@ class TestEdit(ReceiptTest):
 
         self.assertNotEqual(self.product_1.code, "New Code")
 
+    def test_should_not_update_given_invalid_sold_product(self):
+        self.receipt.add_product(self.product_1)
+        sold_product = self.receipt.sold_products[0]
+        sold_product.quantity = ""
+        self.receipt.request.edit()
+        self.db.session.rollback()
+
+        self.assertNotEqual(sold_product.quantity, "")
+
 
 class TestAddProduct(ReceiptTest):
 

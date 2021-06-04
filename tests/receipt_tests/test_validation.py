@@ -36,6 +36,13 @@ class Validate(ReceiptValidationTest):
 
         self.assertNotEqual(error, None)
 
+    def test_should_return_error_given_invalid_sold_product(self):
+        sold_product = self.receipt.sold_products[0]
+        sold_product.quantity = ""
+        error = self.receipt.validation.validate()
+
+        self.assertNotEqual(error, None)
+
 
 class ValidateCustomer(ReceiptValidationTest):
 

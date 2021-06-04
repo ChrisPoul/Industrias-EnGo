@@ -29,4 +29,9 @@ class ReceiptValidation:
         return self.error
 
     def validate_sold_products(self):
+        for sold_product in self.receipt.sold_products:
+            self.error = sold_product.validation.validate()
+            if self.error:
+                break
+
         return self.error
