@@ -21,3 +21,20 @@ class TestAdd(ExpenseTest):
         expense.request.add()
 
         self.assertNotIn(expense, self.db.session)
+
+
+class TestUpdate(ExpenseTest):
+
+    def test_should_update_expense_given_valid_change(self):
+        self.expense.concept = "New Concept"
+        self.expense.request.update()
+        self.db.session.rollback()
+
+        self.assertEqual(self.expense.concept, "New Concept")
+    
+    def test_should_not_update_expense_given_invalid_change(self):
+        self.expense.concept = ""
+        self.expense.request.update()
+        self.db.session.rollback()
+
+        self.assertNotEqual(self.expense.concept, "")

@@ -13,3 +13,10 @@ class ExpenseRequest:
             self.expense.add()
         
         return self.error
+    
+    def update(self):
+        self.error = self.expense.validation.validate()
+        if not self.error:
+            self.expense.update()
+        
+        return self.error
