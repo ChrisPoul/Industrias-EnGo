@@ -1,6 +1,7 @@
 from flask import url_for
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.expense import Expense
 
 ### LOGED IN USER (LU) ###
 ### LOGED IN USER HAS PERMISSION (LUHP) ###
@@ -135,3 +136,66 @@ class TestInventoryView(WarehouseViewTest):
             )
 
         self.assertStatus(response, 302)
+
+
+class TestAddExpenseView(WarehouseViewTest):
+
+    def test_should_add_expense_given_valid_expense_input_and_LUHP(self):
+        self.login_user(self.admin_user)
+        expense_input = dict(
+            concept="Test Expense",
+            type="Test Type",
+            cost="10",
+            quantity="10"
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_expense', id=self.warehouse.id),
+                data=expense_input
+            )
+
+        self.assertIn(self.expense, self.warehouse.expenses)
+
+    def test_should_create_and_add_expense_given_valid_expense_input_and_LUHP(self):
+        self.login_user(self.admin_user)
+        expense_input = dict(
+            concept="New Expense",
+            type="New Type",
+            cost='10',
+            quantity="10"
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_expense', id=self.warehouse.id),
+                data=expense_input
+            )
+        expense = Expense.search('New Expense')
+
+        self.assertTrue(expense)
+        self.assertIn(expense, self.warehouse.expenses)
+    
+    def test_should_not_add_expense_given_invalid_expense_input_and_LUHP(self):
+        self.login_user(self.admin_user)
+        expense_input = dict(
+            concept="Test Expense",
+            type="New Type",
+            cost="10",
+            quantity=""
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_expense', id=self.warehouse.id),
+                data=expense_input
+            )
+        
+        self.assertNotIn(self.expense, self.warehouse.expenses)
+    
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('warehouse.add_expense', id=self.warehouse.id)
+            )
+        
+        self.assertStatus(response, 302)
+

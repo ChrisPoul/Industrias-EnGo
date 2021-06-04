@@ -3,6 +3,7 @@ from flask import (
     flash, redirect, url_for
 )
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.expense import Expense
 from . import (
     permission_required, login_required,
     get_form, update_obj_attrs
@@ -15,6 +16,12 @@ permissions = [
 ]
 warehouse_heads = dict(
     address="Dirección"
+)
+expense_heads = dict(
+    concept="Concepto",
+    type="Tipo",
+    cost="Costo",
+    quantity="Cantidad"
 )
 
 
@@ -89,4 +96,29 @@ def inventory(id):
 
     return render_template(
         "warehouse/inventory.html"
+    )
+
+
+@bp.route("/add_expense/<int:id>", methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
+def add_expense(id):
+    form = get_form(expense_heads)
+    warehouse = Warehouse.get(id)
+    if request.method == "POST":
+        expense = Expense.search(form['concept'])
+        if not expense:
+            expense = Expense(
+                concept=form['concept'],
+                type=form['type'],
+                cost=form['cost']
+            )
+        expense.quantity = form['quantity']
+        error = warehouse.request.add_expense(expense)
+        flash(error)
+    
+    return render_template(
+        'expense/add.html',
+        expense_heads=expense_heads,
+        form=form
     )

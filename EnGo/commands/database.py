@@ -43,12 +43,11 @@ def modify_tables_command():
 
 def modify_tables():
     from EnGo.models.warehouse import (
-        Warehouse, FinishedProduct, RegisteredExpense
+        Warehouse, FinishedProduct
     )
     Warehouse.__table__.drop(db.engine)
     FinishedProduct.__table__.drop(db.engine)
+    from EnGo.models.expense import RegisteredExpense
     RegisteredExpense.__table__.drop(db.engine)
-    from EnGo.models.expense import Expense
-    Expense.__table__.drop(db.engine)
     db.create_all()
 
