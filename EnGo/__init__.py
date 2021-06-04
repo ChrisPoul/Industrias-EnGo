@@ -62,4 +62,7 @@ def create_app(test_config=None):
     from .views import post
     app.register_blueprint(post.bp)
 
+    from .views import expense
+    app.register_blueprint(expense.bp)
+
     return app
