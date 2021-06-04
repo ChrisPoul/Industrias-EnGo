@@ -50,7 +50,9 @@ def add():
         flash(error)
 
     return render_template(
-        'expense/add.html'
+        'expense/add.html',
+        expense_heads=expense_heads,
+        form=form
     )
 
 
