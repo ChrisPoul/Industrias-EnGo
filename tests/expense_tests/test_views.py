@@ -39,7 +39,8 @@ class TestAddView(ExpenseViewTest):
         self.login_user(self.admin_user)
         expense_data = dict(
             concept="Valid Concept",
-            type="Valid Type"
+            type="Valid Type",
+            cost=10
         )
         with self.client as client:
             client.post(
@@ -53,7 +54,8 @@ class TestAddView(ExpenseViewTest):
         self.login_user(self.admin_user)
         expense_data = dict(
             concept="Valid Concept",
-            type=""
+            type="",
+            cost=10
         )
         with self.client as client:
             client.post(
