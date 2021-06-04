@@ -2,7 +2,7 @@
     {% if g.user %}
     <div>
         <a href="{{ url_for('home.main_page') }}">
-            Pagina Principal
+            EnGo
         </a>
         {% if g.user.has_view_permissions('admin.main_page') %}
         <a href="{{ url_for('admin.main_page') }}">
@@ -12,6 +12,11 @@
         {% if g.user.has_view_permissions('user.users') %}
         <a href="{{ url_for('user.users') }}">
             Empleados
+        </a>
+        {% endif %}
+        {% if g.user.has_view_permissions('expense.expenses') %}
+        <a href="{{ url_for('expense.expenses') }}">
+            Gastos
         </a>
         {% endif %}
         {% if g.user.has_view_permissions('customer.customers') %}
