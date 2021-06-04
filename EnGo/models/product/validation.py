@@ -70,11 +70,8 @@ class SoldProductValidation:
         return self.error
 
     def validate_nums(self):
-        try:
-            int(self.sold_product.quantity)
-            float(self.sold_product.price)
-        except ValueError:
-            self.error = invalid_num_error
+        if int(self.sold_product.quantity) < 0 or float(self.sold_product.price) < 0:
+            self.error = "No se pueden añadir cantidades o precios negativos"
 
         return self.error
         
