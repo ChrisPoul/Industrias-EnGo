@@ -1,8 +1,10 @@
 from . import Product
 from EnGo.errors.messages import (
-    repeated_value_error, invalid_num_error
+    repeated_value_error
 )
-from EnGo.models import validate_empty_values
+from EnGo.models import (
+    validate_empty_values, validate_obj_nums
+)
 
 
 class ProductValidation:
@@ -14,7 +16,8 @@ class ProductValidation:
     def validate(self):
         self.validate_empty_values()
         self.validate_unique_values()
-        self.validate_price()
+        if not self.error:
+            self.validate_nums()
         
         return self.error
     
@@ -35,13 +38,12 @@ class ProductValidation:
 
         return self.error
 
-    def validate_price(self):
-        if not self.product.price:
-            self.product.price = 0
-        try:
-            float(self.product.price)
-        except ValueError:
-            self.error = "Número invalido"
+    def validate_nums(self):
+        product_nums = [
+            "price",
+            "inventory"
+        ]
+        self.error = validate_obj_nums(self.product, product_nums)
 
         return self.error
 
@@ -70,8 +72,10 @@ class SoldProductValidation:
         return self.error
 
     def validate_nums(self):
-        if int(self.sold_product.quantity) < 0 or float(self.sold_product.price) < 0:
-            self.error = "No se pueden añadir cantidades o precios negativos"
+        sold_product_nums = [
+            "quantity",
+            "price"
+        ]
+        self.error = validate_obj_nums(self.sold_product, sold_product_nums)
 
         return self.error
-        

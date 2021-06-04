@@ -124,15 +124,16 @@ class TestValidateUniqueValues(ProductTest):
         self.assertEqual(error, None)
 
 
-class ValidatePrice(ProductTest):
+class TestValidateNums(ProductTest):
 
-    def test_should_not_return_error_given_valid_price(self):
+    def test_should_not_return_error_given_valid_nums(self):
         product = Product(
             code="Some Code",
             description="Optional description",
-            price=10
+            price=10,
+            inventory=10
         )
-        error = product.validation.validate_price()
+        error = product.validation.validate_nums()
 
         self.assertEqual(error, None)
 
@@ -140,8 +141,20 @@ class ValidatePrice(ProductTest):
         product = Product(
             code="Some Code",
             description="Optional description",
-            price="invalid price"
+            price="invalid price",
+            inventory=10
         )
-        error = product.validation.validate_price()
+        error = product.validation.validate_nums()
+
+        self.assertNotEqual(error, None)
+
+    def test_should_return_error_given_invalid_inventory(self):
+        product = Product(
+            code="Some Code",
+            description="Optional description",
+            price=10,
+            inventory="invalid inv"
+        )
+        error = product.validation.validate_nums()
 
         self.assertNotEqual(error, None)
