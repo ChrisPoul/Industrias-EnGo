@@ -19,7 +19,8 @@ class ExpenseValidation:
     def validate_empty_values(self):
         expense_attributes = [
             'concept',
-            'type'
+            'type',
+            'cost'
         ]
         self.error = validate_empty_values(self.expense, expense_attributes)
         

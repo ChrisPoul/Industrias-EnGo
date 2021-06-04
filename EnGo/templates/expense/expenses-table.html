@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        {% for head in expense_heads %}
+        <th>
+            {{ expense_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            {% for head in expense_heads %}
+            <td>
+                {% if head == 'concept' %}
+                <a href="{{ url_for('expense.update', id=expense.id ) }}">
+                    {{ expense[head] }}
+                </a>
+                {% else %}
+                {{ expense[head] }}
+                {% endif %}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

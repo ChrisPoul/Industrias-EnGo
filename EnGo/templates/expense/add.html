@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Añadir Gasto{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% for head in expense_heads %}
+    <label for="{{ head }}">{{ expense_heads[head] }}</label>
+    <input name="{{ head }}"
+    {% if head == "cost" %}
+    type="number"
+    {% endif %}
+    id="{{ head }}" value="{{ form[head] }}">
+    {% endfor %}
+    <input type="submit" value="Añadir">
+</form>
+{% endblock %}

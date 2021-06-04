@@ -1,0 +1,9 @@
+<div class="heading">
+    {% include 'expense/search-bar.html' %}
+    <a href="{{ url_for( 'expense.add' ) }}" class="add-button">
+        <input type="button" value="Añadir Gasto">
+    </a>
+</div>
+<div class="container">
+    {% include 'expense/expenses-table.html' %}
+</div>
