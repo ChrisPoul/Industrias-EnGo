@@ -165,3 +165,7 @@ thead {
     padding: 0;
     text-align: right;
 }
+
+.add-product input::placeholder {
+    font-size: x-small;
+}

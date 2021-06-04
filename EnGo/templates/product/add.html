@@ -12,6 +12,11 @@
     {% if head == "price" or head == "inventory" %}
     type="number"
     {% endif %}
+    {% if head == "description" %}
+    placeholder="Opcional"
+    {% else %}
+    placeholder="Requerido"
+    {% endif %}
     id="{{ head }}" value="{{ form[head] }}">
     {% endfor %}
     <input type="submit">
