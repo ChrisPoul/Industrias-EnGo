@@ -8,6 +8,7 @@ from EnGo.models.product import Product
 from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
+from EnGo.models.expense import Expense
 from EnGo.commands.settings import get_settings
 from .view import view_heads
 from . import (
@@ -87,7 +88,8 @@ class Autocomplete:
             users=User.get_all(),
             products=Product.get_all(),
             customers = Customer.get_all(),
-            views=View.get_all()
+            views=View.get_all(),
+            expenses=Expense.get_all()
         )
 
     def get_data(self, group, attribute):
