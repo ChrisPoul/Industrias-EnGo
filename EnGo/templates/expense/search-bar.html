@@ -1,5 +1,5 @@
-<datalist id="products">
-    {% for code in autocomplete.get_data("expenses", "concept") %}
+<datalist id="expenses">
+    {% for concept in autocomplete.get_data("expenses", "concept") %}
     <option>{{ concept }}</option>
     {% endfor %}
 </datalist>

@@ -19,11 +19,18 @@ expense_heads = dict(
     cost="Costo"
 )
 
-@bp.route('/expenses')
+@bp.route('/expenses', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def expenses():
     expenses = Expense.get_all()
+    if request.method == "POST":
+        search_term = request.form["search_term"]
+        expense = Expense.search(search_term)
+        if expense:
+            return redirect(
+                url_for('expense.update', id=expense.id)
+            )
     return render_template(
         'expense/expenses.html',
         expense_heads=expense_heads,
