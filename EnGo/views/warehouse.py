@@ -113,6 +113,7 @@ def add_expense(id):
                 type=form['type'],
                 cost=form['cost']
             )
+        expense.registered_type = form['type']
         expense.quantity = form['quantity']
         error = warehouse.request.add_expense(expense)
         flash(error)

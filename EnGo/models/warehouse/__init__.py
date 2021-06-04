@@ -61,9 +61,14 @@ class Warehouse(db.Model, MyModel):
             expense.quantity
         except AttributeError:
             expense.quantity = 0
+        try:
+            expense.registered_type
+        except AttributeError:
+            expense.registered_type = ""
         registered_expense = RegisteredExpense(
             expense_id=expense.id,
             warehouse_id=self.id,
+            type=expense.registered_type,
             cost=expense.cost,
             quantity=expense.quantity
         )
