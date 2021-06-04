@@ -9,6 +9,7 @@
     {% for head in expense_heads %}
     <label for="{{ head }}">{{ expense_heads[head] }}</label>
     <input name="{{ head }}"
+    placeholder="Requerido"
     {% if head == "cost" %}
     type="number"
     {% endif %}

@@ -8,7 +8,13 @@
 <form method="post">
     {% for head in customer_heads %}
     <label for="{{ head }}">{{ customer_heads[head] }}:</label>
-    <input name="{{ head }}" id="{{ head }}" value="{{ customer[head] }}">
+    <input name="{{ head }}" id="{{ head }}"
+    {% if head == "phone" or head == "rfc" %}
+    placeholder="Opcional"
+    {% else %}
+    placeholder="Requerido"
+    {% endif %}
+    value="{{ customer[head] }}">
     {% endfor %}
     <div>
         <input type="submit" value="Guardar Cambios">

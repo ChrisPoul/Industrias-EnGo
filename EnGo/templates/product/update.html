@@ -9,6 +9,11 @@
     {% for head in product_heads %}
     <label for="{{ head }}">{{ product_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}"
+    {% if head == "description" %}
+    placeholder="Opcional"
+    {% else %}
+    placeholder="Requerido"
+    {% endif %}
     {% if head == "price" or head == "inventory" %}
     type="number"
     {% endif %}
