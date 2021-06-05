@@ -11,7 +11,7 @@ from . import (
 bp = Blueprint("warehouse", __name__, url_prefix="/warehouse")
 
 permissions = [
-    "inventario"
+    'Dev'
 ]
 warehouse_heads = dict(
     address="Dirección"

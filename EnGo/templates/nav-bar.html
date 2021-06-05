@@ -14,10 +14,10 @@
             Empleados
         </a>
         {% endif %}
-        <!-- {% if g.user.has_view_permissions('expense.expenses') %}
+        {% if g.user.has_view_permissions('expense.expenses') %}
         <a href="{{ url_for('expense.expenses') }}">
             Gastos
-        </a> -->
+        </a>
         {% endif %}
         {% if g.user.has_view_permissions('customer.customers') %}
         <a href="{{ url_for('customer.customers') }}">
