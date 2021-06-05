@@ -53,12 +53,17 @@ form label {
     font-size: 0.9em;
     font-weight: 600;
 }
-form input, textarea {
+form input, textarea, select {
     margin: 0.5em;
     padding: 0.4em;
 }
 textarea {
     height: 5em;
+}
+select {
+    padding: 0.3em;
+    padding-left: 0.0em;
+    background-color: rgba(192, 192, 192, 0.698);
 }
 section form div {
     flex-direction: row;
@@ -76,7 +81,7 @@ section form input[type=submit] {
 section form input[type=button] {
     background-color: rgba(199, 37, 37, 0.897);
 }
-input {
+input, select{
     border: 1px solid gray;
     border-radius: 5px;
 }

@@ -8,12 +8,16 @@
 <form method="post">
     {% for head in expense_heads %}
     <label for="{{ head }}">{{ expense_heads[head] }}</label>
+    {% if head == "type" %}
+    {% include 'expense/type-dropdown.html' %}
+    {% else %}
     <input name="{{ head }}"
     placeholder="Requerido"
-    {% if head == "cost" %}
+    {% if head == "cost" or head == "quantity" %}
     type="number"
     {% endif %}
     id="{{ head }}" value="{{ form[head] }}">
+    {% endif %}
     {% endfor %}
     <input type="submit" value="Añadir">
 </form>

@@ -1,5 +1,7 @@
+from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String
+    Column, Integer, String,
+    ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
 
@@ -33,3 +35,16 @@ class Expense(db.Model, MyModel):
     def request(self):
         from .request import ExpenseRequest
         return ExpenseRequest(self)
+
+
+class RegisteredExpense(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    type = Column(String(50), nullable=False, default="")
+    quantity = Column(Integer, nullable=False, default=0)
+    cost = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def get(id):
+        return RegisteredExpense.query.get(id)

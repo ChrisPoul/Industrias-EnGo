@@ -4,7 +4,6 @@ from sqlalchemy import (
     ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
-from EnGo.models.expense import Expense
 
 
 class Warehouse(db.Model, MyModel):
@@ -57,10 +56,21 @@ class Warehouse(db.Model, MyModel):
         return [registered_expense.expense for registered_expense in self.registered_expenses]
 
     def add_expense(self, expense):
+        from EnGo.models.expense import RegisteredExpense
+        try:
+            expense.quantity
+        except AttributeError:
+            expense.quantity = 0
+        try:
+            expense.registered_type
+        except AttributeError:
+            expense.registered_type = ""
         registered_expense = RegisteredExpense(
             expense_id=expense.id,
             warehouse_id=self.id,
-            cost=expense.cost
+            type=expense.registered_type,
+            cost=expense.cost,
+            quantity=expense.quantity
         )
         registered_expense.add()
 
@@ -76,15 +86,3 @@ class FinishedProduct(db.Model, MyModel):
 
     def get(id):
         return FinishedProduct.query.get(id)
-
-
-class RegisteredExpense(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    quantity = Column(Integer, nullable=False, default=0)
-    cost = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return RegisteredExpense.query.get(id)

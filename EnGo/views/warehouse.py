@@ -3,6 +3,8 @@ from flask import (
     flash, redirect, url_for
 )
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.expense import Expense
+from .expense import expense_types
 from . import (
     permission_required, login_required,
     get_form, update_obj_attrs
@@ -15,6 +17,12 @@ permissions = [
 ]
 warehouse_heads = dict(
     address="Dirección"
+)
+expense_heads = dict(
+    concept="Concepto",
+    type="Tipo",
+    cost="Costo",
+    quantity="Cantidad"
 )
 
 
@@ -47,7 +55,9 @@ def add():
         flash(error)
 
     return render_template(
-        "warehouse/add.html"
+        "warehouse/add.html",
+        warehouse_heads=warehouse_heads,
+        form=form,
     )
 
 
@@ -82,11 +92,68 @@ def delete(id):
     )
 
 
-@bp.route("/inventory/<int:id>")
+@bp.route("/inventory/<int:id>", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
 def inventory(id):
+    warehouse = Warehouse.get(id)
+    registered_expenses = warehouse.registered_expenses
+    if request.method == "POST":
+        search_term = request.form['search_term']
+        expense = Expense.search(search_term)
+        if expense:
+            registered_expenses = expense.registered_expenses
 
     return render_template(
-        "warehouse/inventory.html"
+        "warehouse/inventory.html",
+        expense_heads=expense_heads,
+        registered_expenses=registered_expenses,
+        warehouse=warehouse
     )
+
+
+@bp.route("/add_expense/<int:id>", methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
+def add_expense(id):
+    form = get_form(expense_heads)
+    warehouse = Warehouse.get(id)
+    if request.method == "POST":
+        expense = Expense.search(form['concept'])
+        if not expense:
+            expense = Expense(
+                concept=form['concept'],
+                type=form['type'],
+                cost=form['cost']
+            )
+        expense.registered_type = form['type']
+        expense.quantity = form['quantity']
+        error = warehouse.request.add_expense(expense)
+        if not error:
+            return redirect(
+                url_for('warehouse.inventory', id=id)
+            )
+        flash(error)
+    
+    return render_template(
+        'expense/add.html',
+        expense_heads=expense_heads,
+        form=form,
+        expense_types=expense_types
+    )
+
+
+@bp.route('/delete/<int:id>/')
+@permission_required(permissions)
+@login_required
+def delete_expense(id):
+    from EnGo.models.expense import RegisteredExpense
+    registered_expense = RegisteredExpense.get(id)
+    warehouse_id = registered_expense.warehouse_id
+    registered_expense.delete()
+
+    return redirect(
+        url_for('warehouse.inventory', id=warehouse_id)
+    )
+    
+
