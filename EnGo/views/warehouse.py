@@ -91,16 +91,23 @@ def delete(id):
     )
 
 
-@bp.route("/inventory/<int:id>")
+@bp.route("/inventory/<int:id>", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
 def inventory(id):
     warehouse = Warehouse.get(id)
+    registered_expenses = warehouse.registered_expenses
+    if request.method == "POST":
+        search_term = request.form['search_term']
+        expense = Expense.search(search_term)
+        if expense:
+            registered_expenses = expense.registered_expenses
 
     return render_template(
         "warehouse/inventory.html",
         expense_heads=expense_heads,
-        registered_expenses=warehouse.registered_expenses
+        registered_expenses=registered_expenses,
+        warehouse=warehouse
     )
 
 
