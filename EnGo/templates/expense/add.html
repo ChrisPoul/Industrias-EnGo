@@ -10,7 +10,7 @@
     <label for="{{ head }}">{{ expense_heads[head] }}</label>
     <input name="{{ head }}"
     placeholder="Requerido"
-    {% if head == "cost" %}
+    {% if head == "cost" or head == "quantity" %}
     type="number"
     {% endif %}
     id="{{ head }}" value="{{ form[head] }}">

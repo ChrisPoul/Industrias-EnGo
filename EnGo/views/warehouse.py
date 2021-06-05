@@ -54,7 +54,9 @@ def add():
         flash(error)
 
     return render_template(
-        "warehouse/add.html"
+        "warehouse/add.html",
+        warehouse_heads=warehouse_heads,
+        form=form
     )
 
 
@@ -116,6 +118,10 @@ def add_expense(id):
         expense.registered_type = form['type']
         expense.quantity = form['quantity']
         error = warehouse.request.add_expense(expense)
+        if not error:
+            return redirect(
+                url_for('warehouse.inventory', id=id)
+            )
         flash(error)
     
     return render_template(
