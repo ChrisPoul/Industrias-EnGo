@@ -19,6 +19,11 @@
             Gastos
         </a>
         {% endif %}
+        {% if g.user.has_view_permissions('warehouse.warehouses') %}
+        <a href="{{ url_for('warehouse.warehouses') }}">
+            Almacenes
+        </a>
+        {% endif %}
         {% if g.user.has_view_permissions('customer.customers') %}
         <a href="{{ url_for('customer.customers') }}">
             Clientes

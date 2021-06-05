@@ -9,6 +9,7 @@ from EnGo.models.customer import Customer
 from EnGo.models.view import View
 from EnGo.models.permission import Permission
 from EnGo.models.expense import Expense
+from EnGo.models.warehouse import Warehouse
 from EnGo.commands.settings import get_settings
 from .view import view_heads
 from . import (
@@ -89,7 +90,8 @@ class Autocomplete:
             products=Product.get_all(),
             customers = Customer.get_all(),
             views=View.get_all(),
-            expenses=Expense.get_all()
+            expenses=Expense.get_all(),
+            warehouses=Warehouse.get_all()
         )
 
     def get_data(self, group, attribute):

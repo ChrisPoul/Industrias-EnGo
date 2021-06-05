@@ -34,6 +34,7 @@ def warehouses():
 
     return render_template(
         "warehouse/warehouses.html",
+        warehouse_heads=warehouse_heads,
         warehouses=warehouses
     )
 

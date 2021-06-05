@@ -1,0 +1,11 @@
+<datalist id="products">
+    {% for address in autocomplete.get_data("warehouses", "address") %}
+    <option>{{ address }}</option>
+    {% endfor %}
+</datalist>
+<form class="search-bar" method='post' autocomplete="off">
+    <input name="search_term"
+        placeholder="Buscar almacén..."
+        list="warehouses">
+    <button type="submit"><i class="fa fa-search"></i></button>
+</form>

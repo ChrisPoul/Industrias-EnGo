@@ -1,0 +1,9 @@
+<div class="heading">
+    {% include 'warehouse/search-bar.html' %}
+    <a href="{{ url_for('warehouse.add') }}" class="add-button">
+        <input type="button" value="Añadir Almacén">
+    </a>
+</div>
+<div class="container">
+    {% include 'warehouse/warehouses-table.html' %}
+</div>

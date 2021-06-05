@@ -69,4 +69,3 @@ def update_db():
     from EnGo.models.expense import RegisteredExpense
     RegisteredExpense.__table__.drop(db.engine)
     db.create_all()
-    create_dev_user()

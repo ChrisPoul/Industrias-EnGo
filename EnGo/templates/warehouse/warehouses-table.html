@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        {% for head in warehouse_heads %}
+        <th>
+            {{ warehouse_heads[head] }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for warehouse in warehouses %}
+        <tr>
+            {% for head in warehouse_heads %}
+            <td>
+                {{ warehouse[head] }}
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
