@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block header %}
-    <h1>{% block title %}Añadir Almacén{% endblock %}</h1>
+    <h1>{% block title %}Inventario{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
-
+<div>
+    {% include 'expense/expenses-body.html' %}
+</div>
 {% endblock %}

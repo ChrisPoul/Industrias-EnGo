@@ -95,9 +95,12 @@ def delete(id):
 @permission_required(permissions)
 @login_required
 def inventory(id):
+    warehouse = Warehouse.get(id)
 
     return render_template(
-        "warehouse/inventory.html"
+        "warehouse/inventory.html",
+        expense_heads=expense_heads,
+        registered_expenses=warehouse.registered_expenses
     )
 
 
@@ -129,3 +132,19 @@ def add_expense(id):
         expense_heads=expense_heads,
         form=form
     )
+
+
+@bp.route('/delete/<int:id>/')
+@permission_required(permissions)
+@login_required
+def delete_expense(id):
+    from EnGo.models.expense import RegisteredExpense
+    registered_expense = RegisteredExpense.get(id)
+    warehouse_id = registered_expense.warehouse_id
+    registered_expense.delete()
+
+    return redirect(
+        url_for('warehouse.inventory', id=warehouse_id)
+    )
+    
+

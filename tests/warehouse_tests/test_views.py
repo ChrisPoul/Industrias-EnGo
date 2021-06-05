@@ -199,3 +199,27 @@ class TestAddExpenseView(WarehouseViewTest):
         
         self.assertStatus(response, 302)
 
+
+class TestDeleteExpenseView(WarehouseViewTest):
+    
+    def test_should_delete_expense_given_LUHP(self):
+        self.login_user(self.admin_user)
+        self.warehouse.add_expense(self.expense)
+        with self.client as client:
+            client.get(
+                url_for('warehouse.delete_expense', id=self.warehouse.registered_expenses[0].id)
+            )
+        
+        self.assertEqual(len(self.warehouse.registered_expenses), 0)
+    
+    def test_should_not_delete_expense_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        self.warehouse.add_expense(self.expense)
+        with self.client as client:
+            client.get(
+                url_for('warehouse.delete_expense', id=self.warehouse.registered_expenses[0].id)
+            )
+        
+        self.assertEqual(len(self.warehouse.registered_expenses), 1)
+
+

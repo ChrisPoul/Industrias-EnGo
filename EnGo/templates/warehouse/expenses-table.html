@@ -1,0 +1,34 @@
+<table>
+    <thead>
+        {% for head in expense_heads %}
+        <th>
+            {{ expense_heads[head] }}
+        </th>
+        {% endfor %}
+        <th>
+
+        </th>
+    </thead>
+    <tbody>
+        {% for registered_expense in registered_expenses %}
+        <tr>
+            {% for head in expense_heads %}
+            <td>
+                {% if head == 'concept' %}
+                <a href="{{ url_for('expense.update', id=registered_expense.expense.id ) }}">
+                    {{ registered_expense.expense[head] }}
+                </a>
+                {% else %}
+                {{ registered_expense[head] }}
+                {% endif %}
+            </td>
+            {% endfor %}
+            <td class="delete-button">
+                <a href="{{ url_for('warehouse.delete_expense', id=registered_expense.id)}}">
+                    <img src="{{ url_for('static', filename='images/remove.png') }}">
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
