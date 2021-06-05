@@ -47,11 +47,15 @@ class User(db.Model, MyModel):
         return UserRequest(self)
 
     def has_view_permissions(self, view_name):
-        if self.is_admin():
+        if self.is_dev():
             return True
         view = View.search(view_name)
+        if not view and self.is_admin():
+            return True
         if not view:
             return False
+        if self.is_admin() and not view.requires_dev():
+            return True
         for permission in self.permissions:
             if permission in set(view.permissions):
                 return True
@@ -59,7 +63,7 @@ class User(db.Model, MyModel):
         return False
 
     def is_admin(self):
-        return self.has_permissions(["Admin"])
+        return self.has_permissions(["Admin"]) or self.has_permissions(["Dev"])
 
     def is_dev(self):
         return self.has_permissions(["Dev"])

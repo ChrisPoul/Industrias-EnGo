@@ -26,7 +26,7 @@ def create_app(test_config=None):
 
     from .commands import database, settings
     app.cli.add_command(database.init_db_command)
-    app.cli.add_command(database.modify_tables_command)
+    app.cli.add_command(database.update_db_command)
     app.cli.add_command(settings.init_settings_command)
 
     from .views import global_context

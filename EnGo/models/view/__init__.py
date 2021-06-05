@@ -27,6 +27,13 @@ class View(db.Model, MyModel):
     def search(name):
         return View.query.filter_by(view_name=name).first()
 
+    def requires_dev(self):
+        for permission in self.permissions:
+            if permission.is_dev():
+                return True
+        
+        return False
+
     def add_permissions(self, permissions):
         for permission in permissions:
             self.add_permission(permission)
