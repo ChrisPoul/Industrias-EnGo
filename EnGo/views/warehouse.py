@@ -26,11 +26,18 @@ expense_heads = dict(
 )
 
 
-@bp.route("/warehouses")
+@bp.route("/warehouses", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def warehouses():
     warehouses = Warehouse.get_all()
+    if request.method == "POST":
+        search_term = request.form["search_term"]
+        warehouse = Warehouse.search(search_term)
+        if warehouse:
+            return redirect(
+                url_for('warehouse.inventory', id=warehouse.id)
+            )
 
     return render_template(
         "warehouse/warehouses.html",
