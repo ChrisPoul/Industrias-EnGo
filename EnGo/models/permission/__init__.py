@@ -52,3 +52,9 @@ class Permission(db.Model, MyModel):
             return True
         
         return False
+
+    def is_dev(self):
+        if self.permission_name == "Dev":
+            return True
+
+        return False

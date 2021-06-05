@@ -2,7 +2,7 @@
     <strong>Permisos:</strong>
     {% for permission in permissions %}
     <div>
-        {% if not permission.is_admin() and not g.user.is_admin() or g.user.is_admin() %}
+        {% if not permission.is_dev() or g.user.is_dev() %}
         <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
             {% if view and permission in view.permissions %}
             checked
