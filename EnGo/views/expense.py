@@ -18,6 +18,11 @@ expense_heads = dict(
     type="Tipo",
     cost="Costo"
 )
+expense_types = [
+    'Consumible',
+    'Materia Prima',
+    'Fijo'
+]
 
 @bp.route('/expenses', methods=('POST', 'GET'))
 @permission_required(permissions)
@@ -59,7 +64,8 @@ def add():
     return render_template(
         'expense/add.html',
         expense_heads=expense_heads,
-        form=form
+        form=form,
+        expense_types=expense_types
     )
 
 

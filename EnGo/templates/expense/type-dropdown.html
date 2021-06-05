@@ -1,0 +1,5 @@
+<select name="type">
+    {% for type in expense_types %}
+    <option value="{{ type }}">{{ type }}</option>
+    {% endfor %}
+</select>

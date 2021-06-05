@@ -4,6 +4,7 @@ from flask import (
 )
 from EnGo.models.warehouse import Warehouse
 from EnGo.models.expense import Expense
+from .expense import expense_types
 from . import (
     permission_required, login_required,
     get_form, update_obj_attrs
@@ -56,7 +57,7 @@ def add():
     return render_template(
         "warehouse/add.html",
         warehouse_heads=warehouse_heads,
-        form=form
+        form=form,
     )
 
 
@@ -137,7 +138,8 @@ def add_expense(id):
     return render_template(
         'expense/add.html',
         expense_heads=expense_heads,
-        form=form
+        form=form,
+        expense_types=expense_types
     )
 
 
