@@ -46,3 +46,9 @@ class Permission(db.Model, MyModel):
     def validation(self):
         from .validation import PermissionValidation
         return PermissionValidation(self)
+
+    def is_admin(self):
+        if self.permission_name == "Admin":
+            return True
+        
+        return False
