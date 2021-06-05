@@ -63,7 +63,7 @@ class User(db.Model, MyModel):
         return False
 
     def is_admin(self):
-        return self.has_permissions(["Admin"]) or self.has_permissions(["Dev"])
+        return self.has_permissions(["Admin", "Dev"])
 
     def is_dev(self):
         return self.has_permissions(["Dev"])
