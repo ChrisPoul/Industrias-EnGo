@@ -59,17 +59,18 @@ class Warehouse(db.Model, MyModel):
         from EnGo.models.expense import RegisteredExpense
         try:
             expense.quantity
+            expense.registered_type_id
+            expense.unit
         except AttributeError:
             expense.quantity = 0
-        try:
-            expense.registered_type_id
-        except AttributeError:
             expense.registered_type_id = expense.type_id
+            expense.unit = "pz"
         registered_expense = RegisteredExpense(
             expense_id=expense.id,
             warehouse_id=self.id,
             type_id=expense.registered_type_id,
             cost=expense.cost,
+            unit=expense.unit,
             quantity=expense.quantity
         )
         registered_expense.add()

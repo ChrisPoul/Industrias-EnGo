@@ -44,6 +44,7 @@ class RegisteredExpense(db.Model, MyModel):
     type_id = Column(Integer, ForeignKey('expense_type.id'), nullable=False, default=1)
     quantity = Column(Integer, nullable=False, default=0)
     cost = Column(Integer, nullable=False, default=0)
+    unit = Column(String(20), nullable=False, default="pz")
     date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):

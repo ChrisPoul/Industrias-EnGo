@@ -25,7 +25,9 @@ class ExpenseValidation:
         ]
         try:
             self.expense.quantity
-            expense_attributes.append('quantity')
+            self.expense.unit
+            expense_attributes.extend(['quantity', 'unit'])
+
         except AttributeError:
             pass
         self.error = validate_empty_values(self.expense, expense_attributes)

@@ -21,6 +21,7 @@ expense_heads = dict(
     concept="Concepto",
     type_id="Tipo",
     cost="Costo",
+    unit="Unidad",
     quantity="Cantidad"
 )
 
@@ -135,6 +136,7 @@ def add_expense(id):
                 cost=form['cost']
             )
         expense.registered_type_id = form['type_id']
+        expense.unit = form['unit']
         expense.quantity = form['quantity']
         error = warehouse.request.add_expense(expense)
         if not error:
