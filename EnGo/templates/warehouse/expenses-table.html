@@ -18,6 +18,8 @@
                 <a href="{{ url_for('expense.update', id=registered_expense.expense.id ) }}">
                     {{ registered_expense.expense[head] }}
                 </a>
+                {% elif head == "type_id" %}
+                {{ registered_expense.type.name }}
                 {% else %}
                 {{ registered_expense[head] }}
                 {% endif %}

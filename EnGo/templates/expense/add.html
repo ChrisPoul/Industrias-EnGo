@@ -8,7 +8,7 @@
 <form method="post">
     {% for head in expense_heads %}
     <label for="{{ head }}">{{ expense_heads[head] }}</label>
-    {% if head == "type" %}
+    {% if head == "type_id" %}
     {% include 'expense/type-dropdown.html' %}
     {% else %}
     <input name="{{ head }}"
