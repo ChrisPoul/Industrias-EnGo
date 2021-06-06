@@ -135,6 +135,9 @@ def add_expense(id):
                 type_id=form['type_id'],
                 cost=form['cost']
             )
+        else:
+            if not form['cost']:
+                form['cost'] = expense.cost
         expense.registered_type_id = form['type_id']
         expense.unit = form['unit']
         expense.quantity = form['quantity']

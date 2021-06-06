@@ -70,6 +70,7 @@ def add():
 @login_required
 def update(id):
     expense = Expense.get(id)
+    expense_types = ExpenseType.query.all()
     if request.method == "POST":
         update_obj_attrs(expense, expense_heads)
         error = expense.request.update()
@@ -82,6 +83,7 @@ def update(id):
     return render_template(
         'expense/update.html',
         expense_heads=expense_heads,
+        expense_types=expense_types,
         expense=expense
     )
 
