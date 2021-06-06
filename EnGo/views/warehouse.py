@@ -3,7 +3,7 @@ from flask import (
     flash, redirect, url_for
 )
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.expense import ExpenseType
+from EnGo.models.expense import Expense, ExpenseType
 from . import (
     permission_required, login_required,
     get_form, update_obj_attrs

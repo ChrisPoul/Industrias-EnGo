@@ -68,7 +68,7 @@ class Warehouse(db.Model, MyModel):
         registered_expense = RegisteredExpense(
             expense_id=expense.id,
             warehouse_id=self.id,
-            type_id=expense.registered_type,
+            type_id=expense.registered_type_id,
             cost=expense.cost,
             quantity=expense.quantity
         )

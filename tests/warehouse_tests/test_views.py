@@ -18,7 +18,7 @@ class WarehouseViewTest(WarehouseTest):
 class TestWarehousesView(WarehouseViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         with self.client as client:
             response = client.get(
                 url_for('warehouse.warehouses')
@@ -39,7 +39,7 @@ class TestWarehousesView(WarehouseViewTest):
 class TestAddView(WarehouseViewTest):
 
     def test_should_add_warehouse_given_valid_warehouse_data_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         warehouse_data = dict(
             address="Valid Address"
         )
@@ -52,7 +52,7 @@ class TestAddView(WarehouseViewTest):
         self.assertNotEqual(Warehouse.search("Valid Address"), None)
 
     def test_should_not_add_warehouse_given_invalid_warehouse_data_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         warehouse_data = dict(
             address=""
         )
@@ -68,7 +68,7 @@ class TestAddView(WarehouseViewTest):
 class TestUpdateView(WarehouseViewTest):
 
     def test_should_update_warehouse_given_valid_warehouse_data_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         warehouse_data = dict(
             address="Valid Address"
         )
@@ -82,7 +82,7 @@ class TestUpdateView(WarehouseViewTest):
         self.assertEqual(self.warehouse.address, "Valid Address")
 
     def test_should_not_update_warehouse_given_invalid_warehouse_data_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         warehouse_data = dict(
             address=""
         )
@@ -99,7 +99,7 @@ class TestUpdateView(WarehouseViewTest):
 class TestDeleteView(WarehouseViewTest):
 
     def test_should_delete_warehouse_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         with self.client as client:
             client.get(
                 url_for('warehouse.delete', id=self.warehouse.id)
@@ -120,7 +120,7 @@ class TestDeleteView(WarehouseViewTest):
 class TestInventoryView(WarehouseViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         with self.client as client:
             response = client.get(
                 url_for('warehouse.inventory', id=self.warehouse.id)
@@ -141,7 +141,7 @@ class TestInventoryView(WarehouseViewTest):
 class TestAddExpenseView(WarehouseViewTest):
 
     def test_should_add_expense_given_valid_expense_input_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_input = dict(
             concept="Test Expense",
             type="Test Type",
@@ -157,7 +157,7 @@ class TestAddExpenseView(WarehouseViewTest):
         self.assertIn(self.expense, self.warehouse.expenses)
 
     def test_should_create_and_add_expense_given_valid_expense_input_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_input = dict(
             concept="New Expense",
             type="New Type",
@@ -175,7 +175,7 @@ class TestAddExpenseView(WarehouseViewTest):
         self.assertIn(expense, self.warehouse.expenses)
     
     def test_should_not_add_expense_given_invalid_expense_input_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_input = dict(
             concept="Test Expense",
             type="New Type",
@@ -203,7 +203,7 @@ class TestAddExpenseView(WarehouseViewTest):
 class TestDeleteExpenseView(WarehouseViewTest):
     
     def test_should_delete_expense_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         self.warehouse.add_expense(self.expense)
         with self.client as client:
             client.get(

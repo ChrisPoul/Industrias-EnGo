@@ -14,7 +14,7 @@ class WarehouseTest(Test):
         self.warehouse.add()
         self.expense = Expense(
             concept="Test Expense",
-            type="Test Type"
+            type_id=1
         )
         self.expense.add()
         self.product = Product(

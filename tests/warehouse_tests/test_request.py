@@ -50,7 +50,7 @@ class TestAddExpense(WarehouseTest):
     def test_should_add_and_create_expense_given_valid_new_expense(self):
         expense = Expense(
             concept="New Name",
-            type="Test Type"
+            type_id=1
         )
         self.warehouse.request.add_expense(expense)
 
@@ -59,7 +59,7 @@ class TestAddExpense(WarehouseTest):
     def test_should_not_add_expense_to_warehouse_given_invalid_expense(self):
         expense = Expense(
             concept="",
-            type=""
+            type_id=1
         )
         self.warehouse.request.add_expense(expense)
 
