@@ -58,3 +58,8 @@ class ExpenseType(db.Model, MyModel):
         backref='type',
         cascade='all, delete-orphan'
     )
+    registered_expenses = db.relationship(
+        'RegisteredExpense',
+        backref='type',
+        cascade='all, delete-orphan'
+    )
