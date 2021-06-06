@@ -1,8 +1,13 @@
+{% if g.user.is_dev() %}
+<a href="{{ url_for('post.add') }}" class="add-button">
+    <input type="button" value="Añadir Post">
+</a>
+{% endif %}
 {% for post in posts %}
 <div class="post container">
     <div>
         <h1>
-            {% if g.user.is_admin() %}
+            {% if g.user.is_dev() %}
             <a href="{{ url_for('post.update', id=post.id) }}">
                 {{ post.title }}
             </a>
