@@ -21,7 +21,7 @@
         </a>
     </div>
     <input type="submit" value="Guardar Cambios">
-    {% if not user.is_admin() %}
+    {% if not user.is_admin() or g.user.is_dev() %}
     <a href="{{ url_for('user.delete', id=user.id) }}">
         <input type="button" value="Delete" onclick="return confirm('¿Estás seguro?')">
     </a>

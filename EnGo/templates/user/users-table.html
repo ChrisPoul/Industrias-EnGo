@@ -8,6 +8,8 @@
     </thead>
     <tbody>
         {% for user in users %}
+        {% if not user.is_dev() or g.user.is_dev() %}
+        {% if not user.is_admin() or g.user.is_admin() %}
         <tr>
             {% for head in user_heads %}
             <td>
@@ -21,6 +23,8 @@
             </td>
             {% endfor %}
         </tr>
+        {% endif %}
+        {% endif %}
         {% endfor %}
     </tbody>
 </table>
