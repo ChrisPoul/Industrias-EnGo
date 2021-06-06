@@ -7,7 +7,7 @@ class TestAdd(ExpenseTest):
     def test_should_add_expense_given_valid_expense(self):
         expense = Expense(
             concept="Valid Name",
-            type="Test Type"
+            type_id=self.expense_type.id
         )
         expense.request.add()
 
@@ -16,7 +16,7 @@ class TestAdd(ExpenseTest):
     def test_should_not_add_expense_given_invalid_expense(self):
         expense = Expense(
             concept="",
-            type="Test Type"
+            type_id=self.expense_type.id
         )
         expense.request.add()
 

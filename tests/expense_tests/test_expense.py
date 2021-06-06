@@ -7,7 +7,7 @@ class TestAdd(ExpenseTest):
     def test_should_add_expense(self):
         expense = Expense(
             concept="Some Expense",
-            type="Test Type"
+            type_id=self.expense_type.id
         )
         expense.add()
 

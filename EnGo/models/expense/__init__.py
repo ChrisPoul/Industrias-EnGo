@@ -9,7 +9,7 @@ from EnGo.models import db, MyModel
 class Expense(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     concept = Column(String(200), nullable=False, unique=True)
-    type = Column(String(50), nullable=False, default="")
+    type_id = Column(Integer, ForeignKey('expense_type.id'), nullable=False)
     cost = Column(Integer, nullable=False, default=0)
     registered_expenses = db.relationship(
         'RegisteredExpense',
@@ -41,10 +41,20 @@ class RegisteredExpense(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
     warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    type = Column(String(50), nullable=False, default="")
+    type_id = Column(Integer, ForeignKey('expense_type.id'), nullable=False, default=1)
     quantity = Column(Integer, nullable=False, default=0)
     cost = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
         return RegisteredExpense.query.get(id)
+
+    
+class ExpenseType(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50), nullable=False, unique=True)
+    expenses = db.relationship(
+        'Expense',
+        backref='type',
+        cascade='all, delete-orphan'
+    )

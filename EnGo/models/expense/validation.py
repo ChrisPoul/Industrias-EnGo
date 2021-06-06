@@ -21,7 +21,6 @@ class ExpenseValidation:
     def validate_empty_values(self):
         expense_attributes = [
             'concept',
-            'type',
             'cost'
         ]
         try:
@@ -41,7 +40,9 @@ class ExpenseValidation:
         return self.error
     
     def validate_nums(self):
-        expense_nums = ['cost']
+        expense_nums = [
+            'cost'
+        ]
         try:
             self.expense.quantity
             expense_nums.append('quantity')

@@ -16,7 +16,7 @@ class ExpenseViewTest(ExpenseTest):
 class TestExpensesView(ExpenseViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         with self.client as client:
             response = client.get(
                 url_for('expense.expenses')
@@ -36,10 +36,10 @@ class TestExpensesView(ExpenseViewTest):
 class TestAddView(ExpenseViewTest):
 
     def test_should_add_expense_given_valid_expense_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_data = dict(
             concept="Valid Concept",
-            type="Valid Type",
+            type_id=self.expense_type.id,
             cost=10
         )
         with self.client as client:
@@ -51,10 +51,10 @@ class TestAddView(ExpenseViewTest):
         self.assertTrue(Expense.search("Valid Concept"))
     
     def test_should_not_add_expense_given_invalid_expense_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_data = dict(
-            concept="Valid Concept",
-            type="",
+            concept="",
+            type_id=self.expense_type.id,
             cost=10
         )
         with self.client as client:
@@ -78,10 +78,11 @@ class TestAddView(ExpenseViewTest):
 class TestUpdateView(ExpenseViewTest):
 
     def test_should_update_expense_given_valid_change_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_data = dict(
             concept="New Concept",
-            type="Test Type"
+            type_id=self.expense_type.id,
+            cost=10
         )
         with self.client as client:
             client.post(
@@ -93,10 +94,11 @@ class TestUpdateView(ExpenseViewTest):
         self.assertEqual(self.expense.concept, "New Concept")
     
     def test_should_not_update_expense_given_invalid_change_and_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         expense_data = dict(
             concept="",
-            type="Test Type"
+            type_id=self.expense_type.id,
+            cost=10
         )
         with self.client as client:
             client.post(
@@ -120,7 +122,7 @@ class TestUpdateView(ExpenseViewTest):
 class TestDeleteView(ExpenseViewTest):
     
     def test_should_delete_expense_given_LUHP(self):
-        self.login_user(self.admin_user)
+        self.login_user(self.dev_user)
         with self.client as client:
             client.get(
                 url_for('expense.delete', id=self.expense.id)

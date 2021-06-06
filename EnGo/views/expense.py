@@ -2,7 +2,7 @@ from flask import (
     Blueprint, render_template, redirect,
     request, url_for, flash
 )
-from EnGo.models.expense import Expense
+from EnGo.models.expense import Expense, ExpenseType
 from . import (
     login_required, permission_required, get_form,
     update_obj_attrs
@@ -15,14 +15,9 @@ permissions = [
 ]
 expense_heads = dict(
     concept="Concepto",
-    type="Tipo",
+    type_id="Tipo",
     cost="Costo"
 )
-expense_types = [
-    'Consumible',
-    'Materia Prima',
-    'Fijo'
-]
 
 @bp.route('/expenses', methods=('POST', 'GET'))
 @permission_required(permissions)
@@ -48,10 +43,11 @@ def expenses():
 @login_required
 def add():
     form = get_form(expense_heads)
+    expense_types = ExpenseType.query.all()
     if request.method == "POST":
         expense = Expense(
             concept=form['concept'],
-            type=form['type'],
+            type_id=form['type_id'],
             cost=form['cost']
         )
         error = expense.request.add()

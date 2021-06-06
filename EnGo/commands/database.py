@@ -1,6 +1,7 @@
 import click
 from EnGo.models import db
 from flask.cli import with_appcontext
+from werkzeug.security import generate_password_hash
 
 
 @click.command("init-db")
@@ -17,10 +18,10 @@ def init_db():
     create_dev_user()
     from .settings import init_settings
     init_settings()
+    init_expense_types()
 
 
 def create_admin_user():
-    from werkzeug.security import generate_password_hash
     from EnGo.models.permission import Permission
     from EnGo.models.user import User
     admin_permission = Permission(
@@ -36,7 +37,6 @@ def create_admin_user():
 
 
 def create_dev_user():
-    from werkzeug.security import generate_password_hash
     from EnGo.models.permission import Permission
     from EnGo.models.user import User
     dev_permission = Permission.search("Dev")
@@ -66,6 +66,22 @@ def update_db():
     )
     Warehouse.__table__.drop(db.engine)
     FinishedProduct.__table__.drop(db.engine)
-    from EnGo.models.expense import RegisteredExpense
+    from EnGo.models.expense import RegisteredExpense, Expense
     RegisteredExpense.__table__.drop(db.engine)
+    Expense.__table__.drop(db.engine)
     db.create_all()
+
+
+def init_expense_types():
+    expense_types = [
+        'Consumible',
+        'Materia Prima',
+        'Fijo'
+    ]
+    from EnGo.models.expense import ExpenseType
+    for type_name in expense_types:
+        expense_type = ExpenseType(
+            name=type_name
+        )
+        expense_type.add()
+

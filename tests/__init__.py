@@ -31,8 +31,18 @@ class Test(TestCase):
                 return request_context
 
     def create_test_users(self):
+        self.dev_permission = Permission(
+            permission_name="Dev"
+        )
+        self.dev_permission.add()
+        self.dev_user = User(
+            username="Dev",
+            password="0000"
+        )
+        self.dev_user.add()
+        self.dev_user.add_permission(self.dev_permission)
         self.admin_permission = Permission(
-            permission_name="Admin",
+            permission_name="Admin"
         )
         self.admin_permission.add()
         self.admin_user = User(
