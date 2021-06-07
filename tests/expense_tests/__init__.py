@@ -7,7 +7,7 @@ class ExpenseTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.expense_type = ExpenseType(
-            name="Test Expense"
+            name="Test Type"
         )
         self.expense_type.add()
         self.expense = Expense(

@@ -20,3 +20,16 @@ class ExpenseRequest:
             self.expense.update()
         
         return self.error
+
+
+class ExpenseTypeRequest:
+
+    def __init__(self, expense_type):
+        self.expense_type = expense_type
+
+    def add(self):
+        error = self.expense_type.validation.validate()
+        if not error:
+            self.expense_type.add()
+
+        return error

@@ -1,6 +1,6 @@
 from . import ExpenseTest
 from flask import url_for
-from EnGo.models.expense import Expense
+from EnGo.models.expense import Expense, ExpenseType
 
 ### LOGED IN USER HAS PERMISSISON (LUHP) ###
 ### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
@@ -125,6 +125,22 @@ class TestUpdateView(ExpenseViewTest):
             )
         
         self.assertStatus(response, 302)
+
+
+class AddType(ExpenseViewTest):
+
+    def test_should_add_expense_type_given_valid_type_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        type_input = dict(
+            name="New Expense Type"
+        )
+        with self.client as client:
+            client.post(
+                url_for('expense.add_type'),
+                data=type_input
+            )
+        
+        self.assertTrue(ExpenseType.search("New Expense Type"))
 
 
 class TestDeleteView(ExpenseViewTest):

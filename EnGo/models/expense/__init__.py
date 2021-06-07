@@ -54,6 +54,19 @@ class ExpenseType(db.Model, MyModel):
         cascade='all, delete-orphan'
     )
 
+    def search(search_term):
+        return ExpenseType.query.filter_by(name=search_term).first()
+
+    @property
+    def validation(self):
+        from .validation import ExpenseTypeValidation
+        return ExpenseTypeValidation(self)
+
+    @property
+    def request(self):
+        from .request import ExpenseTypeRequest
+        return ExpenseTypeRequest(self)
+
 
 def filter_expenses_by_type(all_expenses, type_id):
     expenses = []
