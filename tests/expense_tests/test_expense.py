@@ -82,5 +82,11 @@ class TestFilterExpensesByType(ExpenseTest):
 
         self.assertEqual(expenses, all_expenses)
     
+    def test_should_return_list_of_expenses_of_the_same_type_given_type_id_is_str(self):
+        all_expenses = Expense.query.all()
+        expenses = filter_expenses_by_type(all_expenses, str(self.expense_type.id))
+
+        self.assertEqual(expenses, [self.expense])
+    
 
 

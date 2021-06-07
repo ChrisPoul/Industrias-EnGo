@@ -1,9 +1,16 @@
 <datalist id="expenses">
+    {% if warehouse %}
+    {% for expense in warehouse.expenses %}
+    <option>{{ expense.concept }}</option>
+    {% endfor %}
+    {% else %}
     {% for concept in autocomplete.get_data("expenses", "concept") %}
     <option>{{ concept }}</option>
     {% endfor %}
+    {% endif %}
 </datalist>
 <form class="search-bar" method='post' autocomplete="off">
+    {% include 'expense/type-dropdown.html' %}
     <input name="search_term"
         placeholder="Buscar gasto..."
         list="expenses">

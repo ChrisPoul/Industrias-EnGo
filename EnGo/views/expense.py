@@ -2,7 +2,9 @@ from flask import (
     Blueprint, render_template, redirect,
     request, url_for, flash
 )
-from EnGo.models.expense import Expense, ExpenseType
+from EnGo.models.expense import (
+    Expense, ExpenseType, filter_expenses_by_type
+) 
 from . import (
     login_required, permission_required, get_form,
     update_obj_attrs
@@ -26,14 +28,19 @@ expense_heads = dict(
 @login_required
 def expenses():
     expenses = Expense.get_all()
+    expense_types = ExpenseType.query.all()
     if request.method == "POST":
         search_term = request.form["search_term"]
-        expenses = Expense.search_all(search_term)
+        if search_term != "":
+            expenses = Expense.search_all(search_term)
+        type_id = request.form['type_id']
+        expenses = filter_expenses_by_type(expenses, type_id)
             
     return render_template(
         'expense/expenses.html',
         expense_heads=expense_heads,
-        expenses=expenses
+        expenses=expenses,
+        expense_types=expense_types
     )
 
 

@@ -3,7 +3,9 @@ from flask import (
     flash, redirect, url_for
 )
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.expense import Expense, ExpenseType
+from EnGo.models.expense import (
+    Expense, ExpenseType, filter_expenses_by_type
+)
 from .expense import expense_heads
 from . import (
     permission_required, login_required,
@@ -100,14 +102,19 @@ def delete(id):
 def inventory(id):
     warehouse = Warehouse.query.get(id)
     expenses = warehouse.expenses
+    expense_types = ExpenseType.query.all()
     if request.method == "POST":
-        search_term = request.form['search_term']
-        expenses = warehouse.search_expenses(search_term)
+        search_term = request.form["search_term"]
+        if search_term != "":
+            expenses = warehouse.search_expenses(search_term)
+        type_id = request.form['type_id']
+        expenses = filter_expenses_by_type(expenses, type_id)
 
     return render_template(
         "warehouse/inventory.html",
         expense_heads=expense_heads,
         expenses=expenses,
+        expense_types=expense_types,
         warehouse=warehouse
     )
 

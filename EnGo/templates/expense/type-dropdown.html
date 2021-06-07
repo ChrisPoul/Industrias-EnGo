@@ -1,4 +1,7 @@
 <select name="type_id">
+    {% if expenses %}
+    <option value="0">Todos</option>
+    {% endif %}
     {% for type in expense_types %}
     <option value="{{ type.id }}">{{ type.name }}</option>
     {% endfor %}

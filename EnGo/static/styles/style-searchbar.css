@@ -17,13 +17,18 @@
 .search-bar input:focus {
     outline: none;
 }
-.search-bar button{
+.search-bar button {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
     border-left: none;
     border-radius:  0px 5px 5px 0px;
 }
+.search-bar select {
+    margin: 0;
+    margin-right: 0.3em;
+}
+
 nav form {
     display: flex;
     justify-content: center;
