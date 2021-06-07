@@ -142,6 +142,19 @@ class AddType(ExpenseViewTest):
         
         self.assertTrue(ExpenseType.search("New Expense Type"))
 
+    def test_should_not_add_expense_type_given_invalid_type_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        type_input = dict(
+            name=""
+        )
+        with self.client as client:
+            client.post(
+                url_for('expense.add_type'),
+                data=type_input
+            )
+        
+        self.assertFalse(ExpenseType.search(""))
+
 
 class TestDeleteView(ExpenseViewTest):
     

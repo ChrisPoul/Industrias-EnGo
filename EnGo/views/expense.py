@@ -106,6 +106,27 @@ def update(id):
     )
 
 
+@bp.route('/add_type', methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def add_type():
+    form = get_form(["name"])
+    if request.method == "POST":
+        expense_type = ExpenseType(
+            name=form["name"]
+        )
+        error = expense_type.request.add()
+        if not error:
+            return redirect(
+                url_for('expense.add')
+            )
+        flash(error)
+    
+    return render_template(
+        'expense/add_type.html'
+    )
+
+
 @bp.route('/delete/<int:id>')
 @permission_required(permissions)
 @login_required

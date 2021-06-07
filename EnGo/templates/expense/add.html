@@ -9,7 +9,12 @@
     {% for head in expense_heads %}
     <label for="{{ head }}">{{ expense_heads[head] }}</label>
     {% if head == "type_id" %}
-    {% include 'expense/type-dropdown.html' %}
+    <div>
+        {% include 'expense/type-dropdown.html' %}
+        <a href="{{ url_for('expense.add_type') }}">
+            Añadir Tipo
+        </a>
+    </div>
     {% else %}
     <input name="{{ head }}"
     placeholder="Requerido"

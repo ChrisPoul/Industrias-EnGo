@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Añadir Tipo de Gasto{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label for="name">Nombre:</label>
+    <input name="name" id="name" placeholder="Nombre del tipo de gasto...">
+    <input type="submit" value="Añadir">
+</form>
+{% endblock %}
