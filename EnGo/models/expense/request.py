@@ -33,3 +33,10 @@ class ExpenseTypeRequest:
             self.expense_type.add()
 
         return error
+
+    def update(self):
+        error = self.expense_type.validation.validate()
+        if not error:
+            self.expense_type.update()
+
+        return error
