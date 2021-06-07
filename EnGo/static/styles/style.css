@@ -138,6 +138,18 @@ th, td {
 .delete-button img {
     max-width: 1.2em;
 }
+
+.add-expense-type-dropdown {
+    justify-content: none;
+}
+.add-expense-type-dropdown select {
+    width: 100%;
+}
+.add-expense-type-dropdown input[type=button] {
+    background-color: #c0c0c0B2;
+    border: 1px solid black;
+}
+
 .posts {
     width: 50vw;
 }
