@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block header %}
-    <h1>{% block title %}Inventario{% endblock %}</h1>
+    <h1>
+        {% block title %}
+        Inventario de almacén {{ warehouse.address }}
+        {% endblock %}
+    </h1>
 {% endblock %}
 
 {% block content %}

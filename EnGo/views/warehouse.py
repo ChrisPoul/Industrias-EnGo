@@ -155,5 +155,6 @@ def add_expense(id):
         'expense/add.html',
         expense_heads=expense_heads,
         form=form,
-        expense_types=expense_types
+        expense_types=expense_types,
+        warehouse=warehouse
     )
