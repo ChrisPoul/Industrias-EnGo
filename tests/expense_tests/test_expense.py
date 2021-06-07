@@ -72,9 +72,15 @@ class TestFilterExpensesByType(ExpenseTest):
 
     def test_should_return_list_of_expenses_of_the_same_type_given_type_obj(self):
         all_expenses = Expense.query.all()
-        expenses = filter_expenses_by_type(all_expenses, self.expense_type)
+        expenses = filter_expenses_by_type(all_expenses, self.expense_type.id)
 
         self.assertEqual(expenses, [self.expense])
+    
+    def test_should_return_all_expenses_given_expense_type_id_is_0(self):
+        all_expenses = Expense.query.all()
+        expenses = filter_expenses_by_type(all_expenses, 0)
+
+        self.assertEqual(expenses, all_expenses)
     
 
 

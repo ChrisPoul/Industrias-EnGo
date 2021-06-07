@@ -55,10 +55,12 @@ class ExpenseType(db.Model, MyModel):
     )
 
 
-def filter_expenses_by_type(all_expenses, expense_type):
+def filter_expenses_by_type(all_expenses, type_id):
     expenses = []
+    if type_id == 0:
+        return all_expenses
     for expense in all_expenses:
-        if expense.type is expense_type:
+        if expense.type_id == type_id:
             expenses.append(expense)
     
     return expenses
