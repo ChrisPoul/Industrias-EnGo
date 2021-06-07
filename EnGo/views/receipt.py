@@ -72,7 +72,7 @@ def search_for_customer():
     customer = None
     for head in customer_heads:
         value = request.form[head]
-        customers = Customer.search(value)
+        customers = Customer.search_all(value)
         if len(customers) != 0 and value != "":
             customer = customers[-1]
             break

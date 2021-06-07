@@ -31,7 +31,7 @@ class Customer(db.Model, MyModel):
     def get_all():
         return Customer.query.all()
 
-    def search(search_term):
+    def search_all(search_term):
         customers = Customer.query.filter_by(customer_name=search_term).all()
         if customers == []:
             customers = Customer.query.filter_by(address=search_term).all()

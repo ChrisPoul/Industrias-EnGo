@@ -86,7 +86,7 @@ class TestAddView(ReceiptViewTest):
             )
         
         self.assertNotEqual(len(Receipt.get_all()), len(prev_receipts))
-        self.assertEqual(len(Customer.search('Valid New Name')), 1)
+        self.assertEqual(len(Customer.search_all('Valid New Name')), 1)
 
     def test_should_redirect_given_valid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)

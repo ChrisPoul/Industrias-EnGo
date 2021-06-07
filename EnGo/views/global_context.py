@@ -26,7 +26,7 @@ def search_bar():
     search_term = request.args['search_term']
     bp_name = "customer"
     try:
-        result = Customer.search(search_term)[0]
+        result = Customer.search_all(search_term)[0]
     except IndexError:
         result = None
     if not result:

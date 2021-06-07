@@ -33,7 +33,7 @@ permissions = [
 def customers():
     customers = Customer.get_all()
     if request.method == "POST":
-        customers = Customer.search(request.form["search_term"])
+        customers = Customer.search_all(request.form["search_term"])
 
     return render_template(
         'customer/customers.html',
