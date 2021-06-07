@@ -53,3 +53,12 @@ class ExpenseType(db.Model, MyModel):
         backref='type',
         cascade='all, delete-orphan'
     )
+
+
+def filter_expenses_by_type(all_expenses, expense_type):
+    expenses = []
+    for expense in all_expenses:
+        if expense.type is expense_type:
+            expenses.append(expense)
+    
+    return expenses

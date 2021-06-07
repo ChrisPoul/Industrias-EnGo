@@ -1,5 +1,5 @@
 from . import ExpenseTest
-from EnGo.models.expense import Expense
+from EnGo.models.expense import Expense, ExpenseType, filter_expenses_by_type
 
 
 class TestAdd(ExpenseTest):
@@ -54,4 +54,27 @@ class TestSearchAll(ExpenseTest):
         expenses = Expense.search_all(self.expense.concept)
 
         self.assertEqual(expenses, [self.expense])
+
+
+class TestFilterExpensesByType(ExpenseTest):
+
+    def setUp(self):
+        ExpenseTest.setUp(self)
+        other_expense_type = ExpenseType(
+            name="Other Type"
+        )
+        other_expense_type.add()
+        self.other_expense = Expense(
+            concept="Other Expense",
+            type_id=other_expense_type.id
+        )
+        self.other_expense.add()
+
+    def test_should_return_list_of_expenses_of_the_same_type_given_type_obj(self):
+        all_expenses = Expense.query.all()
+        expenses = filter_expenses_by_type(all_expenses, self.expense_type)
+
+        self.assertEqual(expenses, [self.expense])
+    
+
 
