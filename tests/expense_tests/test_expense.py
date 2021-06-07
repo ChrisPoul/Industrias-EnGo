@@ -48,10 +48,10 @@ class TestGetAll(ExpenseTest):
         self.assertEqual(expenses, [self.expense])
 
 
-class TestSearch(ExpenseTest):
+class TestSearchAll(ExpenseTest):
 
     def test_should_return_expense_given_valid_search_term(self):
-        expense = Expense.search(self.expense.concept)
+        expenses = Expense.search_all(self.expense.concept)
 
-        self.assertEqual(expense, self.expense)
+        self.assertEqual(expenses, [self.expense])
 

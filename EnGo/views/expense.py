@@ -16,7 +16,9 @@ permissions = [
 expense_heads = dict(
     concept="Concepto",
     type_id="Tipo",
-    cost="Costo"
+    cost="Costo",
+    unit="Unidad",
+    quantity="Cantidad"
 )
 
 @bp.route('/expenses', methods=('POST', 'GET'))
@@ -26,11 +28,8 @@ def expenses():
     expenses = Expense.get_all()
     if request.method == "POST":
         search_term = request.form["search_term"]
-        expense = Expense.search(search_term)
-        if expense:
-            return redirect(
-                url_for('expense.update', id=expense.id)
-            )
+        expenses = Expense.search_all(search_term)
+            
     return render_template(
         'expense/expenses.html',
         expense_heads=expense_heads,
@@ -48,7 +47,9 @@ def add():
         expense = Expense(
             concept=form['concept'],
             type_id=form['type_id'],
-            cost=form['cost']
+            cost=form['cost'],
+            unit=form['unit'],
+            quantity=form['quantity']
         )
         error = expense.request.add()
         if not error:

@@ -8,11 +8,13 @@ from EnGo.models import db, MyModel
 
 class Expense(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
-    concept = Column(String(200), nullable=False, unique=True)
+    concept = Column(String(200), nullable=False, unique=False)
     type_id = Column(Integer, ForeignKey('expense_type.id'), nullable=False)
     cost = Column(Integer, nullable=False, default=0)
-    registered_expenses = db.relationship(
-        'RegisteredExpense',
+    unit = Column(String(20), nullable=False, default="pz")
+    quantity = Column(Integer, nullable=False, default=0)
+    warehouse_expenses = db.relationship(
+        'WarehouseExpense',
         backref="expense",
         cascade="all, delete-orphan"
     )
@@ -23,8 +25,8 @@ class Expense(db.Model, MyModel):
     def get_all():
         return Expense.query.all()
     
-    def search(search_term):
-        return Expense.query.filter_by(concept=search_term).first()
+    def search_all(search_term):
+        return Expense.query.filter_by(concept=search_term).all()
     
     @property
     def validation(self):
@@ -37,18 +39,10 @@ class Expense(db.Model, MyModel):
         return ExpenseRequest(self)
 
 
-class RegisteredExpense(db.Model, MyModel):
+class WarehouseExpense(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
     warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    type_id = Column(Integer, ForeignKey('expense_type.id'), nullable=False, default=1)
-    quantity = Column(Integer, nullable=False, default=0)
-    cost = Column(Integer, nullable=False, default=0)
-    unit = Column(String(20), nullable=False, default="pz")
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return RegisteredExpense.query.get(id)
 
     
 class ExpenseType(db.Model, MyModel):
@@ -56,11 +50,6 @@ class ExpenseType(db.Model, MyModel):
     name = Column(String(50), nullable=False, unique=True)
     expenses = db.relationship(
         'Expense',
-        backref='type',
-        cascade='all, delete-orphan'
-    )
-    registered_expenses = db.relationship(
-        'RegisteredExpense',
         backref='type',
         cascade='all, delete-orphan'
     )

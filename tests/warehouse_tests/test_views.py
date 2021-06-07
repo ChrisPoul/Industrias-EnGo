@@ -140,11 +140,12 @@ class TestInventoryView(WarehouseViewTest):
 
 class TestAddExpenseView(WarehouseViewTest):
 
-    def test_should_add_expense_given_valid_expense_input_and_LUHP(self):
+    def test_should_add_expense_to_warehouse_given_valid_expense_input_and_LUHP(self):
         self.login_user(self.dev_user)
         expense_input = dict(
             concept="Test Expense",
-            type="Test Type",
+            type_id=1,
+            unit=1,
             cost="10",
             quantity="10"
         )
@@ -154,31 +155,14 @@ class TestAddExpenseView(WarehouseViewTest):
                 data=expense_input
             )
 
-        self.assertIn(self.expense, self.warehouse.expenses)
-
-    def test_should_create_and_add_expense_given_valid_expense_input_and_LUHP(self):
-        self.login_user(self.dev_user)
-        expense_input = dict(
-            concept="New Expense",
-            type="New Type",
-            cost='10',
-            quantity="10"
-        )
-        with self.client as client:
-            client.post(
-                url_for('warehouse.add_expense', id=self.warehouse.id),
-                data=expense_input
-            )
-        expense = Expense.search('New Expense')
-
-        self.assertTrue(expense)
-        self.assertIn(expense, self.warehouse.expenses)
+        self.assertEqual(len(self.warehouse.expenses), 1)
     
     def test_should_not_add_expense_given_invalid_expense_input_and_LUHP(self):
         self.login_user(self.dev_user)
         expense_input = dict(
             concept="Test Expense",
-            type="New Type",
+            type_id=1,
+            unit=1,
             cost="10",
             quantity=""
         )
@@ -198,28 +182,3 @@ class TestAddExpenseView(WarehouseViewTest):
             )
         
         self.assertStatus(response, 302)
-
-
-class TestDeleteExpenseView(WarehouseViewTest):
-    
-    def test_should_delete_expense_given_LUHP(self):
-        self.login_user(self.dev_user)
-        self.warehouse.add_expense(self.expense)
-        with self.client as client:
-            client.get(
-                url_for('warehouse.delete_expense', id=self.warehouse.registered_expenses[0].id)
-            )
-        
-        self.assertEqual(len(self.warehouse.registered_expenses), 0)
-    
-    def test_should_not_delete_expense_given_LUHNP(self):
-        self.login_user(self.normal_user)
-        self.warehouse.add_expense(self.expense)
-        with self.client as client:
-            client.get(
-                url_for('warehouse.delete_expense', id=self.warehouse.registered_expenses[0].id)
-            )
-        
-        self.assertEqual(len(self.warehouse.registered_expenses), 1)
-
-

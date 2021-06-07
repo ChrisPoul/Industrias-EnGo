@@ -45,32 +45,6 @@ class TestValidateEmptyValues(ExpenseTest):
         self.assertNotEqual(error, None)
 
 
-class TestValidateUniqueValues(ExpenseTest):
-
-    def test_should_not_return_error_given_unique_expense(self):
-        expense = Expense(
-            concept="Valid Name",
-            type_id=self.expense_type.id
-        )
-        error = expense.validation.validate_unique_values()
-
-        self.assertEqual(error, None)
-
-    def test_should_return_error_given_repeated_value(self):
-        expense = Expense(
-            concept="Test Expense",
-            type_id=self.expense_type.id
-        )
-        error = expense.validation.validate_unique_values()
-
-        self.assertNotEqual(error, None)
-    
-    def test_should_not_return_error_given_expense_already_in_db(self):
-        error = self.expense.validation.validate_unique_values()
-
-        self.assertEqual(error, None)
-
-
 class TestValidateNums(ExpenseTest):
 
     def test_should_not_return_error_given_valid_nums(self):

@@ -12,8 +12,6 @@ class ExpenseValidation:
     def validate(self):
         self.validate_empty_values()
         if not self.error:
-            self.validate_unique_values()
-        if not self.error:
             self.validate_nums()
 
         return self.error
@@ -21,24 +19,12 @@ class ExpenseValidation:
     def validate_empty_values(self):
         expense_attributes = [
             'concept',
-            'cost'
+            'cost',
+            'quantity',
+            'unit'
         ]
-        try:
-            self.expense.quantity
-            self.expense.unit
-            expense_attributes.extend(['quantity', 'unit'])
-
-        except AttributeError:
-            pass
         self.error = validate_empty_values(self.expense, expense_attributes)
         
-        return self.error
-    
-    def validate_unique_values(self):
-        expense = Expense.search(self.expense.concept)
-        if expense and expense is not self.expense:
-            self.error = repeated_value_error
-
         return self.error
     
     def validate_nums(self):

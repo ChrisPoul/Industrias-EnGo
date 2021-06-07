@@ -66,8 +66,8 @@ def update_db():
     )
     Warehouse.__table__.drop(db.engine)
     FinishedProduct.__table__.drop(db.engine)
-    from EnGo.models.expense import RegisteredExpense, Expense
-    RegisteredExpense.__table__.drop(db.engine)
+    from EnGo.models.expense import WarehouseExpense, Expense
+    WarehouseExpense.__table__.drop(db.engine)
     Expense.__table__.drop(db.engine)
     db.create_all()
 

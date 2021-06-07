@@ -1,5 +1,6 @@
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.expense import Expense
 
 
 class TestAdd(WarehouseTest):
@@ -69,4 +70,21 @@ class TestAddExpense(WarehouseTest):
         self.warehouse.add_expense(self.expense)
 
         self.assertEqual(self.warehouse.expenses, [self.expense])
+
+
+class TestSearchExpenses(WarehouseTest):
+
+    def setUp(self):
+        WarehouseTest.setUp(self)
+        another_expense = Expense(
+            concept="Another Expense",
+            type_id=1
+        )
+        another_expense.add()
+
+    def test_should_return_list_of_expenses_given_correct_search_term(self):
+        self.warehouse.add_expense(self.expense)
+        expenses = self.warehouse.search_expenses(self.expense.concept)
+
+        self.assertEqual(expenses, [self.expense])
     

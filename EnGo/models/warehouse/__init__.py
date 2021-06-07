@@ -15,8 +15,8 @@ class Warehouse(db.Model, MyModel):
         backref="warehouse",
         cascade="all, delete-orphan"
     )
-    registered_expenses = db.relationship(
-        'RegisteredExpense',
+    warehouse_expenses = db.relationship(
+        'WarehouseExpense',
         backref="warehouse",
         cascade="all, delete-orphan"
     )
@@ -53,27 +53,19 @@ class Warehouse(db.Model, MyModel):
     
     @property
     def expenses(self):
-        return [registered_expense.expense for registered_expense in self.registered_expenses]
+        return [warehouse_expense.expense for warehouse_expense in self.warehouse_expenses]
 
     def add_expense(self, expense):
-        from EnGo.models.expense import RegisteredExpense
-        try:
-            expense.quantity
-            expense.registered_type_id
-            expense.unit
-        except AttributeError:
-            expense.quantity = 0
-            expense.registered_type_id = expense.type_id
-            expense.unit = "pz"
-        registered_expense = RegisteredExpense(
+        from EnGo.models.expense import WarehouseExpense
+        warehouse_expense = WarehouseExpense(
             expense_id=expense.id,
-            warehouse_id=self.id,
-            type_id=expense.registered_type_id,
-            cost=expense.cost,
-            unit=expense.unit,
-            quantity=expense.quantity
+            warehouse_id=self.id
         )
-        registered_expense.add()
+        warehouse_expense.add()
+
+    def search_expenses(self, search_term):
+        return [expense for expense in self.expenses if expense.concept == search_term]
+        
 
 
 class FinishedProduct(db.Model, MyModel):

@@ -22,24 +22,12 @@ class WarehouseRequest:
         
         return error
     
-    def add_expense(self, expense_to_add):
-        expense = Expense.search(expense_to_add.concept)
-        if expense:
-            self.add_existing_expense(expense)
-        else:
-            self.add_new_expense(expense_to_add)
-        
-        return self.error
-    
-    def add_existing_expense(self, expense):
-        self.error = expense.validation.validate()
-        if not self.error:
-            self.warehouse.add_expense(expense)
-        
-    def add_new_expense(self, expense):
+    def add_expense(self, expense):
         self.error = expense.request.add()
         if not self.error:
             self.warehouse.add_expense(expense)
+        
+        return self.error
         
     def add_product(self, product_to_add):
         product = Product.search(product_to_add.code)
