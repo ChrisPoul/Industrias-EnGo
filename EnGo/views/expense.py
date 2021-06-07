@@ -29,11 +29,21 @@ expense_heads = dict(
 def expenses():
     expenses = Expense.get_all()
     expense_types = ExpenseType.query.all()
+    type_all = dict (
+        id=0,
+        name="Todos"
+    )
+    expense_types.insert(0, type_all)
     if request.method == "POST":
         search_term = request.form["search_term"]
         if search_term != "":
             expenses = Expense.search_all(search_term)
         type_id = request.form['type_id']
+        expense_type = ExpenseType.query.get(type_id)
+        if type_id == "0":
+            expense_type = type_all
+        expense_types.remove(expense_type)
+        expense_types.insert(0, expense_type)
         expenses = filter_expenses_by_type(expenses, type_id)
             
     return render_template(
