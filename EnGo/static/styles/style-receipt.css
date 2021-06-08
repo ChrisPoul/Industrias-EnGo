@@ -3,18 +3,23 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    width: 100%;
+    width: 100vw;
     font-size: 1.175vmax;
     margin: 0;
     text-align: center;
 }
 
 section {
+    padding-top: 3vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin: 3vmax auto;
+    max-width: 21.6cm;
+    margin: auto;
+    margin-bottom: 10vh;
 }
 table{
+    width: 100%;
     border-collapse: collapse;
 }
 nav form {
