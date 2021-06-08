@@ -4,7 +4,7 @@
 }
 body {
     width: 100%;
-    font-size: 1.175vmin;
+    font-size: 1.175vmax;
     margin: 0;
     text-align: center;
 }
@@ -16,9 +16,6 @@ section {
 }
 table{
     border-collapse: collapse;
-}
-nav {
-    font-size: 1.175vmax;
 }
 nav form {
     display: flex;
