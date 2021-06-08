@@ -11,7 +11,6 @@ class Product(db.Model, MyModel):
     code = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=True, unique=False)
     price = Column(Integer, nullable=False, default=0)
-    inventory = Column(Integer, nullable=False, default=0)
     sold_products = db.relationship(
         'SoldProduct',
         backref="product",
@@ -42,6 +41,8 @@ class Product(db.Model, MyModel):
     def request(self):
         from .request import ProductRequest
         return ProductRequest(self)
+    
+    
 
 
 class SoldProduct(db.Model, MyModel):
