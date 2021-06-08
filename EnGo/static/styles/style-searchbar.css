@@ -28,10 +28,3 @@
     margin: 0;
     margin-right: 0.3em;
 }
-
-nav form {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 2em;
-}
