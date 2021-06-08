@@ -3,10 +3,12 @@ from flask import (
     flash, redirect, url_for
 )
 from EnGo.models.warehouse import Warehouse
+from EnGo.models.product import Product, FinishedProduct
 from EnGo.models.expense import (
     Expense, ExpenseType, filter_expenses_by_type
 )
 from .expense import expense_heads
+from .product import product_heads
 from . import (
     permission_required, login_required,
     get_form, update_obj_attrs
@@ -19,6 +21,12 @@ permissions = [
 ]
 warehouse_heads = dict(
     address="Dirección"
+)
+product_heads = dict(
+    product_heads,
+    unit="Unidad",
+    quantity="Cantidad",
+    cost="Costo"
 )
 
 
@@ -156,5 +164,42 @@ def add_expense(id):
         expense_heads=expense_heads,
         form=form,
         expense_types=expense_types,
+        warehouse=warehouse
+    )
+
+
+@bp.route('/add_product/<int:id>', methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
+def add_product(id):
+    warehouse = Warehouse.query.get(id)
+    form = get_form(product_heads)
+    if request.method == "POST":
+        error = None
+        product = Product.search(form['code'])
+        if not product:
+            product = Product(
+                code=form['code'],
+                description=form['description'],
+                price=form['price']
+            )
+            error = product.request.add()
+        if not error:
+            finished_product = FinishedProduct(
+                product_id=product.id,
+                warehouse_id=warehouse.id,
+                quantity=form['quantity'],
+                unit=form['unit'],
+                cost=form['cost']
+            )
+            error = finished_product.request.add()
+        if not error:
+            return redirect(
+                url_for('warehouse.inventory', id=id)
+            )
+        flash(error)
+
+    return render_template(
+        'warehouse/add-product.html',
         warehouse=warehouse
     )

@@ -1,7 +1,7 @@
 from flask import url_for
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.expense import Expense
+from EnGo.models.product import Product, FinishedProduct
 
 ### LOGED IN USER (LU) ###
 ### LOGED IN USER HAS PERMISSION (LUHP) ###
@@ -13,6 +13,12 @@ class WarehouseViewTest(WarehouseTest):
     def setUp(self):
         WarehouseTest.setUp(self)
         self.create_test_users()
+        self.product = Product(
+            code="Test Product",
+            description="Test Description",
+            price=1
+        )
+        self.product.add()
 
 
 class TestWarehousesView(WarehouseViewTest):
@@ -182,3 +188,76 @@ class TestAddExpenseView(WarehouseViewTest):
             )
         
         self.assertStatus(response, 302)
+
+
+class TestAddProductView(WarehouseViewTest):
+
+    def test_should_add_finished_product_given_valid_finished_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        product_input = dict(
+            code="Test Product",
+            quantity=1,
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_product', id=self.warehouse.id),
+                data=product_input
+            )
+        
+        self.assertEqual(len(self.warehouse.products), 1)
+    
+    def test_should_create_and_add_product_given_valid_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        product_input = dict(
+            code="New Product",
+            description="New Description",
+            price=2,
+            quantity=1,
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_product', id=self.warehouse.id),
+                data=product_input
+            )
+        
+        self.assertEqual(len(self.warehouse.products), 1)
+        self.assertTrue(Product.search("New Product"))
+    
+    def test_should_not_add_finished_product_given_invalid_finished_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        product_input = dict(
+            code="Test Product",
+            quantity="",
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_product', id=self.warehouse.id),
+                data=product_input
+            )
+        
+        self.assertEqual(len(self.warehouse.products), 0)
+    
+    def test_should_not_create_and_add_product_given_invalid_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        product_input = dict(
+            code="",
+            description="Test Description",
+            price=2,
+            quantity=1,
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_product', id=self.warehouse.id),
+                data=product_input
+            )
+        
+        self.assertEqual(len(self.warehouse.products), 0)
+        self.assertFalse(Product.search(""))
