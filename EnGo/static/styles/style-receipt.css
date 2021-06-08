@@ -3,6 +3,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
+    width: 100vw;
     font-size: 1.175vmax;
     margin: 0;
     text-align: center;
