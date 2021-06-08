@@ -77,3 +77,36 @@ class SoldProductValidation:
         self.error = validate_obj_nums(self.sold_product, sold_product_nums)
 
         return self.error
+
+
+class FinishedProductValidation:
+
+    def __init__(self, finished_product):
+        self.finished_product = finished_product
+        self.error = None
+
+    def validate(self):
+        self.validate_empty_values()
+        if not self.error:
+            self.validate_nums()
+            
+        return self.error
+
+    def validate_empty_values(self):
+        finished_product_attrs = [
+            'quantity',
+            'unit',
+            'cost'
+        ]
+        self.error = validate_empty_values(self.finished_product, finished_product_attrs)
+
+        return self.error
+
+    def validate_nums(self):
+        finished_product_nums = [
+            'quantity',
+            'cost'
+        ]
+        self.error = validate_obj_nums(self.finished_product, finished_product_nums)
+        
+        return self.error

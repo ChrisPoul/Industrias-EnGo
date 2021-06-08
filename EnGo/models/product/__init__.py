@@ -84,9 +84,13 @@ class FinishedProduct(db.Model, MyModel):
     cost = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
 
-    def get(id):
-        return FinishedProduct.query.get(id)
-
-
-
+    @property
+    def validation(self):
+        from .validation import FinishedProductValidation
+        return FinishedProductValidation(self)
+    
+    @property
+    def request(self):
+        from .request import FinishedProductRequest
+        return FinishedProductRequest(self)
 
