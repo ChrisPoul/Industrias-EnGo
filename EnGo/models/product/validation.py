@@ -24,8 +24,7 @@ class ProductValidation:
     def validate_empty_values(self):
         product_attrs = [
             "code",
-            "price",
-            "inventory"
+            "price"
         ]
         self.error = validate_empty_values(self.product, product_attrs)
         
@@ -40,8 +39,7 @@ class ProductValidation:
 
     def validate_nums(self):
         product_nums = [
-            "price",
-            "inventory"
+            "price"
         ]
         self.error = validate_obj_nums(self.product, product_nums)
 

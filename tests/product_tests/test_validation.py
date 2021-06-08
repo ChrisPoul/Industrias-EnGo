@@ -67,23 +67,11 @@ class TestValidateEmptyValues(ProductTest):
 
         self.assertNotEqual(error, None)
 
-    def test_should_return_error_given_empty_inventory(self):
-        product = Product(
-            code="Valid Code",
-            description="Optional description",
-            price=10,
-            inventory=""
-        )
-        error = product.validation.validate_empty_values()
-
-        self.assertNotEqual(error, None)
-
     def test_should_return_error_given_empty_price(self):
         product = Product(
             code="Valid Code",
             description="Optional description",
-            price="",
-            inventory=10
+            price=""
         )
         error = product.validation.validate_empty_values()
 
@@ -130,8 +118,7 @@ class TestValidateNums(ProductTest):
         product = Product(
             code="Some Code",
             description="Optional description",
-            price=10,
-            inventory=10
+            price=10
         )
         error = product.validation.validate_nums()
 
@@ -141,19 +128,7 @@ class TestValidateNums(ProductTest):
         product = Product(
             code="Some Code",
             description="Optional description",
-            price="invalid price",
-            inventory=10
-        )
-        error = product.validation.validate_nums()
-
-        self.assertNotEqual(error, None)
-
-    def test_should_return_error_given_invalid_inventory(self):
-        product = Product(
-            code="Some Code",
-            description="Optional description",
-            price=10,
-            inventory="invalid inv"
+            price="invalid price"
         )
         error = product.validation.validate_nums()
 

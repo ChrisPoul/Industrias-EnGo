@@ -74,10 +74,5 @@ class SoldProduct(db.Model, MyModel):
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"
 
-    def update_product_inventory(self):
-        quantity_change = int(self.quantity) - self.quantity_ref
-        self.product.inventory -= quantity_change
-        self.quantity_ref = self.quantity
-
 
 from EnGo.models.warehouse import FinishedProduct

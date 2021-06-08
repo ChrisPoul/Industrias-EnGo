@@ -68,8 +68,7 @@ class TestAddView(ProductViewTest):
         product_data = dict(
             code="Valid Code",
             description="Some description",
-            price=10,
-            inventory=10
+            price=10
         )
         with self.client as client:
             client.post(
@@ -84,8 +83,7 @@ class TestAddView(ProductViewTest):
         product_data = dict(
             code="",
             description="Some description",
-            price="invalid price",
-            inventory=10
+            price="invalid price"
         )
         with self.client as client:
             client.post(
@@ -111,8 +109,7 @@ class TestUpdateView(ProductViewTest):
         product_data = dict(
             code="New Code",
             description="",
-            price=20,
-            inventory=10
+            price=20
         )
         with self.client as client:
             client.post(

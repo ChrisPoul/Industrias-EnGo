@@ -9,7 +9,7 @@
     {% for head in product_heads %}
     <label for="{{ head }}">{{ product_heads[head] }}</label>
     <input name="{{ head }}"
-    {% if head == "price" or head == "inventory" %}
+    {% if head == "price" %}
     type="number"
     {% endif %}
     {% if head == "description" %}

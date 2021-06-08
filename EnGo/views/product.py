@@ -13,8 +13,7 @@ bp = Blueprint("product", __name__, url_prefix="/product")
 product_heads = dict(
     code="Código",
     description="Descripción",
-    price="Precio",
-    inventory="Inventario"
+    price="Precio"
 )
 permissions = [
     "Contaduría"
@@ -49,8 +48,7 @@ def add():
         product = Product(
             code=form["code"],
             description=form["description"],
-            price=form["price"],
-            inventory=form["inventory"]
+            price=form["price"]
         )
         error = product.request.add()
         if not error:
