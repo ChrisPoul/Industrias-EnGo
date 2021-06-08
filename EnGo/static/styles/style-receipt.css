@@ -1,7 +1,6 @@
 * {
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.175vmax;
 }
 body {
     width: 100%;
@@ -17,6 +16,9 @@ section {
 }
 table{
     border-collapse: collapse;
+}
+nav {
+    font-size: 1.175vmax;
 }
 nav form {
     display: flex;
