@@ -1,10 +1,11 @@
 * {
     text-decoration: none;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.175vmax;
 }
 body {
     width: 100%;
-    font-size: 1.175vw;
+    font-size: 1.175vmax;
     margin: 0;
     text-align: center;
 }
