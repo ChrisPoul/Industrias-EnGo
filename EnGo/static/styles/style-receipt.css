@@ -7,21 +7,14 @@ body {
     font-size: 1.175vmax;
     margin: 0;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 section {
-    padding-top: 3vh;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    max-width: 21.6cm;
-    margin: auto;
-    margin-bottom: 10vh;
+    margin: 3vmax auto;
 }
 table{
-    width: 100%;
     border-collapse: collapse;
 }
 nav form {
