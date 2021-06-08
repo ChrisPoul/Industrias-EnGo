@@ -109,34 +109,68 @@ def delete(id):
 @login_required
 def inventory(id):
     warehouse = Warehouse.query.get(id)
-    expenses = warehouse.expenses
-    expense_types = ExpenseType.query.all()
-    type_all = dict (
-        id=0,
-        name="Todos"
-    )
-    expense_types.insert(0, type_all)
+    warehouse_inventory = WarehouseInventory(warehouse)
     if request.method == "POST":
-        search_term = request.form["search_term"]
-        if search_term != "":
-            expenses = warehouse.search_expenses(search_term)
-        type_id = request.form['type_id']
-        expense_type = ExpenseType.query.get(type_id)
-        if type_id == "0":
-            expense_type = type_all
-        expense_types.remove(expense_type)
-        expense_types.insert(0, expense_type)
-        expenses = filter_expenses_by_type(expenses, type_id)
+        warehouse_inventory.handle_search_request()
 
     return render_template(
         "warehouse/inventory.html",
         expense_heads=expense_heads,
         product_heads=product_heads,
-        expenses=expenses,
-        expense_types=expense_types,
-        products=warehouse.finished_products,
+        expenses=warehouse_inventory.expenses,
+        expense_types=warehouse_inventory.expense_types,
+        products=warehouse_inventory.products,
         warehouse=warehouse
     )
+
+
+class WarehouseInventory:
+
+    def __init__(self, warehouse):
+        self.warehouse = warehouse
+        self.expenses = warehouse.expenses
+        self.products = warehouse.finished_products
+        self.type_all = dict (
+            id=0,
+            name="Todos"
+        )
+        self.expense_types = ExpenseType.query.all()
+        self.expense_types.insert(0, self.type_all)
+
+    def handle_search_request(self):
+        self.search_term = request.form["search_term"]
+        try:
+            self.type_id = request.form['type_id']
+            self.search_expenses()
+        except KeyError:
+            self.search_products()
+
+    def search_expenses(self):
+        self.set_expenses()
+        self.set_expense_types_order()
+
+    def set_expenses(self):
+        if self.search_term != "":
+            self.expenses = self.warehouse.search_expenses(self.search_term)
+        self.expenses = filter_expenses_by_type(self.expenses, self.type_id)
+
+    def set_expense_types_order(self):
+        expense_type = self.get_expense_type()
+        self.expense_types.remove(expense_type)
+        self.expense_types.insert(0, expense_type)
+
+    def get_expense_type(self):
+        if int(self.type_id) == 0:
+            expense_type = self.type_all
+        else:
+            expense_type = ExpenseType.query.get(self.type_id)
+
+        return expense_type
+
+    def search_products(self):
+        product = Product.search(self.search_term)
+        if product:
+            self.products = product.finished_products
 
 
 @bp.route("/add_expense/<int:id>", methods=("POST", "GET"))
