@@ -173,6 +173,7 @@ def add_expense(id):
 @login_required
 def add_product(id):
     warehouse = Warehouse.query.get(id)
+    product = None
     form = get_form(product_heads)
     if request.method == "POST":
         error = None
@@ -201,5 +202,8 @@ def add_product(id):
 
     return render_template(
         'warehouse/add-product.html',
-        warehouse=warehouse
+        product_heads=product_heads,
+        warehouse=warehouse,
+        product=product,
+        form=form
     )

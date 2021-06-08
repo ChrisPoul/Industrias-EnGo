@@ -1,6 +1,11 @@
 <div class="heading">
     {% include 'product/search-bar.html' %}
-    <a href="{{ url_for('product.add') }}" class="add-button">
+    <a class="add-button" 
+    {% if warehouse %}
+    href="{{ url_for('warehouse.add_product', id=warehouse.id) }}"
+    {% else %}
+    href="{{ url_for('product.add') }}"
+    {% endif %}>
         <input type="button" value="Añadir Producto">
     </a>
 </div>
