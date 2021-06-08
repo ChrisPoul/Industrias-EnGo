@@ -66,25 +66,3 @@ class TestAddExpense(WarehouseTest):
         self.assertNotIn(expense, self.warehouse.expenses)
     
 
-class TestAddProduct(WarehouseTest):
-
-    def test_should_add_product_given_valid_existing_product(self):
-        self.warehouse.request.add_product(self.product)
-
-        self.assertIn(self.product, self.warehouse.products)
-    
-    def test_should_product_given_valid_new_product(self):
-        product = Product(
-            code="New Code"
-        )
-        self.warehouse.request.add_product(product)
-
-        self.assertIn(product, self.warehouse.products)
-
-    def test_should_not_add_product_given_invalid_product(self):
-        product = Product(
-            code=""
-        )
-        self.warehouse.request.add_product(product)
-
-        self.assertNotIn(product, self.warehouse.products)

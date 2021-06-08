@@ -29,17 +29,4 @@ class WarehouseRequest:
         
         return self.error
         
-    def add_product(self, product_to_add):
-        product = Product.search(product_to_add.code)
-        if product:
-            self.warehouse.add_product(product_to_add)
-        else:
-            self.add_new_product(product_to_add)
-        
-        self.error
-    
-    def add_new_product(self, product):
-        self.error = product.request.add()
-        if not self.error:
-            self.warehouse.add_product(product)
         

@@ -56,14 +56,6 @@ class TestSearch(WarehouseTest):
         self.assertEqual(warehouse, self.warehouse)
 
 
-class TestAddProduct(WarehouseTest):
-
-    def test_should_add_product_to_warehouse_given_product(self):
-        self.warehouse.add_product(self.product)
-
-        self.assertEqual(self.warehouse.products, [self.product])
-
-
 class TestAddExpense(WarehouseTest):
 
     def test_should_add_expense_to_warehouse_given_expense(self):

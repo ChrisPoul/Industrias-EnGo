@@ -1,10 +1,8 @@
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
 
-from tests import warehouse_tests
 
-
-class TestValidateEmptyValues(WarehouseTest):
+class TestValidate(WarehouseTest):
 
     def test_should_not_return_error_given_valid_warehouse(self):
         warehouse = Warehouse(
@@ -14,7 +12,7 @@ class TestValidateEmptyValues(WarehouseTest):
 
         self.assertEqual(error, None)
     
-    def test_should_return_error_given_empty_value(self):
+    def test_should_return_error_given_invalid_warehouse(self):
         warehouse = Warehouse(
             address=""
         )
@@ -23,13 +21,32 @@ class TestValidateEmptyValues(WarehouseTest):
         self.assertNotEqual(error, None)
 
 
+class TestValidateEmptyValues(WarehouseTest):
+
+    def test_should_not_return_error_given_no_empty_values(self):
+        warehouse = Warehouse(
+            address="Valid Address"
+        )
+        error = warehouse.validation.validate_empty_values()
+
+        self.assertEqual(error, None)
+    
+    def test_should_return_error_given_empty_value(self):
+        warehouse = Warehouse(
+            address=""
+        )
+        error = warehouse.validation.validate_empty_values()
+
+        self.assertNotEqual(error, None)
+
+
 class TestValidateRepeatedValues(WarehouseTest):
 
-    def test_should_not_return_error_given_valid_warehouse(self):
+    def test_should_not_return_error_given_unique_value(self):
         warehouse = Warehouse(
             address="Unique Address"
         )
-        error = warehouse.validation.validate()
+        error = warehouse.validation.validate_unique_values()
 
         self.assertEqual(error, None)
     
@@ -37,11 +54,11 @@ class TestValidateRepeatedValues(WarehouseTest):
         warehouse = Warehouse(
             address="Test Address"
         )
-        error = warehouse.validation.validate()
+        error = warehouse.validation.validate_unique_values()
 
         self.assertNotEqual(error, None)
     
     def test_should_not_return_error_given_warehouse_already_in_db(self):
-        error = self.warehouse.validation.validate()
+        error = self.warehouse.validation.validate_unique_values()
 
         self.assertEqual(error, None)

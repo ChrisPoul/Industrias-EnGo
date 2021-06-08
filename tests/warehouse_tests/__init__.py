@@ -1,7 +1,6 @@
 from tests import Test
 from EnGo.models.warehouse import Warehouse
 from EnGo.models.expense import Expense
-from EnGo.models.product import Product
 
 
 class WarehouseTest(Test):
@@ -17,7 +16,3 @@ class WarehouseTest(Test):
             type_id=1
         )
         self.expense.add()
-        self.product = Product(
-            code="Test Product"
-        )
-        self.product.add()
