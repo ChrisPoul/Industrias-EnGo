@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import (
-    Column, Integer, String,
-    ForeignKey, DateTime
+    Column, Integer, String, 
+    DateTime
 )
 from EnGo.models import db, MyModel
 
@@ -45,6 +45,7 @@ class Warehouse(db.Model, MyModel):
         return [finished_product.product for finished_product in self.finished_products]
 
     def add_product(self, product):
+        from EnGo.models.product import FinishedProduct
         finished_product = FinishedProduct(
             product_id=product.id,
             warehouse_id=self.id
@@ -66,16 +67,3 @@ class Warehouse(db.Model, MyModel):
     def search_expenses(self, search_term):
         return [expense for expense in self.expenses if expense.concept == search_term]
         
-
-
-class FinishedProduct(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
-    quantity = Column(Integer, nullable=False, default=0)
-    unit = Column(String(10), nullable=False, default="pz")
-    cost = Column(Integer, nullable=False, default=0)
-    date = Column(DateTime, nullable=False, default=datetime.now)
-
-    def get(id):
-        return FinishedProduct.query.get(id)

@@ -75,4 +75,18 @@ class SoldProduct(db.Model, MyModel):
         return f"{attribute}_{self.id}"
 
 
-from EnGo.models.warehouse import FinishedProduct
+class FinishedProduct(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
+    quantity = Column(Integer, nullable=False, default=0)
+    unit = Column(String(10), nullable=False, default="pz")
+    cost = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def get(id):
+        return FinishedProduct.query.get(id)
+
+
+
+
