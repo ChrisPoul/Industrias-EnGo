@@ -4,10 +4,8 @@
 }
 body {
     width: 100vw;
-    background: white;
     margin: 0;
-    font-size: 1.175vw;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.175vmax;
 }
 
 header {

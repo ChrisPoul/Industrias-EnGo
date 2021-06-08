@@ -3,8 +3,7 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background: white;
+    font-size: 1.175vmax;
     margin: 0;
     text-align: center;
     margin-left: auto;
@@ -23,6 +22,11 @@ section {
 table{
     width: 100%;
     border-collapse: collapse;
+}
+nav form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 tr {
     display: flex;
