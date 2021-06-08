@@ -110,6 +110,7 @@ def delete(id):
 def inventory(id):
     warehouse = Warehouse.query.get(id)
     expenses = warehouse.expenses
+    products = warehouse.finished_products
     expense_types = ExpenseType.query.all()
     type_all = dict (
         id=0,
@@ -131,8 +132,10 @@ def inventory(id):
     return render_template(
         "warehouse/inventory.html",
         expense_heads=expense_heads,
+        product_heads=product_heads,
         expenses=expenses,
         expense_types=expense_types,
+        products=products,
         warehouse=warehouse
     )
 
@@ -194,6 +197,9 @@ def add_product(id):
                 cost=form['cost']
             )
             error = finished_product.request.add()
+        else:
+            error = """Ese producto aún no está registrado, porfavor 
+                registra un producto válido antes de continuar"""
         if not error:
             return redirect(
                 url_for('warehouse.inventory', id=id)

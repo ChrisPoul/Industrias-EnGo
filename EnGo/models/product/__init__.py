@@ -85,6 +85,18 @@ class FinishedProduct(db.Model, MyModel):
     date = Column(DateTime, nullable=False, default=datetime.now)
 
     @property
+    def code(self):
+        return self.product.code
+
+    @property
+    def description(self):
+        return self.product.description
+
+    @property
+    def price(self):
+        return self.product.price
+
+    @property
     def validation(self):
         from .validation import FinishedProductValidation
         return FinishedProductValidation(self)
