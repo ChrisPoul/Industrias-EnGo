@@ -261,3 +261,99 @@ class TestAddProductView(WarehouseViewTest):
         
         self.assertEqual(len(self.warehouse.products), 0)
         self.assertFalse(Product.search(""))
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('warehouse.add_product', id=self.warehouse.id)
+            )
+
+        self.assertStatus(response, 302)
+
+
+class TestUpdateProduct(WarehouseViewTest):
+
+    def setUp(self):
+        WarehouseViewTest.setUp(self)
+        self.finished_product = FinishedProduct(
+            product_id=self.product.id,
+            warehouse_id=self.warehouse.id,
+            quantity=10,
+            unit="pz",
+            cost=10
+        )
+        self.finished_product.add()
+
+    def test_should_update_finished_product_given_valid_finished_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        finished_product_input = dict(
+            quantity=20,
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.update_product', id=self.finished_product.id),
+                data=finished_product_input
+            )
+        self.db.session.rollback()
+
+        self.assertEqual(self.finished_product.quantity, 20)
+
+    def test_should_not_update_finished_product_given_invalid_finished_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        finished_product_input = dict(
+            quantity="",
+            unit="pz",
+            cost=1
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.update_product', id=self.finished_product.id),
+                data=finished_product_input
+            )
+        self.db.session.rollback()
+
+        self.assertNotEqual(self.finished_product.quantity, "")
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('warehouse.update_product', id=self.finished_product.id)
+            )
+
+        self.assertStatus(response, 302)
+
+
+class TestDeleteProduct(WarehouseViewTest):
+
+    def setUp(self):
+        WarehouseViewTest.setUp(self)
+        self.finished_product = FinishedProduct(
+            product_id=self.product.id,
+            warehouse_id=self.warehouse.id,
+            quantity=10,
+            unit="pz",
+            cost=10
+        )
+        self.finished_product.add()
+
+    def test_should_delete_finished_product_given_LUHP(self):
+        self.login_user(self.dev_user)
+        with self.client as client:
+            client.get(
+                url_for('warehouse.delete_product', id=self.finished_product.id)
+            )
+
+        self.assertNotIn(self.finished_product, self.db.session)
+
+    def test_should_not_delete_finished_product_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            client.get(
+                url_for('warehouse.delete_product', id=self.finished_product.id)
+            )
+
+        self.assertIn(self.finished_product, self.db.session)

@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}{{ product.code }}{% endblock %}</h1>
+    <h1>{% block title %}
+        {{ product.code }}
+        {% if warehouse %}
+        de almacén {{ warehouse.address }}
+        {% endif %}
+        {% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
 <form method="post">
     {% for head in product_heads %}
+    {% if warehouse and (head == "code" or head == "description" or head == "price") %}
+    <div class="form-info-display">
+        <strong>{{ product_heads[head] }}:</strong>
+        <p>
+            {% if head == "price" %}
+            {{ format_price(product[head]) }}
+            {% else %}
+            {{ product[head] }}
+            {% endif %}
+        </p>
+    </div>
+    {% else %}
     <label for="{{ head }}">{{ product_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}"
     {% if head == "description" %}
@@ -14,14 +31,21 @@
     {% else %}
     placeholder="Requerido"
     {% endif %}
-    {% if head == "price" %}
+    {% if head == "price" or head == "price" %}
     type="number"
     {% endif %}
     value="{{ product[head] }}">
+    {% endif %}
     {% endfor %}
     <div>
         <input type="submit" value="Guardar Cambios">
-        <a href="{{ url_for('product.delete', id=product.id) }}">
+        <a 
+        {% if warehouse %}
+        href="{{ url_for('warehouse.delete_product', id=product.id) }}"
+        {% else %}
+        href="{{ url_for('product.delete', id=product.id) }}"
+        {% endif %}
+        >
             <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
         </a>
     </div>

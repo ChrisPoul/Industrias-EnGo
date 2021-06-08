@@ -215,3 +215,43 @@ def add_product(id):
         product=product,
         form=form
     )
+
+
+@bp.route('/update_product/<int:id>', methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def update_product(id):
+    finished_product = FinishedProduct.query.get(id)
+    if request.method == "POST":
+        finished_product_attrs = [
+            "quantity",
+            "unit",
+            "cost"
+        ]
+        update_obj_attrs(finished_product, finished_product_attrs)
+        error = finished_product.request.update()
+        if not error:
+            return redirect(
+                url_for('warehouse.inventory', id=finished_product.warehouse.id)
+            )
+        flash(error)
+
+    return render_template(
+        "product/update.html",
+        product_heads=product_heads,
+        product=finished_product,
+        warehouse=finished_product.warehouse
+    )
+
+
+@bp.route('/delete_product/<int:id>', methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def delete_product(id):
+    finished_product = FinishedProduct.query.get(id)
+    warehouse_id = finished_product.warehouse.id
+    finished_product.delete()
+
+    return redirect(
+        url_for('warehouse.inventory', id=warehouse_id)
+    )

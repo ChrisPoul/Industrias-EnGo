@@ -136,3 +136,11 @@ th, td {
 .delete-button img {
     max-width: 1.2em;
 }
+
+.form-info-display {
+    justify-content: flex-start;
+}
+.form-info-display strong, .form-info-display p {
+    margin: 1em 0.5em;
+    align-items: center;
+}
