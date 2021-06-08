@@ -1,0 +1,22 @@
+.posts {
+    width: 50vw;
+}
+.posts a {
+    justify-content: flex-end;
+}
+.post {
+    text-align: left;
+    margin-top: 1em;
+}
+.post div {
+    margin-top: 0.5em;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.post h1 {
+    justify-content: left;
+}
+.post a {
+    color: #377ba8;
+}
