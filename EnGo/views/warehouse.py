@@ -198,8 +198,10 @@ def add_product(id):
             )
             error = finished_product.request.add()
         else:
-            error = """Ese producto aún no está registrado, porfavor 
-                registra un producto válido antes de continuar"""
+            error = """
+                Ese producto aún no está registrado, porfavor 
+                registra un producto válido antes de continuar
+            """
         if not error:
             return redirect(
                 url_for('warehouse.inventory', id=id)
