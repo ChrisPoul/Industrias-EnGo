@@ -110,7 +110,6 @@ def delete(id):
 def inventory(id):
     warehouse = Warehouse.query.get(id)
     expenses = warehouse.expenses
-    products = warehouse.finished_products
     expense_types = ExpenseType.query.all()
     type_all = dict (
         id=0,
@@ -135,7 +134,7 @@ def inventory(id):
         product_heads=product_heads,
         expenses=expenses,
         expense_types=expense_types,
-        products=products,
+        products=warehouse.finished_products,
         warehouse=warehouse
     )
 
@@ -200,7 +199,8 @@ def add_product(id):
         else:
             error = """
                 Ese producto aún no está registrado, porfavor 
-                registra un producto válido antes de continuar
+                registra un producto válido antes de continuar,
+                puedes registrarlo desde aquí
             """
         if not error:
             return redirect(
