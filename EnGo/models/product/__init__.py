@@ -51,7 +51,6 @@ class SoldProduct(db.Model, MyModel):
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
     unit = Column(String(10), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
-    quantity_ref = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
 
     def get(id):
