@@ -159,6 +159,9 @@ th, td {
     z-index: 3;
     cursor: pointer;
 }
+#product-inventory td:nth-last-child(2), #product-inventory td:last-child {
+    border-bottom: none;
+}
 #overlay {
     display: none;
     position: fixed;
