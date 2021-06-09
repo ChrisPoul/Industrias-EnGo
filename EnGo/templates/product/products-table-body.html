@@ -3,6 +3,7 @@
     {% for head in product_heads %}
     <td>
         {% if head == 'code' %}
+        {% if warehouse and g.user.has_view_permissions("warehouse.update_product") or not warehouse %}
         <a 
         {% if warehouse %}
         href="{{ url_for('warehouse.update_product', id=product.id) }}"
@@ -12,6 +13,9 @@
         >
             {{ product[head] }}
         </a>
+        {% else %}
+        {{ product[head] }}
+        {% endif %}
         {% elif head == 'price' or head == "cost" %}
         {{ format_price(product[head]) }}
         {% else %}

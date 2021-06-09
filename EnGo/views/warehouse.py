@@ -17,8 +17,11 @@ from . import (
 bp = Blueprint("warehouse", __name__, url_prefix="/warehouse")
 
 permissions = [
-    'Dev'
+    'Contaduría',
+    'Calidad'
 ]
+accounting_permission = ["Contaduría"]
+quality_permission = ["Calidad"]
 warehouse_heads = dict(
     address="Dirección"
 )
@@ -51,7 +54,7 @@ def warehouses():
 
 
 @bp.route("/add", methods=('POST', 'GET'))
-@permission_required(permissions)
+@permission_required(accounting_permission)
 @login_required
 def add():
     form = get_form(warehouse_heads)
@@ -74,7 +77,7 @@ def add():
 
 
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
-@permission_required(permissions)
+@permission_required(accounting_permission)
 @login_required
 def update(id):
     warehouse = Warehouse.query.get(id)
@@ -93,7 +96,7 @@ def update(id):
 
 
 @bp.route("/delete/<int:id>")
-@permission_required(permissions)
+@permission_required(accounting_permission)
 @login_required
 def delete(id):
     warehouse = Warehouse.query.get(id)
@@ -174,7 +177,7 @@ class WarehouseInventory:
 
 
 @bp.route("/add_expense/<int:id>", methods=("POST", "GET"))
-@permission_required(permissions)
+@permission_required(accounting_permission)
 @login_required
 def add_expense(id):
     form = get_form(expense_heads)
@@ -205,7 +208,7 @@ def add_expense(id):
 
 
 @bp.route('/add_product/<int:id>', methods=("POST", "GET"))
-@permission_required(permissions)
+@permission_required(quality_permission)
 @login_required
 def add_product(id):
     warehouse = Warehouse.query.get(id)
@@ -252,7 +255,7 @@ def add_product(id):
 
 
 @bp.route('/update_product/<int:id>', methods=('POST', 'GET'))
-@permission_required(permissions)
+@permission_required(quality_permission)
 @login_required
 def update_product(id):
     finished_product = FinishedProduct.query.get(id)
@@ -279,7 +282,7 @@ def update_product(id):
 
 
 @bp.route('/delete_product/<int:id>', methods=('POST', 'GET'))
-@permission_required(permissions)
+@permission_required(quality_permission)
 @login_required
 def delete_product(id):
     finished_product = FinishedProduct.query.get(id)
