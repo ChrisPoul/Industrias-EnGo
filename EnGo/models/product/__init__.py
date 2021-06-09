@@ -26,7 +26,7 @@ class Product(db.Model, MyModel):
 
     def get(id):
         return Product.query.get(id)
-    
+
     def get_all():
         return Product.query.all()
 
@@ -35,14 +35,14 @@ class Product(db.Model, MyModel):
 
     @property
     def validation(self):
-        from .validation import ProductValidation 
+        from .validation import ProductValidation
         return ProductValidation(self)
 
     @property
     def request(self):
         from .request import ProductRequest
         return ProductRequest(self)
-    
+
     @cached_property
     def inventory(self):
         inventory = {}
@@ -60,8 +60,6 @@ class Product(db.Model, MyModel):
             inventory[finished_product.unit] += finished_product.quantity
 
         return inventory
-            
-    
 
 
 class SoldProduct(db.Model, MyModel):
@@ -75,6 +73,18 @@ class SoldProduct(db.Model, MyModel):
 
     def get(id):
         return SoldProduct.query.get(id)
+
+    @property
+    def code(self):
+        return self.product.code
+
+    @property
+    def description(self):
+        return self.product.description
+
+    @property
+    def price(self):
+        return self.product.price
 
     @property
     def total(self):
@@ -119,10 +129,8 @@ class FinishedProduct(db.Model, MyModel):
     def validation(self):
         from .validation import FinishedProductValidation
         return FinishedProductValidation(self)
-    
+
     @property
     def request(self):
         from .request import FinishedProductRequest
         return FinishedProductRequest(self)
-
-
