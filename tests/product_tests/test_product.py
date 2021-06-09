@@ -1,5 +1,5 @@
 from . import ProductTest
-from EnGo.models.product import Product
+from EnGo.models.product import Product, FinishedProduct, SoldProduct
 
 
 class TestAdd(ProductTest):
@@ -60,3 +60,45 @@ class TestSearch(ProductTest):
         product = Product.search('Test Code')
 
         self.assertEqual(product, self.product)
+
+
+class TestInventory(ProductTest):
+
+    def setUp(self):
+        ProductTest.setUp(self)
+        finished_product = FinishedProduct(
+            product_id=self.product.id,
+            warehouse_id=1,
+            quantity=10,
+            unit="pz"
+        )
+        finished_product.add()
+        sold_product = SoldProduct(
+            receipt_id=1,
+            product_id=self.product.id,
+            unit="pz",
+            quantity=5,
+            price=self.product.price
+        )
+        sold_product.add()
+        finished_product = FinishedProduct(
+            product_id=self.product.id,
+            warehouse_id=1,
+            quantity=10,
+            unit="kg"
+        )
+        finished_product.add()
+        sold_product = SoldProduct(
+            receipt_id=1,
+            product_id=self.product.id,
+            unit="kg",
+            quantity=5,
+            price=self.product.price
+        )
+        sold_product.add()
+
+    def test_should_return_dictionary_with_each_units_inventory(self):
+        inventory = self.product.inventory
+
+        self.assertEqual(inventory["pz"], 5)
+        self.assertEqual(inventory["kg"], 5)
