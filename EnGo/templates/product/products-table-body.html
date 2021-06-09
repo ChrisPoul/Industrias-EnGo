@@ -19,5 +19,11 @@
         {% endif %}
     </td>
     {% endfor %}
+    {% if not warehouse %}
+    <td>
+        <button onclick="on()">Inventario</button>
+        {% include 'product/inventory.html' %}
+    </td>
+    {% endif %}
 </tr>
 {% endfor %}

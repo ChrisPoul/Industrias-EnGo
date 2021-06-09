@@ -1,0 +1,24 @@
+<div id="overlay">
+    <div id="product-inventory" onclick="off()">
+        <table>
+            <thead>
+                <th>
+                    Unidad
+                </th>
+                <th>
+                    Cantidad
+                </th>
+            </thead>
+            {% for unit in product.inventory %}
+            <tr>
+                <td>
+                    {{ unit }}
+                </td>
+                <td>
+                    {{ product.inventory[unit] }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>

@@ -5,6 +5,11 @@
             {{ product_heads[head] }}
         </th>
         {% endfor %}
+        {% if not warehouse %}
+        <th>
+            
+        </th>
+        {% endif %}
     </thead>
     <tbody>
         {% include "product/products-table-body.html" %}

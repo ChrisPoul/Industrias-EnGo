@@ -144,3 +144,28 @@ th, td {
     margin: 1em 0.5em;
     align-items: center;
 }
+
+#product-inventory {
+    display: none;
+    position: fixed;
+    width: 15vmax;
+    height: fit-content;
+    padding: 0 0.5em;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: white;
+    top: 30vh;
+    left: 42vw;
+    z-index: 3;
+    cursor: pointer;
+}
+#overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
