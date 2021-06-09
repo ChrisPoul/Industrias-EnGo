@@ -1,7 +1,8 @@
-from sqlalchemy.sql.roles import StrictFromClauseRole
+from datetime import datetime
 from EnGo.models import db, MyModel
 from sqlalchemy import (
-    Column, String, Integer
+    Column, String, Integer,
+    DateTime
 )
 
 customer_attributes = [
@@ -19,6 +20,7 @@ class Customer(db.Model, MyModel):
     phone = Column(String(15), nullable=False, unique=False, default="")
     email = Column(String(200), nullable=False, unique=False, default="")
     rfc = Column(String(20), nullable=True, unique=False)
+    date = Column(DateTime, nullable=False, default=datetime.now)
     receipts = db.relationship(
         'Receipt',
         backref="customer",

@@ -71,6 +71,7 @@ class SoldProduct(db.Model, MyModel):
     unit = Column(String(10), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
 
     def get(id):
         return SoldProduct.query.get(id)

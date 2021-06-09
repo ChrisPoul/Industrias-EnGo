@@ -13,6 +13,7 @@ class Expense(db.Model, MyModel):
     cost = Column(Integer, nullable=False, default=0)
     unit = Column(String(20), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
+    date = Column(DateTime, nullable=False, default=datetime.now)
     warehouse_expenses = db.relationship(
         'WarehouseExpense',
         backref="expense",

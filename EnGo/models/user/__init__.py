@@ -1,6 +1,7 @@
+from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    ForeignKey
+    ForeignKey, DateTime
 )
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
@@ -17,6 +18,7 @@ class User(db.Model, MyModel):
     username = Column(String(100), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
     salary = Column(Integer, nullable=False, default=1000)
+    date = Column(DateTime, nullable=False, default=datetime.now)
     user_permissions = db.relationship(
         'UserPermission',
         backref="user",
