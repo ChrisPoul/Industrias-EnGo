@@ -56,6 +56,9 @@ class Product(db.Model, MyModel):
                 inventory[finished_product.unit]
             except KeyError:
                 inventory[finished_product.unit] = 0
+            inventory[finished_product.unit] += finished_product.quantity
+
+        return inventory
             
     
 
