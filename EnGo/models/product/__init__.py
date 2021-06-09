@@ -42,6 +42,21 @@ class Product(db.Model, MyModel):
         from .request import ProductRequest
         return ProductRequest(self)
     
+    @property
+    def inventory(self):
+        inventory = {}
+        for sold_product in self.sold_products:
+            try:
+                inventory[sold_product.unit]
+            except KeyError:
+                inventory[sold_product.unit] = 0
+            inventory[sold_product.unit] -= sold_product.quantity
+        for finished_product in self.finished_products:
+            try:
+                inventory[finished_product.unit]
+            except KeyError:
+                inventory[finished_product.unit] = 0
+            
     
 
 
@@ -104,4 +119,5 @@ class FinishedProduct(db.Model, MyModel):
     def request(self):
         from .request import FinishedProductRequest
         return FinishedProductRequest(self)
+
 
