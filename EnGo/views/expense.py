@@ -13,7 +13,7 @@ from . import (
 bp = Blueprint('expense', __name__, url_prefix='/expense')
 
 permissions = [
-    'Dev'
+    'Contaduría'
 ]
 expense_heads = dict(
     concept="Concepto",
