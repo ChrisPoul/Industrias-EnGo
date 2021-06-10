@@ -1,6 +1,4 @@
-<form method="post">
-    {% include "calendar/month-dropdown.html" %}
-</form>
+{% include "calendar/month-dropdown.html" %}
 <table class="calendar">
     <thead>
         {% for weekday in weekdays %}
@@ -13,19 +11,18 @@
         {% for week in month %}
         <tr>
             {% for day in week %}
-            <a href="{{ url_for('calendar.day', date_str=day.strftime('%d.%m.%Y')) }}">
-                <td>
+            <td>
+                <a href="{{ url_for('calendar.day', date_str=day.strftime('%d.%m.%Y')) }}">
                     <div class="day-num">
                         {{ day.day }}
                     </div>
                     <div class="day-info">
 
-                    </div>    
-                </td>
-            </a>
+                    </div>
+                </a>
+            </td>
             {% endfor %}
         </tr>
         {% endfor %}
     </tbody>
-
 </table>

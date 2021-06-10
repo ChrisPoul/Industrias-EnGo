@@ -24,6 +24,9 @@ class Product(db.Model, MyModel):
     )
     unit = "pz"
 
+    def __repr__(self):
+        return self.code
+
     def get(id):
         return Product.query.get(id)
 
@@ -70,6 +73,9 @@ class SoldProduct(db.Model, MyModel):
     quantity = Column(Integer, nullable=False, default=0)
     price = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
+
+    def __repr__(self):
+        return self.code
 
     def get(id):
         return SoldProduct.query.get(id)

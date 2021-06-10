@@ -16,6 +16,9 @@ class Receipt(db.Model, MyModel):
         cascade="all, delete-orphan"
     )
 
+    def __repr__(self):
+        return self.folio
+
     def get(id):
         return Receipt.query.get(id)
 

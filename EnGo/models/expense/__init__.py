@@ -20,6 +20,9 @@ class Expense(db.Model, MyModel):
         cascade="all, delete-orphan"
     )
 
+    def __repr__(self):
+        return self.concept
+
     def get(id):
         return Expense.query.get(id)
     

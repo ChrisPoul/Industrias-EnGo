@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}{{ format_date(day) }}{% endblock %}</h1>
+{% endblock%}
+
+{% block content %}
+<div>
+    {% include "calendar/events-dropdown.html" %}
+    {% for event in events[event_type] %}
+    <div>
+        {{ event }}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
