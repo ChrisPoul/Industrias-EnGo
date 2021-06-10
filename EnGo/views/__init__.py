@@ -1,4 +1,5 @@
 import functools
+from calendar import Calendar
 from flask import (
     request, g, redirect, url_for
 )
@@ -148,3 +149,13 @@ def format_decimal_of_price(decimal):
     if len(decimal) == 1:
         decimal += "0"
     return decimal
+
+
+def get_months(date):
+    month_rows = calendar.yeardatescalendar(date.year, 1)
+    months = []
+    for month_row in month_rows:
+        month = month_row[0]
+        months.append(month)
+
+    return months

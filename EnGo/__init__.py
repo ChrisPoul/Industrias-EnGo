@@ -65,4 +65,7 @@ def create_app(test_config=None):
     from .views import expense
     app.register_blueprint(expense.bp)
 
+    from .views import calendar
+    app.register_blueprint(calendar.bp)
+
     return app
