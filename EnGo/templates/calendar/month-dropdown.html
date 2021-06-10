@@ -1,0 +1,9 @@
+<select name="selected_month">
+    <option value="{{ month_names[month_index] }}">Seleccionar Mes</option>
+    {% for month_name in month_names %}
+    {% if month_name != month_names[month_index] %}
+    <option value="{{ month_name }}">{{ month_name }}</option>
+    {% endif %}
+    {% endfor %}
+    <input type="submit" value="Seleccióna">
+</select>
