@@ -35,6 +35,7 @@ section div {
 h1 {
     color: #377ba8;
     display: flex;
+    font-size: 2.5vmax;
     margin: 0;
     justify-content: center;
 }
