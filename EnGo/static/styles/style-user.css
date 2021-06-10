@@ -1,6 +1,9 @@
+h1 {
+    font-size: 4vmax;
+}
 .user {
     background-color: rgba(161, 178, 187, 0.329);
-    border-radius: 1em;
+    border-radius: 1vmax;
     padding: 4vh 1.5vw;
     margin-top: 1vmax;
     width: auto;
