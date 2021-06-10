@@ -13,15 +13,16 @@
         {% for week in month %}
         <tr>
             {% for day in week %}
-            <td>
-                <div class="day-num">
-                    {{ day.day }}
-                </div>
-                <div class="day-info">
-                    
-                </div>
-                
-            </td>
+            <a href="{{ url_for('calendar.day', date_str=day.strftime('%d.%m.%Y')) }}">
+                <td>
+                    <div class="day-num">
+                        {{ day.day }}
+                    </div>
+                    <div class="day-info">
+
+                    </div>    
+                </td>
+            </a>
             {% endfor %}
         </tr>
         {% endfor %}

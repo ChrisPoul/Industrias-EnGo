@@ -1,6 +1,7 @@
 from datetime import date 
 from flask import (
-    Blueprint, render_template, request
+    Blueprint, render_template, request,
+    session
 )
 from . import login_required, get_months
 
@@ -46,4 +47,13 @@ def calendar():
         month_names=month_names,
         month_index=month_index,
         month=months[month_index]
+    )
+
+
+@bp.route("/day/<string:date_str>")
+@login_required
+def day(date_str):
+
+    return render_template(
+        "calendar/day.html"
     )
