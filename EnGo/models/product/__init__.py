@@ -83,10 +83,6 @@ class SoldProduct(db.Model, MyModel):
         return self.product.description
 
     @property
-    def price(self):
-        return self.product.price
-
-    @property
     def total(self):
         try:
             total = self.quantity * self.price
