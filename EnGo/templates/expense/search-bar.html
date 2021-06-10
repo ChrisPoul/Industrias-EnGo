@@ -4,7 +4,7 @@
     <option>{{ expense.concept }}</option>
     {% endfor %}
     {% else %}
-    {% for concept in autocomplete.get_data("expenses", "concept") %}
+    {% for concept in get_autocomplete_data("expenses", "concept") %}
     <option>{{ concept }}</option>
     {% endfor %}
     {% endif %}

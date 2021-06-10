@@ -3,7 +3,7 @@
 {% block content %}
 {% for head in customer_heads %}
 <datalist id="{{ head }}s">
-    {% for data in autocomplete.get_data("customers", head) %}
+    {% for data in get_autocomplete_data("customers", head) %}
     <option>{{ data }}</option>
     {% endfor %}
 </datalist>

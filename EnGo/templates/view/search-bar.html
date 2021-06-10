@@ -1,5 +1,5 @@
 <datalist id="views">
-    {% for view_name in autocomplete.get_data("views", "view_name") %}
+    {% for view_name in get_autocomplete_data("views", "view_name") %}
     <option>{{ view_heads[view_name] }}</option>
     {% endfor %}
 </datalist>

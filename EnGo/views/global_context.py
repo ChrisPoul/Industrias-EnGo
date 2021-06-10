@@ -50,10 +50,11 @@ def search_bar():
 
 
 @bp.app_context_processor
-def inject_formaters():
+def inject_functions():
     return dict(
         format_price=format_price,
-        format_date=format_date
+        format_date=format_date,
+        get_autocomplete_data=get_autocomplete_data
     )
 
 
@@ -75,30 +76,19 @@ def inject_settings():
     )
 
 
-@bp.app_context_processor
-def inject_autocomplete():
-    return dict(
-        autocomplete=Autocomplete()
+def get_autocomplete_data(group, attribute):
+    groups = dict(
+        users=User.get_all(),
+        products=Product.get_all(),
+        customers = Customer.get_all(),
+        views=View.get_all(),
+        expenses=Expense.get_all(),
+        warehouses=Warehouse.get_all()
     )
-
-
-class Autocomplete:
-
-    def __init__(self):
-        self.groups = dict(
-            users=User.get_all(),
-            products=Product.get_all(),
-            customers = Customer.get_all(),
-            views=View.get_all(),
-            expenses=Expense.get_all(),
-            warehouses=Warehouse.get_all()
-        )
-
-    def get_data(self, group, attribute):
-        data = []
-        for obj in self.groups[group]:
-            value = getattr(obj, attribute)
-            if value not in set(data):
-                data.append(value)
-        
-        return data
+    data = []
+    for obj in groups[group]:
+        value = getattr(obj, attribute)
+        if value not in set(data):
+            data.append(value)
+    
+    return data

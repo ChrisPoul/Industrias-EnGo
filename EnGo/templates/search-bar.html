@@ -1,30 +1,30 @@
 <datalist id="all-search-terms">
     {% if g.user.has_view_permissions("user.update") %}
-    {% for username in autocomplete.get_data("users", "username") %}
+    {% for username in get_autocomplete_data("users", "username") %}
     <option>{{ username }}</option>
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("customer.update") %}
-    {% for customer_name in autocomplete.get_data("customers", "customer_name") %}
+    {% for customer_name in get_autocomplete_data("customers", "customer_name") %}
     <option>{{ customer_name }}</option>
     {% endfor %}
-    {% for address in autocomplete.get_data("customers", "address") %}
+    {% for address in get_autocomplete_data("customers", "address") %}
     <option>{{ address }}</option>
     {% endfor %}
-    {% for phone in autocomplete.get_data("customers", "phone") %}
+    {% for phone in get_autocomplete_data("customers", "phone") %}
     <option>{{ phone }}</option>
     {% endfor %}
-    {% for rfc in autocomplete.get_data("customers", "rfc") %}
+    {% for rfc in get_autocomplete_data("customers", "rfc") %}
     <option>{{ rfc }}</option>
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("view.update") %}
-    {% for view_name in autocomplete.get_data("views", "view_name") %}
+    {% for view_name in get_autocomplete_data("views", "view_name") %}
     <option value="{{ view_heads[view_name] }}">{{ view_name }}</option>
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("product.update") %}
-    {% for product_name in autocomplete.get_data("products", "code") %}
+    {% for product_name in get_autocomplete_data("products", "code") %}
     <option>{{ product_name }}</option>
     {% endfor %}
     {% endif %}

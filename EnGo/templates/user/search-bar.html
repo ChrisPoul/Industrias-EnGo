@@ -1,5 +1,5 @@
 <datalist id="usernames">
-    {% for username in autocomplete.get_data("users", "username") %}
+    {% for username in get_autocomplete_data("users", "username") %}
     <option>{{ username }}</option>
     {% endfor %}
 </datalist>
