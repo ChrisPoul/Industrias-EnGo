@@ -3,9 +3,13 @@
     border: 1px solid black;
     border-radius: 10px;
 }
-.calendar td, .calendar th {
-    height: 9vw;
-    width: 9vw;
+.calendar td {
+    height: 22.5vmin;
+    width: 22.5vmin;
+}
+.calendar th {
+    padding: 2vmin 0.5vmin;
+    border: none;
 }
 .calendar td {
     padding: 0;
