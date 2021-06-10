@@ -1,0 +1,22 @@
+.calendar, .calendar td {
+    border-collapse: initial;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.calendar td, .calendar th {
+    height: 9vw;
+    width: 9vw;
+}
+.calendar td {
+    padding: 0;
+    vertical-align: top;
+}
+.day-num, .day-info {
+    margin: 0.5vmin;
+}
+.day-num {
+    text-align: right;
+}
+.day-info {
+    text-align: justify;
+}

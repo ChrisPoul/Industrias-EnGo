@@ -152,6 +152,7 @@ def format_decimal_of_price(decimal):
 
 
 def get_months(date):
+    calendar = Calendar()
     month_rows = calendar.yeardatescalendar(date.year, 1)
     months = []
     for month_row in month_rows:

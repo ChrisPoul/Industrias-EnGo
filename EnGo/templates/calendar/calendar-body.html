@@ -1,0 +1,27 @@
+<table class="calendar">
+    <thead>
+        {% for weekday in weekdays %}
+        <th>
+            {{ weekday }}
+        </th>
+        {% endfor %}
+    </thead>
+    <tbody>
+        {% for week in month %}
+        <tr>
+            {% for day in week %}
+            <td>
+                <div class="day-num">
+                    {{ day.day }}
+                </div>
+                <div class="day-info">
+                    
+                </div>
+                
+            </td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
