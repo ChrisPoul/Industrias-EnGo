@@ -60,7 +60,7 @@ event_types = dict(
     receipt="Recibos",
     expense="Gastos"
 )
-event_permissions = dict(
+required_views = dict(
     sold_product="product.products",
     finished_product="warehouse.warehouses",
     receipt="receipt.add",
@@ -102,7 +102,7 @@ def day(date_str):
     return render_template(
         "calendar/day.html",
         event_types=event_types,
-        event_permissions=event_permissions,
+        required_views=required_views,
         event_identifier=event_identifier,
         view_name=view_name,
         day=day_date,
