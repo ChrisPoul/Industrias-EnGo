@@ -14,11 +14,13 @@
     {% else %}
     <div class="container">
         <table>
+            {% if selected_category != 'all' %}
             <thead>
                 <th>
                     {{ event_categories[selected_category] }}
                 </th>
             </thead>
+            {% endif %}
             {% for category in events %}
             {% if category != "selecting" and category != "all" %}
             <tr>
