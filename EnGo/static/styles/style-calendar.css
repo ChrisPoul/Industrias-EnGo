@@ -29,3 +29,10 @@
 .day-info {
     text-align: justify;
 }
+.day form {
+    flex-direction: row;
+    width: 100%;
+}
+.day select {
+    width: 100%;
+}

@@ -5,12 +5,25 @@
 {% endblock%}
 
 {% block content %}
-<div>
+<div class="day">
     {% include "calendar/events-dropdown.html" %}
-    {% for event in events[event_type] %}
-    <div>
-        {{ event }}
+    <div class="container">
+        <table>
+            <thead>
+                <th>
+                    {{ event_types[event_identifier] }}
+                </th>
+            </thead>
+            {% for event in events[event_identifier] %}
+            <tr>
+                <td>
+                    <a href="{{ url_for(view_name, id=event.id) }}">
+                        {{ event }}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

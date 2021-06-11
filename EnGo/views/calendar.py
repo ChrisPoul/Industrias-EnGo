@@ -54,29 +54,18 @@ def calendar():
     )
 
 
-@bp.route("/day/<string:date_str>", methods=('POST', 'GET'))
-@login_required
-def day(date_str):
-    day_date = datetime.strptime(date_str, "%d.%m.%Y")
-    event_type = "Ventas"
-    events = get_day_events(day_date)
-    if request.method == "POST":
-        event_type = request.form["event_type"]
-    
-
-    return render_template(
-        "calendar/day.html",
-        day=day_date,
-        event_type=event_type,
-        events=events
-    )
+event_types = dict(
+    product="Ventas",
+    receipt="Recibos",
+    expense="Gastos"
+)
 
 
 def get_day_events(day):
     events = dict(
-        Ventas=filter_obj_by_date(SoldProduct.query.all(), day),
-        Recibos=filter_obj_by_date(Receipt.query.all(), day),
-        Gastos=filter_obj_by_date(Expense.query.all(), day)
+        product=filter_obj_by_date(SoldProduct.query.all(), day),
+        receipt=filter_obj_by_date(Receipt.query.all(), day),
+        expense=filter_obj_by_date(Expense.query.all(), day)
     )
 
     return events
@@ -84,4 +73,27 @@ def get_day_events(day):
 
 def filter_obj_by_date(objs, date):
     return [obj for obj in objs if obj.date.date() == date.date()]
+
+
+@bp.route("/day/<string:date_str>", methods=('POST', 'GET'))
+@login_required
+def day(date_str):
+    day_date = datetime.strptime(date_str, "%d.%m.%Y")
+    event_identifier = "receipt"
+    events = get_day_events(day_date)
+    if request.method == "POST":
+        event_identifier = request.form["event_type"]
+    if event_identifier == "receipt":
+        view_name = f'{event_identifier}.edit'
+    else:
+        view_name = f'{event_identifier}.update'
+
+    return render_template(
+        "calendar/day.html",
+        event_types=event_types,
+        event_identifier=event_identifier,
+        view_name=view_name,
+        day=day_date,
+        events=events
+    )
 

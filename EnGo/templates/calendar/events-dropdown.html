@@ -1,11 +1,11 @@
 <form method="post">
     <select name="event_type">
-        <option value="{{ event_type }}">{{ event_type }}</option>
-        {% for event_identifier in events %}
-        {% if event_identifier != event_type %}
-        <option value="{{ event_identifier }}">{{ event_identifier }}</option>
+        <option value="{{ event_identifier }}">{{ event_types[event_identifier] }}</option>
+        {% for event_type in event_types %}
+        {% if event_type != event_identifier %}
+        <option value="{{ event_type }}">{{ event_types[event_type] }}</option>
         {% endif %}
         {% endfor %}
-        <input type="submit" value="Seleccionar">
     </select>
+    <input type="submit" value="Seleccionar">
 </form>
