@@ -1,5 +1,10 @@
 <select name="type_id">
-    {% for type in expense_types %}
-    <option value="{{ type['id'] }}">{{ type['name'] }}</option>
+    {% if selected_expense_type %}
+    <option value="{{ selected_expense_type['id'] }}">{{ selected_expense_type['name'] }}</option>
+    {% endif %}
+    {% for expense_type in expense_types %}
+    {% if not selected_expense_type or expense_type != selected_expense_type %}
+    <option value="{{ expense_type['id'] }}">{{ expense_type['name'] }}</option>
+    {% endif %}
     {% endfor %}
 </select>

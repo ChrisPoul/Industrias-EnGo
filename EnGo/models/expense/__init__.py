@@ -74,7 +74,6 @@ class ExpenseType(db.Model, MyModel):
 
 def filter_expenses_by_type(all_expenses, type_id):
     expenses = []
-    type_id = int(type_id)
     if type_id == 0:
         return all_expenses
     for expense in all_expenses:
