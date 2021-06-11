@@ -1,52 +1,21 @@
 <nav>
     {% if g.user %}
     <div>
-        <a href="{{ url_for('home.main_page') }}">
-            EnGo
-        </a>
-        {% if g.user.has_view_permissions('admin.main_page') %}
-        <a href="{{ url_for('admin.main_page') }}">
-            Admin
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('user.users') %}
-        <a href="{{ url_for('user.users') }}">
-            Empleados
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('expense.expenses') %}
-        <a href="{{ url_for('expense.expenses') }}">
-            Gastos
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('warehouse.warehouses') %}
-        <a href="{{ url_for('warehouse.warehouses') }}">
-            Almacenes
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('customer.customers') %}
-        <a href="{{ url_for('customer.customers') }}">
-            Clientes
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('product.products') %}
-        <a href="{{ url_for('product.products') }}">
-            Productos
-        </a>
-        {% endif %}
-        {% if g.user.has_view_permissions('receipt.add') %}
-        <a href="{{ url_for('receipt.add') }}">
-            Crear Recibo
-        </a>
-        {% endif %}
-        <a href="{{ url_for('calendar.calendar') }}">
-            Calendario
-        </a>
-    </div>
-    <div class="search-bar">
-        {% include 'search-bar.html' %}
+        <a href="#home">Home</a>
+        <a href="#news">News</a>
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div> 
     </div>
     <div>
+        {% include 'search-bar.html' %}
         <a href="{{ url_for('user.logout') }}">
             Logout
         </a>

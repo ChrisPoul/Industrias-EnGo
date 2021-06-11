@@ -6,7 +6,6 @@ nav {
     font-size: 1.1em;
 }
 nav a {
-    display: flex;
     align-items: center;
     padding: 1em;
     border-left: 1px solid rgba(255, 255, 255, 0.931);
@@ -16,7 +15,7 @@ nav a {
 nav a:hover {
     background-color: #33729c9f;
 }
-nav div {
+nav:last-child {
     display: flex;
     flex-direction: row;
     border-right: 1px solid rgba(255, 255, 255, 0.931);
