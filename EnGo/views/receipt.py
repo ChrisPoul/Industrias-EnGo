@@ -111,9 +111,10 @@ def update(id):
                     quantity=form["quantity"]
                 )
                 error = sold_product.request.add()
-        if not error:
-            form = get_empty_product_form()
-        else:
+            if not error:
+                form = get_empty_product_form()
+            error = None
+        if error:
             flash(error)
 
     return render_template(
