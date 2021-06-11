@@ -1,4 +1,5 @@
 from datetime import date, datetime
+from functools import lru_cache
 from flask import (
     Blueprint, render_template, request
 )
@@ -50,6 +51,7 @@ required_views = dict(
 )
 
 
+@lru_cache(maxsize=1)
 def get_all_events():
     return dict(
         selecting=[],
@@ -89,6 +91,7 @@ def get_month_events(date):
     return month_events
 
 
+@lru_cache(maxsize=40)
 def get_day_events(date):
     try:
         filter_date = date.date()
@@ -158,6 +161,7 @@ def calendar():
 def day(date_str, category):
     current_date = get_date_from_str(date_str)
     selected_category = category
+    get_day_events.cache_clear()
     events = get_day_events(current_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
