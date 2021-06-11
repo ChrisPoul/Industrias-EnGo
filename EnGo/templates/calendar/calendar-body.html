@@ -17,9 +17,9 @@
                         {{ day.day }}
                     </div>
                     <div class="day-info">
-                        {% for event in get_day_events(day)[selected_category] %}
-                        .
-                        {% endfor %}
+                        {% if len(get_day_events(day)[selected_category]) > 0 %}
+                        Eventos: {{ len(get_day_events(day)[selected_category]) }}
+                        {% endif %}
                     </div>
                 </a>
             </td>

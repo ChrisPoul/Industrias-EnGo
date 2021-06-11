@@ -53,7 +53,8 @@ def inject_functions():
     return dict(
         format_price=format_price,
         format_date=format_date,
-        get_autocomplete_data=get_autocomplete_data
+        get_autocomplete_data=get_autocomplete_data,
+        len=len
     )
 
 
