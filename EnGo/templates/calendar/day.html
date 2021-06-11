@@ -7,6 +7,9 @@
 {% block content %}
 <div class="day">
     {% include "calendar/events-dropdown.html" %}
+    {% if event_identifier == "selecting" %}
+    <h2>Aún no has seleccionado una categoría de evento</h2>
+    {% else %}
     <div class="container">
         <table>
             <thead>
@@ -21,5 +24,6 @@
             {% endfor %}
         </table>
     </div>
+    {% endif %}
 </div>
 {% endblock %}
