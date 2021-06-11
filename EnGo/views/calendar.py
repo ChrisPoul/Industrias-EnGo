@@ -87,9 +87,13 @@ def get_month_events(date):
 
 
 def get_day_events(date):
+    try:
+        filter_date = date.date()
+    except AttributeError:
+        filter_date = date
 
     def filter_events_by_day(events):
-        return [event for event in events if event.date.date() == date.date()]
+        return [event for event in events if event.date.date() == filter_date]
 
     all_events = get_all_events()
     day_events = {}

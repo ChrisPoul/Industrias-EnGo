@@ -17,7 +17,9 @@
                         {{ day.day }}
                     </div>
                     <div class="day-info">
-
+                        {% for event in get_day_events(day)[event_identifier] %}
+                        .
+                        {% endfor %}
                     </div>
                 </a>
             </td>
