@@ -4,8 +4,8 @@
     border-radius: 10px;
 }
 .calendar td {
-    height: 13vw;
-    width: 13vw;
+    height: 12vw;
+    width: 12vw;
 }
 .calendar th {
     padding: 2vmin 0.5vmin;
