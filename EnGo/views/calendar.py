@@ -126,11 +126,11 @@ def calendar():
     event_identifier = "selecting"
     if request.method == "POST":
         event_identifier = request.form["event_type"]
-        current_date_str = request.form["selected_date"]
-        if not current_date_str:
+        month_str = request.form["selected_date"]
+        if not month_str:
             current_date = date.today()
         else:
-            current_date = datetime.strptime(current_date_str, "%Y-%m-%d")
+            current_date = datetime.strptime(month_str, "%Y-%m")
     view_name = get_view_name(event_identifier)
     month_index = current_date.month - 1
     months = get_months(current_date)
