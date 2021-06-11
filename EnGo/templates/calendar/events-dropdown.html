@@ -2,7 +2,7 @@
     <select name="event_category">
         <option value="{{ selected_category }}">{{ event_categories[selected_category] }}</option>
         {% for event_category in event_categories %}
-        {% if event_category != "selecting" and g.user.has_view_permissions(required_views[event_category]) %}
+        {% if event_category != "selecting" and g.user.has_view_permissions(update_views[event_category]) %}
         {% if event_category != selected_category %}
         <option value="{{ event_category }}">{{ event_categories[event_category] }}</option>
         {% endif %}

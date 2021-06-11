@@ -19,10 +19,21 @@
                     {{ event_categories[selected_category] }}
                 </th>
             </thead>
-            {% for event in events[selected_category] %}
+            {% for category in events %}
+            {% if category != "selecting" and category != "all" %}
+            <tr>
+                <td>
+                    <h2>{{ event_categories[category] }}</h2>
+                </td>
+            </tr>
+            {% endif %}
+            {% for event in events[category] %}
+            {% if category == selected_category or selected_category == "all" %}
             <tr>
                 {% include "calendar/event.html" %}
             </tr>
+            {% endif %}
+            {% endfor %}
             {% endfor %}
         </table>
     </div>

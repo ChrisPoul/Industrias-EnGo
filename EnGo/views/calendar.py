@@ -42,12 +42,12 @@ event_categories = dict(
     receipt="Recibos",
     expense="Gastos"
 )
-required_views = dict(
+update_views = dict(
     all="admin.admin",
-    sold_product="receipt.add",
-    finished_product="warehouse.add_product",
-    receipt="receipt.add",
-    expense="expense.expenses"
+    sold_product="receipt.update",
+    finished_product="warehouse.update_product",
+    receipt="receipt.update",
+    expense="expense.update"
 )
 
 
@@ -110,17 +110,6 @@ def get_day_events(date):
     return day_events
 
 
-def get_view_name(selected_category):
-    if selected_category == "sold_product":
-        view_name = 'receipt.update'
-    elif selected_category == "finished_product":
-        view_name = 'warehouse.update_product'
-    else:
-        view_name = f'{selected_category}.update'
-
-    return view_name
-
-
 def get_date_from_str(date_str):
     return datetime.strptime(date_str, "%d.%m.%Y")
 
@@ -137,7 +126,6 @@ def calendar():
             current_date = date.today()
         else:
             current_date = datetime.strptime(month_str, "%Y-%m")
-    view_name = get_view_name(selected_category)
     month_index = current_date.month - 1
     months = get_months(current_date)
 
@@ -146,12 +134,11 @@ def calendar():
         weekdays=weekdays,
         event_categories=event_categories,
         month_names=month_names,
-        view_name=view_name,
         month_index=month_index,
         selected_category=selected_category,
         get_day_events=get_day_events,
         current_date=current_date,
-        required_views=required_views,
+        update_views=update_views,
         month=months[month_index]
     )
 
@@ -165,14 +152,12 @@ def day(date_str, category):
     events = get_day_events(current_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
-    view_name = get_view_name(selected_category)
 
     return render_template(
         "calendar/day.html",
         current_date=current_date,
-        view_name=view_name,
         event_categories=event_categories,
         selected_category=selected_category,
-        required_views=required_views,
+        update_views=update_views,
         events=events
     )
