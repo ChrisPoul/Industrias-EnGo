@@ -93,7 +93,7 @@ def day(date_str):
     if request.method == "POST":
         event_identifier = request.form["event_type"]
     if event_identifier == "receipt" or event_identifier == "sold_product":
-        view_name = 'receipt.edit'
+        view_name = 'receipt.update'
     elif event_identifier == "finished_product":
         view_name = 'warehouse.update_product'
     else:

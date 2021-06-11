@@ -60,7 +60,7 @@ view_heads = {
     "product.products": "Página de Productos",
     "product.delete": "Página de Eliminar Producto",
     "receipt.add": "Página de Añadir Recibo",
-    "receipt.edit": "Página de Editar Recibo",
+    "receipt.update": "Página de Editar Recibo",
     "receipt.done": "Página de Recibo Terminado",
     "receipt.remove_product": "Página de Eliminar Producto del Recibo",
     "receipt.delete": "Página de Eliminar Recibo",

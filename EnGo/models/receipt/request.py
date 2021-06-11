@@ -7,7 +7,7 @@ class ReceiptRequest:
         self.receipt = receipt
         self.error = None
     
-    def edit(self):
+    def update(self):
         error = self.receipt.validation.validate()
         if not error:
             self.receipt.update()

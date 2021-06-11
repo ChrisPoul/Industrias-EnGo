@@ -8,7 +8,7 @@ class TestEdit(ReceiptTest):
     def test_should_update_customer_given_valid_customer_and_valid_products(self):
         self.receipt.add_product(self.product_1)
         self.receipt.customer.customer_name = "New Name"
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertEqual(self.receipt.customer.customer_name, "New Name")
@@ -16,7 +16,7 @@ class TestEdit(ReceiptTest):
     def test_should_not_update_customer_given_invalid_customer_and_valid_products(self):
         self.receipt.add_product(self.product_1)
         self.receipt.customer.customer_name = ""
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertNotEqual(self.receipt.customer.customer_name, "")
@@ -25,7 +25,7 @@ class TestEdit(ReceiptTest):
         self.receipt.add_product(self.product_1)
         self.product_1.code = ""
         self.receipt.customer.customer_name = "New Name"
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertNotEqual(self.receipt.customer.customer_name, "New Name")
@@ -33,7 +33,7 @@ class TestEdit(ReceiptTest):
     def test_should_update_products_given_valid_customer_and_valid_products(self):
         self.receipt.add_product(self.product_1)
         self.product_1.code = "New Code"
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertEqual(self.product_1.code, "New Code")
@@ -41,7 +41,7 @@ class TestEdit(ReceiptTest):
     def test_should_not_update_products_given_invalid_products_and_valid_customer(self):
         self.receipt.add_product(self.product_1)
         self.product_1.code = ""
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertNotEqual(self.product_1.code, "")
@@ -50,7 +50,7 @@ class TestEdit(ReceiptTest):
         self.receipt.add_product(self.product_1)
         self.product_1.code = "New Code"
         self.receipt.customer.customer_name = ""
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertNotEqual(self.product_1.code, "New Code")
@@ -59,7 +59,7 @@ class TestEdit(ReceiptTest):
         self.receipt.add_product(self.product_1)
         sold_product = self.receipt.sold_products[0]
         sold_product.quantity = ""
-        self.receipt.request.edit()
+        self.receipt.request.update()
         self.db.session.rollback()
 
         self.assertNotEqual(sold_product.quantity, "")

@@ -23,7 +23,7 @@
                     {% if head == "date" %}
                     {{ format_date(receipt[head]) }}
                     {% elif head == "folio" %}
-                    <a href="{{ url_for('receipt.edit', id=receipt.id) }}">
+                    <a href="{{ url_for('receipt.update', id=receipt.id) }}">
                         {{ receipt[head] }}
                     </a>
                     {% else %}

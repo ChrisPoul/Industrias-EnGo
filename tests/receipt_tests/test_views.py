@@ -122,7 +122,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=customer_data
             )
         self.db.session.rollback()
@@ -136,7 +136,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=customer_data
             )
         self.db.session.rollback()
@@ -153,7 +153,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=product_data
             )
         self.db.session.rollback()
@@ -171,7 +171,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=product_data
             )
         self.db.session.rollback()
@@ -188,7 +188,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=data
             )
         self.db.session.rollback()
@@ -204,7 +204,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=data
             )
         self.db.session.rollback()
@@ -218,7 +218,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=product_data
             )
         self.db.session.rollback()
@@ -234,7 +234,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=product_data
             )
         self.db.session.rollback()
@@ -249,7 +249,7 @@ class TestEditView(ReceiptViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('receipt.edit', id=self.receipt.id),
+                url_for('receipt.update', id=self.receipt.id),
                 data=data
             )
         self.db.session.rollback()
@@ -260,7 +260,7 @@ class TestEditView(ReceiptViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('receipt.edit', id=self.receipt.id)
+                url_for('receipt.update', id=self.receipt.id)
             )
 
         self.assertStatus(response, 302)

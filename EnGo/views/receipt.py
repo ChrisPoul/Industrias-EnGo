@@ -57,7 +57,7 @@ def add():
             )
             receipt.add()
             return redirect(
-                url_for('receipt.edit', id=receipt.id)
+                url_for('receipt.update', id=receipt.id)
             )
         flash(error)    
     
@@ -80,17 +80,17 @@ def search_for_customer():
     return customer
 
 
-@bp.route("/edit/<int:id>", methods=('POST', 'GET'))
+@bp.route("/update/<int:id>", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
-def edit(id):
+def update(id):
     receipt = Receipt.get(id)
     form = get_form(product_heads)
     empty_spaces = get_empty_spaces(receipt.products)
     if request.method == "POST":
         update_obj_attrs(receipt.customer, receipt_customer_heads)
         update_receipt_products(receipt)
-        error = receipt.request.edit()
+        error = receipt.request.update()
         if not error:
             product = get_product_to_add()
             error = receipt.request.add_product(product)
@@ -136,7 +136,7 @@ def remove_product(id):
     sold_product.delete()
 
     return redirect(
-        url_for('receipt.edit', id=receipt_id)
+        url_for('receipt.update', id=receipt_id)
     )
 
 
