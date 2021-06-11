@@ -1,9 +1,8 @@
 from datetime import date, datetime
 from flask import (
-    Blueprint, render_template, request,
-    session
+    Blueprint, render_template, request
 )
-from EnGo.models.product import SoldProduct
+from EnGo.models.product import SoldProduct, FinishedProduct
 from EnGo.models.receipt import Receipt
 from EnGo.models.expense import Expense
 from . import login_required, get_months
@@ -55,45 +54,60 @@ def calendar():
 
 
 event_types = dict(
-    product="Ventas",
+    select="Seleccionar Evento",
+    sold_product="Productos Vendidos",
+    finished_product="Productos Terminados",
     receipt="Recibos",
     expense="Gastos"
+)
+event_permissions = dict(
+    sold_product="product.products",
+    finished_product="warehouse.warehouses",
+    receipt="receipt.add",
+    expense="expense.expenses"
 )
 
 
 def get_day_events(day):
+
+    def filter_obj_by_day(objs):
+        return [obj for obj in objs if obj.date.date() == day.date()]
+
     events = dict(
-        product=filter_obj_by_date(SoldProduct.query.all(), day),
-        receipt=filter_obj_by_date(Receipt.query.all(), day),
-        expense=filter_obj_by_date(Expense.query.all(), day)
+        select=[],
+        sold_product=filter_obj_by_day(SoldProduct.query.all()),
+        finished_product=filter_obj_by_day(FinishedProduct.query.all()),
+        receipt=filter_obj_by_day(Receipt.query.all()),
+        expense=filter_obj_by_day(Expense.query.all())
     )
 
     return events
-
-
-def filter_obj_by_date(objs, date):
-    return [obj for obj in objs if obj.date.date() == date.date()]
 
 
 @bp.route("/day/<string:date_str>", methods=('POST', 'GET'))
 @login_required
 def day(date_str):
     day_date = datetime.strptime(date_str, "%d.%m.%Y")
-    event_identifier = "receipt"
+    event_identifier = "select"
     events = get_day_events(day_date)
     if request.method == "POST":
         event_identifier = request.form["event_type"]
-    if event_identifier == "receipt":
-        view_name = f'{event_identifier}.edit'
+    if event_identifier == "receipt" or event_identifier == "sold_product":
+        view_name = 'receipt.edit'
+    elif event_identifier == "finished_product":
+        view_name = 'warehouse.update_product'
     else:
         view_name = f'{event_identifier}.update'
 
     return render_template(
         "calendar/day.html",
         event_types=event_types,
+        event_permissions=event_permissions,
         event_identifier=event_identifier,
         view_name=view_name,
         day=day_date,
         events=events
     )
+
+
 

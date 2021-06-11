@@ -2,8 +2,10 @@
     <select name="event_type">
         <option value="{{ event_identifier }}">{{ event_types[event_identifier] }}</option>
         {% for event_type in event_types %}
+        {% if event_type != "select" and g.user.has_view_permissions(event_permissions[event_type]) %}
         {% if event_type != event_identifier %}
         <option value="{{ event_type }}">{{ event_types[event_type] }}</option>
+        {% endif %}
         {% endif %}
         {% endfor %}
     </select>

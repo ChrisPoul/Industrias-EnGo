@@ -115,6 +115,9 @@ class FinishedProduct(db.Model, MyModel):
     cost = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
 
+    def __repr__(self):
+        return self.code
+
     @property
     def code(self):
         return self.product.code
