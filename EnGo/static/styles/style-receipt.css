@@ -51,6 +51,9 @@ strong {
     justify-content: space-between;
     padding: 0.2em;
 }
+input, select, button {
+    font-size: 1em;
+}
 input {
     width: 100%;
 }
@@ -121,17 +124,17 @@ thead {
     text-align: center;
 }
 .code {
-    max-width: 12%;
+    max-width: 11%;
 }
 .description {
     justify-content: left;
     text-align: justify;
 }
 .unit {
-    max-width: 7%;
+    max-width: 8%;
 }
 .price {
-    max-width: 7%;
+    max-width: 8%;
 }
 .price input {
     text-align: center;
@@ -170,5 +173,5 @@ thead {
 }
 
 .add-product input::placeholder {
-    font-size: x-small;
+    font-size: 0.7em;
 }

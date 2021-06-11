@@ -49,9 +49,12 @@ form {
 form label {
     margin: 0.5em;
     margin-bottom: 0;
-    font-size: 0.9em;
     font-weight: 600;
 }
+input, select, button {
+    font-size: 1em;
+}
+
 form input, textarea, select {
     margin: 0.5em;
     padding: 0.4em;
@@ -92,6 +95,9 @@ input[type=submit], input[type=button] {
 table {
     margin-top: 1em;
     border-collapse: collapse;
+}
+th {
+    font-size: 1.2em;
 }
 th, td {
     margin: 1em;
