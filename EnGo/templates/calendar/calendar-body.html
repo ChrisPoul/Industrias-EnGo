@@ -17,8 +17,21 @@
                         {{ day.day }}
                     </div>
                     <div class="day-info">
+                        {% if selected_category == "all" %}
+                        <ul>
+                            {% for category in event_categories %}
+                            {% if category != "all" and len(get_day_events(day)[category]) > 0 %}
+                            <li>
+                                {{ len(get_day_events(day)[category]) }} {{ event_categories[category] }}
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                        {% else %}
                         {% if len(get_day_events(day)[selected_category]) > 0 %}
-                        Eventos: {{ len(get_day_events(day)[selected_category]) }}
+                        <br>
+                        {{ len(get_day_events(day)[selected_category]) }} {{ event_categories[selected_category] }}
+                        {% endif %}
                         {% endif %}
                     </div>
                 </a>

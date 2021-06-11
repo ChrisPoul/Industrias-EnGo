@@ -28,7 +28,14 @@
     text-align: right;
 }
 .day-info {
-    text-align: justify;
+    text-align: center;
+    font-weight: 600;
+}
+.day-info ul {
+    text-align: left;
+    margin-top: 0;
+    padding-left: 1.5em;
+    font-weight: 500;
 }
 
 .calendar-selection {

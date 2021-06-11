@@ -35,12 +35,14 @@ month_names = [
 
 event_categories = dict(
     selecting="Seleccionar Categoría",
+    all="Todos",
     sold_product="Productos Vendidos",
     finished_product="Productos Terminados",
     receipt="Recibos",
     expense="Gastos"
 )
 required_views = dict(
+    all="admin.admin",
     sold_product="receipt.add",
     finished_product="warehouse.add_product",
     receipt="receipt.add",
@@ -51,6 +53,7 @@ required_views = dict(
 def get_all_events():
     return dict(
         selecting=[],
+        all=[],
         sold_product=SoldProduct.query.all(),
         finished_product=FinishedProduct.query.all(),
         receipt=Receipt.query.all(),
@@ -125,7 +128,7 @@ def calendar():
     current_date = date.today()
     selected_category = "selecting"
     if request.method == "POST":
-        selected_category = request.form["event_type"]
+        selected_category = request.form["event_category"]
         month_str = request.form["selected_date"]
         if not month_str:
             current_date = date.today()
@@ -157,7 +160,7 @@ def day(date_str, category):
     selected_category = category
     events = get_day_events(current_date)
     if request.method == "POST":
-        selected_category = request.form["event_type"]
+        selected_category = request.form["event_category"]
     view_name = get_view_name(selected_category)
 
     return render_template(
