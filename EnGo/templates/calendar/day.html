@@ -16,17 +16,7 @@
             </thead>
             {% for event in events[event_identifier] %}
             <tr>
-                <td>
-                    <a 
-                        {% if event_identifier == 'sold_product' %}
-                        href="{{ url_for(view_name, id=event.receipt_id) }}"
-                        {% else %} 
-                        href="{{ url_for(view_name, id=event.id) }}"
-                        {% endif %}
-                        >
-                        {{ event }}
-                    </a>
-                </td>
+                {% include "calendar/event.html" %}
             </tr>
             {% endfor %}
         </table>
