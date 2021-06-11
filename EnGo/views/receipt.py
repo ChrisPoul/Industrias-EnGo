@@ -4,7 +4,7 @@ from flask import (
 )
 from werkzeug.utils import redirect
 from EnGo.models.customer import Customer
-from EnGo.models.product import Product
+from EnGo.models.product import Product, SoldProduct
 from EnGo.models.receipt import Receipt
 from . import (
     login_required, permission_required,
@@ -30,6 +30,7 @@ product_heads = dict(
     price="Precio",
     total="Total"
 )
+
 permissions = [
     "Contaduría"
 ]
@@ -85,17 +86,33 @@ def search_for_customer():
 @login_required
 def update(id):
     receipt = Receipt.get(id)
-    form = get_form(product_heads)
+    form = get_product_form()
     empty_spaces = get_empty_spaces(receipt.products)
     if request.method == "POST":
         update_obj_attrs(receipt.customer, receipt_customer_heads)
         update_receipt_products(receipt)
         error = receipt.request.update()
         if not error:
-            product = get_product_to_add()
-            error = receipt.request.add_product(product)
-            if not error:
-                form = get_empty_form(product_heads)
+            search_term = request.form["code"]
+            product = Product.search(search_term)
+            if not product:
+                product = Product(
+                    code=form["code"],
+                    description=form["description"],
+                    price=form["price"]
+                )
+                error = product.request.add()
+            if product not in set(receipt.products):
+                sold_product = SoldProduct(
+                    receipt_id=id,
+                    product_id=product.id,
+                    price=product.price,
+                    unit=form["unit"],
+                    quantity=form["quantity"]
+                )
+                error = sold_product.request.add()
+        if not error:
+            form = get_empty_product_form()
         else:
             flash(error)
 
@@ -107,6 +124,24 @@ def update(id):
         receipt=receipt,
         form=form
     )
+
+
+def get_product_form():
+    form = get_form(product_heads)
+    if not form['unit']:
+        form['unit'] = "pz"
+    if not form['quantity']:
+        form['quantity'] = 0
+
+    return form
+
+
+def get_empty_product_form():
+    form = get_empty_form(product_heads)
+    form['unit'] = "pz"
+    form['quantity'] = 0
+
+    return form
 
 
 @bp.route("/done/<int:id>")
@@ -154,18 +189,6 @@ def delete(id):
     return redirect(
         url
     )
-
-
-def get_product_to_add():
-    form = get_form(product_heads)
-    product = Product(
-        code=form["code"],
-        description=form["description"],
-        price=form["price"]
-    )
-    product.unit = form["unit"]
-
-    return product
 
 
 def update_receipt_products(receipt):

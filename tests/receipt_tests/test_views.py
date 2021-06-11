@@ -118,7 +118,8 @@ class TestEditView(ReceiptViewTest):
     def test_should_update_receipt_customer_given_valid_customer_data_and_LUHP(self):
         self.login_user(self.accounting_user)
         customer_data = dict(
-            customer_name="New Name"
+            customer_name="New Name",
+            code=""
         )
         with self.client as client:
             client.post(
@@ -149,7 +150,8 @@ class TestEditView(ReceiptViewTest):
         self.receipt.add_product(self.product_2)
         product_data = dict(
             code_1="New Code",
-            code_2="New Code 2"
+            code_2="New Code 2",
+            code=""
         )
         with self.client as client:
             client.post(
