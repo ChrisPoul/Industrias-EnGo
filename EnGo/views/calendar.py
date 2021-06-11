@@ -33,7 +33,7 @@ month_names = [
     "Diciembre"
 ]
 
-event_types = dict(
+event_categories = dict(
     selecting="Seleccionar Categoría",
     sold_product="Productos Vendidos",
     finished_product="Productos Terminados",
@@ -65,9 +65,9 @@ def get_year_events(date):
 
     all_events = get_all_events()
     year_events = {}
-    for event_identifier in all_events:
-        events = all_events[event_identifier]
-        year_events[event_identifier] = filter_events_by_year(events)
+    for selected_category in all_events:
+        events = all_events[selected_category]
+        year_events[selected_category] = filter_events_by_year(events)
     
     return year_events
 
@@ -79,9 +79,9 @@ def get_month_events(date):
         
     year_events = get_year_events(date)
     month_events = {}
-    for event_identifier in year_events:
-        events = year_events[event_identifier]
-        month_events[event_identifier] = filter_events_by_month(events)
+    for selected_category in year_events:
+        events = year_events[selected_category]
+        month_events[selected_category] = filter_events_by_month(events)
 
     return month_events
 
@@ -97,20 +97,20 @@ def get_day_events(date):
 
     all_events = get_all_events()
     day_events = {}
-    for event_identifier in all_events:
-        events = all_events[event_identifier]
-        day_events[event_identifier] = filter_events_by_day(events)
+    for selected_category in all_events:
+        events = all_events[selected_category]
+        day_events[selected_category] = filter_events_by_day(events)
 
     return day_events
 
 
-def get_view_name(event_identifier):
-    if event_identifier == "receipt" or event_identifier == "sold_product":
+def get_view_name(selected_category):
+    if selected_category == "sold_product":
         view_name = 'receipt.update'
-    elif event_identifier == "finished_product":
+    elif selected_category == "finished_product":
         view_name = 'warehouse.update_product'
     else:
-        view_name = f'{event_identifier}.update'
+        view_name = f'{selected_category}.update'
 
     return view_name
 
@@ -123,26 +123,26 @@ def get_date_from_str(date_str):
 @login_required
 def calendar():
     current_date = date.today()
-    event_identifier = "selecting"
+    selected_category = "selecting"
     if request.method == "POST":
-        event_identifier = request.form["event_type"]
+        selected_category = request.form["event_type"]
         month_str = request.form["selected_date"]
         if not month_str:
             current_date = date.today()
         else:
             current_date = datetime.strptime(month_str, "%Y-%m")
-    view_name = get_view_name(event_identifier)
+    view_name = get_view_name(selected_category)
     month_index = current_date.month - 1
     months = get_months(current_date)
 
     return render_template(
         "calendar/calendar.html",
         weekdays=weekdays,
-        event_types=event_types,
+        event_categories=event_categories,
         month_names=month_names,
         view_name=view_name,
         month_index=month_index,
-        event_identifier=event_identifier,
+        selected_category=selected_category,
         get_day_events=get_day_events,
         current_date=current_date,
         required_views=required_views,
@@ -150,22 +150,22 @@ def calendar():
     )
 
 
-@bp.route("/day/<string:date_str>", methods=('POST', 'GET'))
+@bp.route("/day/<string:date_str>/<string:category>", methods=('POST', 'GET'))
 @login_required
-def day(date_str):
+def day(date_str, category):
     current_date = get_date_from_str(date_str)
-    event_identifier = "selecting"
+    selected_category = category
     events = get_day_events(current_date)
     if request.method == "POST":
-        event_identifier = request.form["event_type"]
-    view_name = get_view_name(event_identifier)
+        selected_category = request.form["event_type"]
+    view_name = get_view_name(selected_category)
 
     return render_template(
         "calendar/day.html",
         current_date=current_date,
         view_name=view_name,
-        event_types=event_types,
-        event_identifier=event_identifier,
+        event_categories=event_categories,
+        selected_category=selected_category,
         required_views=required_views,
         events=events
     )

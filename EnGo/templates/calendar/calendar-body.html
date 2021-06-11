@@ -12,12 +12,12 @@
         <tr>
             {% for day in week %}
             <td>
-                <a href="{{ url_for('calendar.day', date_str=day.strftime('%d.%m.%Y')) }}">
+                <a href="{{ url_for('calendar.day', date_str=day.strftime('%d.%m.%Y'), category=selected_category) }}">
                     <div class="day-num">
                         {{ day.day }}
                     </div>
                     <div class="day-info">
-                        {% for event in get_day_events(day)[event_identifier] %}
+                        {% for event in get_day_events(day)[selected_category] %}
                         .
                         {% endfor %}
                     </div>

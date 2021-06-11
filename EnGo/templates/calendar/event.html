@@ -1,6 +1,6 @@
 <td>
     <a 
-        {% if event_identifier == 'sold_product' %}
+        {% if selected_category == 'sold_product' %}
         href="{{ url_for(view_name, id=event.receipt_id) }}"
         {% else %} 
         href="{{ url_for(view_name, id=event.id) }}"

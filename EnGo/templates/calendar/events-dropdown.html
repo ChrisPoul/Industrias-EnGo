@@ -1,13 +1,13 @@
 <div class="events-dropdown">
     <select name="event_type">
-        <option value="{{ event_identifier }}">{{ event_types[event_identifier] }}</option>
-        {% for event_type in event_types %}
+        <option value="{{ selected_category }}">{{ event_categories[selected_category] }}</option>
+        {% for event_type in event_categories %}
         {% if event_type != "selecting" and g.user.has_view_permissions(required_views[event_type]) %}
-        {% if event_type != event_identifier %}
-        <option value="{{ event_type }}">{{ event_types[event_type] }}</option>
+        {% if event_type != selected_category %}
+        <option value="{{ event_type }}">{{ event_categories[event_type] }}</option>
         {% endif %}
         {% endif %}
         {% endfor %}
     </select>
-    <input type="submit" value="Seleccionar">
+    <input type="submit" value="Aceptar">
 </div>
