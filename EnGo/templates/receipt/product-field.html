@@ -1,23 +1,18 @@
-{% if receipt.done %}
-{% if head == "code" or head == "description" %}
-{{ sold_product.product[head] }}
-{% elif head == "total" or head == "price" %}
-{{ format_price(sold_product[head]) }}
-{% else %}
-{{ sold_product[head] }}
-{% endif %}
-{% else %}
-{% if head == "code" or head == "description" %}
-<input name="{{ sold_product.get_unique_key(head) }}" 
-    id="{{ sold_product.get_unique_key(head) }}" 
-    value="{{ sold_product.product[head] }}">
-{% elif head == "total" %}
+{% if not receipt.done %}
+{% if head == "total" %}
 {{ format_price(sold_product[head]) }}
 {% else %}
 <input name="{{ sold_product.get_unique_key(head) }}"
+    id="{{ sold_product.get_unique_key(head) }}"
     {% if head == 'quantity' or head == 'price' %}
     type="number"
     {% endif %}
-    id="{{ sold_product.get_unique_key(head) }}" value="{{ sold_product[head] }}">
+    value="{{ sold_product[head] }}">
+{% endif %}
+{% else %}
+{% if head == "total" or head == "price" %}
+{{ format_price(sold_product[head]) }}
+{% else %}
+{{ sold_product[head] }}
 {% endif %}
 {% endif %}
