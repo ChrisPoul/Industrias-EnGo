@@ -1,4 +1,4 @@
-<form method="post">
+<div class="events-dropdown">
     <select name="event_type">
         <option value="{{ event_identifier }}">{{ event_types[event_identifier] }}</option>
         {% for event_type in event_types %}
@@ -10,4 +10,4 @@
         {% endfor %}
     </select>
     <input type="submit" value="Seleccionar">
-</form>
+</div>

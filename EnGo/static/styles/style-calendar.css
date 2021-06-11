@@ -29,10 +29,16 @@
 .day-info {
     text-align: justify;
 }
-.day form {
+
+.calendar-selection {
+    justify-content: space-between;
+}
+.events-dropdown, .calendar-selection {
     flex-direction: row;
     width: 100%;
 }
-.day select {
+.events-dropdown select {
     width: 100%;
 }
+
+

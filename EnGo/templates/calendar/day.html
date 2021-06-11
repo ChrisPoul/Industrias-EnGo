@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}{{ format_date(day) }}{% endblock %}</h1>
+<h1>{% block title %}{{ format_date(current_date) }}{% endblock %}</h1>
 {% endblock%}
 
 {% block content %}
 <div class="day">
-    {% include "calendar/events-dropdown.html" %}
+    <form method="post">
+        {% include "calendar/events-dropdown.html" %}
+    </form>
     {% if event_identifier == "selecting" %}
     <h2>Aún no has seleccionado una categoría de evento</h2>
     {% else %}

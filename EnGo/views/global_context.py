@@ -1,8 +1,7 @@
 from flask import (
     Blueprint, request, session,
-    redirect
+    redirect, url_for
 )
-from flask.helpers import url_for
 from EnGo.models.user import User
 from EnGo.models.product import Product
 from EnGo.models.customer import Customer
