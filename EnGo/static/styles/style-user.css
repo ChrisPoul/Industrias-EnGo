@@ -1,9 +1,10 @@
 .user {
     background-color: rgba(161, 178, 187, 0.329);
     border-radius: 1vmax;
-    padding: 4vh 1.5vw;
+    padding: 2em 1.5em;
     margin-top: 1vmax;
     width: auto;
+    font-size: 1.2vmax;
 }
 .user input[type=submit] {
     color: white;
