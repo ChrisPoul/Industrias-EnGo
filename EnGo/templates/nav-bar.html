@@ -1,8 +1,11 @@
 <nav>
     {% if g.user %}
-    <div>
+    <div class="left-side">
         <a href="{{ url_for('home.main_page' ) }}">
             EnGo
+        </a>
+        <a href="{{ url_for('admin.main_page' ) }}">
+            Admin
         </a>
         <div class="dropdown">
             <button class="dropbtn"> 
@@ -18,15 +21,32 @@
         </div>
         <div class="dropdown">
             <button class="dropbtn">
-                Dropdown 
+                Recursos Humanos 
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+                <a href="{{ url_for('user.users') }}">Empleados</a>
+                <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
             </div>
         </div>
+        <div class="dropdown">
+            <button class="dropbtn">
+                Almacén
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                {% for warehouse in warehouses %}
+                <a href="{{ url_for('warehouse.inventory', id=warehouse.id) }}">
+                    {{ warehouse.address }}
+                </a>
+                {% endfor %}
+                <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
+                <a href="{{ url_for('warehouse.warehouses') }}">Todos</a>
+            </div>
+        </div>
+        <a href="{{ url_for('calendar.calendar' ) }}">
+            Calendario
+        </a>
     </div>
     <div class="right-side">
         {% include 'search-bar.html' %}

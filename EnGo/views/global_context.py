@@ -19,6 +19,39 @@ from . import (
 bp = Blueprint("global_context", __name__)
 
 
+@bp.app_context_processor
+def inject_functions():
+
+    return dict(
+        format_price=format_price,
+        format_date=format_date,
+        get_autocomplete_data=get_autocomplete_data,
+        len=len
+    )
+
+
+@bp.app_context_processor
+def inject_view_and_permissions():
+    session["prev_url"] = request.referrer
+
+    return dict(
+        view=View.search(request.endpoint),
+        view_heads=view_heads,
+        permissions=Permission.get_all()
+    )
+
+
+@bp.app_context_processor
+def inject_global_objects():
+    settings = get_settings()
+    warehouses = Warehouse.get_all()
+
+    return dict(
+        settings=settings,
+        warehouses=warehouses
+    )
+
+
 @bp.route('/search_bar')
 @login_required
 def search_bar():
@@ -46,34 +79,6 @@ def search_bar():
         return redirect(
             session['prev_url']
         )
-
-
-@bp.app_context_processor
-def inject_functions():
-    return dict(
-        format_price=format_price,
-        format_date=format_date,
-        get_autocomplete_data=get_autocomplete_data,
-        len=len
-    )
-
-
-@bp.app_context_processor
-def inject_view_and_permissions():
-    session["prev_url"] = request.referrer
-    return dict(
-        view=View.search(request.endpoint),
-        view_heads=view_heads,
-        permissions=Permission.get_all()
-    )
-
-
-@bp.app_context_processor
-def inject_settings():
-    settings = get_settings()
-    return dict(
-        settings=settings
-    )
 
 
 def get_autocomplete_data(group, attribute):

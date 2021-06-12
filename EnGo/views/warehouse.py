@@ -37,7 +37,6 @@ product_heads = dict(
 @permission_required(permissions)
 @login_required
 def warehouses():
-    warehouses = Warehouse.get_all()
     if request.method == "POST":
         search_term = request.form["search_term"]
         warehouse = Warehouse.search(search_term)
@@ -48,8 +47,7 @@ def warehouses():
 
     return render_template(
         "warehouse/warehouses.html",
-        warehouse_heads=warehouse_heads,
-        warehouses=warehouses
+        warehouse_heads=warehouse_heads
     )
 
 
