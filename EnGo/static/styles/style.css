@@ -20,7 +20,7 @@ header {
 section {
     display: flex;
     justify-content: center;
-    margin: 3vmax 1vw;
+    margin: 3vmax 2vw;
 }
 section div {
     display: flex;
