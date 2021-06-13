@@ -22,7 +22,7 @@
             </thead>
             {% endif %}
             {% for category in events %}
-            {% if category != "selecting" and category != "all" %}
+            {% if selected_category == "all" and category != "selecting" and category != "all" %}
             <tr>
                 <td>
                     <h3>{{ event_categories[category] }}</h3>
