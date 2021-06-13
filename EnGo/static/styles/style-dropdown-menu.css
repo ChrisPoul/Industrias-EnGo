@@ -20,6 +20,7 @@
     z-index: 1;
 }
 .dropdown-content a {
+    border: none;
     float: none;
     color: black;
     padding: 0.5em 1em;
@@ -29,6 +30,9 @@
 }
 .dropdown-content a:hover {
     background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 .dropdown-content a:hover, .dropdown-content {
     border-radius: 10px;

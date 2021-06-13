@@ -1,25 +1,41 @@
 function on() {
-    document.getElementById("product-inventory").style.display = "block";
-    document.getElementById("overlay").style.display = "block" 
+    displayElement(document.getElementById("product-inventory"))
+    displayElement(document.getElementById("overlay"))
 }
   
+
 function off() {
-    document.getElementById("product-inventory").style.display = "none";
-    document.getElementById("overlay").style.display = "none" 
+    hideElement(document.getElementById("product-inventory"))
+    hideElement(document.getElementById("overlay"))
 }
+
 
 window.onclick = event => {
     element = event.target
-    elementClass = element.className
-    if (elementClass == "dropbtn") {
-        dropdown = element.parentElement
-        dropdown_content = dropdown.children[1]
-        dropdown_content.style.display = "block" 
+    if (element.className == "dropbtn") {
+        displayDropdown(element)
     }
     else {
         dropdowns = document.getElementsByClassName("dropdown-content")
         for(i = 0; i < dropdowns.length; i++){
-            dropdowns[i].style.display = "none" 
+            hideElement(dropdowns[i])
         }
     }
+}
+
+
+function displayDropdown (dropdownButton) {
+    dropdown = dropdownButton.parentElement
+    dropdownContent = dropdown.children[1]
+    displayElement(dropdownContent)
+}
+
+
+function displayElement (element) {
+    element.style.display = "block" 
+}
+
+
+function hideElement (element) {
+    element.style.display = "none"
 }
