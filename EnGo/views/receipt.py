@@ -102,7 +102,7 @@ def update(id):
                     price=form["price"]
                 )
                 error = product.request.add()
-            if product not in set(receipt.products):
+            if not error and product not in set(receipt.products):
                 sold_product = SoldProduct(
                     receipt_id=id,
                     product_id=product.id,

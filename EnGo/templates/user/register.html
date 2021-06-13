@@ -12,6 +12,7 @@
     type="password" required
     {% elif head == "salary" %}
     type="number"
+    step=".01"
     {% endif %}
     placeholder="{{ user_heads[head] }}...">
     {% endfor %}

@@ -4,8 +4,11 @@
 {% else %}
 <input name="{{ sold_product.get_unique_key(head) }}"
     id="{{ sold_product.get_unique_key(head) }}"
-    {% if head == 'quantity' or head == 'price' %}
+    {% if head == 'quantity' %}
     type="number"
+    {% elif head == "price" %}
+    type="number"
+    step=".01"
     {% endif %}
     value="{{ sold_product[head] }}">
 {% endif %}

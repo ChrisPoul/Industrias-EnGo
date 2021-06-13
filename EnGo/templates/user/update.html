@@ -11,6 +11,7 @@
     <input name="{{ head }}" id="{{ head }}"
         {% if head == "salary" %}
         type="number"
+        step=".01"
         {% endif %}
         value="{{ user[head] }}">
     {% endfor %}

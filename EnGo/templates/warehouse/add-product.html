@@ -10,9 +10,11 @@
     {% if head != "price" and head != "description" or product and not product.id %}
     <label for="{{ head }}">{{ product_heads[head] }}</label>
     <input name="{{ head }}"
-    {% if head == "price" or head == "quantity" or head == "cost" %}
+    {% if head == 'quantity' %}
     type="number"
-    {% endif %}
+    {% elif head == "price" or head == "cost" %}
+    type="number"
+    step=".01"
     {% if head == "description" %}
     placeholder="Opcional"
     {% else %}

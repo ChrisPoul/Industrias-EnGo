@@ -9,8 +9,11 @@
         {% else %}
         placeholder="Requerido"
         {% endif %}
-        {% if head == "price" or head == "quantity" %}
+        {% if head == "quantity" %}
         type="number"
+        {% elif head == "price" %}
+        type="number"
+        step=".01"
         {% endif %}
         value="{{ form[head] }}" list="{{ head }}s">
         {% endif %}

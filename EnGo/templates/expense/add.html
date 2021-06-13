@@ -25,8 +25,11 @@
     {% else %}
     <input name="{{ head }}"
     placeholder="Requerido"
-    {% if head == "cost" or head == "quantity" %}
+    {% if head == 'quantity' %}
     type="number"
+    {% elif head == "cost" %}
+    type="number"
+    step=".01"
     {% endif %}
     id="{{ head }}" value="{{ form[head] }}">
     {% endif %}
