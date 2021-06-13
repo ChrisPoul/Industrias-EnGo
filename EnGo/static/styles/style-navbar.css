@@ -2,7 +2,7 @@ nav {
     display: flex;
     overflow: hidden;
     width: 100%;
-    background-color: #4189b9be;
+    background-color: #333;
     justify-content: space-between;
     font-size: 1.1em;
 }
@@ -11,11 +11,8 @@ nav a, nav .dropdown {
     border-left: 1px solid rgba(255, 255, 255, 0.931);
     color: rgb(255, 255, 255);
 }
-nav a:hover {
-    background-color: #33729c9f;
-}
-nav div:first-child {
-    border-right: 1px solid rgba(255, 255, 255, 0.931);
+nav a:hover, nav .dropdown:hover {
+    background-color: rgba(71, 71, 71, 0.616);
 }
 
 nav .search-bar {
@@ -42,4 +39,5 @@ nav a, .dropdown .dropbtn {
 }
 .right-side, .left-side {
     display: flex;
+    border-right: 1px solid rgba(255, 255, 255, 0.931);
 }
