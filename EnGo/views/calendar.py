@@ -117,17 +117,17 @@ def get_date_from_str(date_str):
 @bp.route("/calendar", methods=("POST", "GET"))
 @login_required
 def calendar():
-    current_date = date.today()
+    selected_date = date.today()
     selected_category = "selecting"
     if request.method == "POST":
         selected_category = request.form["event_category"]
         month_str = request.form["selected_date"]
         if not month_str:
-            current_date = date.today()
+            selected_date = date.today()
         else:
-            current_date = datetime.strptime(month_str, "%Y-%m")
-    month_index = current_date.month - 1
-    months = get_months(current_date)
+            selected_date = datetime.strptime(month_str, "%Y-%m")
+    month_index = selected_date.month - 1
+    months = get_months(selected_date)
 
     return render_template(
         "calendar/calendar.html",
@@ -137,7 +137,7 @@ def calendar():
         month_index=month_index,
         selected_category=selected_category,
         get_day_events=get_day_events,
-        current_date=current_date,
+        selected_date=selected_date,
         update_views=update_views,
         month=months[month_index]
     )
@@ -146,16 +146,16 @@ def calendar():
 @bp.route("/day/<string:date_str>/<string:category>", methods=('POST', 'GET'))
 @login_required
 def day(date_str, category):
-    current_date = get_date_from_str(date_str)
+    selected_date = get_date_from_str(date_str)
     selected_category = category
     get_all_events.cache_clear()
-    events = get_day_events(current_date)
+    events = get_day_events(selected_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
 
     return render_template(
         "calendar/day.html",
-        current_date=current_date,
+        selected_date=selected_date,
         event_categories=event_categories,
         selected_category=selected_category,
         update_views=update_views,
