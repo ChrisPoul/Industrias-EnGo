@@ -1,4 +1,8 @@
-{% extends "receipt/base.html" %}
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Añadir Recibo{% endblock %}</h1>
+{% endblock %}
 
 {% block content %}
 {% for head in customer_heads %}

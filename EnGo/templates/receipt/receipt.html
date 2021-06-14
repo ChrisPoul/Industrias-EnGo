@@ -1,12 +1,11 @@
-{% extends "receipt/base.html" %}
+{% extends "base.html" %}
+
+{% block header %}
+    <h1>{% block title %}Recibo {{ receipt.folio }}{% endblock %}</h1>
+{% endblock %}
 
 {% block content %}
-<form method="post" autocomplete="off">
-    <div>
-        {% include "receipt/receipt-head.html" %}
-    </div>
-    <div>
-        {% include "receipt/products.html" %}
-    </div>
+<form method="post" autocomplete="off" class="receipt">
+    
 </form>
 {% endblock %}
