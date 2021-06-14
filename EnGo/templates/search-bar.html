@@ -22,7 +22,7 @@
     {% endfor %}
     {% endif %}
 </datalist>
-<form class="search-bar" action="{{ url_for('global_context.search_bar') }}" autocomplete="off">
+<form class="search-bar" method="post" action="{{ url_for('global_context.search_bar') }}" autocomplete="off">
     <input name="search_term"
         placeholder="¿Qué estás buscando?"
         list="all-search-terms">

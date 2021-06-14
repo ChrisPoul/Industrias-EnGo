@@ -58,10 +58,10 @@ def inject_global_objects():
     )
 
 
-@bp.route('/search_bar')
+@bp.route('/search_bar', methods=('POST', ))
 @login_required
 def search_bar():
-    search_term = request.args['search_term']
+    search_term = request.form['search_term']
     bp_name = "customer"
     try:
         result = Customer.search_all(search_term)[0]
