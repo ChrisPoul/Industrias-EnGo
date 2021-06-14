@@ -15,9 +15,12 @@
         <a href="{{ url_for('home.main_page' ) }}">
             EnGo
         </a>
+        {% if g.user.has_view_permissions("admin.main_page") %}
         <a href="{{ url_for('admin.main_page' ) }}">
             Admin
         </a>
+        {% endif %}
+        {% if g.user.has_view_permissions('receipt.add') %}
         <div class="dropdown">
             <button class="dropbtn"> 
                 Contaduría
@@ -31,6 +34,8 @@
             </div>
             <div class="dropdown-background"></div>
         </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('user.users') %}
         <div class="dropdown">
             <button class="dropbtn">
                 Recursos Humanos 
@@ -42,6 +47,8 @@
             </div>
             <div class="dropdown-background"></div>
         </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('warehouse.warehouses') %}
         <div class="dropdown">
             <button class="dropbtn">
                 Almacén
@@ -53,11 +60,14 @@
                     {{ warehouse.address }}
                 </a>
                 {% endfor %}
+                {% if g.user.has_view_permissions('warehouse.add') %}
                 <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
+                {% endif %}
                 <a href="{{ url_for('warehouse.warehouses') }}">Todos</a>
             </div>
             <div class="dropdown-background"></div>
         </div>
+        {% endif %}
         <a href="{{ url_for('calendar.calendar' ) }}">
             Calendario
         </a>
