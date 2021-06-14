@@ -9,6 +9,7 @@
             <div class="dropdown-content">
                 {% include "view/update.html" %}
             </div>
+            <div class="dropdown-background"></div>
         </div>
         {% endif %}
         <a href="{{ url_for('home.main_page' ) }}">
@@ -28,6 +29,7 @@
                 <a href="{{ url_for('customer.customers') }}">Clientes</a>
                 <a href="{{ url_for('receipt.add') }}">Añadir Recibo</a>
             </div>
+            <div class="dropdown-background"></div>
         </div>
         <div class="dropdown">
             <button class="dropbtn">
@@ -38,6 +40,7 @@
                 <a href="{{ url_for('user.users') }}">Empleados</a>
                 <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
             </div>
+            <div class="dropdown-background"></div>
         </div>
         <div class="dropdown">
             <button class="dropbtn">
@@ -53,6 +56,7 @@
                 <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
                 <a href="{{ url_for('warehouse.warehouses') }}">Todos</a>
             </div>
+            <div class="dropdown-background"></div>
         </div>
         <a href="{{ url_for('calendar.calendar' ) }}">
             Calendario

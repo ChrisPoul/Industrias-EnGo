@@ -15,11 +15,8 @@ window.onclick = event => {
     if (element.className == "dropbtn") {
         displayDropdown(element)
     }
-    else {
-        dropdowns = document.getElementsByClassName("dropdown-content")
-        for(i = 0; i < dropdowns.length; i++){
-            hideElement(dropdowns[i])
-        }
+    else if (element.className == "dropdown-background") {
+        hideDropdown(element)
     }
 }
 
@@ -27,7 +24,19 @@ window.onclick = event => {
 function displayDropdown (dropdownButton) {
     dropdown = dropdownButton.parentElement
     dropdownContent = dropdown.children[1]
+    dropdownBackground = dropdown.children[2]
     displayElement(dropdownContent)
+    displayElement(dropdownBackground)
+}
+
+
+function hideDropdown (dropdownBackground) {
+    hideElement(dropdownBackground)
+    dropdowns = document.getElementsByClassName("dropdown-content")
+    for(i = 0; i < dropdowns.length; i++){
+        dropdownContent = dropdowns[i]
+        hideElement(dropdownContent)
+    }
 }
 
 
