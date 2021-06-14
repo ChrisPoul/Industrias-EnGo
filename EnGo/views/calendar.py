@@ -63,34 +63,6 @@ def get_all_events():
     )
 
 
-def get_year_events(date):
-
-    def filter_events_by_year(events):
-        return [event for event in events if event.date.date().year == date.date().year]
-
-    all_events = get_all_events()
-    year_events = {}
-    for selected_category in all_events:
-        events = all_events[selected_category]
-        year_events[selected_category] = filter_events_by_year(events)
-    
-    return year_events
-
-
-def get_month_events(date):
-
-    def filter_events_by_month(events):
-        return [event for event in events if event.date.date().month == date.date().month]
-        
-    year_events = get_year_events(date)
-    month_events = {}
-    for selected_category in year_events:
-        events = year_events[selected_category]
-        month_events[selected_category] = filter_events_by_month(events)
-
-    return month_events
-
-
 @lru_cache(maxsize=40)
 def get_day_events(date):
     try:

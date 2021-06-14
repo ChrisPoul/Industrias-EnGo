@@ -25,12 +25,15 @@
 }
 .permissions-checkbox {
     flex-direction: column;
+    text-align: left;
     margin: 1em;
 }
 .permissions-checkbox div {
     display: flex;
+    text-align: left;
     flex-direction: row;
     justify-content: flex-start;
+    width: fit-content;
 }
 .permissions-checkbox strong {
     margin-bottom: 0.5em;
@@ -38,6 +41,7 @@
     text-align: left;
 }
 .permissions-checkbox input {
+    width: fit-content;
     margin-left: 0;
     margin-top: 0.6em;
 }

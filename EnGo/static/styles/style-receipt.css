@@ -76,6 +76,10 @@ table a {
 thead {
     background-color: rgba(128, 128, 128, 0.637);
 }
+.permissions-checkbox label {
+    margin: 0.3em
+}
+
 .add-receipt {
     border: 1px solid black;
     border-radius: 10px;
@@ -175,3 +179,4 @@ thead {
 .add-product input::placeholder {
     font-size: 0.7em;
 }
+

@@ -1,0 +1,22 @@
+.update-view {
+    align-items: left;
+    width: fit-content;
+}
+.image-selection {
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+}
+.image-selection label {
+    margin: 1em;
+    margin-bottom: 0;
+    text-align: left;
+}
+.update-view input[type=file] {
+    border: none;
+    max-width: 14em;
+    margin-left: 1em;
+}
+.image-selection input, .image-selection label {
+    width: fit-content;
+}
