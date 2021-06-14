@@ -37,7 +37,7 @@ class TestDayView(CalendarViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('calendar.day', date_str="30.12.2020")
+                url_for('calendar.day', date_str="30.12.2020", category="all")
             )
         
         self.assert200(response)
@@ -45,7 +45,7 @@ class TestDayView(CalendarViewTest):
     def test_should_redirect_given_no_LU(self):
         with self.client as client:
             response = client.get(
-                url_for('calendar.day', date_str="30.12.2020")
+                url_for('calendar.day', date_str="30.12.2020", category="all")
             )
         
         self.assertStatus(response, 302)
