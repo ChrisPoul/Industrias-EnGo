@@ -1,6 +1,16 @@
 <nav>
     {% if g.user %}
     <div class="left-side">
+        {% if g.user.is_admin() and view %}
+        <div class="dropdown">
+            <button class="dropbtn"> 
+                <i class="fa fa-gear" style="font-size: 1em;"></i>
+            </button>
+            <div class="dropdown-content">
+                {% include "view/update.html" %}
+            </div>
+        </div>
+        {% endif %}
         <a href="{{ url_for('home.main_page' ) }}">
             EnGo
         </a>
@@ -53,13 +63,6 @@
         <a href="{{ url_for('user.logout') }}">
             Logout
         </a>
-        {% if g.user.is_admin() and view %}
-        {% if request.endpoint != "view.update" %}
-        <a href="{{ url_for('view.update', id=view.id ) }}" class="gear-icon">
-            <i class="fa fa-gear" style="font-size: 1.6em;"></i>
-        </a>
-        {% endif %}
-        {% endif %}
     </div>
     {% endif %}
 </nav>

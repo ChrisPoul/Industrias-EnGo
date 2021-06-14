@@ -1,22 +1,12 @@
-{% extends 'base.html' %}
-
-{% block header %}
-    <h1>{% block title %}{{ view_heads[view.view_name] }}{% endblock %}</h1>
-{% endblock %}
-
-{% block content %}
-<div class="container">
-    <form method='post' enctype="multipart/form-data" class="update-view">
-        <div class="image-selection">
-            {% if view.view_name == "receipt.update" or view.view_name == "receipt.done" %}
-            <label for="receipt_image">
-                Imagen del Recibo:
-            </label>
-            <input type="file" name="receipt_image" id="receipt_image">
-            {% endif %}
-        </div>
-        {% include 'view/permissions-dropdown.html' %}
-        <input type="submit" value="Guardar cambios">
-    </form>
-</div>
-{% endblock %}
+<form method='post' action="{{ url_for('view.update', id=view.id) }}" enctype="multipart/form-data" class="update-view">
+    <div class="image-selection">
+        {% if view.view_name == "receipt.update" or view.view_name == "receipt.done" %}
+        <label for="receipt_image">
+            Imagen del Recibo:
+        </label>
+        <input type="file" name="receipt_image" id="receipt_image">
+        {% endif %}
+    </div>
+    {% include 'view/permissions-dropdown.html' %}
+    <input type="submit" value="Guardar cambios">
+</form>

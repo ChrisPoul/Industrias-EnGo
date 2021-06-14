@@ -34,9 +34,6 @@ nav a {
 nav a, .dropdown .dropbtn {
     padding: 1em;
 }
-.gear-icon {
-    padding: 0.8em 0.9em;
-}
 .right-side, .left-side {
     display: flex;
     border-right: 1px solid rgba(255, 255, 255, 0.931);

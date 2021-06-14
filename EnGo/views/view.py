@@ -12,30 +12,24 @@ from . import get_checked_permissions
 bp = Blueprint('view', __name__, url_prefix="/view")
 
 
-@bp.route('/update/<int:id>', methods=("POST", "GET"))
+@bp.route('/update/<int:id>', methods=("POST", ))
 def update(id):
     view = View.get(id)
-    if request.method == "POST":
-        try:
-            receipt_image = request.files["receipt_image"]
-        except KeyError:
-            receipt_image = None
-        if receipt_image:
-            save_image(receipt_image)
-        checked_permissions = get_checked_permissions()
-        view.update_permissions(checked_permissions)
-        try:
-            url = session["prev_url"]
-        except KeyError:
-            url = url_for('home.main_page')
+    try:
+        receipt_image = request.files["receipt_image"]
+    except KeyError:
+        receipt_image = None
+    if receipt_image:
+        save_image(receipt_image)
+    checked_permissions = get_checked_permissions()
+    view.update_permissions(checked_permissions)
+    try:
+        url = session["prev_url"]
+    except KeyError:
+        url = url_for('home.main_page')
 
-        return redirect(
-            url
-        )
-
-    return render_template(
-        'view/update.html',
-        view=view
+    return redirect(
+        url
     )
 
 
