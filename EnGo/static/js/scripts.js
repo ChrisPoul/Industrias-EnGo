@@ -12,7 +12,10 @@ function off() {
 
 window.onclick = event => {
     element = event.target
-    if (element.className == "dropbtn") {
+    if (element.className == "dropbtn" || element.className == "fa fa-gear") {
+        if (element.className == "fa fa-gear") {
+            element = element.parentElement
+        }
         displayDropdown(element)
     }
     else if (element.className == "dropdown-background") {
