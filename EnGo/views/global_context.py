@@ -11,6 +11,7 @@ from EnGo.models.expense import Expense
 from EnGo.models.warehouse import Warehouse
 from EnGo.commands.settings import get_settings
 from .view import view_heads
+from .customer import customer_heads
 from . import (
     login_required, format_price,
     format_date
@@ -45,10 +46,15 @@ def inject_view_and_permissions():
 def inject_global_objects():
     settings = get_settings()
     warehouses = Warehouse.get_all()
+    customer_autocomplete_heads = [
+        "phone",
+        "rfc"
+    ]
 
     return dict(
         settings=settings,
-        warehouses=warehouses
+        warehouses=warehouses,
+        customer_autocomplete_heads=customer_autocomplete_heads
     )
 
 

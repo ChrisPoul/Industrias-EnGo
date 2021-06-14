@@ -5,17 +5,10 @@
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("customer.update") %}
-    {% for customer_name in get_autocomplete_data("customers", "customer_name") %}
-    <option>{{ customer_name }}</option>
+    {% for head in customer_autocomplete_heads %}
+    {% for customer_data in get_autocomplete_data("customers", head) %}
+    <option>{{ customer_data }}</option>
     {% endfor %}
-    {% for address in get_autocomplete_data("customers", "address") %}
-    <option>{{ address }}</option>
-    {% endfor %}
-    {% for phone in get_autocomplete_data("customers", "phone") %}
-    <option>{{ phone }}</option>
-    {% endfor %}
-    {% for rfc in get_autocomplete_data("customers", "rfc") %}
-    <option>{{ rfc }}</option>
     {% endfor %}
     {% endif %}
     {% if g.user.has_view_permissions("view.update") %}
