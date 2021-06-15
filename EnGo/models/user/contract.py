@@ -17,19 +17,25 @@ class Contract(db.Model, MyModel):
     def duration(self):
         if not self.end:
             return None
-        duration = self.end - self.start
 
-        return duration.days
+        return get_elapsed_time(self.start, self.end, "days")
 
     @property
     def seniority(self):
-        seniority = datetime.today() - self.start
-
-        return seniority.days
+        
+        return get_elapsed_time(self.start, datetime.today(), "days")
 
     @property
     def vacation_days(self):
+        seniority_years = get_elapsed_time(self.start, datetime.today(), "years")
+        if seniority_years == 0:
+            return 0
         vacation_days = 6
+        for year in range(1, seniority_years + 1):
+            if year > 1 and year <= 4:
+                vacation_days += 2
+        for year in range(5, seniority_years, 4):
+            vacation_days += 2
 
         return vacation_days
 

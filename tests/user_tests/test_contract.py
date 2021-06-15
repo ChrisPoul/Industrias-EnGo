@@ -47,10 +47,15 @@ class VacationDays(TestContract):
         
         self.assertEqual(self.user.contract.vacation_days, 6)
 
-    def test_should_return_12_given_four_years_or_less_since_start_of_contract(self):
+    def test_should_return_12_given_four_years_since_start_of_contract(self):
         self.user.contract.start = datetime.today() - timedelta(days=4*360)
         
         self.assertEqual(self.user.contract.vacation_days, 12)
+    
+    def test_should_return_14_given_nine_years_since_start_of_contract(self):
+        self.user.contract.start = datetime.today() - timedelta(days=9*360)
+
+        self.assertEqual(self.user.contract.vacation_days, 14)
 
 
 class TestGetElapsedTime(TestContract):
@@ -61,4 +66,16 @@ class TestGetElapsedTime(TestContract):
         self.assertEqual(elapsed_years, 0)
 
     def test_should_return_months_elapsed_between_two_dates_given_months_as_parameter(self):
-        
+        elapsed_months = get_elapsed_time(datetime(2020, 1, 1), datetime(2021, 2, 1), "months")
+
+        self.assertEqual(elapsed_months, 13)
+    
+    def test_should_return_months_elapsed_between_two_dates_given_different_years_but_less_than_12_months_apart(self):
+        elapsed_months = get_elapsed_time(datetime(2020, 11, 1), datetime(2021, 2, 1), "months")
+
+        self.assertEqual(elapsed_months, 3)
+    
+    def test_should_return_days_elpased_between_two_dates_given_days_as_parameter(self):
+        elapsed_days = get_elapsed_time(datetime(2021, 6, 1), datetime(2021, 6, 10), "days")
+
+        self.assertEqual(elapsed_days, 9)
