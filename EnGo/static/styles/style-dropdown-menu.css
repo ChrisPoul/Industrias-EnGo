@@ -49,8 +49,13 @@
 .dropdown-content a:hover, .dropdown-content {
     border-radius: 10px;
 }
-.dropdown-content input[type=submit] {
+.dropdown-submit {
+    display: flex;
+    justify-content: center;
+}
+.dropdown-submit input[type=submit] {
     background-color: silver;
     border: 1px solid black;
     margin: 0.5em;
+    width: fit-content;
 }
