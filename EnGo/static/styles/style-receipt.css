@@ -1,1 +1,28 @@
+.receipt {
+    display: grid;
+    grid-template-columns: 12% 15% 38% 12% 13% 10%;
+    width: 21.6cm;
+}
+.receipt div {
+    padding: 0.5em;
+    border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+}
+.receipt input {
+    width: 100%;
+    margin: 0;
+    padding: 0.2em 0.5em;
+    text-align: center;
+}
 
+.product-head {
+    font-weight: 600;
+}
+
+.receipt-foot {
+    display: flex;
+    justify-content: space-between !important;
+    grid-column-start: 1;
+    grid-column-end: span 5;
+}

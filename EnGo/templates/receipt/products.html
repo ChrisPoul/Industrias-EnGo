@@ -1,0 +1,15 @@
+{% for head in product_heads %}
+<div class="product-head">
+    {{ product_heads[head] }}
+</div>
+{% endfor %}
+{% for product in receipt.sold_products %}
+{% for head in product_heads %}
+<div> 
+    {% include "receipt/product-field.html" %}
+</div>
+{% endfor %}
+{% endfor %}
+{% if not receipt.done %}
+{% include "receipt/add-product.html" %}
+{% endif %}

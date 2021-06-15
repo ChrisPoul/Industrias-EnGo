@@ -1,0 +1,14 @@
+{% for head in product_heads %}
+    <div>
+        {% if head != "total" %}
+        <input value="{{ form[head] }}" name="{{ head }}"
+        {% if head == "quantity" %}
+        type="number"
+        {% elif head == "price" %}
+        type="number"
+        step=".01"
+        {% endif %}
+        >
+        {% endif %}
+    </div>
+{% endfor %}

@@ -1,0 +1,11 @@
+<div class="receipt-foot">
+    {% if not receipt.done %}
+    <input type="submit" value="Guardar Cambios">
+    <a href="{{ url_for('receipt.done', id=receipt.id) }}">
+        <input type="button" value="Finalizar">
+    </a>
+    {% endif %}
+</div>
+<div>
+    {{ format_price(receipt.total) }}
+</div>
