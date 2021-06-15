@@ -1,3 +1,7 @@
+.add-receipt input {
+    width: 100%;
+}
+
 .receipt {
     display: grid;
     grid-template-columns: 12% 15% 38% 12% 13% 10%;
