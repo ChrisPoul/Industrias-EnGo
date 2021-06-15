@@ -6,6 +6,7 @@
 
 {% block content %}
 <form method="post" autocomplete="off" class="receipt">
+    {% include "receipt/receipt-head.html" %}
     {% include "receipt/products.html" %}
     {% include "receipt/receipt-foot.html" %}
 </form>

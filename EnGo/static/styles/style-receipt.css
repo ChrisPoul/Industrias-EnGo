@@ -16,6 +16,33 @@
     text-align: center;
 }
 
+.receipt-head {
+    display: grid;
+    grid-template-columns: 73% 27%;
+    grid-column-start: 1;
+    grid-column-end: span 6;
+    padding: 0 !important;
+    justify-content: space-between !important;
+}
+.receipt-head div {
+   border: 0;
+}
+.customer-info {
+    display: grid;
+    grid-template-columns: 18% 82%;
+    padding: 0 !important;
+    width: 100%;
+}
+
+.receipt-info {
+    display: grid;
+    grid-template-columns: auto auto;
+    width: 100%;
+}
+.customer-info div, .receipt-info div {
+    justify-content: left !important;
+    padding: 0.1em 0.5em;
+}
 .product-head {
     font-weight: 600;
 }

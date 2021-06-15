@@ -1,0 +1,35 @@
+<div class="receipt-head">
+    <div class="customer-info">
+        {% for head in customer_heads %}
+        <div>
+            <strong>{{ customer_heads[head] }}:</strong>
+        </div>
+        <div>
+            {% if receipt.done %}
+            {{ receipt.customer[head] }}
+            {% else %}
+            <input type="text" name="{{ head }}"value="{{ receipt.customer[head] }}">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="receipt-info">
+        <div>
+            <strong>
+                Fecha:
+            </strong>
+        </div> 
+        <div>
+            {{ format_date(receipt.date) }}
+        </div>
+        <div>
+            <strong>
+                Folio:
+            </strong>  
+        </div>
+        <div>
+            {{ receipt.folio }}
+        </div>
+    </div>
+
+</div>
