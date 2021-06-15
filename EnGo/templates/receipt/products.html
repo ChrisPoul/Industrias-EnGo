@@ -13,3 +13,10 @@
 {% if not receipt.done %}
 {% include "receipt/add-product.html" %}
 {% endif %}
+{% for _ in empty_spaces %}
+{% for head in product_heads %}
+<div>
+    <br>
+</div>
+{% endfor %}
+{% endfor %}
