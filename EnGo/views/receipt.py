@@ -40,15 +40,14 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def add():
-    form = get_form(customer_heads)
     if request.method == "POST":
         error = None
         customer = search_for_customer()
         if not customer:
             customer = Customer(
-                customer_name=form['customer_name'],
-                address=form['address'],
-                phone=form['phone'],
+                customer_name=request.form['customer_name'],
+                address=request.form['address'],
+                phone=request.form['phone'],
                 rfc=""
             )
             error = customer.request.add()
@@ -65,7 +64,7 @@ def add():
     return render_template(
         'receipt/add.html',
         customer_heads=customer_heads,
-        form=form
+        form=request.form
     )
 
 
