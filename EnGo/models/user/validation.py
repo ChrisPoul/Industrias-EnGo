@@ -1,6 +1,11 @@
-from . import user_attributes
 from EnGo.errors.messages import repeated_value_error
 from EnGo.models import validate_empty_values
+
+user_attributes = [
+    "username",
+    "password",
+    "salary"
+]
 
 
 class UserValidation:

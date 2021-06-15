@@ -6,12 +6,6 @@ from sqlalchemy import (
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
 
-user_attributes = [
-    "username",
-    "password",
-    "salary"
-]
-
 
 class User(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
@@ -21,8 +15,8 @@ class User(db.Model, MyModel):
     contract = db.relationship(
         "Contract",
         backref="user",
+        cascade="all, delete-orphan",
         uselist=False,
-        cascade="all, delete-orphan"
     )
     observations = db.relationship(
         'UserObservation',
@@ -105,6 +99,9 @@ class User(db.Model, MyModel):
     def update_permissions(self, permissions):
         self.remove_permissions()
         self.add_permissions(permissions)
+
+
+from .contract import Contract
         
 
 class UserObservation(db.Model, MyModel):
