@@ -1,4 +1,9 @@
 <div class="receipt-head">
+    <div class="receipt-logo">
+        <a href="{{ url_for('receipt.update', id=receipt.id) }}">
+            <img src="{{ url_for('static', filename=settings['receipt_image']) }}">
+        </a>
+    </div>
     <div class="customer-info">
         {% for head in customer_heads %}
         <div>

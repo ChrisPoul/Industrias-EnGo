@@ -21,10 +21,12 @@
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </head>
 
+{% if receipt and not receipt.done or not receipt %}
 {% include "nav-bar.html" %}
 <header>
     {% block header %}{% endblock %}
 </header>
+{% endif %}
 {% for message in get_flashed_messages() %}
 <div class="flash">{{ message }}</div>
 {% endfor %}
