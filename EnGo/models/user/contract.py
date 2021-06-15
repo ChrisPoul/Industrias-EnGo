@@ -13,5 +13,7 @@ class Contract(db.Model, MyModel):
     start = Column(DateTime, nullable=True)
     end = Column(DateTime, nullable=True)
 
-
+    @property
+    def duration(self):
+        return 1
 
