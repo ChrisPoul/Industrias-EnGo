@@ -8,10 +8,7 @@
 <form method="post" class="user">
     {% for head in user_heads %}
     {% if head == "password" %}
-    {% for head in password_heads %}
-    <input name="{{ head }}" id="{{ head }}" type="password"
-        placeholder="{{ password_heads[head] }}">
-    {% endfor %}
+    {% include "user/password-fields.html" %}
     {% else %}
     <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}"
     {% if head == "salary" %}
