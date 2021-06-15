@@ -78,6 +78,7 @@ section form input[type=button] {
     border: none;
     width: fit-content;
     padding: 0.5em 2.5em;
+    cursor: pointer;
 }
 section form input[type=submit] {
     background-color: rgba(34, 57, 139, 0.788);
