@@ -43,12 +43,11 @@ def products():
 @permission_required(permissions)
 @login_required
 def add():
-    form = get_form(product_heads)
     if request.method == "POST":
         product = Product(
-            code=form["code"],
-            description=form["description"],
-            price=form["price"]
+            code=request.form["code"],
+            description=request.form["description"],
+            price=request.form["price"]
         )
         error = product.request.add()
         if not error:
@@ -60,7 +59,7 @@ def add():
     return render_template(
         "product/add.html",
         product_heads=product_heads,
-        form=form
+        form=request.form
     )
 
 

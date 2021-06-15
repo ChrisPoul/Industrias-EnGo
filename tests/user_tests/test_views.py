@@ -74,6 +74,7 @@ class TestRegisterView(UserViewTest):
         user_credentials = dict(
             username="Some User",
             password="0000",
+            password_confirm="0000",
             salary=1000
         )
         with self.client as client:
@@ -84,11 +85,28 @@ class TestRegisterView(UserViewTest):
         
         self.assertNotEqual(User.search('Some User'), None)
 
-    def test_should_not_register_user_given_invalid_credentials_and_LUHP(self):
+    def test_should_not_register_user_given_invalid_username_and_LUHP(self):
         self.login_user(self.admin_user)
         user_credentials = dict(
             username="Test",
             password="",
+            password_confirm="",
+            salary=1000
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.register'),
+                data=user_credentials
+            )
+
+        self.assertEqual(User.search('Test'), None)
+
+    def test_should_not_register_user_given_passwords_dont_match_and_LUHP(self):
+        self.login_user(self.admin_user)
+        user_credentials = dict(
+            username="Test",
+            password="0000",
+            password_confirm="1234",
             salary=1000
         )
         with self.client as client:
