@@ -36,9 +36,12 @@
 
 .customer-info {
     display: grid;
-    grid-template-columns: 18% 82%;
+    grid-template-columns: 15% 85%;
     padding: 0 !important;
     width: 100%;
+}
+.customer-info input {
+    text-align: left;
 }
 
 .receipt-info {
