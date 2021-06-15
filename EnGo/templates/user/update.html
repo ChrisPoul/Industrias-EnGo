@@ -15,7 +15,7 @@
         {% endif %}
         value="{{ user[head] }}">
     {% endfor %}
-    {% include "user/permissions-dropdown.html" %}
+    {% include "view/permissions-dropdown.html" %}
     <div class="change-password-link">
         <a href="{{ url_for('user.update_password', id=user.id) }}">
             Cambiar contraseña

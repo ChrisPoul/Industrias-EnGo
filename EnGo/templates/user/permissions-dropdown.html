@@ -1,15 +1,21 @@
 <div class="permissions-checkbox">
     {% for permission in permissions %}
+    {% if not user or (not permission.is_admin() and not g.user.is_admin() or g.user.is_admin()) %}
+    {% if not permission.is_dev() or g.user.is_dev() %}
     <div>
-        {% if not permission.is_admin() and not g.user.is_admin() or g.user.is_admin() %}
-        {% if not permission.is_dev() or g.user.is_dev() %}
-        <input type="checkbox" name="{{ permission.permission_name }}" value="{{ permission.id }}"
-            {% if user and permission in user.permissions %}
+        <input type="checkbox" 
+            name="{{ permission.permission_name }}" 
+            value="{{ permission.id }}"
+            {% if user and permission in user.permissions or view and permission in view.permissions %}
             checked
             {% endif %}>
-        <label for="{{ permission.permission_name }}">{{ permission.permission_name }}</label>
-        {% endif %}
-        {% endif %}
     </div>
+    <div>
+        <strong>
+            {{ permission.permission_name }}
+        </strong>
+    </div>
+    {% endif %}
+    {% endif %}
     {% endfor %}
 </div>

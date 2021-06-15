@@ -67,6 +67,7 @@ select {
     padding: 0.3em;
     padding-left: 0.0em;
     background-color: rgba(192, 192, 192, 0.698);
+    cursor: pointer;
 }
 section form div {
     flex-direction: row;
