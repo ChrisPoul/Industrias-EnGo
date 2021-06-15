@@ -7,14 +7,19 @@
 {% block content %}
 <form method="post" class="user">
     {% for head in user_heads %}
-    <input name="{{ head }}" id="{{ head }}"
     {% if head == "password" %}
-    type="password" required
-    {% elif head == "salary" %}
+    {% for head in password_heads %}
+    <input name="{{ head }}" id="{{ head }}" type="password"
+        placeholder="{{ password_heads[head] }}">
+    {% endfor %}
+    {% else %}
+    <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}"
+    {% if head == "salary" %}
     type="number"
     step=".01"
     {% endif %}
     placeholder="{{ user_heads[head] }}...">
+    {% endif %}
     {% endfor %}
     {% include "user/permissions-dropdown.html" %}
     <input type="submit" value="Registrar">

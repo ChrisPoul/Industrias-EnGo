@@ -2,11 +2,12 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
+from EnGo.models.user import User
 from . import (
     permission_required, login_required,
-    update_obj_attrs, get_checked_permissions
+    update_obj_attrs, get_checked_permissions,
+    get_form
 )
-from EnGo.models.user import User
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -20,6 +21,10 @@ user_login_heads = dict(
 user_heads = dict(
     user_login_heads,
     salary="Salario Semanal"
+)
+password_heads = dict(
+    password="Escribe una contraseña...",
+    password_confirm="Confirma la contraseña..."
 )
 permissions = [
     "Recursos Humanos"
@@ -49,13 +54,18 @@ def users():
 @permission_required(permissions)
 @login_required
 def register():
+    form = get_form(user_heads)
     if request.method == "POST":
-        user = User(
-            username=request.form['username'],
-            password=request.form['password'],
-            salary=request.form['salary']
-        )
-        error = user.request.register()
+        error = None
+        if form["password"] != request.form["password_confirm"]:
+            error = "Las contraseñas no coinciden"
+        if not error:
+            user = User(
+                username=form['username'],
+                password=form['password'],
+                salary=form['salary']
+            )
+            error = user.request.register()
         if not error:
             checked_permissions = get_checked_permissions()
             user.add_permissions(checked_permissions)
@@ -66,7 +76,9 @@ def register():
 
     return render_template(
         "user/register.html",
-        user_heads=user_heads
+        user_heads=user_heads,
+        password_heads=password_heads,
+        form=form
     )
 
 
@@ -127,10 +139,6 @@ def update(id):
 @login_required
 def update_password(id):
     user = User.get(id)
-    password_heads = dict(
-        password="Escribe una contraseña...",
-        password_confirm="Confirma la contraseña..."
-    )
     if request.method == "POST":
         password = request.form["password"]
         password_confirm = request.form["password_confirm"]
