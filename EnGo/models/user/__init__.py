@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    ForeignKey, DateTime
+    ForeignKey, DateTime, Text
 )
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
@@ -17,8 +17,18 @@ class User(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     username = Column(String(100), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
-    salary = Column(Integer, nullable=False, default=1000)
-    date = Column(DateTime, nullable=False, default=datetime.now)
+    salary = Column(Integer, nullable=False, default=0)
+    contract = db.relationship(
+        "Contract",
+        backref="user",
+        uselist=False,
+        cascade="all, delete-orphan"
+    )
+    observations = db.relationship(
+        'UserObservation',
+        backref="user",
+        cascade="all, delete-orphan"
+    )
     user_permissions = db.relationship(
         'UserPermission',
         backref="user",
@@ -96,6 +106,13 @@ class User(db.Model, MyModel):
         self.remove_permissions()
         self.add_permissions(permissions)
         
+
+class UserObservation(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    description = Column(Text, nullable=False)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+
 
 class UserPermission(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
