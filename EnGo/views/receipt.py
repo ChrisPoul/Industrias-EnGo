@@ -46,9 +46,9 @@ def add():
         customer = search_for_customer()
         if not customer:
             customer = Customer(
-                customer_name=request.form['customer_name'],
-                address=request.form['address'],
-                phone=request.form['phone'],
+                customer_name=form['customer_name'],
+                address=form['address'],
+                phone=form['phone'],
                 rfc=""
             )
             error = customer.request.add()
