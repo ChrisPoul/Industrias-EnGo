@@ -82,7 +82,7 @@ class TestChristmasBonus(TestContract):
     def test_should_return_15_000_given_monthly_salary_of_30_000(self):
         self.user.salary = 30_000
         
-        self.assertEqual()
+        pass
 
 
 class TestGetElapsedYears(TestContract):
