@@ -25,7 +25,9 @@ def permission_required(permission_names):
         def wrapped_view(*args, **kwargs):
             view_name = request.endpoint
             set_view_permissions(view_name, permission_names)
-            if not g.user or not g.user.has_view_permissions(view_name):
+            if view_name == "user.profile" and kwargs['id'] == g.user.id:
+                return view_func(*args, **kwargs)
+            if not g.user.has_view_permissions(view_name):
                 return redirect(
                     url_for('home.main_page')
                 )
