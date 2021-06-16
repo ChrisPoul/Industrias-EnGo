@@ -16,7 +16,7 @@ window.onclick = event => {
         displaySideMenu(element)
     }
     else if (element.className == "links-dropdown-button") {
-        displayDropdownLinks(element)
+        toggleDropdownLinks(element)
     }
     else if (element.className == "side-menu-background") {
         hideSideMenu(element)
@@ -33,7 +33,7 @@ function displaySideMenu (sideMenuButton) {
 }
 
 
-function displayDropdownLinks (dropdownLinksButton) {
+function toggleDropdownLinks (dropdownLinksButton) {
     dropdownLinks = dropdownLinksButton.parentElement
     dropdownLinksContent = dropdownLinks.children[1]
     if (dropdownLinksContent.style.display == "none") {

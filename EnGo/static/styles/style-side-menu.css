@@ -63,9 +63,6 @@
 .links-dropdown-content a:hover {
     background-color: rgb(63, 62, 62);
 }
-.links-dropdown:hover .links-dropdown-content {
-    display: block;
-}
 .dropdown-submit {
     display: flex;
     justify-content: center;
