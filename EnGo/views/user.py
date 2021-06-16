@@ -20,7 +20,7 @@ user_login_heads = dict(
 )
 user_heads = dict(
     user_login_heads,
-    salary="Salario Semanal"
+    salary="Salario Mensual"
 )
 password_heads = dict(
     password="Escribe una contraseña...",
