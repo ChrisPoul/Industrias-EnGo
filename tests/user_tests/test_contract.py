@@ -68,6 +68,23 @@ class VacationDays(TestContract):
         self.assertEqual(self.user.contract.vacation_days, 16)
 
 
+class TestVacationBonus(TestContract):
+    
+    def test_should_return_2500_given_3_years_of_seniority_and_a_30_000_salary(self):
+        self.user.salary = 30_000
+        self.user.contract.start = datetime.today() - timedelta(days=3*370)
+
+        self.assertEqual(self.user.contract.vacation_bonus, 2500)
+
+
+class TestChristmasBonus(TestContract):
+
+    def test_should_return_15_000_given_monthly_salary_of_30_000(self):
+        self.user.salary = 30_000
+        
+        self.assertEqual()
+
+
 class TestGetElapsedYears(TestContract):
 
     def test_should_return_0_given_two_dates_in_different_years_but_less_than_one_year_appart(self):
@@ -84,4 +101,5 @@ class TestGetElapsedYears(TestContract):
         elapsed_years = get_elapsed_years(datetime(2018, 1, 1), datetime(2020, 1, 1))
         
         self.assertEqual(elapsed_years, 2)
+
 

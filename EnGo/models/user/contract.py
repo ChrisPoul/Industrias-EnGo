@@ -14,6 +14,10 @@ class Contract(db.Model, MyModel):
     end = Column(DateTime, nullable=True)
 
     @property
+    def daily_salary(self):
+        return self.user.salary / 30
+
+    @property
     def duration(self):
         if not self.end:
             return None
@@ -40,6 +44,10 @@ class Contract(db.Model, MyModel):
             vacation_days += 2
 
         return vacation_days
+    
+    @property
+    def vacation_bonus(self):
+       return self.vacation_days * self.daily_salary * 0.25
 
 
 def get_elapsed_years(start_date, end_date):
