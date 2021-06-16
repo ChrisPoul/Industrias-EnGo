@@ -185,6 +185,14 @@ def delete(id):
     )
 
 
+@bp.route("/profile/<int:id>")
+@permission_required(permissions)
+@login_required
+def profile(id):
+    return render_template(
+        "user/profile.html"
+    )
+
 @bp.before_app_request
 def load_loged_in_user():
     try:

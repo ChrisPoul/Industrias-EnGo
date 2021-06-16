@@ -277,3 +277,24 @@ class TestDeleteView(UserViewTest):
             )
 
         self.assertNotIn(self.normal_user, self.db.session)
+
+
+class TestProfileView(UserViewTest):
+
+    def test_should_grant_access_given_LUHP(self):
+        self.login_user(self.dev_user)
+        with self.client as client:
+           response = client.get(
+                url_for('user.profile', id=self.normal_user.id)
+            )
+
+        self.assert200(response)
+
+    def test_should_grant_access_given_profile_belongs_to_LU(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+           response = client.get(
+                url_for('user.profile', id=self.normal_user.id)
+            )
+
+        self.assert200(response)
