@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from . import UserTest
-from EnGo.models.user.contract import Contract, get_elapsed_time
+from EnGo.models.user.contract import Contract, get_elapsed_years
 
 
 class TestContract(UserTest):
@@ -42,40 +42,46 @@ class TestSeniority(TestContract):
 
 class VacationDays(TestContract):
 
-    def test_should_return_6_days_given_less_than_a_year_since_start_of_contract(self):
-        self.user.contract.start = datetime.today() - timedelta(days=360)
+    def test_should_return_0_given_less_than_a_year_since_start_of_contract(self):
+        self.user.contract.start = datetime.today() - timedelta(days=364)
+        
+        self.assertEqual(self.user.contract.vacation_days, 0)
+
+    def test_should_return_6_given_a_year_since_start_of_contract(self):
+        self.user.contract.start = datetime.today() - timedelta(days=370)
         
         self.assertEqual(self.user.contract.vacation_days, 6)
 
     def test_should_return_12_given_four_years_since_start_of_contract(self):
-        self.user.contract.start = datetime.today() - timedelta(days=4*360)
+        self.user.contract.start = datetime.today() - timedelta(days=4*370)
         
         self.assertEqual(self.user.contract.vacation_days, 12)
     
     def test_should_return_14_given_nine_years_since_start_of_contract(self):
-        self.user.contract.start = datetime.today() - timedelta(days=9*360)
+        self.user.contract.start = datetime.today() - timedelta(days=9*370)
 
         self.assertEqual(self.user.contract.vacation_days, 14)
 
+    def test_should_return_16_given_fourteen_years_since_start_of_contract(self):
+        self.user.contract.start = datetime.today() - timedelta(days=14*370)
 
-class TestGetElapsedTime(TestContract):
+        self.assertEqual(self.user.contract.vacation_days, 16)
 
-    def test_should_return_years_elapsed_between_two_dates_given_years_as_parameter(self):
-        elapsed_years = get_elapsed_time(datetime(2020, 1, 1), datetime(2020, 12, 30), "years")
+
+class TestGetElapsedYears(TestContract):
+
+    def test_should_return_0_given_two_dates_in_different_years_but_less_than_one_year_appart(self):
+        elapsed_years = get_elapsed_years(datetime(2020, 12, 1), datetime(2021, 1, 1))
 
         self.assertEqual(elapsed_years, 0)
 
-    def test_should_return_months_elapsed_between_two_dates_given_months_as_parameter(self):
-        elapsed_months = get_elapsed_time(datetime(2020, 1, 1), datetime(2021, 2, 1), "months")
+    def test_should_return_1_given_two_dates_in_different_years_one_year_appart(self):
+        elapsed_years = get_elapsed_years(datetime(2020, 12, 1), datetime(2022, 1, 1))
 
-        self.assertEqual(elapsed_months, 13)
-    
-    def test_should_return_months_elapsed_between_two_dates_given_different_years_but_less_than_12_months_apart(self):
-        elapsed_months = get_elapsed_time(datetime(2020, 11, 1), datetime(2021, 2, 1), "months")
+        self.assertEqual(elapsed_years, 1)
 
-        self.assertEqual(elapsed_months, 3)
-    
-    def test_should_return_days_elpased_between_two_dates_given_days_as_parameter(self):
-        elapsed_days = get_elapsed_time(datetime(2021, 6, 1), datetime(2021, 6, 10), "days")
+    def test_should_2_given_two_dates_exactly_two_years_appart(self):
+        elapsed_years = get_elapsed_years(datetime(2018, 1, 1), datetime(2020, 1, 1))
+        
+        self.assertEqual(elapsed_years, 2)
 
-        self.assertEqual(elapsed_days, 9)

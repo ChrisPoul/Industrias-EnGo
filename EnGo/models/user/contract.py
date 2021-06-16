@@ -17,38 +17,41 @@ class Contract(db.Model, MyModel):
     def duration(self):
         if not self.end:
             return None
+        duration = self.end - self.start
 
-        return get_elapsed_time(self.start, self.end, "days")
+        return duration.days
 
     @property
     def seniority(self):
-        
-        return get_elapsed_time(self.start, datetime.today(), "days")
+        seniority = datetime.today() - self.start
+
+        return seniority.days
 
     @property
     def vacation_days(self):
-        seniority_years = get_elapsed_time(self.start, datetime.today(), "years")
+        seniority_years = get_elapsed_years(self.start, datetime.today())
         if seniority_years == 0:
             return 0
         vacation_days = 6
-        for year in range(1, seniority_years + 1):
-            if year > 1 and year <= 4:
+        for year in range(2, seniority_years + 1):
+            if year <= 4:
                 vacation_days += 2
-        for year in range(5, seniority_years, 4):
+        for year in range(5, seniority_years, 5):
             vacation_days += 2
 
         return vacation_days
 
 
-def get_elapsed_time(start_date, end_date, time_period="days"):
-    if time_period == "days":
-        elapsed_time = (end_date - start_date).days
-    elif time_period == "years":
-        elapsed_time = end_date.year - start_date.year
-    elif time_period == "months":
-        elapsed_years = end_date.year - start_date.year
-        elapsed_time = end_date.month - start_date.month + (elapsed_years * 12)
-    else:
-        raise ValueError("Invalid Time Period")
+def get_elapsed_years(start_date, end_date):
+    elapsed_days = (end_date - start_date).days
+    elapsed_years = 0
+    for year in range(start_date.year, end_date.year):
+        if year % 4 == 0:
+            elapsed_days -= 366
+        else:
+            elapsed_days -= 365
+        if elapsed_days >= 0:
+            elapsed_years += 1
 
-    return elapsed_time
+
+    return elapsed_years
