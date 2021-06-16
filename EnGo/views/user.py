@@ -26,6 +26,15 @@ password_heads = dict(
     password="Escribe una contraseña...",
     password_confirm="Confirma la contraseña..."
 )
+weekday_heads = dict(
+    monday="Lunes",
+    tuesday="Martes",
+    wednesday="Miércoles",
+    thursday="Jueves",
+    friday="Viernes",
+    saturday="Sábado",
+    sunday="Domingo"
+)
 permissions = [
     "Recursos Humanos"
 ]
@@ -103,6 +112,19 @@ def login():
     return render_template(
         "user/login.html",
         user_heads=user_login_heads
+    )
+
+
+@bp.route("/profile/<int:id>")
+@permission_required(permissions)
+@login_required
+def profile(id):
+    user = User.query.get(id)
+
+    return render_template(
+        "user/profile.html",
+        weekday_heads=weekday_heads,
+        user=user
     )
 
 
@@ -184,14 +206,6 @@ def delete(id):
         url_for('user.users')
     )
 
-
-@bp.route("/profile/<int:id>")
-@permission_required(permissions)
-@login_required
-def profile(id):
-    return render_template(
-        "user/profile.html"
-    )
 
 @bp.before_app_request
 def load_loged_in_user():

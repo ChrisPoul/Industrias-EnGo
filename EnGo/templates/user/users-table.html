@@ -14,7 +14,7 @@
             {% for head in user_heads %}
             <td>
                 {% if head == "username" %}
-                <a href="{{ url_for('user.update', id=user.id) }}">
+                <a href="{{ url_for('user.profile', id=user.id) }}">
                     {{ user[head] }}
                 </a>
                 {% else %}

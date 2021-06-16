@@ -23,6 +23,11 @@ class User(db.Model, MyModel):
         backref="user",
         cascade="all, delete-orphan"
     )
+    activities = db.relationship(
+        'UserActivities',
+        backref="user",
+        cascade="all, delete-orphan"
+    )
     user_permissions = db.relationship(
         'UserPermission',
         backref="user",
@@ -111,3 +116,10 @@ class UserPermission(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)
+
+
+class UserActivities(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    assignment_date = Column(DateTime, nullable=False, default=datetime.now)
+    due_date = Column(DateTime, nullable=False)

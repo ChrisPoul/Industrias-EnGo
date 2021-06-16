@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block header %}
+<h1>{%block title %}Perfil de {{ user.username }}{% endblock %}</h1>
+{% if g.user.has_view_permissions('user.update') %}
+<a href="{{ url_for('user.update', id=user.id) }}">
+    editar
+</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="week-activities">
+    {% for head in weekday_heads %}
+    <div class="weekday-head">
+        {{ weekday_heads[head] }}
+    </div>
+    {% endfor %}
+    {% for head in weekday_heads %}
+    <div>
+        pene
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

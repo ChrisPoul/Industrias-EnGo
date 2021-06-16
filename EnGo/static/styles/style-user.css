@@ -48,3 +48,23 @@
     font-size: 0.9em;
     text-decoration: underline;
 }
+
+.week-activities {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.week-activities div {
+    padding: 1em;
+    text-align: center;
+    border-right: 1px solid black;
+}
+.week-activities div:last-child {
+    border-right: none !important;
+}
+.weekday-head {
+    border-right: none !important;
+    border-bottom: 1px solid black;
+    font-weight: 600;
+}
