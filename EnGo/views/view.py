@@ -23,13 +23,9 @@ def update(id):
         save_image(receipt_image)
     checked_permissions = get_checked_permissions()
     view.update_permissions(checked_permissions)
-    try:
-        url = session["prev_url"]
-    except KeyError:
-        url = url_for('home.main_page')
 
     return redirect(
-        url
+        request.referrer
     )
 
 
