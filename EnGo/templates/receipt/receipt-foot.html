@@ -4,6 +4,12 @@
     <a href="{{ url_for('receipt.done', id=receipt.id) }}">
         <input type="button" value="Finalizar">
     </a>
+    {% else %}
+    <p>
+        POR EL PRESENTE PAGARÉ RECONOZCO Y ME OBLIGO A PAGAR A
+        <strong>ENRIQUE GÓMEZ ESPINOZA</strong> EN ESTA CIUDAD O 
+        EN CUALQUER OTRA QUE ME REQUIERA.
+    </p>
     {% endif %}
 </div>
 <div>

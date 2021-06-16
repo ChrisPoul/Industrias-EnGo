@@ -49,7 +49,7 @@
 
 .customer-info {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 18% 82%;
     padding: 0 !important;
     width: 100%;
 }
@@ -79,4 +79,7 @@
 }
 .receipt-foot input[type=button] {
     background-color: rgb(76, 187, 76);
+}
+.receipt-foot p {
+    text-align: center;
 }
