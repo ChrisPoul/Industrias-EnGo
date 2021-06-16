@@ -12,12 +12,12 @@
         </a>
         {% endif %}
         {% if g.user.has_view_permissions('receipt.add') %}
-        <div class="dropdown-links">
-            <button class="dropdown-links-button"> 
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
                 Contaduría
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-links-content">
+            <div class="links-dropdown-content">
                 <a href="{{ url_for('expense.expenses') }}">Gastos</a>
                 <a href="{{ url_for('product.products') }}">Productos</a>
                 <a href="{{ url_for('customer.customers') }}">Clientes</a>
@@ -26,24 +26,24 @@
         </div>
         {% endif %}
         {% if g.user.has_view_permissions('user.users') %}
-        <div class="dropdown-links">
-            <button class="dropdown-links-button"> 
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
                 Recursos Humanos 
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-links-content">
+            <div class="links-dropdown-content">
                 <a href="{{ url_for('user.users') }}">Empleados</a>
                 <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
             </div>
         </div>
         {% endif %}
         {% if g.user.has_view_permissions('warehouse.warehouses') %}
-        <div class="dropdown-links">
-            <button class="dropdown-links-button"> 
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
                 Almacén
                 <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-links-content">
+            <div class="links-dropdown-content">
                 {% for warehouse in warehouses %}
                 <a href="{{ url_for('warehouse.inventory', id=warehouse.id) }}">
                     {{ warehouse.address }}
@@ -57,11 +57,11 @@
         </div>
         {% endif %}
         {% if g.user.is_admin() and view %}
-        <div class="dropdown-links">
-            <button class="dropdown-links-button"> 
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
                 <i class="fa fa-gear" style="font-size: 1em;"></i>
             </button>
-            <div class="dropdown-links-content">
+            <div class="links-dropdown-content">
                 {% include "view/update.html" %}
             </div>
         </div>
