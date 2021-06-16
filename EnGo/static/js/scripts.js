@@ -24,26 +24,31 @@ window.onclick = event => {
 }
 
 
-function displaySideMenu (menuButton) {
-    sideMenu = menuButton.parentElement
-    menuContent = sideMenu.children[1]
-    menuContent.style.display = "flex"
-    menuBackground = sideMenu.children[2]
-    displayElement(menuBackground)
+function displaySideMenu (sideMenuButton) {
+    sideMenu = sideMenuButton.parentElement
+    sideMenuContent = sideMenu.children[1]
+    sideMenuContent.style.display = "flex"
+    sideMenuBackground = sideMenu.children[2]
+    displayElement(sideMenuBackground)
 }
 
 
 function displayDropdownLinks (dropdownLinksButton) {
     dropdownLinks = dropdownLinksButton.parentElement
     dropdownLinksContent = dropdownLinks.children[1]
-    displayElement(dropdownLinksContent)
+    if (dropdownLinksContent.style.display == "none") {
+        displayElement(dropdownLinksContent)
+    }
+    else {
+        hideElement(dropdownLinksContent)
+    }
 }
 
 
-function hideSideMenu (menuBackground) {
-    hideElement(menuBackground)
-    menuContent = document.getElementsByClassName("side-menu-content")[0]
-    hideElement(menuContent)
+function hideSideMenu (sideMenuBackground) {
+    hideElement(sideMenuBackground)
+    sideMenuContent = document.getElementsByClassName("side-menu-content")[0]
+    hideElement(sideMenuContent)
 }
 
 
