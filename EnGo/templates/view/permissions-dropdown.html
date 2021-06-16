@@ -6,7 +6,7 @@
         <input type="checkbox" 
             name="{{ permission.permission_name }}" 
             value="{{ permission.id }}"
-            {% if user and permission in user.permissions %}
+            {% if view and permission in view.permissions %}
             checked
             {% endif %}>
     </div>
