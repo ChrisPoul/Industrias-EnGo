@@ -12,34 +12,38 @@ function off() {
 
 window.onclick = event => {
     element = event.target
-    if (element.className == "dropbtn" || element.className == "fa fa-gear") {
-        if (element.className == "fa fa-gear") {
-            element = element.parentElement
-        }
-        displayDropdown(element)
+    if (element.className == "side-menu-button") {
+        displaySideMenu(element)
     }
-    else if (element.className == "dropdown-background") {
-        hideDropdown(element)
+    else if (element.className == "dropdown-links-button") {
+        displayDropdownLinks(element)
+    }
+    else if (element.className == "side-menu-background") {
+        hideSideMenu(element)
     }
 }
 
 
-function displayDropdown (dropdownButton) {
-    dropdown = dropdownButton.parentElement
-    dropdownContent = dropdown.children[1]
-    dropdownBackground = dropdown.children[2]
-    displayElement(dropdownContent)
-    displayElement(dropdownBackground)
+function displaySideMenu (menuButton) {
+    sideMenu = menuButton.parentElement
+    menuContent = sideMenu.children[1]
+    menuContent.style.display = "flex"
+    menuBackground = sideMenu.children[2]
+    displayElement(menuBackground)
 }
 
 
-function hideDropdown (dropdownBackground) {
-    hideElement(dropdownBackground)
-    dropdowns = document.getElementsByClassName("dropdown-content")
-    for(i = 0; i < dropdowns.length; i++){
-        dropdownContent = dropdowns[i]
-        hideElement(dropdownContent)
-    }
+function displayDropdownLinks (dropdownLinksButton) {
+    dropdownLinks = dropdownLinksButton.parentElement
+    dropdownLinksContent = dropdownLinks.children[1]
+    displayElement(dropdownLinksContent)
+}
+
+
+function hideSideMenu (menuBackground) {
+    hideElement(menuBackground)
+    menuContent = document.getElementsByClassName("side-menu-content")[0]
+    hideElement(menuContent)
 }
 
 
