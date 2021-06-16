@@ -1,14 +1,6 @@
 <nav>
     <div class="left-side">
-        <div class="side-menu">
-            <button class="side-menu-button">
-                Menu
-            </button>
-            <div class="side-menu-content">
-                {% include "side-menu-content.html" %}
-            </div>
-            <div class="side-menu-background"></div>
-        </div>
+        {% include "side-menu.html" %}
         <a href="{{ url_for('calendar.calendar' ) }}">
             Calendario
         </a>

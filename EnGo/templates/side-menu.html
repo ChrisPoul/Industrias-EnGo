@@ -1,0 +1,71 @@
+<div class="side-menu">
+    <button class="side-menu-button">
+        Menu
+    </button>
+    <div class="side-menu-content">
+        <a href="{{ url_for('home.main_page' ) }}">
+            EnGo
+        </a>
+        {% if g.user.has_view_permissions("admin.main_page") %}
+        <a href="{{ url_for('admin.main_page' ) }}">
+            Admin
+        </a>
+        {% endif %}
+        {% if g.user.has_view_permissions('receipt.add') %}
+        <div class="dropdown-links">
+            <button class="dropdown-links-button"> 
+                Contaduría
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-links-content">
+                <a href="{{ url_for('expense.expenses') }}">Gastos</a>
+                <a href="{{ url_for('product.products') }}">Productos</a>
+                <a href="{{ url_for('customer.customers') }}">Clientes</a>
+                <a href="{{ url_for('receipt.add') }}">Añadir Recibo</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('user.users') %}
+        <div class="dropdown-links">
+            <button class="dropdown-links-button"> 
+                Recursos Humanos 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-links-content">
+                <a href="{{ url_for('user.users') }}">Empleados</a>
+                <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('warehouse.warehouses') %}
+        <div class="dropdown-links">
+            <button class="dropdown-links-button"> 
+                Almacén
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-links-content">
+                {% for warehouse in warehouses %}
+                <a href="{{ url_for('warehouse.inventory', id=warehouse.id) }}">
+                    {{ warehouse.address }}
+                </a>
+                {% endfor %}
+                {% if g.user.has_view_permissions('warehouse.add') %}
+                <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
+                {% endif %}
+                <a href="{{ url_for('warehouse.warehouses') }}">Todos</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if g.user.is_admin() and view %}
+        <div class="dropdown-links">
+            <button class="dropdown-links-button"> 
+                <i class="fa fa-gear" style="font-size: 1em;"></i>
+            </button>
+            <div class="dropdown-links-content">
+                {% include "view/update.html" %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+    <div class="side-menu-background"></div>
+</div>
