@@ -3,11 +3,20 @@ from . import UserTest
 from EnGo.models.user import UserActivity
 
 
-class ActivityValidationTest(UserTest):
-    pass
+class ActivityTest(UserTest):
+    
+    def setUp(self):
+        UserTest.setUp(self)
+        self.activity = UserActivity(
+            user_id=self.user.id,
+            title="Test Activity",
+            description="Test Description",
+            due_date=date.today()
+        )
+        self.activity.add()
 
 
-class TestValidate(ActivityValidationTest):
+class TestValidate(ActivityTest):
 
     def test_should_not_return_error_given_valid_activity(self):
         activity = UserActivity(
@@ -32,7 +41,7 @@ class TestValidate(ActivityValidationTest):
         self.assertNotEqual(error, None)
 
 
-class TestValidateEmptyValues(ActivityValidationTest):
+class TestValidateEmptyValues(ActivityTest):
 
     def test_should_not_return_error_given_no_empty_title(self):
         activity = UserActivity(
@@ -57,20 +66,7 @@ class TestValidateEmptyValues(ActivityValidationTest):
         self.assertNotEqual(error, None)
 
 
-class ActivityRequestTest(UserTest):
-    
-    def setUp(self):
-        UserTest.setUp(self)
-        self.activity = UserActivity(
-            user_id=self.user.id,
-            title="Test Activity",
-            description="Test Description",
-            due_date=date.today()
-        )
-        self.activity.add()
-
-
-class TestAdd(ActivityRequestTest):
+class TestRequestAdd(ActivityTest):
 
     def test_should_add_activity_given_valid_activity(self):
         activity = UserActivity(
@@ -95,7 +91,7 @@ class TestAdd(ActivityRequestTest):
         self.assertNotIn(activity, self.db.session)
 
 
-class TestUpdate(ActivityRequestTest):
+class TestRequestUpdate(ActivityTest):
 
     def test_should_update_activity_given_valid_changes(self):
         self.activity.title = "New Valid Title"
