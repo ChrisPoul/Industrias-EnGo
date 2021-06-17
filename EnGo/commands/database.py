@@ -61,15 +61,8 @@ def update_db_command():
 
 
 def update_db():
-    from EnGo.models.warehouse import (
-        Warehouse, FinishedProduct
-    )
-    Warehouse.__table__.drop(db.engine)
-    FinishedProduct.__table__.drop(db.engine)
-    from EnGo.models.expense import WarehouseExpense, Expense
-    WarehouseExpense.__table__.drop(db.engine)
-    Expense.__table__.drop(db.engine)
-    db.create_all()
+    from EnGo.models.user import UserActivities
+    UserActivities.__table__.drop(db.engine)
 
 
 def init_expense_types():

@@ -109,6 +109,8 @@ class User(db.Model, MyModel):
         for activity in week_activities:
             week_day = activity.due_date.isocalendar()[2]
             weekday_activities[week_day].append(activity)
+
+        return weekday_activities
     
 
 def filter_activities_by_week(date, events):
