@@ -8,6 +8,7 @@
     top: 0;
     left: 0;
     height: 100%;
+    padding-top: 0.5em;
     flex-direction: column;
     color: white;
     background-color: #333;
