@@ -18,7 +18,7 @@ class ProductViewTest(ProductTest):
 class TestProductsView(ProductViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         with self.client as client:
             response = client.get(
                 url_for("product.products")
@@ -35,7 +35,7 @@ class TestProductsView(ProductViewTest):
         self.assertStatus(response, 302)
 
     def test_should_redirect_given_valid_search_term_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         search_data = dict(
             search_term="Test Code"
         )
@@ -48,7 +48,7 @@ class TestProductsView(ProductViewTest):
         self.assertStatus(response, 302)
 
     def test_should_not_redirect_given_invalid_search_term_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         search_data = dict(
             search_term="Invalid term"
         )
@@ -64,7 +64,7 @@ class TestProductsView(ProductViewTest):
 class TestAddView(ProductViewTest):
 
     def test_should_add_product_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         product_data = dict(
             code="Valid Code",
             description="Some description",
@@ -79,7 +79,7 @@ class TestAddView(ProductViewTest):
         self.assertEqual(len(Product.get_all()), 2)
 
     def test_should_not_add_product_given_invalid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         product_data = dict(
             code="",
             description="Some description",
@@ -105,7 +105,7 @@ class TestAddView(ProductViewTest):
 class TestUpdateView(ProductViewTest):
 
     def test_should_update_product_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         product_data = dict(
             code="New Code",
             description="",
@@ -132,7 +132,7 @@ class TestUpdateView(ProductViewTest):
 class TestDeleteView(ProductViewTest):
 
     def test_should_delete_product_given_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         with self.client as client:
             client.get(
                 url_for("product.delete", id=self.product.id)

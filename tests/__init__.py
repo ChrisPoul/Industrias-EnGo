@@ -51,16 +51,6 @@ class Test(TestCase):
         )
         self.admin_user.add()
         self.admin_user.add_permission(self.admin_permission)
-        accounting_permission = Permission(
-            permission_name="Contaduría"
-        )
-        accounting_permission.add()
-        self.accounting_user = User(
-            username="Accounting User",
-            password="0000"
-        )
-        self.accounting_user.add()
-        self.accounting_user.add_permission(accounting_permission)
         self.normal_user = User(
             username="Normal User",
             password="0000"

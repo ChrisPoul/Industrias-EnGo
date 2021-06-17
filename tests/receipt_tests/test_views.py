@@ -24,7 +24,7 @@ class ReceiptViewTest(ReceiptTest):
 class TestAddView(ReceiptViewTest):
 
     def test_should_add_receipt_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="Test Name",
             address="Test Address",
@@ -40,7 +40,7 @@ class TestAddView(ReceiptViewTest):
         self.assertNotEqual(len(Receipt.get_all()), len(prev_receipts))
     
     def test_should_not_add_receipt_given_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="",
             address="Invalid Address",
@@ -56,7 +56,7 @@ class TestAddView(ReceiptViewTest):
         self.assertEqual(Receipt.get_all(), prev_receipts)
 
     def test_should_not_add_receipt_given_empty_values_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="",
             address="",
@@ -72,7 +72,7 @@ class TestAddView(ReceiptViewTest):
         self.assertEqual(Receipt.get_all(), prev_receipts)
     
     def test_should_add_receipt_and_new_customer_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="Valid New Name",
             address="Valid Address",
@@ -89,7 +89,7 @@ class TestAddView(ReceiptViewTest):
         self.assertEqual(len(Customer.search_all('Valid New Name')), 1)
 
     def test_should_redirect_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="Valid New Name",
             address="Valid Address",
@@ -116,7 +116,7 @@ class TestAddView(ReceiptViewTest):
 class TestEditView(ReceiptViewTest):
 
     def test_should_update_receipt_customer_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="New Name",
             code=""
@@ -131,7 +131,7 @@ class TestEditView(ReceiptViewTest):
         self.assertEqual(self.customer.customer_name, 'New Name')
 
     def test_should_not_update_customer_given_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name=""
         )
@@ -145,7 +145,7 @@ class TestEditView(ReceiptViewTest):
         self.assertNotEqual(self.customer.customer_name, '')
 
     def test_should_update_receipt_products_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         self.receipt.add_product(self.product_1)
         self.receipt.add_product(self.product_2)
         product_data = dict(
@@ -164,7 +164,7 @@ class TestEditView(ReceiptViewTest):
         self.assertEqual(self.product_2.code, "New Code 2")
 
     def test_should_not_update_receipt_products_given_invalid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         self.receipt.add_product(self.product_1)
         self.receipt.add_product(self.product_2)
         product_data = dict(
@@ -182,7 +182,7 @@ class TestEditView(ReceiptViewTest):
         self.assertNotEqual(self.product_2.code, "")
 
     def test_should_not_update_customer_given_valid_customer_data_and_invalid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         self.receipt.add_product(self.product_1)
         data = dict(
             customer_name="New Name",
@@ -198,7 +198,7 @@ class TestEditView(ReceiptViewTest):
         self.assertNotEqual(self.customer.customer_name, 'New Name')
 
     def test_should_not_update_receipt_products_given_valid_product_data_and_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         self.receipt.add_product(self.product_1)
         data = dict(
             customer_name="",
@@ -214,7 +214,7 @@ class TestEditView(ReceiptViewTest):
         self.assertNotEqual(self.product_1.code, 'New Code')
 
     def test_should_add_product_to_receipt_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         product_data = dict(
             code="Code 1"
         )
@@ -228,7 +228,7 @@ class TestEditView(ReceiptViewTest):
         self.assertIn(self.product_1, self.receipt.products)
 
     def test_should_create_product_and_add_it_to_receipt_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         product_data = dict(
             code="New Product",
             description="Some description",
@@ -244,7 +244,7 @@ class TestEditView(ReceiptViewTest):
         self.assertTrue(Product.search("New Product"))
 
     def test_should_not_add_product_given_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         data = dict(
             customer_name="",
             code="Code 1"
@@ -292,7 +292,7 @@ class TestDoneView(ReceiptViewTest):
 class TestRemoveProduct(ReceiptViewTest):
 
     def test_should_remove_product_from_receipt_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         self.receipt.add_product(self.product_1)
         with self.client as client:
             client.get(
@@ -314,7 +314,7 @@ class TestRemoveProduct(ReceiptViewTest):
 class TestDeleteView(ReceiptViewTest):
 
     def test_should_delete_receipt_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         with self.client as client:
             client.get(
                 url_for('receipt.delete', id=self.receipt.id)

@@ -16,7 +16,7 @@ class CustomerViewTest(CustomerTest):
 class TestCustomersView(CustomerViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         with self.client as client:
             response = client.get(
                 url_for('customer.customers')
@@ -34,7 +34,7 @@ class TestCustomersView(CustomerViewTest):
         self.assertStatus(response, 302)
 
     def test_should_not_redirect_given_valid_search_term_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         search_data = dict(
             search_term="Test Name"
         )
@@ -47,7 +47,7 @@ class TestCustomersView(CustomerViewTest):
         self.assert200(response)
 
     def test_should_not_redirect_given_invalid_search_term_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         search_data = dict(
             search_term="Invalid search term"
         )
@@ -63,7 +63,7 @@ class TestCustomersView(CustomerViewTest):
 class TestAddView(CustomerViewTest):
 
     def test_should_add_customer_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="Valid Name",
             address="Valid Address",
@@ -79,7 +79,7 @@ class TestAddView(CustomerViewTest):
         self.assertEqual(len(Customer.get_all()), 2)
     
     def test_should_not_add_customer_given_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="",
             address="Valid Address",
@@ -107,7 +107,7 @@ class TestAddView(CustomerViewTest):
 class TestUpdateView(CustomerViewTest):
 
     def test_should_update_customer_given_valid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="New Name", 
             address="Valid Address",
@@ -123,7 +123,7 @@ class TestUpdateView(CustomerViewTest):
         self.assertEqual(self.customer.customer_name, "New Name")
 
     def test_should_not_update_customer_given_invalid_customer_data_and_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         customer_data = dict(
             customer_name="", 
             address="Valid Address",
@@ -151,7 +151,7 @@ class TestUpdateView(CustomerViewTest):
 class DeleteCustomerView(CustomerViewTest):
 
     def test_should_delete_customer_given_LUHP(self):
-        self.login_user(self.accounting_user)
+        self.login_user(self.admin_user)
         with self.client as client:
             client.get(
                 url_for('customer.delete', id=self.customer.id)
