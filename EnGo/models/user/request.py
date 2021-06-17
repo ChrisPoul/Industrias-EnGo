@@ -37,3 +37,23 @@ class UserRequest:
             self.user.update()
 
         return error
+
+
+class UserActivityRequest:
+
+    def __init__(self, user_activity):
+        self.activity = user_activity
+    
+    def add(self):
+        error = self.activity.validation.validate()
+        if not error:
+            self.activity.add()
+        
+        return error
+
+    def update(self):
+        error = self.activity.validation.validate()
+        if not error:
+            self.activity.update()
+        
+        return error

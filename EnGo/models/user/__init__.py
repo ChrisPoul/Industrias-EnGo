@@ -148,4 +148,12 @@ class UserActivity(db.Model, MyModel):
     title = Column(String(200), nullable=False)
     description = Column(Text, nullable=True)
 
+    @property
+    def validation(self):
+        from .validation import UserActivityValidation
+        return UserActivityValidation(self)
 
+    @property
+    def request(self):
+        from .request import UserActivityRequest
+        return UserActivityRequest(self)
