@@ -67,14 +67,3 @@ def validate_obj_num(obj, attribute):
             error = "No se pueden añadir cantidades negativas"
 
     return error
-
-
-def filter_by_week(date, events):
-    week_events = []
-    for event in events:
-        date_year, date_week, _ = date.isocalendar()
-        event_year, event_week, _ = event.date.isocalendar()
-        if event_year == date_year and event_week == date_week:
-            week_events.append(event)
-    
-    return week_events

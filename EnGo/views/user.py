@@ -1,12 +1,12 @@
+from datetime import datetime
 from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from EnGo.models.user import User
+from EnGo.models.user import User, UserActivities
 from . import (
     permission_required, login_required,
-    update_obj_attrs, get_checked_permissions,
-    get_form
+    get_checked_permissions, get_form
 )
 
 bp = Blueprint("user", __name__, url_prefix="/user")
@@ -35,6 +35,11 @@ weekday_heads = {
     6: "Sábado",
     7: "Domingo"
 }
+activity_heads = dict(
+    title="Titulo",
+    description="Descripsión",
+    due_date="Fecha"
+)
 permissions = [
     "Recursos Humanos"
 ]
@@ -120,11 +125,33 @@ def login():
 @login_required
 def profile(id):
     user = User.query.get(id)
+    week_activities = user.get_week_activities(datetime.today())
 
     return render_template(
         "user/profile.html",
         weekday_heads=weekday_heads,
+        week_activities=week_activities,
         user=user
+    )
+
+
+@bp.route("/assign_activity/<int:id>", methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
+def assign_activity(id):
+    if request.method == "POST":
+        due_date_str = request.form["due_date"]
+        due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
+        activity = UserActivities(
+            user_id=id,
+            title=request.form['title'],
+            description=request.form['description'],
+            due_date=due_date
+        )
+        activity.add()
+    return render_template(
+        "user/assign_activity.html",
+        activity_heads=activity_heads
     )
 
 

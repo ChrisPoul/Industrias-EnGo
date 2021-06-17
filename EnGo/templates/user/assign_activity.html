@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Assignar Actividad{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% for head in activity_heads %}
+    <div>
+        <label for="{{ head }}">{{ activity_heads[head] }}</label>
+        <input name="{{ head }}"
+        {% if head == "due_date" %}
+        type="date"
+        {% else %}
+        type="text"
+        {% endif %}> 
+    </div>
+    {% endfor %}
+    <input type="submit" value="Asignar">
+</form>
+{% endblock %}
