@@ -3,7 +3,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from EnGo.models.user import User, UserActivities
+from EnGo.models.user import User, UserActivity
 from . import (
     permission_required, login_required,
     get_checked_permissions, get_form
@@ -142,7 +142,7 @@ def assign_activity(id):
     if request.method == "POST":
         due_date_str = request.form["due_date"]
         due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-        activity = UserActivities(
+        activity = UserActivity(
             user_id=id,
             title=request.form['title'],
             description=request.form['description'],

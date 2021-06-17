@@ -24,7 +24,7 @@ class User(db.Model, MyModel):
         cascade="all, delete-orphan"
     )
     activities = db.relationship(
-        'UserActivities',
+        'UserActivity',
         backref="user",
         cascade="all, delete-orphan"
     )
@@ -140,7 +140,7 @@ class UserPermission(db.Model, MyModel):
     permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)
 
 
-class UserActivities(db.Model, MyModel):
+class UserActivity(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     assignment_date = Column(DateTime, nullable=False, default=datetime.now)

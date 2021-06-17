@@ -61,8 +61,9 @@ def update_db_command():
 
 
 def update_db():
-    from EnGo.models.user import UserActivities
-    UserActivities.__table__.drop(db.engine)
+    from EnGo.models.user import UserActivity
+    # UserActivity.__table__.drop(db.engine)
+    db.create_all()
 
 
 def init_expense_types():
