@@ -4,17 +4,16 @@
 }
 .side-menu-content {
     display: none;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
     flex-direction: column;
     color: white;
     background-color: #333;
     min-width: 10em;
-    box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.87);
+    box-shadow: 0 0 2em 0 rgba(0, 0, 0, 0.87);
     z-index: 2;
-    border-radius: 10px;
-}
-.side-menu:hover .side-menu-content {
-    display: flex;
 }
 .side-menu-button {  
     border: none;
