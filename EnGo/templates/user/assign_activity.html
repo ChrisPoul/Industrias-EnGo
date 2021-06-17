@@ -9,7 +9,7 @@
     {% for head in activity_heads %}
     <div>
         <label for="{{ head }}">{{ activity_heads[head] }}</label>
-        <input name="{{ head }}"
+        <input name="{{ head }}" value="{{ form[head] }}"
         {% if head == "due_date" %}
         type="date"
         {% else %}

@@ -38,7 +38,7 @@ weekday_heads = {
 activity_heads = dict(
     title="Titulo",
     description="Descripsión",
-    due_date="Fecha"
+    due_date="Fecha De Entrega"
 )
 permissions = [
     "Recursos Humanos"
@@ -140,18 +140,30 @@ def profile(id):
 @login_required
 def assign_activity(id):
     if request.method == "POST":
+        error = None
         due_date_str = request.form["due_date"]
-        due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-        activity = UserActivity(
-            user_id=id,
-            title=request.form['title'],
-            description=request.form['description'],
-            due_date=due_date
-        )
-        activity.add()
+        try:
+            due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
+        except ValueError:
+            error = "No has seleccionado una fecha, porfavor selecciona una"
+        if not error:
+            activity = UserActivity(
+                user_id=id,
+                title=request.form['title'],
+                description=request.form['description'],
+                due_date=due_date
+            )
+            error = activity.request.add()
+        if not error:
+            return redirect(
+                url_for('user.profile', id=id)
+            )
+        flash(error)
+        
     return render_template(
         "user/assign_activity.html",
-        activity_heads=activity_heads
+        activity_heads=activity_heads,
+        form=request.form
     )
 
 
