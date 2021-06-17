@@ -26,15 +26,15 @@ password_heads = dict(
     password="Escribe una contraseña...",
     password_confirm="Confirma la contraseña..."
 )
-weekday_heads = dict(
-    monday="Lunes",
-    tuesday="Martes",
-    wednesday="Miércoles",
-    thursday="Jueves",
-    friday="Viernes",
-    saturday="Sábado",
-    sunday="Domingo"
-)
+weekday_heads = {
+    1: "Lunes",
+    2: "Martes",
+    3: "Miércoles",
+    4: "Jueves",
+    5: "Viernes",
+    6: "Sábado",
+    7: "Domingo"
+}
 permissions = [
     "Recursos Humanos"
 ]

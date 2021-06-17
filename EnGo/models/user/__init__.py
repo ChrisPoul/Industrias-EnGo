@@ -3,7 +3,7 @@ from sqlalchemy import (
     Column, Integer, String,
     ForeignKey, DateTime, Text
 )
-from EnGo.models import db, MyModel
+from EnGo.models import db, MyModel, filter_by_week
 from EnGo.models.view import View
 
 
@@ -100,6 +100,15 @@ class User(db.Model, MyModel):
     def update_permissions(self, permissions):
         self.remove_permissions()
         self.add_permissions(permissions)
+
+    def get_week_activities(self, date=datetime.today):
+        week_activities = filter_by_week(date, self)
+        weekday_activities = {}
+        for weekday_num in range(1, 8):
+            weekday_activities[weekday] = []
+        for activity in week_activities:
+            week_day = activity.date.get_weekday()
+            weekday_activities[week_day].append(activity)
 
 
 from .contract import Contract
