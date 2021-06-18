@@ -27,13 +27,13 @@ password_heads = dict(
     password_confirm="Confirma la contraseña..."
 )
 weekday_heads = {
-    1: "Lunes",
-    2: "Martes",
-    3: "Miércoles",
-    4: "Jueves",
-    5: "Viernes",
-    6: "Sábado",
-    7: "Domingo"
+    0: "Lunes",
+    1: "Martes",
+    2: "Miércoles",
+    3: "Jueves",
+    4: "Viernes",
+    5: "Sábado",
+    6: "Domingo"
 }
 activity_heads = dict(
     title="Título",
@@ -142,9 +142,10 @@ def get_weekday_dates(date):
     weekday_dates = {
         current_weekday: date
     }
-    for day in range(1, current_weekday):
-        weekday_dates[day] = date - timedelta(days=current_weekday - day)
-    for day in range(current_weekday + 1, 8):
+    for day in range(0, current_weekday):
+        previous_day = timedelta(days=current_weekday - day)
+        weekday_dates[day] = date - previous_day 
+    for day in range(current_weekday + 1, 7):
         weekday_dates[day] = date + timedelta(days=day - current_weekday)
 
     return weekday_dates
