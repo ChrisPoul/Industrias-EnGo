@@ -6,13 +6,18 @@ from flask import (
 from EnGo.models.permission import Permission
 from EnGo.models.view import View
 from EnGo.commands.settings import get_settings, save_settings
-from . import get_checked_permissions
+from . import (
+    login_required, permission_required,
+    get_checked_permissions
+)
 
 
 bp = Blueprint('view', __name__, url_prefix="/view")
 
 
 @bp.route('/update/<int:id>', methods=("POST", ))
+@permission_required(["Admin"])
+@login_required
 def update(id):
     view = View.get(id)
     try:
@@ -23,9 +28,13 @@ def update(id):
         save_image(receipt_image)
     checked_permissions = get_checked_permissions()
     view.update_permissions(checked_permissions)
+    if not request.referrer:
+        url = url_for('home.main_page')
+    else:
+        url = request.referrer
 
     return redirect(
-        request.referrer
+        url
     )
 
 
