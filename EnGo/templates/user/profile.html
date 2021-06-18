@@ -4,27 +4,29 @@
 <h1>{% block title %}Perfil de {{ user.username }}{% endblock %}</h1>
 {% if g.user.has_view_permissions('user.update') %}
 <a href="{{ url_for('user.update', id=user.id) }}">
-    editar
+    <input type="button" value="Editar">
 </a>
 {% endif %}
 {% endblock %}
 
 {% block content %}
-<a href="{{ url_for('user.assign_activity', id=user.id) }}">
-    Añadir Actividad
-</a>
-<div class="week-activities">
-    {% for weekday in weekday_heads %}
-    <div class="weekday-head">
-        {{ weekday_heads[weekday] }}
-    </div>
-    {% endfor %}
-    {% for weekday in weekday_heads %}
-    <div>
-        {% for activity in week_activities[weekday] %}
-        {{ activity.title }}
+<div class="user-activities">
+    <a href="{{ url_for('user.assign_activity', id=user.id) }}">
+        <input type="button" value="Añadir Actividad">
+    </a>
+    <div class="week-activities">
+        {% for weekday in weekday_heads %}
+        <div class="weekday-head">
+            {{ weekday_heads[weekday] }}
+        </div>
+        {% endfor %}
+        {% for weekday in weekday_heads %}
+        <div>
+            {% for activity in week_activities[weekday] %}
+            {{ activity.title }}
+            {% endfor %}
+        </div>
         {% endfor %}
     </div>
-    {% endfor %}
 </div>
 {% endblock %}

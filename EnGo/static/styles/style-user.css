@@ -77,3 +77,7 @@
 .assign-activity input {
     width: 100%;
 }
+
+.user-activities:first-child {
+    text-align: right !important;
+}

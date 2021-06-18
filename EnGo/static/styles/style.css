@@ -69,6 +69,9 @@ select {
     background-color: rgba(192, 192, 192, 0.698);
     cursor: pointer;
 }
+input[type=button] {
+    cursor: pointer;
+}
 section form div {
     flex-direction: row;
     justify-content: space-between;
@@ -78,7 +81,6 @@ section form input[type=button] {
     border: none;
     width: fit-content;
     padding: 0.5em 2.5em;
-    cursor: pointer;
 }
 section form input[type=submit] {
     background-color: rgba(34, 57, 139, 0.788);
