@@ -27,3 +27,17 @@ class TestUpdate(ViewTest):
         self.db.session.rollback()
 
         self.assertIn(self.admin_permission, self.view.permissions)
+
+    def test_should_update_view_permissions_given_valid_permissions_input_and_LUHNP(self):
+        self.login_user(self.normal_user)
+        permissions_input = dict(
+            Admin=self.admin_permission.id
+        )
+        with self.client as client:
+            client.post(
+                url_for('view.update', id=self.view.id),
+                data=permissions_input
+            )
+        self.db.session.rollback()
+
+        self.assertNotIn(self.admin_permission, self.view.permissions)
