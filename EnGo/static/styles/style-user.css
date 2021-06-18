@@ -68,3 +68,12 @@
     border-bottom: 1px solid black;
     font-weight: 600;
 }
+
+.assign-activity {
+    display: grid;
+    grid-template-columns: max-content 80%;
+    align-items: center;
+}
+.assign-activity input {
+    width: 100%;
+}

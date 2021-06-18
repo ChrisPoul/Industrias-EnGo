@@ -36,8 +36,8 @@ weekday_heads = {
     7: "Domingo"
 }
 activity_heads = dict(
-    title="Titulo",
-    description="Descripsión",
+    title="Título",
+    description="Descripción",
     due_date="Fecha De Entrega"
 )
 permissions = [

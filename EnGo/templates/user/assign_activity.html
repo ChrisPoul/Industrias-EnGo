@@ -6,17 +6,26 @@
 
 {% block content %}
 <form method="post">
-    {% for head in activity_heads %}
-    <div>
-        <label for="{{ head }}">{{ activity_heads[head] }}</label>
-        <input name="{{ head }}" value="{{ form[head] }}"
-        {% if head == "due_date" %}
-        type="date"
-        {% else %}
-        type="text"
-        {% endif %}> 
+    <div class="assign-activity">
+        {% for head in activity_heads %}
+        <div>
+            <strong>{{ activity_heads[head] }}:</strong>
+        </div>
+        <div>
+            <input name="{{ head }}" value="{{ form[head] }}"
+            {% if head == "title" %}
+            placeholder="Requerido"
+            {% else %}
+            placeholder="Opcional"
+            {% endif %}
+            {% if head == "due_date" %}
+            type="date"
+            {% else %}
+            type="text"
+            {% endif %}> 
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
     <input type="submit" value="Asignar">
 </form>
 {% endblock %}
