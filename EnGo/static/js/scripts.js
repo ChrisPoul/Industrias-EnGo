@@ -44,7 +44,7 @@ function displaySideMenu (sideMenuButton) {
 function toggleDropdownLinks (dropdownLinksButton) {
     dropdownLinks = dropdownLinksButton.parentElement
     dropdownLinksContent = dropdownLinks.children[1]
-    if (dropdownLinksContent.style.display == "none") {
+    if (dropdownLinksContent.style.display != "block") {
         displayElement(dropdownLinksContent)
     }
     else {
