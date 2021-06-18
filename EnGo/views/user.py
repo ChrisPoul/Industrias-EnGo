@@ -54,7 +54,7 @@ def users():
         user = User.search(request.form['search_term'])
         if user:
             return redirect(
-                url_for('user.update', id=user.id)
+                url_for('user.profile', id=user.id)
             )
 
     return render_template(

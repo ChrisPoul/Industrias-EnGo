@@ -69,8 +69,11 @@ select {
     background-color: rgba(192, 192, 192, 0.698);
     cursor: pointer;
 }
-input[type=button] {
+input[type=button], input[type=date] {
     cursor: pointer;
+}
+input[type=date] {
+    width: min-content !important;
 }
 section form div {
     flex-direction: row;
