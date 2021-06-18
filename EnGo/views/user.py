@@ -257,3 +257,18 @@ def load_loged_in_user():
         g.user = None
     else:
         g.user = User.get(user_id)
+
+
+@bp.route('/day_activities/<int:id>/<string:date_str>')
+@permission_required(permissions)
+@login_required
+def day_activities(id, date_str):
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+    user = User.get(id)
+    day_activities = user.get_day_activities(date)
+    
+    return render_template(
+        'user/day-activities.html',
+        user=user,
+        activities=day_activities
+    )

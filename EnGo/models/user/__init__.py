@@ -112,6 +112,11 @@ class User(db.Model, MyModel):
 
         return weekday_activities
     
+    def get_day_activities(self, date):
+        week_activities = self.get_week_activities(date)
+        day = date.weekday()
+        
+        return week_activities[day]
 
 def filter_activities_by_week(date, events):
     week_events = []
