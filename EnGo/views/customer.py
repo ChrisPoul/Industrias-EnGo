@@ -106,5 +106,6 @@ def receipts(id):
     return render_template(
         'customer/receipts.html',
         receipt_heads=receipt_heads,
-        customer=customer
+        customer=customer,
+        receipts=customer.receipts
     )

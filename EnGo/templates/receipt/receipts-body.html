@@ -1,0 +1,36 @@
+<div class="container">
+    <table>
+        <thead>
+            {% for head in receipt_heads %}
+            <th>
+                {{ receipt_heads[head] }}
+            </th>
+            {% endfor %}
+            <th></th>
+        </thead>
+        <tbody>
+            {% for receipt in receipts %}
+            <tr>
+                {% for head in receipt_heads %}
+                <td>
+                    {% if head == "date" %}
+                    {{ format_date(receipt[head]) }}
+                    {% elif head == "folio" %}
+                    <a href="{{ url_for('receipt.update', id=receipt.id) }}">
+                        {{ receipt[head] }}
+                    </a>
+                    {% else %}
+                    {{ receipt[head] }}
+                    {% endif %}
+                </td>
+                {% endfor %}
+                <td>
+                    <a href="{{ url_for('receipt.delete', id=receipt.id) }}" class="delete-button">
+                        <img src="{{ url_for('static', filename='images/remove.png') }}">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
