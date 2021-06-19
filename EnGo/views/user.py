@@ -142,7 +142,7 @@ def get_weekday_dates(date):
     weekday_dates = {
         current_weekday: date
     }
-    for day in range(0, current_weekday):
+    for day in range(current_weekday):
         previous_day = timedelta(days=current_weekday - day)
         weekday_dates[day] = date - previous_day 
     for day in range(current_weekday + 1, 7):

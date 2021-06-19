@@ -82,10 +82,6 @@ def get_day_events(date):
     return day_events
 
 
-def get_date_from_str(date_str):
-    return datetime.strptime(date_str, "%d.%m.%Y")
-
-
 @bp.route("/calendar", methods=("POST", "GET"))
 @login_required
 def calendar():
@@ -118,7 +114,7 @@ def calendar():
 @bp.route("/day/<string:date_str>/<string:category>", methods=('POST', 'GET'))
 @login_required
 def day(date_str, category):
-    selected_date = get_date_from_str(date_str)
+    selected_date = datetime.strptime(date_str, "%d.%m.%Y")
     selected_category = category
     get_all_events.cache_clear()
     events = get_day_events(selected_date)
