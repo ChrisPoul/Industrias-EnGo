@@ -1,6 +1,9 @@
 <nav>
     <div class="left-side">
         {% include "side-menu.html" %}
+        <a href="{{ request.referrer }}">
+            <i class="fa fa-undo"></i>
+        </a>
     </div>
     <div class="right-side">
         {% include 'search-bar.html' %}
