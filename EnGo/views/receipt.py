@@ -13,6 +13,11 @@ from . import (
 
 bp = Blueprint('receipt', __name__)
 
+receipt_heads = dict(
+    folio="Remisión",
+    date="Fecha",
+    total="Total"
+)
 customer_heads = dict(
     customer_name="Nombre",
     address="Dirección",
@@ -34,6 +39,19 @@ product_heads = dict(
 permissions = [
     "Contaduría"
 ]
+
+
+@bp.route('/receipts')
+@permission_required(permissions)
+@login_required
+def receipts():
+    receipts = Receipt.query.all()
+
+    return render_template(
+        "receipt/receipts.html",
+        receipt_heads=receipt_heads,
+        receipts=receipts
+    )
 
 
 @bp.route('/receipt', methods=("POST", "GET"))

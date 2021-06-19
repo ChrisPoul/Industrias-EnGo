@@ -4,6 +4,7 @@ from flask import (
 )
 from EnGo.models import customer
 from EnGo.models.customer import Customer
+from .receipt import receipt_heads
 from . import (
     login_required, permission_required,
     update_obj_attrs, get_form
@@ -16,11 +17,6 @@ customer_heads = dict(
     address="Dirección",
     phone="Teléfono",
     rfc="RFC"
-)
-receipt_heads = dict(
-    folio="Remisión",
-    date="Fecha",
-    total="Total"
 )
 permissions = [
     "Contaduría"

@@ -21,6 +21,27 @@ class ReceiptViewTest(ReceiptTest):
         self.create_test_users()
 
 
+class TestReceiptsView(ReceiptViewTest):
+
+    def test_should_grant_access_given_LUHP(self):
+        self.login_user(self.admin_user)
+        with self.client as client:
+            response = client.get(
+                url_for('receipt.receipts')
+            )
+        
+        self.assert200(response)
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('receipt.receipts')
+            )
+        
+        self.assertStatus(response, 302)
+
+
 class TestAddView(ReceiptViewTest):
 
     def test_should_add_receipt_given_valid_customer_data_and_LUHP(self):
