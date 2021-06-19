@@ -23,7 +23,7 @@
     background-color: #333;
     margin: 0;
     cursor: pointer;
-    font-size: large;
+    font-size: 1em;
 }
 .side-menu-content a, .links-dropdown-button {
     text-align: left;

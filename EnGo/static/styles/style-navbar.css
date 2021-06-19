@@ -6,7 +6,9 @@ nav {
     justify-content: space-between;
     font-size: 1.1em;
 }
-nav a, .side-menu-button {
+nav a, .side-menu {
+    display: flex;
+    align-items: center;
     padding: 1em;
 }
 nav a:hover, nav .dropdown:hover {
