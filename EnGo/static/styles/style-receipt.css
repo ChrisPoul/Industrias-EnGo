@@ -83,3 +83,8 @@
 .receipt-foot p {
     text-align: center;
 }
+
+.filter-receipts {
+    flex-direction: row;
+    justify-content: flex-end;
+}

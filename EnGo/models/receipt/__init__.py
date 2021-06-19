@@ -67,4 +67,10 @@ class Receipt(db.Model, MyModel):
         sold_product.add()
 
 
+def filter_receipts_by_date(receipts, date):
+    filtered_receipts = []
+    for receipt in receipts:
+        if receipt.date.isocalendar() == date.isocalendar():
+            filtered_receipts.append(receipt)
 
+    return filtered_receipts

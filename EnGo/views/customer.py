@@ -1,9 +1,11 @@
+from datetime import datetime
 from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
 )
 from EnGo.models import customer
 from EnGo.models.customer import Customer
+from EnGo.models.receipt import filter_receipts_by_date
 from .receipt import receipt_heads
 from . import (
     login_required, permission_required,
@@ -97,15 +99,22 @@ def delete(id):
     )
 
 
-@bp.route('/receipts/<int:id>')
+@bp.route('/receipts/<int:id>', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def receipts(id):
+    selected_date_str = ""
     customer = Customer.get(id)
+    receipts = customer.receipts
+    if request.method == "POST":
+        selected_date_str = request.form["selected_date"]
+        selected_date = datetime.strptime(selected_date_str, "%Y-%m-%d")
+        receipts = filter_receipts_by_date(receipts, selected_date)
 
     return render_template(
         'customer/receipts.html',
         receipt_heads=receipt_heads,
+        selected_date=selected_date_str,
         customer=customer,
-        receipts=customer.receipts
+        receipts=receipts
     )

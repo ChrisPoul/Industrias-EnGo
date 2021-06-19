@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import (
     Blueprint, render_template, request,
     flash, url_for, session
@@ -5,7 +6,7 @@ from flask import (
 from werkzeug.utils import redirect
 from EnGo.models.customer import Customer
 from EnGo.models.product import Product, SoldProduct
-from EnGo.models.receipt import Receipt
+from EnGo.models.receipt import Receipt, filter_receipts_by_date
 from . import (
     login_required, permission_required,
     update_obj_attrs, get_form, get_empty_form
@@ -41,15 +42,21 @@ permissions = [
 ]
 
 
-@bp.route('/receipts')
+@bp.route('/receipts', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def receipts():
+    selected_date_str = ""
     receipts = Receipt.query.all()
+    if request.method == "POST":
+        selected_date_str = request.form["selected_date"]
+        selected_date = datetime.strptime(selected_date_str, "%Y-%m-%d")
+        receipts = filter_receipts_by_date(receipts, selected_date)
 
     return render_template(
         "receipt/receipts.html",
         receipt_heads=receipt_heads,
+        selected_date=selected_date_str,
         receipts=receipts
     )
 
