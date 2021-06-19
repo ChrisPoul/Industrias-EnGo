@@ -45,27 +45,3 @@ def save_image(image_file):
     settings = get_settings()
     settings["receipt_image"] = receipt_image
     save_settings(settings)
-
-
-view_heads = {
-    "admin.main_page": "Página del Administrador",
-    "customer.add": "Página de Añadir Cliente",
-    "customer.update": "Página de Editar Cliente",
-    "customer.customers": "Página de Clientes",
-    "customer.receipts": "Página de Recibos del Cliente",
-    "customer.delete": "Página de Eliminar Cliente",
-    "product.add": "Página de Añadir Producto",
-    "product.update": "Página de Editar Producto",
-    "product.products": "Página de Productos",
-    "product.delete": "Página de Eliminar Producto",
-    "receipt.add": "Página de Añadir Recibo",
-    "receipt.update": "Página de Editar Recibo",
-    "receipt.done": "Página de Recibo Terminado",
-    "receipt.remove_product": "Página de Eliminar Producto del Recibo",
-    "receipt.delete": "Página de Eliminar Recibo",
-    "user.register": "Página de Añadir Empleado",
-    "user.update": "Página de Editar Empleado",
-    "user.update_password": "Página de Editar Contraseña del Empleado",
-    "user.users": "Página de Empleados",
-    "user.delete": "Página de Eliminar Empleado"
-}

@@ -11,11 +11,6 @@
     {% endfor %}
     {% endfor %}
     {% endif %}
-    {% if g.user.has_view_permissions("view.update") %}
-    {% for view_name in get_autocomplete_data("views", "view_name") %}
-    <option value="{{ view_heads[view_name] }}">{{ view_name }}</option>
-    {% endfor %}
-    {% endif %}
     {% if g.user.has_view_permissions("product.update") %}
     {% for product_name in get_autocomplete_data("products", "code") %}
     <option>{{ product_name }}</option>

@@ -10,7 +10,6 @@ from EnGo.models.permission import Permission
 from EnGo.models.expense import Expense
 from EnGo.models.warehouse import Warehouse
 from EnGo.commands.settings import get_settings
-from .view import view_heads
 from .customer import customer_heads
 from . import (
     login_required, format_price,
@@ -33,11 +32,8 @@ def inject_functions():
 
 @bp.app_context_processor
 def inject_view_and_permissions():
-    session["prev_url"] = request.referrer
-
     return dict(
         view=View.search(request.endpoint),
-        view_heads=view_heads,
         permissions=Permission.get_all()
     )
 
@@ -71,9 +67,6 @@ def search_bar():
         bp_name = "user"
         result = User.search(search_term)
     if not result:
-        bp_name = "view"
-        result = View.search(search_term)
-    if not result:
         bp_name = "product"
         result = Product.search(search_term)
 
@@ -83,7 +76,7 @@ def search_bar():
         )
     else: 
         return redirect(
-            session['prev_url']
+            request.referrer
         )
 
 
@@ -92,7 +85,6 @@ def get_autocomplete_data(group, attribute):
         users=User.get_all(),
         products=Product.get_all(),
         customers = Customer.get_all(),
-        views=View.get_all(),
         expenses=Expense.get_all(),
         warehouses=Warehouse.get_all()
     )
