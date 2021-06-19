@@ -58,26 +58,28 @@ def inject_global_objects():
 @login_required
 def search_bar():
     search_term = request.form['search_term']
-    bp_name = "customer"
     try:
-        result = Customer.search_all(search_term)[0]
+        customer = Customer.search_all(search_term)[0]
     except IndexError:
-        result = None
-    if not result:
-        bp_name = "user"
-        result = User.search(search_term)
-    if not result:
-        bp_name = "product"
-        result = Product.search(search_term)
+        customer = None
+    if customer:
+        return redirect(
+            url_for("customer.update", id=customer.id)
+        )
+    user = User.search(search_term)
+    if user:
+        return redirect(
+            url_for("user.profile", id=user.id)
+        )
+    product = Product.search(search_term)
+    if product:
+        return redirect(
+            url_for("product.update", id=product.id)
+        )
 
-    if result:
-        return redirect(
-            url_for(f"{bp_name}.update", id=result.id)
-        )
-    else: 
-        return redirect(
-            request.referrer
-        )
+    return redirect(
+        request.referrer
+    )
 
 
 def get_autocomplete_data(group, attribute):
