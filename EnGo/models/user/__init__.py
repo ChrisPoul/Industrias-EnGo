@@ -104,7 +104,7 @@ class User(db.Model, MyModel):
     def get_week_activities(self, date=datetime.today):
         week_activities = filter_activities_by_week(date, self.activities)
         weekday_activities = {}
-        for weekday_num in range(1, 8):
+        for weekday_num in range(0, 7):
             weekday_activities[weekday_num] = []
         for activity in week_activities:
             week_day = activity.due_date.isocalendar()[2]
@@ -112,6 +112,11 @@ class User(db.Model, MyModel):
 
         return weekday_activities
     
+    def get_day_activities(self, date):
+        week_activities = self.get_week_activities(date)
+        day = date.weekday()
+        
+        return week_activities[day]
 
 def filter_activities_by_week(date, events):
     week_events = []

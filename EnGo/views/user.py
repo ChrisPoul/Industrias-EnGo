@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
@@ -27,13 +27,13 @@ password_heads = dict(
     password_confirm="Confirma la contraseña..."
 )
 weekday_heads = {
-    1: "Lunes",
-    2: "Martes",
-    3: "Miércoles",
-    4: "Jueves",
-    5: "Viernes",
-    6: "Sábado",
-    7: "Domingo"
+    0: "Lunes",
+    1: "Martes",
+    2: "Miércoles",
+    3: "Jueves",
+    4: "Viernes",
+    5: "Sábado",
+    6: "Domingo"
 }
 activity_heads = dict(
     title="Título",
@@ -126,12 +126,43 @@ def login():
 def profile(id):
     user = User.query.get(id)
     week_activities = user.get_week_activities(datetime.today())
+    weekday_dates = get_weekday_dates(datetime.today())
 
     return render_template(
         "user/profile.html",
         weekday_heads=weekday_heads,
         week_activities=week_activities,
+        weekday_dates=weekday_dates,
         user=user
+    )
+
+
+def get_weekday_dates(date):
+    current_weekday = date.weekday()
+    weekday_dates = {
+        current_weekday: date
+    }
+    for day in range(0, current_weekday):
+        previous_day = timedelta(days=current_weekday - day)
+        weekday_dates[day] = date - previous_day 
+    for day in range(current_weekday + 1, 7):
+        weekday_dates[day] = date + timedelta(days=day - current_weekday)
+
+    return weekday_dates
+
+@bp.route('/day_activities/<int:id>/<string:date_str>')
+@permission_required(permissions)
+@login_required
+def day_activities(id, date_str):
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+    user = User.get(id)
+    day_activities = user.get_day_activities(date)
+    
+    return render_template(
+        'user/day-activities.html',
+        user=user,
+        activities=day_activities,
+        date=date_str
     )
 
 
