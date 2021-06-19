@@ -23,6 +23,7 @@
     border-right: 1px solid black;
     border-left: none;
     border-radius:  0px 5px 5px 0px;
+    background-color: white;
 }
 .search-bar select {
     margin: 0;
