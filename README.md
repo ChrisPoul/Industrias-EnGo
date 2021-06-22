@@ -6,4 +6,4 @@ From general adimistrative tasks, to keeping track of inventory, this program is
 You need to already be registered with a valid username and password in order to gain access to the system, which is why there's already an admin user registered
 with this credentials: 
 ### username: Admin
-### passord: 0000
+### password: 0000
