@@ -1,5 +1,4 @@
 from datetime import date, datetime
-from functools import lru_cache
 from flask import (
     Blueprint, render_template, request
 )
@@ -51,7 +50,6 @@ update_views = dict(
 )
 
 
-@lru_cache(maxsize=1)
 def get_all_events():
     return dict(
         selecting=[],
@@ -63,7 +61,6 @@ def get_all_events():
     )
 
 
-@lru_cache(maxsize=40)
 def get_day_events(date):
     try:
         filter_date = date.date()
