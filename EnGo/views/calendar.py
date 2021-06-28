@@ -113,7 +113,6 @@ def calendar():
 def day(date_str, category):
     selected_date = datetime.strptime(date_str, "%d.%m.%Y")
     selected_category = category
-    get_all_events.cache_clear()
     events = get_day_events(selected_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
