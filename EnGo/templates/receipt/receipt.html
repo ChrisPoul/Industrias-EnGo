@@ -5,9 +5,18 @@
 {% endblock %}
 
 {% block content %}
-<form method="post" autocomplete="off" class="receipt">
-    {% include "receipt/receipt-head.html" %}
-    {% include "receipt/products.html" %}
-    {% include "receipt/receipt-foot.html" %}
-</form>
+<div style="flex-direction: column;">
+    <form method="post" autocomplete="off" class="receipt">
+        {% include "receipt/receipt-head.html" %}
+        {% include "receipt/products.html" %}
+        {% include "receipt/receipt-foot.html" %}
+    </form>
+    {% if receipt.done %}
+    <form class="receipt">
+        {% include "receipt/receipt-head.html" %}
+        {% include "receipt/products.html" %}
+        {% include "receipt/receipt-foot.html" %}
+    </form>
+    {% endif %}
+</div>
 {% endblock %}
