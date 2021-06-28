@@ -248,22 +248,6 @@ class TestEditView(ReceiptViewTest):
 
         self.assertIn(self.product_1, self.receipt.products)
 
-    def test_should_create_product_and_add_it_to_receipt_given_valid_product_data_and_LUHP(self):
-        self.login_user(self.admin_user)
-        product_data = dict(
-            code="New Product",
-            description="Some description",
-            price=10
-        )
-        with self.client as client:
-            client.post(
-                url_for('receipt.update', id=self.receipt.id),
-                data=product_data
-            )
-        self.db.session.rollback()
-
-        self.assertTrue(Product.search("New Product"))
-
     def test_should_not_add_product_given_invalid_customer_data_and_LUHP(self):
         self.login_user(self.admin_user)
         data = dict(
