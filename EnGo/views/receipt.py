@@ -120,12 +120,7 @@ def update(id):
             search_term = request.form["code"]
             product = Product.search(search_term)
             if not product:
-                product = Product(
-                    code=form["code"],
-                    description=form["description"],
-                    price=form["price"]
-                )
-                error = product.request.add()
+                error = "No se encontró un producto con ese código"
             if not error and product not in set(receipt.products):
                 sold_product = SoldProduct(
                     receipt_id=id,
@@ -137,7 +132,6 @@ def update(id):
                 error = sold_product.request.add()
             if not error:
                 form = get_empty_product_form()
-            error = None
         if error:
             flash(error)
 

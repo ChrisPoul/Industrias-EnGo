@@ -1,12 +1,17 @@
+<datalist id="codes">
+    {% for code in get_autocomplete_data("products", "code") %}
+    <option>{{ code }}</option>
+    {% endfor %}
+</datalist>
 {% for head in product_heads %}
     <div>
-        {% if head != "total" %}
+        {% if head == "code" or head == "quantity" %}
         <input value="{{ form[head] }}" name="{{ head }}"
         {% if head == "quantity" %}
         type="number"
-        {% elif head == "price" %}
-        type="number"
-        step=".01"
+        {% elif head == "code" %}
+        list="codes"
+        placeholder="Buscar"
         {% endif %}
         >
         {% endif %}

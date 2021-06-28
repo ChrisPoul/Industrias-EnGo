@@ -13,7 +13,7 @@
 
 .receipt {
     display: grid;
-    grid-template-columns: 12% 15% 38% 12% 13% 10%;
+    grid-template-columns: auto auto 38% 12% auto auto;
     width: 21.6cm;
 }
 .receipt div {
@@ -49,7 +49,7 @@
 
 .customer-info {
     display: grid;
-    grid-template-columns: 18% 82%;
+    grid-template-columns: auto 82%;
     padding: 0 !important;
     width: 100%;
 }
@@ -63,7 +63,7 @@
     width: 100%;
 }
 .customer-info div, .receipt-info div {
-    justify-content: left !important;
+    justify-content: left;
     padding: 0.1em 0.5em;
 }
 .product-head {
