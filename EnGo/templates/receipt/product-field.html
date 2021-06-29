@@ -1,7 +1,11 @@
 {% if not receipt.done %}
     {% if head == "total" %}
     {{ format_price(product[head]) }}
-    {% elif head == "description" or head == "code" %}
+    {% elif head == "code" %}
+    <a href="{{ url_for('receipt.remove_product', id=product.id) }}">
+        {{ product[head] }}
+    </a>
+    {% elif head == "description" %}
     {{ product[head] }}
     {% else %}
     <input name="{{ product.get_unique_key(head) }}"

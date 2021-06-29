@@ -5,7 +5,7 @@
 </datalist>
 {% for head in product_heads %}
     <div>
-        {% if head == "code" or head == "quantity" %}
+        {% if head == "code" or head == "quantity" or head == "unit" %}
         <input value="{{ form[head] }}" name="{{ head }}"
         {% if head == "quantity" %}
         type="number"

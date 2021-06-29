@@ -15,6 +15,7 @@
     display: grid;
     grid-template-columns: auto auto 38% 12% auto auto;
     width: 21.6cm;
+    text-align: center;
     margin-bottom: 5vh;
 }
 .receipt div {
@@ -88,4 +89,8 @@
 .filter-receipts {
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.receipt-code {
+    grid-column: 2 / span 2;
 }
