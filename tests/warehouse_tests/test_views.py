@@ -19,28 +19,7 @@ class WarehouseViewTest(WarehouseTest):
             description="Test Description",
             price=1
         )
-        self.product.add()
-
-
-class TestWarehousesView(WarehouseViewTest):
-
-    def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.dev_user)
-        with self.client as client:
-            response = client.get(
-                url_for('warehouse.warehouses')
-            )
-
-        self.assert200(response)
-
-    def test_should_return_valid_response_given_LUHP(self):
-        self.login_user(self.normal_user)
-        with self.client as client:
-            response = client.get(
-                url_for('warehouse.warehouses')
-            )
-
-        self.assertStatus(response, 302)    
+        self.product.add()  
     
 
 class TestAddView(WarehouseViewTest):

@@ -41,10 +41,10 @@
             </div>
         </div>
         {% endif %}
-        {% if g.user.has_view_permissions('warehouse.warehouses') %}
+        {% if g.user.has_view_permissions('warehouse.inventory') %}
         <div class="links-dropdown">
             <button class="links-dropdown-button"> 
-                Almacén
+                Almacenes
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="links-dropdown-content">
@@ -56,7 +56,6 @@
                 {% if g.user.has_view_permissions('warehouse.add') %}
                 <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
                 {% endif %}
-                <a href="{{ url_for('warehouse.warehouses') }}">Todos</a>
             </div>
         </div>
         {% endif %}
