@@ -46,7 +46,7 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def receipts():
-    selected_date_str = ""
+    selected_date_str = datetime.today().strftime('%Y-%m-%d')
     receipts = Receipt.query.all()
     if request.method == "POST":
         selected_date_str = request.form["selected_date"]
