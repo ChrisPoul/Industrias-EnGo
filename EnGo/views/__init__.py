@@ -51,8 +51,6 @@ def set_view_permissions(view_name, permission_names):
         )
         view.add()
         view.add_permissions(permissions)
-    if view.permissions != permissions:
-        view.update_permissions(permissions)
 
 
 def get_permissions(names):
