@@ -60,9 +60,6 @@
     text-align: center;
     border-right: 1px solid black;
 }
-.week-activities div:last-child {
-    border-right: none !important;
-}
 .weekday-head {
     border-right: none !important;
     border-bottom: 1px solid black;
@@ -79,5 +76,17 @@
 }
 
 .user-activities:first-child {
+    overflow: hidden;
     text-align: right !important;
+}
+.weekday {
+    height: 100%;
+    padding: 0 !important;
+}
+.weekday div {
+    border-right: none !important;
+    padding-bottom: 0;
+}
+.weekday div:last-child {
+    padding-bottom: 1em;
 }
