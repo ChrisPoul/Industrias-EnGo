@@ -1,4 +1,5 @@
-<div class="permissions-checkbox">
+<label for="permissions-checkbox">Permisos Requeridos:</label>
+<div id="permissions-checkbox" class="permissions-checkbox">
     {% for permission in permissions %}
     {% if not permission.is_admin() and not g.user.is_admin() or g.user.is_admin() %}
     {% if not permission.is_dev() or g.user.is_dev() %}
