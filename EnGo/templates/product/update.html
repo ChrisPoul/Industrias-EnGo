@@ -2,10 +2,7 @@
 
 {% block header %}
     <h1>{% block title %}
-        {{ product.code }}
-        {% if warehouse %}
-        de almacén {{ warehouse.address }}
-        {% endif %}
+        {{ product.code }} de almacén {{ product.warehouse.address }}
         {% endblock %}</h1>
 {% endblock %}
 

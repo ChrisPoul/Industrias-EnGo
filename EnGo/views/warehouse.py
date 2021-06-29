@@ -88,6 +88,12 @@ def delete(id):
 @login_required
 def inventory(id):
     warehouse = Warehouse.query.get(id)
+    if request.method == "POST":
+        product = Product.search(request.form["search_term"])
+        if product and product.warehouse_id == warehouse.id:
+            return redirect(
+                url_for('product.update', id=product.id)
+            )
 
     return render_template(
         "warehouse/inventory.html",
