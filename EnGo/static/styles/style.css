@@ -69,7 +69,7 @@ select {
     background-color: rgba(192, 192, 192, 0.698);
     cursor: pointer;
 }
-input[type=button], input[type=date] {
+input[type=button], input[type=submit], input[type=date] {
     cursor: pointer;
 }
 input[type=date] {

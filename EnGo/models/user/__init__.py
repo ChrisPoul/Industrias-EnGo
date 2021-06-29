@@ -104,10 +104,10 @@ class User(db.Model, MyModel):
     def get_week_activities(self, date=datetime.today):
         week_activities = filter_activities_by_week(date, self.activities)
         weekday_activities = {}
-        for weekday_num in range(0, 7):
+        for weekday_num in range(7):
             weekday_activities[weekday_num] = []
         for activity in week_activities:
-            week_day = activity.due_date.isocalendar()[2]
+            week_day = activity.due_date.weekday()
             weekday_activities[week_day].append(activity)
 
         return weekday_activities
@@ -122,14 +122,11 @@ def filter_activities_by_week(date, events):
     week_events = []
     for event in events:
         date_year, date_week, _ = date.isocalendar()
-        event_year, event_week, _ = event.due_date.isocalendar()
-        if event_year == date_year and event_week == date_week:
+        due_year, due_week, _ = event.due_date.isocalendar()
+        if due_year == date_year and due_week == date_week:
             week_events.append(event)
     
     return week_events
-
-
-from .contract import Contract
         
 
 class UserObservation(db.Model, MyModel):
@@ -162,3 +159,6 @@ class UserActivity(db.Model, MyModel):
     def request(self):
         from .request import UserActivityRequest
         return UserActivityRequest(self)
+
+
+from .contract import Contract

@@ -120,84 +120,6 @@ def login():
     )
 
 
-@bp.route("/profile/<int:id>")
-@permission_required(permissions)
-@login_required
-def profile(id):
-    user = User.query.get(id)
-    week_activities = user.get_week_activities(datetime.today())
-    weekday_dates = get_weekday_dates(datetime.today())
-
-    return render_template(
-        "user/profile.html",
-        weekday_heads=weekday_heads,
-        week_activities=week_activities,
-        weekday_dates=weekday_dates,
-        user=user
-    )
-
-
-def get_weekday_dates(date):
-    current_weekday = date.weekday()
-    weekday_dates = {
-        current_weekday: date
-    }
-    for day in range(current_weekday):
-        previous_day = timedelta(days=current_weekday - day)
-        weekday_dates[day] = date - previous_day 
-    for day in range(current_weekday + 1, 7):
-        weekday_dates[day] = date + timedelta(days=day - current_weekday)
-
-    return weekday_dates
-
-@bp.route('/day_activities/<int:id>/<string:date_str>')
-@permission_required(permissions)
-@login_required
-def day_activities(id, date_str):
-    date = datetime.strptime(date_str, "%Y-%m-%d")
-    user = User.get(id)
-    day_activities = user.get_day_activities(date)
-    
-    return render_template(
-        'user/day-activities.html',
-        user=user,
-        activities=day_activities,
-        date=date_str
-    )
-
-
-@bp.route("/assign_activity/<int:id>", methods=("POST", "GET"))
-@permission_required(permissions)
-@login_required
-def assign_activity(id):
-    if request.method == "POST":
-        error = None
-        due_date_str = request.form["due_date"]
-        try:
-            due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-        except ValueError:
-            error = "No has seleccionado una fecha, porfavor selecciona una"
-        if not error:
-            activity = UserActivity(
-                user_id=id,
-                title=request.form['title'],
-                description=request.form['description'],
-                due_date=due_date
-            )
-            error = activity.request.add()
-        if not error:
-            return redirect(
-                url_for('user.profile', id=id)
-            )
-        flash(error)
-        
-    return render_template(
-        "user/assign_activity.html",
-        activity_heads=activity_heads,
-        form=request.form
-    )
-
-
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
@@ -288,3 +210,82 @@ def load_loged_in_user():
         g.user = None
     else:
         g.user = User.get(user_id)
+
+
+@bp.route("/profile/<int:id>")
+@permission_required(permissions)
+@login_required
+def profile(id):
+    user = User.query.get(id)
+    week_activities = user.get_week_activities(datetime.today())
+    weekday_dates = get_weekday_dates(datetime.today())
+
+    return render_template(
+        "user/profile.html",
+        weekday_heads=weekday_heads,
+        week_activities=week_activities,
+        weekday_dates=weekday_dates,
+        user=user
+    )
+
+
+def get_weekday_dates(date):
+    current_weekday = date.weekday()
+    weekday_dates = {
+        current_weekday: date
+    }
+    for day in range(current_weekday):
+        previous_day = timedelta(days=current_weekday - day)
+        weekday_dates[day] = date - previous_day 
+    for day in range(current_weekday, 7):
+        weekday_dates[day] = date + timedelta(days=day - current_weekday)
+
+    return weekday_dates
+
+
+@bp.route('/day_activities/<int:id>/<string:date_str>')
+@permission_required(permissions)
+@login_required
+def day_activities(id, date_str):
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+    user = User.get(id)
+    day_activities = user.get_day_activities(date)
+    
+    return render_template(
+        'user/day-activities.html',
+        user=user,
+        activities=day_activities,
+        date=date_str
+    )
+
+
+@bp.route("/assign_activity/<int:id>", methods=("POST", "GET"))
+@permission_required(permissions)
+@login_required
+def assign_activity(id):
+    if request.method == "POST":
+        error = None
+        due_date_str = request.form["due_date"]
+        try:
+            due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
+        except ValueError:
+            error = "No has seleccionado una fecha, porfavor selecciona una"
+        if not error:
+            activity = UserActivity(
+                user_id=id,
+                title=request.form['title'],
+                description=request.form['description'],
+                due_date=due_date
+            )
+            error = activity.request.add()
+        if not error:
+            return redirect(
+                url_for('user.profile', id=id)
+            )
+        flash(error)
+        
+    return render_template(
+        "user/assign_activity.html",
+        activity_heads=activity_heads,
+        form=request.form
+    )
