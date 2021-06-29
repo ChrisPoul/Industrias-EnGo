@@ -14,33 +14,6 @@
             Admin
         </a>
         {% endif %}
-        {% if g.user.has_view_permissions('receipt.add') %}
-        <div class="links-dropdown">
-            <button class="links-dropdown-button"> 
-                Contaduría
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="links-dropdown-content">
-                <a href="{{ url_for('expense.expenses') }}">Gastos</a>
-                <a href="{{ url_for('product.products') }}">Productos</a>
-                <a href="{{ url_for('customer.customers') }}">Clientes</a>
-                <a href="{{ url_for('receipt.receipts') }}">Recibos</a>
-                <a href="{{ url_for('receipt.add') }}">Añadir Recibo</a>
-            </div>
-        </div>
-        {% endif %}
-        {% if g.user.has_view_permissions('user.users') %}
-        <div class="links-dropdown">
-            <button class="links-dropdown-button"> 
-                Recursos Humanos 
-                <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="links-dropdown-content">
-                <a href="{{ url_for('user.users') }}">Empleados</a>
-                <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
-            </div>
-        </div>
-        {% endif %}
         {% if g.user.has_view_permissions('warehouse.inventory') %}
         <div class="links-dropdown">
             <button class="links-dropdown-button"> 
@@ -56,6 +29,33 @@
                 {% if g.user.has_view_permissions('warehouse.add') %}
                 <a href="{{ url_for('warehouse.add') }}">Añadir Almacén</a>
                 {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('user.users') %}
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
+                Recursos Humanos 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="links-dropdown-content">
+                <a href="{{ url_for('user.users') }}">Empleados</a>
+                <a href="{{ url_for('user.register') }}">Añadir Empleado</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if g.user.has_view_permissions('receipt.add') %}
+        <div class="links-dropdown">
+            <button class="links-dropdown-button"> 
+                Contaduría
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="links-dropdown-content">
+                <a href="{{ url_for('expense.expenses') }}">Gastos</a>
+                <a href="{{ url_for('product.products') }}">Productos</a>
+                <a href="{{ url_for('customer.customers') }}">Clientes</a>
+                <a href="{{ url_for('receipt.receipts') }}">Recibos</a>
+                <a href="{{ url_for('receipt.add') }}">Añadir Recibo</a>
             </div>
         </div>
         {% endif %}
