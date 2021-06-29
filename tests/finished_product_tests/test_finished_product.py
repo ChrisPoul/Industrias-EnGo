@@ -7,7 +7,6 @@ class TestAdd(FinishedProductTest):
     def test_should_add_finished_product(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=1,
             unit="pz",
             cost=1

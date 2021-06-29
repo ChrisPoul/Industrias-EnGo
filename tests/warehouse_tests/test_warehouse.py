@@ -54,29 +54,3 @@ class TestSearch(WarehouseTest):
         warehouse = Warehouse.search('Test Address')
 
         self.assertEqual(warehouse, self.warehouse)
-
-
-class TestAddExpense(WarehouseTest):
-
-    def test_should_add_expense_to_warehouse_given_expense(self):
-        self.warehouse.add_expense(self.expense)
-
-        self.assertEqual(self.warehouse.expenses, [self.expense])
-
-
-class TestSearchExpenses(WarehouseTest):
-
-    def setUp(self):
-        WarehouseTest.setUp(self)
-        another_expense = Expense(
-            concept="Another Expense",
-            type_id=1
-        )
-        another_expense.add()
-
-    def test_should_return_list_of_expenses_given_correct_search_term(self):
-        self.warehouse.add_expense(self.expense)
-        expenses = self.warehouse.search_expenses(self.expense.concept)
-
-        self.assertEqual(expenses, [self.expense])
-    

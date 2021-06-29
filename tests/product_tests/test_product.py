@@ -6,6 +6,7 @@ class TestAdd(ProductTest):
 
     def test_should_add_product(self):
         product = Product(
+            warehouse_id=1,
             code="Some Code",
             description="Optional description",
             price=10
@@ -68,7 +69,6 @@ class TestInventory(ProductTest):
         ProductTest.setUp(self)
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=10,
             unit="pz"
         )
@@ -83,7 +83,6 @@ class TestInventory(ProductTest):
         sold_product.add()
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=10,
             unit="kg"
         )

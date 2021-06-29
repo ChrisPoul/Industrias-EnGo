@@ -9,14 +9,5 @@
 {% endblock %}
 
 {% block content %}
-{% if g.user.has_view_permissions("warehouse.add_expense") %}
-<div style="flex-direction: row;">
-    <div>
-        {% include 'expense/expenses-body.html' %}
-    </div>
-    {% endif %}
-    <div style="margin-left: 1vw;">
-        {% include 'product/products-body.html' %}
-    </div>
-</div>
+{% include 'product/products-body.html' %}
 {% endblock %}

@@ -37,32 +37,5 @@ class TestUpdate(WarehouseTest):
         self.warehouse.request.update()
         self.db.session.rollback()
 
-        self.assertNotEqual(self.warehouse.address, "")
-
-
-class TestAddExpense(WarehouseTest):
-
-    def test_should_add_expense_to_warehouse_given_existing_expense(self):
-        self.warehouse.request.add_expense(self.expense)
-
-        self.assertIn(self.expense, self.warehouse.expenses)
-    
-    def test_should_add_and_create_expense_given_valid_new_expense(self):
-        expense = Expense(
-            concept="New Name",
-            type_id=1
-        )
-        self.warehouse.request.add_expense(expense)
-
-        self.assertIn(expense, self.warehouse.expenses)
-
-    def test_should_not_add_expense_to_warehouse_given_invalid_expense(self):
-        expense = Expense(
-            concept="",
-            type_id=1
-        )
-        self.warehouse.request.add_expense(expense)
-
-        self.assertNotIn(expense, self.warehouse.expenses)
-    
+        self.assertNotEqual(self.warehouse.address, "")    
 

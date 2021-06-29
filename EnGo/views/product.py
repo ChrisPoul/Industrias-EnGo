@@ -7,6 +7,7 @@ from . import (
     get_form
 )
 from EnGo.models.product import Product
+from EnGo.models.warehouse import Warehouse
 
 bp = Blueprint("product", __name__, url_prefix="/product")
 
@@ -20,11 +21,12 @@ permissions = [
 ]
 
 
-@bp.route("/products", methods=("POST", "GET"))
+@bp.route("/products/<int:warehouse_id>", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
-def products():
-    products = Product.get_all()
+def products(warehouse_id):
+    warehouse = Warehouse.query.get(warehouse_id)
+    products = warehouse.products
     if request.method == "POST":
         product = Product.search(request.form['search_term'])
         if product:
@@ -35,16 +37,18 @@ def products():
     return render_template(
         "product/products.html",
         product_heads=product_heads,
+        warehouse=warehouse,
         products=products
     )
 
 
-@bp.route("/add", methods=('POST', 'GET'))
+@bp.route("/add/<int:warehouse_id>", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
-def add():
+def add(warehouse_id):
     if request.method == "POST":
         product = Product(
+            warehouse_id=warehouse_id,
             code=request.form["code"],
             description=request.form["description"],
             price=request.form["price"]
@@ -52,7 +56,7 @@ def add():
         error = product.request.add()
         if not error:
             return redirect(
-                url_for('product.products')
+                url_for('product.products', warehouse_id=warehouse_id)
             )
         flash(error)
 
@@ -73,7 +77,7 @@ def update(id):
         error = product.request.update()
         if not error:
             return redirect(
-                url_for('product.products')
+                url_for('product.products', warehouse_id=product.warehouse_id)
             )
         flash(error)
 
@@ -90,8 +94,9 @@ def update(id):
 @login_required
 def delete(id):
     product = Product.get(id)
+    warehouse_id = product.warehouse_id
     product.delete()
 
     return redirect(
-        url_for('product.products')
+        url_for('product.products', warehouse_id=warehouse_id)
     )

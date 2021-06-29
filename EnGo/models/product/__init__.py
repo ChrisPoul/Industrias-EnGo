@@ -12,6 +12,7 @@ class Product(db.Model, MyModel):
     code = Column(String(50), nullable=False, unique=True)
     description = Column(Text, nullable=True, unique=False)
     price = Column(Integer, nullable=False, default=0)
+    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
     sold_products = db.relationship(
         'SoldProduct',
         backref="product",
@@ -114,7 +115,6 @@ class SoldProduct(db.Model, MyModel):
 class FinishedProduct(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=0)
     unit = Column(String(10), nullable=False, default="pz")
     cost = Column(Integer, nullable=False, default=0)

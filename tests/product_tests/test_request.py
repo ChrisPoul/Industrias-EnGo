@@ -6,6 +6,7 @@ class TestAdd(ProductTest):
 
     def test_should_add_product_given_valid_product(self):
         product = Product(
+            warehouse_id=1,
             code="Test Code 2",
             price=10
         )
@@ -15,6 +16,7 @@ class TestAdd(ProductTest):
 
     def test_should_not_add_product_given_invalid_product(self):
         product = Product(
+            warehouse_id=1,
             code="",
             price=10
         )

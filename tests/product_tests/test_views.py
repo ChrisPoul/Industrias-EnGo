@@ -21,7 +21,7 @@ class TestProductsView(ProductViewTest):
         self.login_user(self.admin_user)
         with self.client as client:
             response = client.get(
-                url_for("product.products")
+                url_for("product.products", warehouse_id=self.warehouse.id)
             )
 
         self.assert200(response)
@@ -29,7 +29,7 @@ class TestProductsView(ProductViewTest):
     def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
-            url_for("product.products")
+            url_for("product.products", warehouse_id=self.warehouse.id)
         )
         
         self.assertStatus(response, 302)
@@ -41,7 +41,7 @@ class TestProductsView(ProductViewTest):
         )
         with self.client as client:
             response = client.post(
-                url_for('product.products'),
+                url_for('product.products', warehouse_id=self.warehouse.id),
                 data=search_data
             )
         
@@ -54,7 +54,7 @@ class TestProductsView(ProductViewTest):
         )
         with self.client as client:
             response = client.post(
-                url_for('product.products'),
+                url_for('product.products', warehouse_id=self.warehouse.id),
                 data=search_data
             )
         
@@ -72,7 +72,7 @@ class TestAddView(ProductViewTest):
         )
         with self.client as client:
             client.post(
-                url_for("product.add"),
+                url_for("product.add", warehouse_id=self.warehouse.id),
                 data=product_data
             )
 
@@ -87,7 +87,7 @@ class TestAddView(ProductViewTest):
         )
         with self.client as client:
             client.post(
-                url_for("product.add"),
+                url_for("product.add", warehouse_id=self.warehouse.id),
                 data=product_data
             )
 
@@ -96,7 +96,7 @@ class TestAddView(ProductViewTest):
     def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)
         response = self.client.get(
-            url_for("product.add")
+            url_for("product.add", warehouse_id=self.warehouse.id)
         )
         
         self.assertStatus(response, 302)

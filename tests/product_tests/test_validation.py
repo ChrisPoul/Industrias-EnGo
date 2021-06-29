@@ -102,6 +102,7 @@ class TestValidateUniqueValues(ProductTest):
 
     def test_should_not_return_error_given_product_already_in_database(self):
         product = Product(
+            warehouse_id=1,
             code="Unique Code",
             description="Optional description",
             price=10

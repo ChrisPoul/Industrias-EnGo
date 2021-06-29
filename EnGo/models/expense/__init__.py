@@ -14,11 +14,6 @@ class Expense(db.Model, MyModel):
     unit = Column(String(20), nullable=False, default="pz")
     quantity = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
-    warehouse_expenses = db.relationship(
-        'WarehouseExpense',
-        backref="expense",
-        cascade="all, delete-orphan"
-    )
 
     def __repr__(self):
         return self.concept
@@ -41,12 +36,6 @@ class Expense(db.Model, MyModel):
     def request(self):
         from .request import ExpenseRequest
         return ExpenseRequest(self)
-
-
-class WarehouseExpense(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    expense_id = Column(Integer, ForeignKey('expense.id'), nullable=False)
-    warehouse_id = Column(Integer, ForeignKey('warehouse.id'), nullable=False)
 
     
 class ExpenseType(db.Model, MyModel):

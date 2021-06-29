@@ -16,11 +16,13 @@ class ReceiptTest(Test):
         )
         self.customer.add()
         self.product_1 = Product(
+            warehouse_id=1,
             code="Code 1",
             price=10
         )
         self.product_1.add()
         self.product_2 = Product(
+            warehouse_id=1,
             code="Code 2",
             price=10
         )

@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>
-        {% block title %}
-        Añadir Gasto
-        {% if warehouse %}
-        a {{ warehouse.address }}
-        {% endif %}
-        {% endblock %}
-    </h1>
+    <h1>{% block title %} Añadir Gasto {% endblock %}</h1>
 {% endblock %}
 
 {% block content %}

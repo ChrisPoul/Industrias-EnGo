@@ -7,7 +7,6 @@ class TestValidation(FinishedProductTest):
     def test_should_not_return_error_given_valid_finished_product(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=1,
             unit="pz",
             cost=1
@@ -19,7 +18,6 @@ class TestValidation(FinishedProductTest):
     def test_should_return_error_given_invalid_finished_product(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="",
             unit="pz",
             cost=1
@@ -34,7 +32,6 @@ class TestValidateEmptyValues(FinishedProductTest):
     def test_should_not_return_error_given_no_empty_values(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=1,
             unit="pz",
             cost=1
@@ -46,7 +43,6 @@ class TestValidateEmptyValues(FinishedProductTest):
     def test_should_return_error_given_empty_quantity(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="",
             unit="pz",
             cost=1
@@ -58,7 +54,6 @@ class TestValidateEmptyValues(FinishedProductTest):
     def test_should_return_error_given_empty_unit(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="1",
             unit="",
             cost=1
@@ -70,7 +65,6 @@ class TestValidateEmptyValues(FinishedProductTest):
     def test_should_return_error_given_empty_cost(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="1",
             unit="pz",
             cost=""
@@ -85,7 +79,6 @@ class TestValidateNums(FinishedProductTest):
     def test_should_not_return_error_given_valid_quantity_and_cost(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity=1,
             unit="pz",
             cost=1
@@ -97,7 +90,6 @@ class TestValidateNums(FinishedProductTest):
     def test_should_return_error_given_invalid_quantity(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="Invalid Quantity",
             unit="pz",
             cost=1
@@ -109,7 +101,6 @@ class TestValidateNums(FinishedProductTest):
     def test_should_return_error_given_invalid_cost(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
-            warehouse_id=1,
             quantity="1",
             unit="pz",
             cost="Invalid Cost"
