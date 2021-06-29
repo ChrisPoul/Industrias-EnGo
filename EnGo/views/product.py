@@ -74,7 +74,7 @@ def update(id):
         error = product.request.update()
         if not error:
             return redirect(
-                url_for('product.products', warehouse_id=product.warehouse_id)
+                url_for('warehouse.inventory', id=product.warehouse_id)
             )
         flash(error)
 

@@ -23,15 +23,16 @@
     {% else %}
     <label for="{{ head }}">{{ product_heads[head] }}:</label>
     <input name="{{ head }}" id="{{ head }}"
-    {% if head == "description" %}
-    placeholder="Opcional"
-    {% else %}
-    placeholder="Requerido"
-    {% endif %}
-    {% if head == "price" %}
-    type="number"
-    {% endif %}
-    value="{{ product[head] }}">
+        {% if head == "description" %}
+        placeholder="Opcional"
+        {% else %}
+        placeholder="Requerido"
+        {% endif %}
+        {% if head == "price" %}
+        type="number"
+        step=".01"
+        {% endif %}
+        value="{{ product[head] }}">
     {% endif %}
     {% endfor %}
     <div>

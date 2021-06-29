@@ -18,10 +18,11 @@ permissions = [
 expense_heads = dict(
     concept="Concepto",
     type_id="Tipo",
-    cost="Costo",
+    quantity="Cantidad",
     unit="Unidad",
-    quantity="Cantidad"
+    cost="Costo"
 )
+
 
 @bp.route('/expenses', methods=('POST', 'GET'))
 @permission_required(permissions)
