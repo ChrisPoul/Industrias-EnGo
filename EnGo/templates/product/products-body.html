@@ -1,11 +1,13 @@
-<div class="heading">
-    {% include 'product/search-bar.html' %}
-    {% if g.user.has_view_permissions("product.add") %}
-    <a class="add-button" href="{{ url_for('product.add', warehouse_id=warehouse.id) }}">
-        <input type="button" value="Añadir Producto">
-    </a>
-    {% endif %}
-</div>
-<div class="container">
-    {% include 'product/products-table.html' %}
+<div>
+    <div class="heading">
+        {% include 'product/search-bar.html' %}
+        {% if g.user.has_view_permissions("product.add") and warehouse %}
+        <a class="add-button" href="{{ url_for('product.add', warehouse_id=warehouse.id) }}">
+            <input type="button" value="Añadir Producto">
+        </a>
+        {% endif %}
+    </div>
+    <div class="container">
+        {% include 'product/products-table.html' %}
+    </div>
 </div>

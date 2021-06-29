@@ -7,7 +7,6 @@ from . import (
     get_form
 )
 from EnGo.models.product import Product
-from EnGo.models.warehouse import Warehouse
 
 bp = Blueprint("product", __name__, url_prefix="/product")
 
@@ -21,12 +20,11 @@ permissions = [
 ]
 
 
-@bp.route("/products/<int:warehouse_id>", methods=("POST", "GET"))
+@bp.route("/products", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
-def products(warehouse_id):
-    warehouse = Warehouse.query.get(warehouse_id)
-    products = warehouse.products
+def products():
+    products = Product.query.all()
     if request.method == "POST":
         product = Product.search(request.form['search_term'])
         if product:
@@ -37,7 +35,6 @@ def products(warehouse_id):
     return render_template(
         "product/products.html",
         product_heads=product_heads,
-        warehouse=warehouse,
         products=products
     )
 
@@ -56,7 +53,7 @@ def add(warehouse_id):
         error = product.request.add()
         if not error:
             return redirect(
-                url_for('product.products', warehouse_id=warehouse_id)
+                url_for('warehouse.inventory', id=warehouse_id)
             )
         flash(error)
 
