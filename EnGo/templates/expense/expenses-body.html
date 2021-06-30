@@ -1,14 +1,16 @@
-<div class="heading">
-    {% include 'expense/search-bar.html' %}
-    <a class="add-button" 
-    {% if warehouse %}
-    href="{{ url_for('warehouse.add_expense', id=warehouse.id) }}"
-    {% else %}
-    href="{{ url_for('expense.add') }}"
-    {% endif %}>
-        <input type="button" value="Añadir Gasto">
-    </a>
-</div>
-<div class="container">
-    {% include 'expense/expenses-table.html' %}
+<div>
+    <div class="heading">
+        {% include 'expense/search-bar.html' %}
+        <a class="add-button" 
+        {% if warehouse %}
+        href="{{ url_for('warehouse.add_expense', id=warehouse.id) }}"
+        {% else %}
+        href="{{ url_for('expense.add') }}"
+        {% endif %}>
+            <input type="button" value="Añadir Gasto">
+        </a>
+    </div>
+    <div class="container">
+        {% include 'expense/expenses-table.html' %}
+    </div>
 </div>

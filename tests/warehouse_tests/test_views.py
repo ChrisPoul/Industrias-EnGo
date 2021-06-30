@@ -1,7 +1,7 @@
 from flask import url_for
 from . import WarehouseTest
 from EnGo.models.warehouse import Warehouse
-from EnGo.models.product import Product, FinishedProduct
+from EnGo.models.product import Product
 
 ### LOGED IN USER (LU) ###
 ### LOGED IN USER HAS PERMISSION (LUHP) ###
@@ -19,7 +19,7 @@ class WarehouseViewTest(WarehouseTest):
             description="Test Description",
             price=1
         )
-        self.product.add()  
+        self.product.add()
     
 
 class TestAddView(WarehouseViewTest):
@@ -101,6 +101,52 @@ class TestDeleteView(WarehouseViewTest):
             )
         
         self.assertIn(self.warehouse, self.db.session)
+
+
+class TestAddExpenseView(WarehouseViewTest):
+
+    def test_should_add_expense_to_warehouse_given_valid_expense_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        expense_input = dict(
+            concept="Test Expense",
+            type_id=1,
+            cost=10,
+            unit="pz",
+            quantity=10
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_expense', id=self.warehouse.id),
+                data=expense_input
+            )
+        
+        self.assertEqual(len(self.warehouse.expenses), 1)
+
+    def test_should_not_add_expense_to_warehouse_given_invalid_expense_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        expense_input = dict(
+            concept="",
+            type_id=1,
+            cost=10,
+            unit="pz",
+            quantity=10
+        )
+        with self.client as client:
+            client.post(
+                url_for('warehouse.add_expense', id=self.warehouse.id),
+                data=expense_input
+            )
+        
+        self.assertEqual(len(self.warehouse.expenses), 0)
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('warehouse.add_expense', id=self.warehouse.id)
+            )
+
+        self.assertStatus(response, 302)
 
 
 class TestInventoryView(WarehouseViewTest):

@@ -15,6 +15,11 @@ class Warehouse(db.Model, MyModel):
         backref="warehouse",
         cascade="all, delete-orphan"
     )
+    warehouse_expenses = db.relationship(
+        'WarehouseExpense',
+        backref="warehouse",
+        cascade="all, delete-orphan"
+    )
 
     def get(id):
         return Warehouse.query.get(id)
@@ -34,4 +39,16 @@ class Warehouse(db.Model, MyModel):
     def validation(self):
         from .validation import WarehouseValidation
         return WarehouseValidation(self)
+
+    @property
+    def expenses(self):
+        return [warehouse_expense.expense for warehouse_expense in self.warehouse_expenses]
+
+    def add_expense(self, expense):
+        from EnGo.models.expense import WarehouseExpense
+        warehouse_expense = WarehouseExpense(
+            warehouse_id=self.id,
+            expense_id=expense.id
+        )
+        warehouse_expense.add()
         

@@ -12,5 +12,20 @@
 {% endblock %}
 
 {% block content %}
-{% include 'product/products-body.html' %}
+<div class="warehouse-inventory">
+    <div class="warehouse-inventory-buttons">
+        <button onclick="displayWarehouseInventory(event, 'products')">
+            Productos
+        </button>
+        <button onclick="displayWarehouseInventory(event, 'expenses')">
+            Gastos
+        </button>
+    </div>
+    <div id="warehouse-products" class="warehouse-inventory-content">
+        {% include 'product/products-body.html' %}
+    </div>
+    <div id="warehouse-expenses" class="warehouse-inventory-content">
+        {% include 'expense/expenses-body.html' %}
+    </div>
+</div>
 {% endblock %}

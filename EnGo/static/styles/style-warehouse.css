@@ -1,0 +1,32 @@
+.warehouse-inventory {
+    width: 100%;
+    align-items: center;
+}
+.warehouse-inventory-buttons {
+    flex-direction: row;
+    width: 90%;
+    justify-content: flex-end;
+}
+.warehouse-inventory-buttons button {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    background-color: inherit;
+    padding: 1em;
+}
+.warehouse-inventory-content {
+    display: none;
+    background-color: lightgray;
+    padding: 2em;
+    width: 90%;
+    border-radius: 10px;
+}
+
+.warehouse-inventory-buttons :first-child {
+    background-color: lightgray;
+}
+#warehouse-products {
+    display: flex;
+}
