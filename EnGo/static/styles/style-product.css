@@ -6,30 +6,23 @@
     align-items: center;
 }
 
-#product-inventory {
+.product-inventory-content {
     display: none;
-    position: fixed;
-    width: 15vmax;
+    position: static;
     height: fit-content;
     padding: 0 0.5em;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: white;
-    top: 30vh;
-    left: 42vw;
-    z-index: 3;
-    cursor: pointer;
 }
-#product-inventory td:nth-last-child(2), #product-inventory td:last-child {
+.product-inventory-content td:nth-last-child(2), .product-inventory-content td:last-child {
     border-bottom: none;
 }
-#overlay {
+.product-inventory-overlay {
     display: none;
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0);
     z-index: 2;
     top: 0;
     left: 0;
+    cursor: pointer;
 }
