@@ -34,6 +34,7 @@ def expenses():
         id=0,
         name="Todos"
     )
+    expense_types.append(selected_expense_type)
     if request.method == "POST":
         search_term = request.form["search_term"]
         if search_term != "":

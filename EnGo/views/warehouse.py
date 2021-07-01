@@ -124,6 +124,7 @@ def inventory(id):
         id=0,
         name="Todos"
     )
+    warehouse_inventory.expense_types.append(selected_expense_type)
     if request.method == "POST":
         warehouse_inventory.handle_search_request()
         selected_expense_type = ExpenseType.query.get(warehouse_inventory.type_id)
