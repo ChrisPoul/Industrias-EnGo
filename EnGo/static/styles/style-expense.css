@@ -8,3 +8,7 @@
     background-color: #c0c0c0B2;
     border: 1px solid black;
 }
+
+.expense-types-dropdown {
+    margin-left: 0.2em !important;
+}

@@ -1,4 +1,4 @@
-<select name="type_id">
+<select class="expense-types-dropdown" name="type_id">
     {% if selected_expense_type %}
     <option value="{{ selected_expense_type['id'] }}">{{ selected_expense_type['name'] }}</option>
     {% endif %}
