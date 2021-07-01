@@ -51,4 +51,7 @@ class Warehouse(db.Model, MyModel):
             expense_id=expense.id
         )
         warehouse_expense.add()
+
+    def search_expenses(self, search_term):
+        return [expense for expense in self.expenses if expense.concept == search_term]
         
