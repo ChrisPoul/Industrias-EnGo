@@ -130,6 +130,10 @@ def inventory(id):
         warehouse_inventory.handle_search_request()
         if warehouse_inventory.type_id != 0:
             selected_expense_type = ExpenseType.query.get(warehouse_inventory.type_id)
+        if warehouse_inventory.product:
+            return redirect(
+                url_for('product.update', id=warehouse_inventory.product.id)
+            )
 
     return render_template(
         "warehouse/inventory.html",
@@ -152,6 +156,7 @@ class WarehouseInventory:
         self.products = warehouse.products
         self.type_id = 0
         self.selected_inventory = "products"
+        self.product = None
 
     def handle_search_request(self):
         self.search_term = request.form["search_term"]
@@ -169,8 +174,5 @@ class WarehouseInventory:
         self.expenses = filter_expenses_by_type(self.expenses, self.type_id)
 
     def search_products(self):
-        product = Product.search(self.search_term)
-        if product:
-            return redirect(
-                url_for('product.update', id=product.id)
-            )
+        self.product = Product.search(self.search_term)
+            
