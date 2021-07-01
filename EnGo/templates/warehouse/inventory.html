@@ -14,17 +14,29 @@
 {% block content %}
 <div class="warehouse-inventory">
     <div class="warehouse-inventory-buttons">
-        <button onclick="displayWarehouseInventory(event, 'products')">
+        <button onclick="displayWarehouseInventory(event, 'products')"
+            {% if selected_inventory == "products" %}
+            style="background-color: lightgray;"
+            {% endif %}>
             Productos
         </button>
-        <button onclick="displayWarehouseInventory(event, 'expenses')">
+        <button onclick="displayWarehouseInventory(event, 'expenses')"
+            {% if selected_inventory == "expenses" %}
+            style="background-color: lightgray;"
+            {% endif %}>
             Gastos
         </button>
     </div>
-    <div id="warehouse-products" class="warehouse-inventory-content">
+    <div id="warehouse-products" class="warehouse-inventory-content"
+        {% if selected_inventory == "products" %}
+        style="display: block;"
+        {% endif %}>
         {% include 'product/products-body.html' %}
     </div>
-    <div id="warehouse-expenses" class="warehouse-inventory-content">
+    <div id="warehouse-expenses" class="warehouse-inventory-content"
+        {% if selected_inventory == "expenses" %}
+        style="display: block;"
+        {% endif %}>
         {% include 'expense/expenses-body.html' %}
     </div>
 </div>

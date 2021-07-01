@@ -4,7 +4,7 @@
 }
 .warehouse-inventory-buttons {
     flex-direction: row;
-    width: 90%;
+    width: 92%;
     justify-content: flex-end;
 }
 .warehouse-inventory-buttons button {
@@ -22,11 +22,4 @@
     padding: 2em;
     width: 90%;
     border-radius: 10px;
-}
-
-.warehouse-inventory-buttons :first-child {
-    background-color: lightgray;
-}
-#warehouse-products {
-    display: flex;
 }

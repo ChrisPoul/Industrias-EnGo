@@ -120,23 +120,26 @@ def add_expense(id):
 def inventory(id):
     warehouse = Warehouse.query.get(id)
     warehouse_inventory = WarehouseInventory(warehouse)
+    expense_types = ExpenseType.query.all()
     selected_expense_type = dict (
         id=0,
         name="Todos"
     )
-    warehouse_inventory.expense_types.append(selected_expense_type)
+    expense_types.append(selected_expense_type)
     if request.method == "POST":
         warehouse_inventory.handle_search_request()
-        selected_expense_type = ExpenseType.query.get(warehouse_inventory.type_id)
+        if warehouse_inventory.type_id != 0:
+            selected_expense_type = ExpenseType.query.get(warehouse_inventory.type_id)
 
     return render_template(
         "warehouse/inventory.html",
         expense_heads=expense_heads,
         product_heads=product_heads,
         expenses=warehouse_inventory.expenses,
-        expense_types=warehouse_inventory.expense_types,
+        expense_types=expense_types,
         selected_expense_type=selected_expense_type,
         products=warehouse_inventory.products,
+        selected_inventory=warehouse_inventory.selected_inventory,
         warehouse=warehouse
     )
 
@@ -147,14 +150,17 @@ class WarehouseInventory:
         self.warehouse = warehouse
         self.expenses = warehouse.expenses
         self.products = warehouse.products
-        self.expense_types = ExpenseType.query.all()
+        self.type_id = 0
+        self.selected_inventory = "products"
 
     def handle_search_request(self):
         self.search_term = request.form["search_term"]
         try:
             self.type_id = int(request.form['type_id'])
+            self.selected_inventory = "expenses"
             self.search_expenses()
         except KeyError:
+            self.selected_inventory = "products"
             self.search_products()
 
     def search_expenses(self):
