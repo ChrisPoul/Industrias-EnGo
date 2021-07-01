@@ -17,6 +17,9 @@ header {
     justify-content: center;
     background-color:rgba(143, 143, 143, 0.671)
 }
+header a {
+    margin-left: 1em;
+}
 
 section {
     display: flex;
