@@ -6,9 +6,18 @@
     align-items: center;
 }
 
+.product-inventory {
+    padding: 0;
+}
+.product-inventory-button {
+    margin: 0 auto;
+}
 .product-inventory-content {
     display: none;
-    position: static;
+    position: absolute;
+    color: white;
+    background-color: #333;
+    border-radius: 10px;
     height: fit-content;
     padding: 0 0.5em;
 }

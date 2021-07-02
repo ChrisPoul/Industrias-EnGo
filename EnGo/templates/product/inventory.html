@@ -1,27 +1,27 @@
-<div class="product-inventory">
-    <button class="product-inventory-button">Inventario</button>
-    <div class="product-inventory-content">
-        <table>
-            <thead>
-                <th>
-                    Unidad
-                </th>
-                <th>
-                    Cantidad
-                </th>
-            </thead>
-            {% for unit in product.inventory %}
-            <tr>
-                <td>
-                    {{ unit }}
-                </td>
-                <td>
-                    {{ product.inventory[unit] }}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="product-inventory-overlay">
-    </div>
+<button class="product-inventory-button" onclick="displayProductInventory(event)">
+    Inventario
+</button>
+<div class="product-inventory-content">
+    <table>
+        <thead>
+            <th>
+                Unidad
+            </th>
+            <th>
+                Cantidad
+            </th>
+        </thead>
+        {% for unit in product.inventory %}
+        <tr>
+            <td>
+                {{ unit }}
+            </td>
+            <td>
+                {{ product.inventory[unit] }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="product-inventory-overlay" onclick="hideProductInventories(event)">
 </div>

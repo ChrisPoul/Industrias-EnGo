@@ -1,16 +1,6 @@
-window.onclick = event => {
-    element = event.target
-    if (element.className == "product-inventory-button") {
-        displayProductInventory(element)
-    }
-    else if (element.className == "product-inventory-overlay") {
-        hideElement(element)
-        hideProductInventories()
-    }
-}
-
-
-function displayProductInventory(productInventoryButton) {
+function displayProductInventory(event) {
+    productInventoryButton = event.target
+    hideElement(productInventoryButton)
     productInventory = productInventoryButton.parentElement
     productInventoryContent = productInventory.children[1]
     productInventoryOverlay = productInventory.children[2]
@@ -19,11 +9,14 @@ function displayProductInventory(productInventoryButton) {
 }
 
 
-function hideProductInventories() {
+function hideProductInventories(event) {
+    productInventoryOverlay = event.target
+    hideElement(productInventoryOverlay)
+    productInventoryButtons = document.getElementsByClassName("product-inventory-button")
     productInventoryContents = document.getElementsByClassName("product-inventory-content")
-    console.log(productInventoryContents)
     for (i = 0; i < productInventoryContents.length; i++) {
         hideElement(productInventoryContents[i])
+        displayElement(productInventoryButtons[i])
     }
 }
 
