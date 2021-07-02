@@ -37,14 +37,21 @@
                 value="{{ product[head] }}">
             {% endfor %}
         </div>
-        <input type="button" class="add-finished-product-button"
-            onclick="displayFinishedProductFields()" 
-            value="Añadir Producto Terminado">
-        <div>
-            <input type="submit" value="Guardar Cambios">
-            <a href="{{ url_for('product.delete', id=product.id) }}">
-                <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
-            </a>
+        <div class="product-update-buttons">
+            <div>
+                <input type="button" class="add-finished-product-button"
+                    onclick="displayFinishedProductFields()" 
+                    value="Añadir Producto Terminado">
+            </div>
+            <div></div>
+            <div>
+                <input type="submit" value="Guardar Cambios">
+            </div>
+            <div>
+                <a href="{{ url_for('product.delete', id=product.id) }}">
+                    <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
+                </a>
+            </div>
         </div>
     </form>
     {% include "product/finished-products.html" %}
