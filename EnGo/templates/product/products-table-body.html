@@ -3,7 +3,7 @@
     {% for head in product_heads %}
     <td>
         {% if head == 'code' %}
-        <a href="{{ url_for('product.update', id=product.id) }}">
+        <a href="{{ url_for('product.profile', id=product.id) }}">
             {{ product[head] }}
         </a>
         {% elif head == 'price' or head == "cost" %}

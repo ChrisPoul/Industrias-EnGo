@@ -7,53 +7,26 @@
 {% endblock %}
 
 {% block content %}
-<div>
-    <form method="post">
-        {% for head in product_heads %}
-        <label for="{{ head }}">{{ product_heads[head] }}:</label>
-        <input name="{{ head }}" id="{{ head }}"
-            {% if head == "description" %}
-            placeholder="Opcional"
-            {% else %}
-            placeholder="Requerido"
-            {% endif %}
-            {% if head == "price" %}
-            type="number"
-            step=".01"
-            {% endif %}
-            value="{{ product[head] }}">
-        {% endfor %}
-        <div id="add-finished-product">
-            {% for head in finished_product_heads %}
-            <label for="{{ head }}">{{ finished_product_heads[head] }}:</label>
-            <input name="{{ head }}" id="{{ head }}"
-                placeholder="Requerido"
-                {% if head == "cost" %}
-                type="number"
-                step=".01"
-                {% elif head == "quantity" %}
-                type="number"
-                {% endif %}
-                value="{{ product[head] }}">
-            {% endfor %}
-        </div>
-        <div class="product-update-buttons">
-            <div>
-                <input type="button" class="add-finished-product-button"
-                    onclick="displayFinishedProductFields()" 
-                    value="Añadir Producto Terminado">
-            </div>
-            <div></div>
-            <div>
-                <input type="submit" value="Guardar Cambios">
-            </div>
-            <div>
-                <a href="{{ url_for('product.delete', id=product.id) }}">
-                    <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
-                </a>
-            </div>
-        </div>
-    </form>
-    {% include "product/finished-products.html" %}
-</div>
+<form method="post">
+    {% for head in product_heads %}
+    <label for="{{ head }}">{{ product_heads[head] }}:</label>
+    <input name="{{ head }}" id="{{ head }}"
+        {% if head == "description" %}
+        placeholder="Opcional"
+        {% else %}
+        placeholder="Requerido"
+        {% endif %}
+        {% if head == "price" %}
+        type="number"
+        step=".01"
+        {% endif %}
+        value="{{ product[head] }}">
+    {% endfor %}
+    <div class="product-update-buttons">
+        <input type="submit" value="Guardar Cambios">
+        <a href="{{ url_for('product.delete', id=product.id) }}">
+            <input type="button" value="Eliminar" onclick="return confirm('¿Estas seguro?')">
+        </a>
+    </div>
+</form>
 {% endblock %}

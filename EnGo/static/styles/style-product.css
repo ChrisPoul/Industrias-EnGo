@@ -36,20 +36,6 @@
     cursor: pointer;
 }
 
-#add-finished-product {
-    display: None;
-    flex-direction: column;
-}
-.product-update-buttons {
-    display: grid;
-    grid-template-columns: auto auto;
-}
-.product-update-buttons input[type=submit] {
-    width: 100%;
-}
-.add-finished-product-button {
-    background-color: rgba(184, 135, 11, 0.698) !important;
-}
 .finished-products {
     display: grid;
     grid-template-columns: auto auto auto;

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}
+        {{ product.code }} de almacén {{ product.warehouse.address }}
+        {% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<div>
+    <div>
+        {% for head in product_heads %}
+        {{ product[head] }}
+        {% endfor %}
+    </div>
+    <form method="post">
+        {% for head in finished_product_heads %}
+        <label for="{{ head }}">{{ finished_product_heads[head] }}:</label>
+        <input name="{{ head }}" id="{{ head }}"
+            placeholder="Requerido"
+            {% if head == "cost" %}
+            type="number"
+            step=".01"
+            {% elif head == "quantity" %}
+            type="number"
+            {% endif %}
+            value="{{ request.form[head] }}">
+        {% endfor %}
+        <div>
+            <input type="submit" value="Añadir Producto Terminado">
+        </div>
+    </form>
+    {% include "product/finished-products.html" %}
+</div>
+{% endblock %}

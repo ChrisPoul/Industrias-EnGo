@@ -6,7 +6,7 @@ from . import (
     permission_required, login_required, update_obj_attrs,
     get_form
 )
-from EnGo.models.product import Product
+from EnGo.models.product import Product, FinishedProduct
 
 bp = Blueprint("product", __name__, url_prefix="/product")
 
@@ -74,7 +74,6 @@ def add(warehouse_id):
 @login_required
 def update(id):
     product = Product.get(id)
-    add_finished_product = False
     if request.method == "POST":
         update_obj_attrs(product, product_heads)
         error = product.request.update()
@@ -88,8 +87,28 @@ def update(id):
     return render_template(
         "product/update.html",
         product_heads=product_heads,
+        product=product
+    )
+
+
+@bp.route("/profile/<int:id>", methods=('POST', 'GET'))
+def profile(id):
+    product = Product.query.get(id)
+    if request.method == "POST":
+        finished_product = FinishedProduct(
+            product_id=product.id,
+            cost=request.form["cost"],
+            unit=request.form["unit"],
+            quantity=request.form["quantity"]
+        )
+        error = finished_product.request.add()
+        if error:
+            flash(error)
+    
+    return render_template(
+        'product/profile.html',
+        product_heads=product_heads,
         finished_product_heads=finished_product_heads,
-        add_finished_product=add_finished_product,
         product=product
     )
 

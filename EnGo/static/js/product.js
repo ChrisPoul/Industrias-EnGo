@@ -21,12 +21,6 @@ function hideProductInventories(event) {
 }
 
 
-function displayFinishedProductFields() {
-    finishedProductFields = document.getElementById("add-finished-product")
-    finishedProductFields.style.display = "flex"
-}
-
-
 function displayElement (element) {
     element.style.display = "block" 
 }

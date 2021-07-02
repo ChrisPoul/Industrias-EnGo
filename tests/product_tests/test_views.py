@@ -129,6 +129,24 @@ class TestUpdateView(ProductViewTest):
         self.assertStatus(response, 302)
 
 
+class TestProfileView(ProductViewTest):
+
+    def test_should_add_finished_product_given_valid_finished_product_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        finished_product_input = dict(
+            cost=100,
+            unit="pz",
+            quantity=10
+        )
+        with self.client as client:
+            client.post(
+                url_for('product.profile', id=self.product.id),
+                data=finished_product_input
+            )
+        
+        self.assertEqual(len(self.product.finished_products), 1)
+
+
 class TestDeleteView(ProductViewTest):
 
     def test_should_delete_product_given_LUHP(self):
