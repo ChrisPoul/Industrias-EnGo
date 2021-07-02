@@ -35,3 +35,22 @@
     left: 0;
     cursor: pointer;
 }
+
+#add-finished-product {
+    display: None;
+    flex-direction: column;
+}
+.add-finished-product-button {
+    background-color: rgba(184, 135, 11, 0.698) !important;
+}
+.finished-products {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.finished-products div{
+    padding: 0.5em;
+}
+.head {
+    border-bottom: 1px solid black;
+    font-weight: 600;
+}

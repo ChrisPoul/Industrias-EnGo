@@ -15,6 +15,11 @@ product_heads = dict(
     description="Descripción",
     price="Precio"
 )
+finished_product_heads = dict(
+    cost="Costo de producción",
+    unit="Unidad",
+    quantity="Cantidad"
+)
 permissions = [
     "Contaduría"
 ]
@@ -69,6 +74,7 @@ def add(warehouse_id):
 @login_required
 def update(id):
     product = Product.get(id)
+    add_finished_product = False
     if request.method == "POST":
         update_obj_attrs(product, product_heads)
         error = product.request.update()
@@ -82,6 +88,8 @@ def update(id):
     return render_template(
         "product/update.html",
         product_heads=product_heads,
+        finished_product_heads=finished_product_heads,
+        add_finished_product=add_finished_product,
         product=product
     )
 

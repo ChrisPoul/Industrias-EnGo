@@ -1,0 +1,14 @@
+<div class="finished-products container">
+    {% for head in finished_product_heads %}
+    <div class="head">
+        {{ finished_product_heads[head] }}
+    </div>
+    {% endfor %}
+    {% for finished_product in product.finished_products %}
+    {% for head in finished_product_heads %}
+    <div>
+        {{ finished_product[head] }}
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
