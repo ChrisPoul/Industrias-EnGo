@@ -29,13 +29,9 @@ class ExpenseValidation:
     
     def validate_nums(self):
         expense_nums = [
-            'cost'
+            'cost',
+            'quantity'
         ]
-        try:
-            self.expense.quantity
-            expense_nums.append('quantity')
-        except AttributeError:
-            pass
         self.error = validate_obj_num_attrs(self.expense, expense_nums)
     
         return self.error
