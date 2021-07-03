@@ -3,14 +3,23 @@
 {% block header %}
     <h1>{% block title %}
         {{ product.code }} de almacén {{ product.warehouse.address }}
-        {% endblock %}</h1>
+        {% endblock %}
+    </h1>
+    <a href="{{ url_for('product.update', id=product.id) }}">
+        <input type="button" value="Editar">
+    </a>
 {% endblock %}
 
 {% block content %}
 <div>
-    <div>
+    <div class="product-profile-info">
         {% for head in product_heads %}
-        {{ product[head] }}
+        <div>
+            <strong>{{ product_heads[head] }}:</strong>  
+        </div>
+        <div>
+            {{ product[head] }}
+        </div>
         {% endfor %}
     </div>
     <form method="post">

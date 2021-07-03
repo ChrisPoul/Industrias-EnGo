@@ -35,10 +35,20 @@
     left: 0;
     cursor: pointer;
 }
+.product-profile-info {
+    display: grid;
+    grid-template-columns: 20% auto;
+    margin-bottom: 3vh;
+}
+.product-profile-info div {
+    margin-left: 0.5em;
+    margin-bottom: 0.4em;
+}
 
 .finished-products {
     display: grid;
     grid-template-columns: auto auto auto;
+    margin-top: 5vh;
 }
 .finished-products div{
     padding: 0.5em;
