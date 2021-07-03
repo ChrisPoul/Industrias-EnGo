@@ -8,8 +8,7 @@ class TestAdd(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity=1,
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         finished_product.add()
 

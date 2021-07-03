@@ -6,7 +6,7 @@
         <a href="{{ url_for('product.profile', id=product.id) }}">
             {{ product[head] }}
         </a>
-        {% elif head == 'price' or head == "cost" %}
+        {% elif head == 'price' %}
         {{ format_price(product[head]) }}
         {% else %}
         {{ product[head] }}

@@ -15,7 +15,6 @@ class FinishedProductTest(Test):
         self.finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity=1,
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         self.finished_product.add()

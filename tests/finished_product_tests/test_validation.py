@@ -8,8 +8,7 @@ class TestValidation(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity=1,
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate()
 
@@ -19,8 +18,7 @@ class TestValidation(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity="",
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate()
 
@@ -33,8 +31,7 @@ class TestValidateEmptyValues(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity=1,
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate_empty_values()
 
@@ -44,8 +41,7 @@ class TestValidateEmptyValues(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity="",
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate_empty_values()
 
@@ -55,19 +51,7 @@ class TestValidateEmptyValues(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity="1",
-            unit="",
-            cost=1
-        )
-        error = finished_product.validation.validate_empty_values()
-
-        self.assertNotEqual(error, None)
-        
-    def test_should_return_error_given_empty_cost(self):
-        finished_product = FinishedProduct(
-            product_id=self.product.id,
-            quantity="1",
-            unit="pz",
-            cost=""
+            unit=""
         )
         error = finished_product.validation.validate_empty_values()
 
@@ -76,12 +60,11 @@ class TestValidateEmptyValues(FinishedProductTest):
 
 class TestValidateNums(FinishedProductTest):
 
-    def test_should_not_return_error_given_valid_quantity_and_cost(self):
+    def test_should_not_return_error_given_valid_quantity(self):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity=1,
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate_nums()
 
@@ -91,21 +74,8 @@ class TestValidateNums(FinishedProductTest):
         finished_product = FinishedProduct(
             product_id=self.product.id,
             quantity="Invalid Quantity",
-            unit="pz",
-            cost=1
+            unit="pz"
         )
         error = finished_product.validation.validate_nums()
 
         self.assertNotEqual(error, None)
-    
-    def test_should_return_error_given_invalid_cost(self):
-        finished_product = FinishedProduct(
-            product_id=self.product.id,
-            quantity="1",
-            unit="pz",
-            cost="Invalid Cost"
-        )
-        error = finished_product.validation.validate_nums()
-
-        self.assertNotEqual(error, None)
-    

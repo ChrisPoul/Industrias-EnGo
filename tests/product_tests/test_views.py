@@ -134,7 +134,6 @@ class TestProfileView(ProductViewTest):
     def test_should_add_finished_product_given_valid_finished_product_input_and_LUHP(self):
         self.login_user(self.dev_user)
         finished_product_input = dict(
-            cost=100,
             unit="pz",
             quantity=10
         )

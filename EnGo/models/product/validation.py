@@ -95,8 +95,7 @@ class FinishedProductValidation:
     def validate_empty_values(self):
         finished_product_attrs = [
             'quantity',
-            'unit',
-            'cost'
+            'unit'
         ]
         self.error = validate_empty_values(self.finished_product, finished_product_attrs)
 
@@ -104,8 +103,7 @@ class FinishedProductValidation:
 
     def validate_nums(self):
         finished_product_nums = [
-            'quantity',
-            'cost'
+            'quantity'
         ]
         self.error = validate_obj_num_attrs(self.finished_product, finished_product_nums)
         

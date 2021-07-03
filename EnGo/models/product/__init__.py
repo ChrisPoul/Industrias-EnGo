@@ -117,7 +117,6 @@ class FinishedProduct(db.Model, MyModel):
     product_id = Column(Integer, ForeignKey('product.id'), nullable=False)
     quantity = Column(Integer, nullable=False, default=0)
     unit = Column(String(10), nullable=False, default="pz")
-    cost = Column(Integer, nullable=False, default=0)
     date = Column(DateTime, nullable=False, default=datetime.now)
 
     def __repr__(self):

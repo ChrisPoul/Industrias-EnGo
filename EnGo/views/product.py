@@ -16,7 +16,6 @@ product_heads = dict(
     price="Precio"
 )
 finished_product_heads = dict(
-    cost="Costo de producción",
     unit="Unidad",
     quantity="Cantidad"
 )
@@ -97,7 +96,6 @@ def profile(id):
     if request.method == "POST":
         finished_product = FinishedProduct(
             product_id=product.id,
-            cost=request.form["cost"],
             unit=request.form["unit"],
             quantity=request.form["quantity"]
         )

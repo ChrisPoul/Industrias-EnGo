@@ -27,10 +27,7 @@
         <label for="{{ head }}">{{ finished_product_heads[head] }}:</label>
         <input name="{{ head }}" id="{{ head }}"
             placeholder="Requerido"
-            {% if head == "cost" %}
-            type="number"
-            step=".01"
-            {% elif head == "quantity" %}
+            {% if head == "quantity" %}
             type="number"
             {% endif %}
             value="{{ request.form[head] }}">
