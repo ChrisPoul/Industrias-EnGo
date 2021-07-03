@@ -1,6 +1,6 @@
 from . import Expense, ExpenseType
 from EnGo.errors.messages import repeated_value_error
-from EnGo.models import validate_empty_values, validate_obj_nums
+from EnGo.models import validate_empty_values, validate_obj_num_attrs
 
 
 class ExpenseValidation:
@@ -36,7 +36,7 @@ class ExpenseValidation:
             expense_nums.append('quantity')
         except AttributeError:
             pass
-        self.error = validate_obj_nums(self.expense, expense_nums)
+        self.error = validate_obj_num_attrs(self.expense, expense_nums)
     
         return self.error
 

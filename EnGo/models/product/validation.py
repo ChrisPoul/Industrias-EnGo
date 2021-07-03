@@ -3,7 +3,7 @@ from EnGo.errors.messages import (
     repeated_value_error
 )
 from EnGo.models import (
-    validate_empty_values, validate_obj_nums
+    validate_empty_values, validate_obj_num_attrs
 )
 
 
@@ -41,7 +41,7 @@ class ProductValidation:
         product_nums = [
             "price"
         ]
-        self.error = validate_obj_nums(self.product, product_nums)
+        self.error = validate_obj_num_attrs(self.product, product_nums)
 
         return self.error
 
@@ -74,7 +74,7 @@ class SoldProductValidation:
             "quantity",
             "price"
         ]
-        self.error = validate_obj_nums(self.sold_product, sold_product_nums)
+        self.error = validate_obj_num_attrs(self.sold_product, sold_product_nums)
 
         return self.error
 
@@ -107,6 +107,6 @@ class FinishedProductValidation:
             'quantity',
             'cost'
         ]
-        self.error = validate_obj_nums(self.finished_product, finished_product_nums)
+        self.error = validate_obj_num_attrs(self.finished_product, finished_product_nums)
         
         return self.error

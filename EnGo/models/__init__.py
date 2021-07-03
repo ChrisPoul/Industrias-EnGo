@@ -42,7 +42,7 @@ def validate_empty_values(obj, attributes):
     return None
 
 
-def validate_obj_nums(obj, attributes):
+def validate_obj_num_attrs(obj, attributes):
     for attr in attributes:
         error = validate_obj_num(obj, attr)
         if error:
