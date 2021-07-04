@@ -4,7 +4,7 @@ from flask import (
 )
 from . import (
     permission_required, login_required, update_obj_attrs,
-    get_form
+    get_form, get_empty_form
 )
 from EnGo.models.product import Product, FinishedProduct
 
@@ -94,6 +94,7 @@ def update(id):
 @bp.route("/profile/<int:id>", methods=('POST', 'GET'))
 def profile(id):
     product = Product.query.get(id)
+    form = get_form(finished_product_heads)
     if request.method == "POST":
         finished_product = FinishedProduct(
             product_id=product.id,
@@ -103,11 +104,14 @@ def profile(id):
         error = finished_product.request.add()
         if error:
             flash(error)
+        else:
+            form = get_empty_form(finished_product_heads)
     
     return render_template(
         'product/profile.html',
         product_heads=product_heads,
         finished_product_heads=finished_product_heads,
+        form=form,
         product=product
     )
 
