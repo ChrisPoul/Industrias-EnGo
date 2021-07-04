@@ -23,7 +23,7 @@
             <div class="links-dropdown-content">
                 {% for warehouse in warehouses %}
                 <a href="{{ url_for('warehouse.inventory', id=warehouse.id) }}">
-                    {{ warehouse.address }}
+                    {{ warehouse.name }}
                 </a>
                 {% endfor %}
                 {% if g.user.has_view_permissions('warehouse.add') %}

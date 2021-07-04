@@ -24,7 +24,7 @@ accounting_permission = ["Contaduría"]
 quality_permission = ["Calidad"]
 
 warehouse_heads = dict(
-    address="Dirección"
+    name="Nombre del Almacén"
 )
 
 
@@ -35,7 +35,7 @@ def add():
     form = get_form(warehouse_heads)
     if request.method == "POST":
         warehouse = Warehouse(
-            address=form["address"]
+            name=form["name"]
         )
         error = warehouse.request.add()
         if not error:

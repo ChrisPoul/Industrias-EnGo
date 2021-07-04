@@ -6,7 +6,7 @@ class TestValidate(WarehouseTest):
 
     def test_should_not_return_error_given_valid_warehouse(self):
         warehouse = Warehouse(
-            address="Valid Address"
+            name="Valid name"
         )
         error = warehouse.validation.validate()
 
@@ -14,7 +14,7 @@ class TestValidate(WarehouseTest):
     
     def test_should_return_error_given_invalid_warehouse(self):
         warehouse = Warehouse(
-            address=""
+            name=""
         )
         error = warehouse.validation.validate()
 
@@ -25,7 +25,7 @@ class TestValidateEmptyValues(WarehouseTest):
 
     def test_should_not_return_error_given_no_empty_values(self):
         warehouse = Warehouse(
-            address="Valid Address"
+            name="Valid name"
         )
         error = warehouse.validation.validate_empty_values()
 
@@ -33,7 +33,7 @@ class TestValidateEmptyValues(WarehouseTest):
     
     def test_should_return_error_given_empty_value(self):
         warehouse = Warehouse(
-            address=""
+            name=""
         )
         error = warehouse.validation.validate_empty_values()
 
@@ -44,7 +44,7 @@ class TestValidateRepeatedValues(WarehouseTest):
 
     def test_should_not_return_error_given_unique_value(self):
         warehouse = Warehouse(
-            address="Unique Address"
+            name="Unique name"
         )
         error = warehouse.validation.validate_unique_values()
 
@@ -52,7 +52,7 @@ class TestValidateRepeatedValues(WarehouseTest):
     
     def test_should_return_error_given_repeated_value(self):
         warehouse = Warehouse(
-            address="Test Address"
+            name="Test Warehouse"
         )
         error = warehouse.validation.validate_unique_values()
 

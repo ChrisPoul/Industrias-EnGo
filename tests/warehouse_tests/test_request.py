@@ -8,7 +8,7 @@ class TestAdd(WarehouseTest):
 
     def test_sould_add_warehouse_given_valid_warehouse(self):
         warehouse = Warehouse(
-            address="Valid Address"
+            name="Valid name"
         )
         warehouse.request.add()
 
@@ -16,7 +16,7 @@ class TestAdd(WarehouseTest):
 
     def test_should_not_add_warehouse_given_invalid_warehouse(self):
         warehouse = Warehouse(
-            address=""
+            name=""
         )
         warehouse.request.add()
         
@@ -26,16 +26,16 @@ class TestAdd(WarehouseTest):
 class TestUpdate(WarehouseTest):
 
     def test_should_update_warehouse_given_valid_changes(self):
-        self.warehouse.address = "New Address"
+        self.warehouse.name = "New name"
         self.warehouse.request.update()
         self.db.session.rollback()
 
-        self.assertEqual(self.warehouse.address, "New Address")
+        self.assertEqual(self.warehouse.name, "New name")
     
     def test_should_not_update_warehouse_given_invalid_changes(self):
-        self.warehouse.address = ""
+        self.warehouse.name = ""
         self.warehouse.request.update()
         self.db.session.rollback()
 
-        self.assertNotEqual(self.warehouse.address, "")    
+        self.assertNotEqual(self.warehouse.name, "")    
 

@@ -3,7 +3,7 @@
 {% block header %}
     <h1>
         {% block title %}
-        Inventario de almacén {{ warehouse.address }}
+        Inventario de almacén {{ warehouse.name }}
         {% endblock %}
     </h1>
     <a href="{{ url_for('warehouse.update', id=warehouse.id) }}">

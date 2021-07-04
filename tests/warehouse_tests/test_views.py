@@ -27,7 +27,7 @@ class TestAddView(WarehouseViewTest):
     def test_should_add_warehouse_given_valid_warehouse_data_and_LUHP(self):
         self.login_user(self.dev_user)
         warehouse_data = dict(
-            address="Valid Address"
+            name="Valid name"
         )
         with self.client as client:
             client.post(
@@ -35,12 +35,12 @@ class TestAddView(WarehouseViewTest):
                 data=warehouse_data
             )
 
-        self.assertNotEqual(Warehouse.search("Valid Address"), None)
+        self.assertNotEqual(Warehouse.search("Valid name"), None)
 
     def test_should_not_add_warehouse_given_invalid_warehouse_data_and_LUHP(self):
         self.login_user(self.dev_user)
         warehouse_data = dict(
-            address=""
+            name=""
         )
         with self.client as client:
             client.post(
@@ -56,7 +56,7 @@ class TestUpdateView(WarehouseViewTest):
     def test_should_update_warehouse_given_valid_warehouse_data_and_LUHP(self):
         self.login_user(self.dev_user)
         warehouse_data = dict(
-            address="Valid Address"
+            name="Valid name"
         )
         with self.client as client:
             client.post(
@@ -65,12 +65,12 @@ class TestUpdateView(WarehouseViewTest):
             )
         self.db.session.rollback()
 
-        self.assertEqual(self.warehouse.address, "Valid Address")
+        self.assertEqual(self.warehouse.name, "Valid name")
 
     def test_should_not_update_warehouse_given_invalid_warehouse_data_and_LUHP(self):
         self.login_user(self.dev_user)
         warehouse_data = dict(
-            address=""
+            name=""
         )
         with self.client as client:
             client.post(
@@ -79,7 +79,7 @@ class TestUpdateView(WarehouseViewTest):
             )
         self.db.session.rollback()
 
-        self.assertNotEqual(self.warehouse.address, "")
+        self.assertNotEqual(self.warehouse.name, "")
 
 
 class TestDeleteView(WarehouseViewTest):

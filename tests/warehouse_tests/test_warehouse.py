@@ -7,7 +7,7 @@ class TestAdd(WarehouseTest):
 
     def test_should_add_warehouse(self):
         warehouse = Warehouse(
-            address="Another Test Address"
+            name="Another Test Warehouse"
         )
         warehouse.add()
 
@@ -17,11 +17,11 @@ class TestAdd(WarehouseTest):
 class TestUpdate(WarehouseTest):
 
     def test_should_update_warehouse(self):
-        self.warehouse.address = "New Address"
+        self.warehouse.name = "New name"
         self.warehouse.update()
         self.db.session.rollback()
 
-        self.assertEqual(self.warehouse.address, "New Address")
+        self.assertEqual(self.warehouse.name, "New name")
 
 
 class TestDelete(WarehouseTest):
@@ -51,6 +51,6 @@ class TestGetAll(WarehouseTest):
 class TestSearch(WarehouseTest):
 
     def test_should_return_warehouse_given_valid_search_term(self):
-        warehouse = Warehouse.search('Test Address')
+        warehouse = Warehouse.search('Test Warehouse')
 
         self.assertEqual(warehouse, self.warehouse)

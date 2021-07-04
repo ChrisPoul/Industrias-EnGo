@@ -1,6 +1,6 @@
 <datalist id="warehouses">
-    {% for address in get_autocomplete_data("warehouses", "address") %}
-    <option>{{ address }}</option>
+    {% for name in get_autocomplete_data("warehouses", "name") %}
+    <option>{{ name }}</option>
     {% endfor %}
 </datalist>
 <form class="search-bar" method='post' autocomplete="off">

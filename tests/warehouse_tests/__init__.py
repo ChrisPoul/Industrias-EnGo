@@ -7,6 +7,6 @@ class WarehouseTest(Test):
     def setUp(self):
         Test.setUp(self)
         self.warehouse = Warehouse(
-            address="Test Address"
+            name="Test Warehouse"
         )
         self.warehouse.add()

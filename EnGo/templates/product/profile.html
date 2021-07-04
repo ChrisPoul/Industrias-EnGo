@@ -2,7 +2,7 @@
 
 {% block header %}
     <h1>{% block title %}
-        {{ product.code }} de almacén {{ product.warehouse.address }}
+        {{ product.code }} de almacén {{ product.warehouse.name }}
         {% endblock %}
     </h1>
     <a href="{{ url_for('product.update', id=product.id) }}">
