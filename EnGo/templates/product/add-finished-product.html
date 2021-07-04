@@ -1,0 +1,16 @@
+<form method="post">
+    {% for head in finished_product_heads %}
+    {% if head != "date" %}
+    <label for="{{ head }}">{{ finished_product_heads[head] }}:</label>
+    <input name="{{ head }}" id="{{ head }}"
+        placeholder="Requerido"
+        {% if head == "quantity" %}
+        type="number"
+        {% endif %}
+        value="{{ request.form[head] }}">
+    {% endif %}
+    {% endfor %}
+    <div>
+        <input type="submit" value="Añadir Producto Terminado">
+    </div>
+</form>

@@ -7,7 +7,11 @@
     {% for finished_product in product.finished_products %}
     {% for head in finished_product_heads %}
     <div>
+        {% if head == "date" %}
+        {{ finished_product[head].strftime("%d/%m/%Y a las %H:%M:%S") }}
+        {% else %}
         {{ finished_product[head] }}
+        {% endif %}
     </div>
     {% endfor %}
     {% endfor %}

@@ -18,24 +18,15 @@
             <strong>{{ product_heads[head] }}:</strong>  
         </div>
         <div>
+            {% if head == "price" %}
+            {{ format_price(product[head]) }}
+            {% else %}
             {{ product[head] }}
+            {% endif %}
         </div>
         {% endfor %}
     </div>
-    <form method="post">
-        {% for head in finished_product_heads %}
-        <label for="{{ head }}">{{ finished_product_heads[head] }}:</label>
-        <input name="{{ head }}" id="{{ head }}"
-            placeholder="Requerido"
-            {% if head == "quantity" %}
-            type="number"
-            {% endif %}
-            value="{{ request.form[head] }}">
-        {% endfor %}
-        <div>
-            <input type="submit" value="Añadir Producto Terminado">
-        </div>
-    </form>
+    {% include "product/add-finished-product.html" %}
     {% include "product/finished-products.html" %}
 </div>
 {% endblock %}
