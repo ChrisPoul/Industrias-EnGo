@@ -371,4 +371,45 @@ class TestDayActivities(UserViewTest):
             )
         
         self.assert200(response)
+
+
+class TestAddProductionView(UserViewTest):
+
+    def test_should_add_production_given_valid_production_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        production_input = dict(
+            concept="New Production",
+            quantity=10
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.add_production', user_id=self.user.id),
+                data=production_input
+            )
+
+        self.assertEqual(len(self.user.production), 1)
+    
+    def test_should_not_add_production_given_invalid_production_input_and_LUHP(self):
+        self.login_user(self.dev_user)
+        production_input = dict(
+            concept="",
+            quantity=10
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.add_production', user_id=self.user.id),
+                data=production_input
+            )
+        
+        self.assertEqual(len(self.user.production), 0)
+    
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.add_production', user_id=self.user.id)
+            )
+        
+        self.assertStatus(response, 302)
+        
         

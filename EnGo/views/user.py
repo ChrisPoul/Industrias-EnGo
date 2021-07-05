@@ -3,7 +3,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from EnGo.models.user import User, UserActivity
+from EnGo.models.user import User, UserActivity, UserProduction
 from . import (
     permission_required, login_required,
     get_checked_permissions, get_form
@@ -290,7 +290,26 @@ def assign_activity(id):
         flash(error)
         
     return render_template(
-        "user/assign_activity.html",
+        "user/assign-activity.html",
         activity_heads=activity_heads,
         form=request.form
+    )
+
+
+@bp.route('/add_production/<int:user_id>', methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def add_production(user_id):
+    if request.method == "POST":
+        production = UserProduction(
+            user_id=user_id,
+            concept=request.form['concept'],
+            quantity=request.form['quantity']
+        )
+        error = production.request.add()
+        flash(error)
+    
+    return render_template(
+        "user/add-production.html",
+        user_production_heads=user_production_heads
     )
