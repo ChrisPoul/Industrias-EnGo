@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %} - EnGo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-overlay-dropdown.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-navbar.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-side-menu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-searchbar.css') }}">
@@ -19,8 +20,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-config-menu.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style-warehouse.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{{ url_for('static', filename='js/overlay-dropdown.js') }}"></script>
     <script src="{{ url_for('static', filename='js/side-menu.js') }}"></script>
-<script src="{{ url_for('static', filename='js/product.js') }}"></script>
     <script src="{{ url_for('static', filename='js/warehouse-inventory.js') }}"></script>
 </head>
 

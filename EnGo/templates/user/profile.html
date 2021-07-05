@@ -10,28 +10,28 @@
 {% endblock %}
 
 {% block content %}
-<div class="user-activities">
-    <a href="{{ url_for('user.assign_activity', id=user.id) }}">
-        <input type="button" value="Añadir Actividad">
-    </a>
-    <div class="week-activities">
-        {% for weekday in weekday_heads %}
-        <div class="weekday-head">
-            {{ weekday_heads[weekday] }}
-        </div>
-        {% endfor %}
-        {% for weekday in weekday_heads %}
-        <a href="{{ url_for('user.day_activities',
-            id=user.id, date_str=weekday_dates[weekday].strftime('%Y-%m-%d')) }}">
-            <div class="weekday">
-                {% for activity in week_activities[weekday] %}
-                <div>
-                    {{ activity.title }}
-                </div>
-                {% endfor %}
+<div>
+    <div class="user-profile-summary">
+        <div class="user-production-summary">
+            <div>
+                <strong>Producción de la semana:</strong> 100
             </div>
-        </a>
-        {% endfor %}
+            <div>
+                <button>
+                    Desgloce
+                </button>
+                <button>
+                    Añadir
+                </button>
+            </div>
+        </div>
+        <div>
+            Actividades finalizadas: 10
+        </div>
+        <div>
+            Actividades por finalizar: 20
+        </div>
     </div>
+    {% include "user/user-activities.html" %}
 </div>
 {% endblock %}

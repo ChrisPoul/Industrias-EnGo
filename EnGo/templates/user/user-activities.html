@@ -1,0 +1,24 @@
+<div class="user-activities">
+    <a href="{{ url_for('user.assign_activity', id=user.id) }}">
+        <input type="button" value="Añadir Actividad">
+    </a>
+    <div class="week-activities">
+        {% for weekday in weekday_heads %}
+        <div class="weekday-head">
+            {{ weekday_heads[weekday] }}
+        </div>
+        {% endfor %}
+        {% for weekday in weekday_heads %}
+        <a href="{{ url_for('user.day_activities',
+            id=user.id, date_str=weekday_dates[weekday].strftime('%Y-%m-%d')) }}">
+            <div class="weekday">
+                {% for activity in week_activities[weekday] %}
+                <div>
+                    {{ activity.title }}
+                </div>
+                {% endfor %}
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>

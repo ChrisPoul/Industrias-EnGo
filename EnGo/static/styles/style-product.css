@@ -6,32 +6,6 @@
     align-items: center;
 }
 
-.product-inventory-button {
-    margin: 0 auto;
-}
-.product-inventory-content {
-    display: none;
-    position: absolute;
-    color: white;
-    background-color: #333;
-    border-radius: 10px;
-    height: fit-content;
-    padding: 0 0.5em;
-}
-.product-inventory-content td:nth-last-child(2), .product-inventory-content td:last-child {
-    border-bottom: none;
-}
-.product-inventory-overlay {
-    display: none;
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0,0,0,0);
-    z-index: 2;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-}
 .product-profile-info {
     display: grid;
     grid-template-columns: 20% auto;

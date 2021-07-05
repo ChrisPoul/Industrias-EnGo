@@ -1,0 +1,26 @@
+.overlay-dropdown-button {
+    margin: 0 auto;
+}
+.overlay-dropdown-content {
+    display: none;
+    position: absolute;
+    color: white;
+    background-color: #333;
+    border-radius: 10px;
+    height: fit-content;
+    padding: 0 0.5em;
+}
+.overlay-dropdown-content td:nth-last-child(2), .overlay-dropdown-content td:last-child {
+    border-bottom: none;
+}
+.overlay-dropdown-foreground {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0);
+    z-index: 2;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
