@@ -25,6 +25,16 @@ class TestValidate(ProductionTest):
         error = user_production.validation.validate()
 
         self.assertEqual(error, None)
+    
+    def test_should_return_error_given_invalid_user_production(self):
+        user_production = UserProduction(
+            user_id=self.user.id,
+            concept="",
+            quantity=10
+        )
+        error = user_production.validation.validate()
+
+        self.assertNotEqual(error, None)
 
 
 class TestValidateEmptyValues(ProductionTest):
@@ -38,3 +48,23 @@ class TestValidateEmptyValues(ProductionTest):
         error = user_production.validation.validate_empty_values()
 
         self.assertEqual(error, None)
+    
+    def test_should_return_error_given_empty_concept(self):
+        user_production = UserProduction(
+            user_id=self.user.id,
+            concept="",
+            quantity=10
+        )
+        error = user_production.validation.validate_empty_values()
+
+        self.assertNotEqual(error, None)
+    
+    def test_should_return_error_given_empty_quantity(self):
+        user_production = UserProduction(
+            user_id=self.user.id,
+            concept="Test Concept",
+            quantity=""
+        )
+        error = user_production.validation.validate_empty_values()
+
+        self.assertNotEqual(error, None)
