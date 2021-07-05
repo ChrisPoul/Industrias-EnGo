@@ -33,6 +33,11 @@ class User(db.Model, MyModel):
         backref="user",
         cascade="all, delete-orphan"
     )
+    production = db.relationship(
+        'UserProduction',
+        backref="user",
+        cascade="all, delete-orphan"
+    )
 
     def get(id):
         return User.query.get(id)
@@ -159,6 +164,19 @@ class UserActivity(db.Model, MyModel):
     def request(self):
         from .request import UserActivityRequest
         return UserActivityRequest(self)
+
+
+class UserProduction(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    concept = Column(String(200), nullable=False, unique=False)
+    date = Column(DateTime, nullable=False, default=datetime.now)
+    quantity = Column(Integer, nullable=False)
+
+    @property
+    def validation(self):
+        from .validation import UserProductionValidation
+        return UserProductionValidation(self)
 
 
 from .contract import Contract
