@@ -3,7 +3,20 @@
         <i class="fa fa-caret-down" onclick="displayOverlayDropdown(event)"></i>
     </button>
     <div class="overlay-dropdown-content">
-        pene
+        <div class="user-production">
+            {% for head in user_production_heads %}
+            <div class="head">
+                {{ user_production_heads[head] }}
+            </div>
+            {% endfor %}
+            {% for production in user.production %}
+            {% for head in user_production_heads %}
+            <div>
+                {{ production[head] }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     <div class="overlay-dropdown-foreground" onclick="hideOverlayDropdown(event)"></div>
 </div>
