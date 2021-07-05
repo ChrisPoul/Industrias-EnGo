@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Registrar Producción{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% for head in user_production_heads %}
+    <label for="{{ head }}">{{ user_production_heads[head] }}</label>
+    <input name="{{ head }}" value="{{ request.form[head] }}"
+        placeholder="Requerido"
+        {% if head == "quantity" %}
+        type="number"
+        {% endif %}> 
+    {% endfor %}
+    <input type="submit" value="Asignar">
+</form>
+{% endblock %}

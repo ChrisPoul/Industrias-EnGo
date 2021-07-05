@@ -296,10 +296,10 @@ def assign_activity(id):
     )
 
 
-@bp.route('/add_production/<int:user_id>', methods=('POST', 'GET'))
+@bp.route('/register_production/<int:user_id>', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
-def add_production(user_id):
+def register_production(user_id):
     if request.method == "POST":
         production = UserProduction(
             user_id=user_id,
@@ -307,9 +307,13 @@ def add_production(user_id):
             quantity=request.form['quantity']
         )
         error = production.request.add()
+        if not error:
+            return redirect(
+                url_for('user.profile', id=user_id)
+            )
         flash(error)
     
     return render_template(
-        "user/add-production.html",
+        "user/register-production.html",
         user_production_heads=user_production_heads
     )
