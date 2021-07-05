@@ -174,6 +174,11 @@ class UserProduction(db.Model, MyModel):
     quantity = Column(Integer, nullable=False)
 
     @property
+    def request(self):
+        from .request import UserProductionRequest
+        return UserProductionRequest(self)
+
+    @property
     def validation(self):
         from .validation import UserProductionValidation
         return UserProductionValidation(self)

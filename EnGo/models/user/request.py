@@ -57,3 +57,21 @@ class UserActivityRequest:
             self.activity.update()
         
         return error
+
+
+class UserProductionRequest:
+
+    def __init__(self, user_production):
+        self.user_production = user_production
+
+    def add(self):
+        error = self.user_production.validation.validate()
+        if not error:
+            self.user_production.add()
+    
+    def update(self):
+        error = self.user_production.validation.validate()
+        if not error:
+            self.user_production.update()
+        
+        return error
