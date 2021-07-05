@@ -1,5 +1,8 @@
 function displayOverlayDropdown(event) {
     overlayDropdownButton = event.target
+    if (overlayDropdownButton.className != "overlay-dropdown-button") {
+        overlayDropdownButton = overlayDropdownButton.parentElement
+    } 
     hideElement(overlayDropdownButton)
     overlayDropdown = overlayDropdownButton.parentElement
     overlayDropdownContent = overlayDropdown.children[1]
