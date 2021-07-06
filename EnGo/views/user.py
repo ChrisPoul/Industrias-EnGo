@@ -224,7 +224,7 @@ def load_loged_in_user():
 def profile(id):
     user = User.query.get(id)
     selected_date = datetime.today()
-    week_activities = user.schedule.get_week_activities(selected_date)
+    week_activities = user.schedule.get_weekday_activities(selected_date)
     weekday_dates = MyCalendar.get_weekday_dates(selected_date)
     week_production = user.schedule.get_week_production(selected_date)
 
@@ -245,7 +245,7 @@ def profile(id):
 def day_activities(id, date_str):
     date = datetime.strptime(date_str, "%Y-%m-%d")
     user = User.get(id)
-    day_activities = user.get_day_activities(date)
+    day_activities = user.schedule.get_day_activities(date)
     
     return render_template(
         'user/day-activities.html',

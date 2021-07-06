@@ -6,28 +6,27 @@ class UserSchedule:
     def __init__(self, user):
         self.user = user
 
-    def get_week_activities(self, date):
-        week_activities = self.filter_activities_by_week(date)
+    def get_weekday_activities(self, date):
         weekday_activities = {}
-        for weekday_num in range(7):
-            weekday_activities[weekday_num] = []
-        for activity in week_activities:
-            week_day = activity.due_date.weekday()
-            weekday_activities[week_day].append(activity)
+        weekday_dates = MyCalendar.get_weekday_dates(date)
+        for weekday in weekday_dates:
+            day_activities = self.get_day_activities(weekday_dates[weekday])
+            weekday_activities[weekday] = day_activities
 
         return weekday_activities
     
     def get_day_activities(self, date):
-        week_activities = self.get_week_activities(date)
-        day = date.weekday()
+        day_activities = []
+        for activity in self.user.activities:
+            if activity.due_date.isocalendar() == date.isocalendar():
+                day_activities.append(activity)
         
-        return week_activities[day]
+        return day_activities
 
     def get_day_production(self, date):
         day_production = []
         for production in self.user.production:
-            production_date = production.date.date()
-            if production_date == date:
+            if production.date.isocalendar() == date.isocalendar():
                 day_production.append(production)
         
         return day_production
@@ -35,19 +34,8 @@ class UserSchedule:
     def get_week_production(self, date):
         weekday_dates = MyCalendar.get_weekday_dates(date)
         week_production = []
-        for weekday in weekday_dates:
-            date = weekday_dates[weekday].date()
-            day_production = self.get_day_production(date)
+        for weekday_date in weekday_dates.values():
+            day_production = self.get_day_production(weekday_date)
             week_production += day_production
         
         return week_production
-
-    def filter_activities_by_week(self, date):
-        week_activities = []
-        for activity in self.user.activities:
-            selected_year, selected_week, _ = date.isocalendar()
-            due_year, due_week, _ = activity.due_date.isocalendar()
-            if due_year == selected_year and due_week == selected_week:
-                week_activities.append(activity)
-        
-        return week_activities
