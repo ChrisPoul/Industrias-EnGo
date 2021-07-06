@@ -89,6 +89,7 @@
 .user-production {
     display: grid;
     grid-template-columns: auto auto auto;
+    padding-top: 0.3em;
 }
 .user-production div {
     padding: 0.5em;

@@ -43,7 +43,7 @@ activity_heads = dict(
 production_heads = dict(
     concept="Concepto",
     quantity="Cantidad",
-    date="Fecha"
+    date="Fecha y Hora"
 )
 permissions = [
     "Recursos Humanos"

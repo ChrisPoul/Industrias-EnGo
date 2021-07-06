@@ -1,12 +1,20 @@
 <div class="user-production">
     {% for head in production_heads %}
-    <div class="head">
-        {{ production_heads[head] }}
+    <div {% if request.endpoint == "user.profile" %}
+        style="border-bottom: 1px solid white;"
+        {% else %}
+        style="border-bottom: 1px solid black;"
+        {% endif %}>
+        <strong>{{ production_heads[head] }}</strong>
     </div>
     {% endfor %}
     {% for production in user_production %}
     {% for head in production_heads %}
-    <div>
+    <div {% if request.endpoint == "user.profile" %}
+        style="border-bottom: 1px solid white;"
+        {% else %}
+        style="border-bottom: 1px solid black;"
+        {% endif %}>
         {% if head == "date" %}
         {{ format_datetime(production[head]) }}
         {% else %}
