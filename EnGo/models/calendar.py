@@ -1,4 +1,5 @@
 from calendar import Calendar
+from datetime import timedelta
 from EnGo.models.product import SoldProduct, FinishedProduct
 from EnGo.models.receipt import Receipt
 from EnGo.models.expense import Expense
@@ -39,3 +40,16 @@ class MyCalendar:
             day_events[selected_category] = filter_events_by_day(events)
 
         return day_events
+
+    def get_weekday_dates(date):
+        current_weekday = date.weekday()
+        weekday_dates = {
+            current_weekday: date
+        }
+        for day in range(current_weekday):
+            previous_day = timedelta(days=current_weekday - day)
+            weekday_dates[day] = date - previous_day 
+        for day in range(current_weekday, 7):
+            weekday_dates[day] = date + timedelta(days=day - current_weekday)
+
+        return weekday_dates

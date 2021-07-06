@@ -1,9 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
 from EnGo.models.user import User, UserActivity, UserProduction
+from EnGo.models.calendar import MyCalendar
 from . import (
     permission_required, login_required,
     get_checked_permissions, get_form
@@ -43,7 +44,7 @@ activity_heads = dict(
 production_heads = dict(
     concept="Concepto",
     quantity="Cantidad",
-    date="Fecha y Hora"
+    date="Fecha de Registro"
 )
 permissions = [
     "Recursos Humanos"
@@ -222,9 +223,10 @@ def load_loged_in_user():
 @login_required
 def profile(id):
     user = User.query.get(id)
-    week_activities = user.get_week_activities(datetime.today())
-    weekday_dates = get_weekday_dates(datetime.today())
-    user_week_production = get_user_week_production(user, weekday_dates)
+    selected_date = datetime.today()
+    week_activities = user.schedule.get_week_activities(selected_date)
+    weekday_dates = MyCalendar.get_weekday_dates(selected_date)
+    week_production = user.schedule.get_week_production(selected_date)
 
     return render_template(
         "user/profile.html",
@@ -232,33 +234,9 @@ def profile(id):
         production_heads=production_heads,
         week_activities=week_activities,
         weekday_dates=weekday_dates,
-        user_production=user_week_production,
+        user_production=week_production,
         user=user
     )
-
-
-def get_user_week_production(user, weekday_dates):
-    user_week_production = []
-    for weekday in weekday_dates:
-        date = weekday_dates[weekday].date()
-        day_production = user.get_day_production(date)
-        user_week_production += day_production
-    
-    return user_week_production
-
-
-def get_weekday_dates(date):
-    current_weekday = date.weekday()
-    weekday_dates = {
-        current_weekday: date
-    }
-    for day in range(current_weekday):
-        previous_day = timedelta(days=current_weekday - day)
-        weekday_dates[day] = date - previous_day 
-    for day in range(current_weekday, 7):
-        weekday_dates[day] = date + timedelta(days=day - current_weekday)
-
-    return weekday_dates
 
 
 @bp.route('/day_activities/<int:id>/<string:date_str>')

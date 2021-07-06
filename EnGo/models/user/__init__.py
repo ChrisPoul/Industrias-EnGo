@@ -62,6 +62,11 @@ class User(db.Model, MyModel):
         from .request import UserRequest
         return UserRequest(self)
 
+    @property
+    def schedule(self):
+        from .schedule import UserSchedule
+        return UserSchedule(self)
+
     def has_view_permissions(self, view_name):
         view = View.search(view_name)
         if self.is_dev() or not view:
@@ -105,42 +110,6 @@ class User(db.Model, MyModel):
     def update_permissions(self, permissions):
         self.remove_permissions()
         self.add_permissions(permissions)
-
-    def get_week_activities(self, date=datetime.today):
-        week_activities = filter_activities_by_week(date, self.activities)
-        weekday_activities = {}
-        for weekday_num in range(7):
-            weekday_activities[weekday_num] = []
-        for activity in week_activities:
-            week_day = activity.due_date.weekday()
-            weekday_activities[week_day].append(activity)
-
-        return weekday_activities
-    
-    def get_day_activities(self, date):
-        week_activities = self.get_week_activities(date)
-        day = date.weekday()
-        
-        return week_activities[day]
-
-    def get_day_production(self, date):
-        day_production = []
-        for production in self.production:
-            production_date = production.date.date()
-            if production_date == date:
-                day_production.append(production)
-        
-        return day_production
-
-def filter_activities_by_week(date, events):
-    week_events = []
-    for event in events:
-        date_year, date_week, _ = date.isocalendar()
-        due_year, due_week, _ = event.due_date.isocalendar()
-        if due_year == date_year and due_week == date_week:
-            week_events.append(event)
-    
-    return week_events
         
 
 class UserObservation(db.Model, MyModel):
@@ -150,19 +119,13 @@ class UserObservation(db.Model, MyModel):
     date = Column(DateTime, nullable=False, default=datetime.now)
 
 
-class UserPermission(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)
-
-
 class UserActivity(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    assignment_date = Column(DateTime, nullable=False, default=datetime.now)
-    due_date = Column(DateTime, nullable=False)
     title = Column(String(200), nullable=False)
     description = Column(Text, nullable=True)
+    assignment_date = Column(DateTime, nullable=False, default=datetime.now)
+    due_date = Column(DateTime, nullable=False)
 
     @property
     def validation(self):
@@ -191,6 +154,12 @@ class UserProduction(db.Model, MyModel):
     def validation(self):
         from .validation import UserProductionValidation
         return UserProductionValidation(self)
+
+
+class UserPermission(db.Model, MyModel):
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
+    permission_id = Column(Integer, ForeignKey('permission.id'), nullable=False)
 
 
 from .contract import Contract
