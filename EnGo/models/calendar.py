@@ -3,22 +3,6 @@ from EnGo.models.product import SoldProduct, FinishedProduct
 from EnGo.models.receipt import Receipt
 from EnGo.models.expense import Expense
 
-event_categories = dict(
-    selecting="Seleccionar Categoría",
-    all="Todos",
-    sold_product="Productos Vendidos",
-    finished_product="Productos Terminados",
-    receipt="Recibos",
-    expense="Gastos"
-)
-update_views = dict(
-    all="admin.admin",
-    sold_product="receipt.update",
-    finished_product="warehouse.update_product",
-    receipt="receipt.update",
-    expense="expense.update"
-)
-
 
 class MyCalendar:
 

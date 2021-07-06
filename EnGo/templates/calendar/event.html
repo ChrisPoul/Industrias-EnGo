@@ -2,9 +2,9 @@
     <a 
         {% if category == "all" %}
         {% elif category == 'sold_product' %}
-        href="{{ url_for(update_views[category], id=event.receipt_id) }}"
+        href="{{ url_for(updatable_views[category], id=event.receipt_id) }}"
         {% else %} 
-        href="{{ url_for(update_views[category], id=event.id) }}"
+        href="{{ url_for(updatable_views[category], id=event.id) }}"
         {% endif %}
         >
         {{ event }}

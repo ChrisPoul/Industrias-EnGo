@@ -30,6 +30,21 @@ month_names = [
     "Noviembre",
     "Diciembre"
 ]
+event_categories = dict(
+    selecting="Seleccionar Categoría",
+    all="Todos",
+    sold_product="Productos Vendidos",
+    finished_product="Productos Terminados",
+    receipt="Recibos",
+    expense="Gastos"
+)
+updatable_views = dict(
+    all="admin.admin",
+    sold_product="receipt.update",
+    finished_product="warehouse.update_product",
+    receipt="receipt.update",
+    expense="expense.update"
+)
 
 
 @bp.route("/calendar", methods=("POST", "GET"))
@@ -56,7 +71,7 @@ def calendar():
         selected_category=selected_category,
         get_day_events=MyCalendar.get_day_events,
         selected_date=selected_date,
-        update_views=update_views,
+        updatable_views=updatable_views,
         month=months[month_index]
     )
 
@@ -75,6 +90,6 @@ def day(date_str, category):
         selected_date=selected_date,
         event_categories=event_categories,
         selected_category=selected_category,
-        update_views=update_views,
+        updatable_views=updatable_views,
         events=events
     )
