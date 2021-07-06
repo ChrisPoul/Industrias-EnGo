@@ -225,8 +225,8 @@ def profile(id):
     user = User.query.get(id)
     selected_date = datetime.today()
     week_activities = user.schedule.get_weekday_activities(selected_date)
-    weekday_dates = MyCalendar.get_weekday_dates(selected_date)
     week_production = user.schedule.get_week_production(selected_date)
+    weekday_dates = MyCalendar.get_weekday_dates(selected_date)
 
     return render_template(
         "user/profile.html",
