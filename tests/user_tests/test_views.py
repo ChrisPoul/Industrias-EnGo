@@ -373,9 +373,9 @@ class TestDayActivities(UserViewTest):
         self.assert200(response)
 
 
-class TestAddProductionView(UserViewTest):
+class TestRegisterProductionView(UserViewTest):
 
-    def test_should_add_production_given_valid_production_input_and_LUHP(self):
+    def test_should_register_production_given_valid_production_input_and_LUHP(self):
         self.login_user(self.dev_user)
         production_input = dict(
             concept="New Production",
@@ -383,13 +383,13 @@ class TestAddProductionView(UserViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('user.add_production', user_id=self.user.id),
+                url_for('user.register_production', user_id=self.user.id),
                 data=production_input
             )
 
         self.assertEqual(len(self.user.production), 1)
     
-    def test_should_not_add_production_given_invalid_production_input_and_LUHP(self):
+    def test_should_not_register_production_given_invalid_production_input_and_LUHP(self):
         self.login_user(self.dev_user)
         production_input = dict(
             concept="",
@@ -397,7 +397,7 @@ class TestAddProductionView(UserViewTest):
         )
         with self.client as client:
             client.post(
-                url_for('user.add_production', user_id=self.user.id),
+                url_for('user.register_production', user_id=self.user.id),
                 data=production_input
             )
         
@@ -407,7 +407,7 @@ class TestAddProductionView(UserViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('user.add_production', user_id=self.user.id)
+                url_for('user.register_production', user_id=self.user.id)
             )
         
         self.assertStatus(response, 302)
