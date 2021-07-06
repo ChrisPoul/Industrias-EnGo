@@ -156,3 +156,7 @@ button, .add-button input {
 .delete-button img {
     max-width: 1.2em;
 }
+.icon-button {
+    border: none;
+    background: inherit;
+}
