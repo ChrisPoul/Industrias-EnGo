@@ -13,7 +13,7 @@ from EnGo.commands.settings import get_settings
 from .customer import customer_heads
 from . import (
     login_required, format_price,
-    format_date
+    format_date, format_datetime
 )
 
 bp = Blueprint("global_context", __name__)
@@ -25,6 +25,7 @@ def inject_functions():
     return dict(
         format_price=format_price,
         format_date=format_date,
+        format_datetime=format_datetime,
         get_autocomplete_data=get_autocomplete_data,
         len=len
     )

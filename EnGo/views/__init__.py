@@ -123,6 +123,10 @@ def format_date(date):
     return date.strftime("%d/%m/%Y")
 
 
+def format_datetime(datetime):
+    return datetime.strftime("%d/%m/%Y a las %H:%M")
+
+
 def format_price(price, iva=None):
     price = float(price)
     if iva:

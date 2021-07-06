@@ -88,11 +88,11 @@
 
 .user-production {
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto;
 }
 .user-production div {
     padding: 0.5em;
-    border-bottom: 1px solid white;
+    justify-content: center;
 }
 
 .user-activities:first-child {

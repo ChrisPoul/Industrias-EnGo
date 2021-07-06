@@ -6,13 +6,15 @@
 
 {% block content %}
 <form method="post">
-    {% for head in user_production_heads %}
-    <label for="{{ head }}">{{ user_production_heads[head] }}</label>
+    {% for head in production_heads %}
+    {% if head != "date" %}
+    <label for="{{ head }}">{{ production_heads[head] }}</label>
     <input name="{{ head }}" value="{{ request.form[head] }}"
         placeholder="Requerido"
         {% if head == "quantity" %}
         type="number"
-        {% endif %}> 
+        {% endif %}>
+    {% endif %}
     {% endfor %}
     <input type="submit" value="Asignar">
 </form>

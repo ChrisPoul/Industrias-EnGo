@@ -40,9 +40,10 @@ activity_heads = dict(
     description="Descripción",
     due_date="Fecha De Entrega"
 )
-user_production_heads = dict(
+production_heads = dict(
     concept="Concepto",
-    quantity="Cantidad"
+    quantity="Cantidad",
+    date="Fecha"
 )
 permissions = [
     "Recursos Humanos"
@@ -227,7 +228,7 @@ def profile(id):
     return render_template(
         "user/profile.html",
         weekday_heads=weekday_heads,
-        user_production_heads=user_production_heads,
+        production_heads=production_heads,
         week_activities=week_activities,
         weekday_dates=weekday_dates,
         user=user
@@ -315,5 +316,5 @@ def register_production(user_id):
     
     return render_template(
         "user/register-production.html",
-        user_production_heads=user_production_heads
+        production_heads=production_heads
     )
