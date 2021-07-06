@@ -224,6 +224,7 @@ def profile(id):
     user = User.query.get(id)
     week_activities = user.get_week_activities(datetime.today())
     weekday_dates = get_weekday_dates(datetime.today())
+    user_week_production = get_user_week_production(user, weekday_dates)
 
     return render_template(
         "user/profile.html",
@@ -231,9 +232,19 @@ def profile(id):
         production_heads=production_heads,
         week_activities=week_activities,
         weekday_dates=weekday_dates,
-        user_production=user.production,
+        user_production=user_week_production,
         user=user
     )
+
+
+def get_user_week_production(user, weekday_dates):
+    user_week_production = []
+    for weekday in weekday_dates:
+        date = weekday_dates[weekday].date()
+        day_production = user.get_day_production(date)
+        user_week_production += day_production
+    
+    return user_week_production
 
 
 def get_weekday_dates(date):

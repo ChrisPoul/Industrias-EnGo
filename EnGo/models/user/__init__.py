@@ -123,6 +123,15 @@ class User(db.Model, MyModel):
         
         return week_activities[day]
 
+    def get_day_production(self, date):
+        day_production = []
+        for production in self.production:
+            production_date = production.date.date()
+            if production_date == date:
+                day_production.append(production)
+        
+        return day_production
+
 def filter_activities_by_week(date, events):
     week_events = []
     for event in events:
