@@ -1,0 +1,18 @@
+<div class="user-production">
+    {% for head in production_heads %}
+    <div class="head">
+        {{ production_heads[head] }}
+    </div>
+    {% endfor %}
+    {% for production in user_production %}
+    {% for head in production_heads %}
+    <div>
+        {% if head == "date" %}
+        {{ format_datetime(production[head]) }}
+        {% else %}
+        {{ production[head] }}
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>

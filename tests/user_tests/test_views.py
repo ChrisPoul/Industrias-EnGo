@@ -411,5 +411,16 @@ class TestRegisterProductionView(UserViewTest):
             )
         
         self.assertStatus(response, 302)
+
+
+class TestProductionView(UserViewTest):
+
+    def test_should_return_valid_response_given_LUHP(self):
+        self.login_user(self.dev_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.production', user_id=self.user.id)
+            )
         
+        self.assert200(response)
         

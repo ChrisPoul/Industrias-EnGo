@@ -18,9 +18,9 @@
                 {% include "user/production-summary.html" %}
             </div>
             <div>
-                <button>
-                    Desgloce
-                </button>
+                <a href="{{ url_for('user.production', user_id=user.id) }}">
+                    <button>Desgloce</button>
+                </a>
                 <a href="{{ url_for('user.register_production', user_id=user.id) }}">
                     <button>Añadir</button>
                 </a>

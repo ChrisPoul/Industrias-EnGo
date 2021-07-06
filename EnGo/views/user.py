@@ -231,6 +231,7 @@ def profile(id):
         production_heads=production_heads,
         week_activities=week_activities,
         weekday_dates=weekday_dates,
+        user_production=user.production,
         user=user
     )
 
@@ -318,3 +319,19 @@ def register_production(user_id):
         "user/register-production.html",
         production_heads=production_heads
     )
+
+
+@bp.route('/production/<int:user_id>')
+@permission_required(permissions)
+@login_required
+def production(user_id):
+    user = User.query.get(user_id)
+    user_production = user.production
+
+    return render_template(
+        "user/production.html",
+        production_heads=production_heads,
+        user_production=user_production,
+        user=user
+    )
+    
