@@ -2,10 +2,8 @@ from datetime import date, datetime
 from flask import (
     Blueprint, render_template, request
 )
-from EnGo.models.product import SoldProduct, FinishedProduct
-from EnGo.models.receipt import Receipt
-from EnGo.models.expense import Expense
-from . import login_required, get_months
+from EnGo.models.calendar import MyCalendar
+from . import login_required
 
 bp = Blueprint("calendar", __name__)
 
@@ -33,51 +31,6 @@ month_names = [
     "Diciembre"
 ]
 
-event_categories = dict(
-    selecting="Seleccionar Categoría",
-    all="Todos",
-    sold_product="Productos Vendidos",
-    finished_product="Productos Terminados",
-    receipt="Recibos",
-    expense="Gastos"
-)
-update_views = dict(
-    all="admin.admin",
-    sold_product="receipt.update",
-    finished_product="warehouse.update_product",
-    receipt="receipt.update",
-    expense="expense.update"
-)
-
-
-def get_all_events():
-    return dict(
-        selecting=[],
-        all=[],
-        sold_product=SoldProduct.query.all(),
-        finished_product=FinishedProduct.query.all(),
-        receipt=Receipt.query.all(),
-        expense=Expense.query.all()
-    )
-
-
-def get_day_events(date):
-    try:
-        filter_date = date.date()
-    except AttributeError:
-        filter_date = date
-
-    def filter_events_by_day(events):
-        return [event for event in events if event.date.date() == filter_date]
-
-    all_events = get_all_events()
-    day_events = {}
-    for selected_category in all_events:
-        events = all_events[selected_category]
-        day_events[selected_category] = filter_events_by_day(events)
-
-    return day_events
-
 
 @bp.route("/calendar", methods=("POST", "GET"))
 @login_required
@@ -92,7 +45,7 @@ def calendar():
         else:
             selected_date = datetime.strptime(month_str, "%Y-%m")
     month_index = selected_date.month - 1
-    months = get_months(selected_date)
+    months = MyCalendar.get_months(selected_date)
 
     return render_template(
         "calendar/calendar.html",
@@ -101,7 +54,7 @@ def calendar():
         month_names=month_names,
         month_index=month_index,
         selected_category=selected_category,
-        get_day_events=get_day_events,
+        get_day_events=MyCalendar.get_day_events,
         selected_date=selected_date,
         update_views=update_views,
         month=months[month_index]
@@ -113,7 +66,7 @@ def calendar():
 def day(date_str, category):
     selected_date = datetime.strptime(date_str, "%d.%m.%Y")
     selected_category = category
-    events = get_day_events(selected_date)
+    events = MyCalendar.get_day_events(selected_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
 
