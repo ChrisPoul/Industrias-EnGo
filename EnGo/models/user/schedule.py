@@ -23,14 +23,6 @@ class UserSchedule:
         
         return day_activities
 
-    def get_day_production(self, date):
-        day_production = []
-        for production in self.user.production:
-            if production.date.isocalendar() == date.isocalendar():
-                day_production.append(production)
-        
-        return day_production
-
     def get_week_production(self, date):
         weekday_dates = MyCalendar.get_weekday_dates(date)
         week_production = []
@@ -39,3 +31,11 @@ class UserSchedule:
             week_production += day_production
         
         return week_production
+
+    def get_day_production(self, date):
+        day_production = []
+        for production in self.user.production:
+            if production.date.isocalendar() == date.isocalendar():
+                day_production.append(production)
+        
+        return day_production
