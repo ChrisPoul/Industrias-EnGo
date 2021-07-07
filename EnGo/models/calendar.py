@@ -29,7 +29,7 @@ class MyCalendar:
         day_events = {}
         for selected_category in all_events:
             events = all_events[selected_category]
-            day_events[selected_category] = [event for event in events if event.isocalendar() == date.isocalendar()]
+            day_events[selected_category] = [event for event in events if event.date.isocalendar() == date.isocalendar()]
 
         return day_events
 
