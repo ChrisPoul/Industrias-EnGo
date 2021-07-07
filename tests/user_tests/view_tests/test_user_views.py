@@ -1,6 +1,10 @@
 from . import UserViewTest
 from flask import url_for
 
+### LOGED IN USER (LU) ###
+### LOGED IN USER HAS PERMISSION (LUHP) ###
+### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
+
 
 class TestUsersView(UserViewTest):
 

@@ -3,6 +3,10 @@ from flask import url_for
 from werkzeug.security import check_password_hash
 from EnGo.models.user import User
 
+### LOGED IN USER (LU) ###
+### LOGED IN USER HAS PERMISSION (LUHP) ###
+### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
+
 
 class TestRegisterView(UserViewTest):
 
