@@ -26,8 +26,8 @@ class UserSchedule:
     def get_week_production(self, date):
         weekday_dates = MyCalendar.get_weekday_dates(date)
         week_production = []
-        for weekday_date in weekday_dates.values():
-            day_production = self.get_day_production(weekday_date)
+        for day in weekday_dates.values():
+            day_production = self.get_day_production(day)
             week_production += day_production
         
         return week_production
