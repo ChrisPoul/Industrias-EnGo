@@ -9,6 +9,7 @@
     border-radius: 10px;
     height: fit-content;
     padding: 0 0.5em;
+    z-index: 3
 }
 .overlay-dropdown-content td:nth-last-child(2), .overlay-dropdown-content td:last-child {
     border-bottom: none;
