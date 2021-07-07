@@ -20,17 +20,17 @@
                         {% if selected_category == "all" %}
                         <ul>
                             {% for category in event_categories %}
-                            {% if category != "all" and len(get_day_events(day)[category]) > 0 %}
+                            {% if category != "all" and len(get_all_day_events(day)[category]) > 0 %}
                             <li>
-                                {{ len(get_day_events(day)[category]) }} {{ event_categories[category] }}
+                                {{ len(get_all_day_events(day)[category]) }} {{ event_categories[category] }}
                             </li>
                             {% endif %}
                             {% endfor %}
                         </ul>
                         {% else %}
-                        {% if len(get_day_events(day)[selected_category]) > 0 %}
+                        {% if len(get_all_day_events(day)[selected_category]) > 0 %}
                         <br>
-                        {{ len(get_day_events(day)[selected_category]) }} {{ event_categories[selected_category] }}
+                        {{ len(get_all_day_events(day)[selected_category]) }} {{ event_categories[selected_category] }}
                         {% endif %}
                         {% endif %}
                     </div>

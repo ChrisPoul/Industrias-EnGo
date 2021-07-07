@@ -24,20 +24,12 @@ class MyCalendar:
             expense=Expense.query.all()
         )
     
-    def get_day_events(date):
-        try:
-            filter_date = date.date()
-        except AttributeError:
-            filter_date = date
-
-        def filter_events_by_day(events):
-            return [event for event in events if event.date.date() == filter_date]
-
+    def get_all_day_events(date):
         all_events = MyCalendar.get_all_events()
         day_events = {}
         for selected_category in all_events:
             events = all_events[selected_category]
-            day_events[selected_category] = filter_events_by_day(events)
+            day_events[selected_category] = [event for event in events if event.isocalendar() == date.isocalendar()]
 
         return day_events
 

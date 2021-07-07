@@ -1,13 +1,13 @@
 from flask import url_for
-from . import Test
+from . import CalendarTest
 
 ### LOGED IN USER (LU) ###
 
 
-class CalendarViewTest(Test):
+class CalendarViewTest(CalendarTest):
 
     def setUp(self):
-        Test.setUp(self)
+        CalendarTest.setUp(self)
         self.create_test_users()
 
 

@@ -69,7 +69,7 @@ def calendar():
         month_names=month_names,
         month_index=month_index,
         selected_category=selected_category,
-        get_day_events=MyCalendar.get_day_events,
+        get_all_day_events=MyCalendar.get_all_day_events,
         selected_date=selected_date,
         updatable_views=updatable_views,
         month=months[month_index]
@@ -81,7 +81,7 @@ def calendar():
 def day(date_str, category):
     selected_date = datetime.strptime(date_str, "%d.%m.%Y")
     selected_category = category
-    events = MyCalendar.get_day_events(selected_date)
+    events = MyCalendar.get_all_day_events(selected_date)
     if request.method == "POST":
         selected_category = request.form["event_category"]
 
