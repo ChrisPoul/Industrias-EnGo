@@ -14,7 +14,7 @@
 .overlay-dropdown-content td:nth-last-child(2), .overlay-dropdown-content td:last-child {
     border-bottom: none;
 }
-.overlay-dropdown-foreground {
+.overlay-dropdown-background {
     display: none;
     position: fixed;
     width: 100vw;

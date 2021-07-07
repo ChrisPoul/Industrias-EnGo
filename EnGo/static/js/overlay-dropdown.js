@@ -1,20 +1,20 @@
 function displayOverlayDropdown(event) {
     overlayDropdownButton = event.target
-    if (overlayDropdownButton.className != "overlay-dropdown-button") {
+    if (!overlayDropdownButton.className.includes("overlay-dropdown-button")) {
         overlayDropdownButton = overlayDropdownButton.parentElement
     } 
     hideElement(overlayDropdownButton)
     overlayDropdown = overlayDropdownButton.parentElement
     overlayDropdownContent = overlayDropdown.children[1]
     displayElement(overlayDropdownContent)
-    overlayDropdownForeground = overlayDropdown.children[2]
-    displayElement(overlayDropdownForeground)
+    overlayDropdownBackground = overlayDropdown.children[2]
+    displayElement(overlayDropdownBackground)
 }
 
 
 function hideOverlayDropdown(event) {
-    overlayDropdownForeground = event.target
-    hideElement(overlayDropdownForeground)
+    overlayDropdownBackground = event.target
+    hideElement(overlayDropdownBackground)
     overlayDropdownButtons = document.getElementsByClassName("overlay-dropdown-button")
     overlayDropdownContents = document.getElementsByClassName("overlay-dropdown-content")
     for (i = 0; i < overlayDropdownContents.length; i++) {
