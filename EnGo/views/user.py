@@ -218,12 +218,16 @@ def load_loged_in_user():
         g.user = User.get(user_id)
 
 
-@bp.route("/profile/<int:id>")
+@bp.route("/profile/<int:id>", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
 def profile(id):
     user = User.query.get(id)
     selected_date = datetime.today()
+    selected_week_str = selected_date.strftime("%Y-W%W")
+    if request.method == "POST":
+        selected_week_str = request.form["selected_week"]
+        selected_date = datetime.strptime(selected_week_str + "-1", "%Y-W%W-%w")
     week_activities = user.schedule.get_weekday_activities(selected_date)
     week_production = user.schedule.get_week_production(selected_date)
     weekday_dates = MyCalendar.get_weekday_dates(selected_date)
@@ -235,6 +239,7 @@ def profile(id):
         week_activities=week_activities,
         weekday_dates=weekday_dates,
         user_production=week_production,
+        selected_week_str=selected_week_str,
         user=user
     )
 

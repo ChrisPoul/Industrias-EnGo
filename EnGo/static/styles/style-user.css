@@ -60,6 +60,18 @@
     text-align: center;
     border-right: 1px solid black;
 }
+.week-activities-head {
+    flex-direction: row;
+    justify-content: space-between;
+}
+.week-activities-head a input {
+    margin: 0.5em;
+}
+.week-activities-head form {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
 .weekday-head {
     border-right: none !important;
     border-bottom: 1px solid black;
@@ -96,10 +108,6 @@
     justify-content: center;
 }
 
-.user-activities:first-child {
-    overflow: hidden;
-    text-align: right !important;
-}
 .weekday {
     height: 100%;
     padding: 0 !important;
