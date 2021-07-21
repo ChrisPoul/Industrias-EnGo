@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Actividades del dia {{ date }}{% endblock %}</h1>
+<h1>{% block title %}Actividades del dia {{ format_date(date) }}{% endblock %}</h1>
 {% endblock%}
 
 {% block content %}
 <div>
     {% for activity in activities %}
-    <div>
+    <div class="container activity">
         <strong>{{ activity.title }}</strong>
         <p>{{ activity.description }}</p>
     </div>

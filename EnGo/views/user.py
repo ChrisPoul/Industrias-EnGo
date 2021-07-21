@@ -256,7 +256,7 @@ def day_activities(id, date_str):
         'user/day-activities.html',
         user=user,
         activities=day_activities,
-        date=date_str
+        date=date
     )
 
 

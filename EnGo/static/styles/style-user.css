@@ -122,3 +122,9 @@
 .weekday div:last-child {
     padding-bottom: 1em;
 }
+
+.activity {
+    padding-top: 1em;
+    text-align: left;
+    margin: 0.3em;
+}
