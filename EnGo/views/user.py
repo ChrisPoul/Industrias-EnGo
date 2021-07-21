@@ -264,6 +264,7 @@ def day_activities(id, date_str):
 @permission_required(permissions)
 @login_required
 def assign_activity(id):
+    min_date = datetime.today().strftime("%Y-%m-%d")
     if request.method == "POST":
         error = None
         due_date_str = request.form["due_date"]
@@ -288,7 +289,7 @@ def assign_activity(id):
     return render_template(
         "user/assign-activity.html",
         activity_heads=activity_heads,
-        form=request.form
+        min_date=min_date
     )
 
 

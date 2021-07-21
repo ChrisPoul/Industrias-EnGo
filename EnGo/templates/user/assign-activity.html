@@ -12,7 +12,7 @@
             <strong>{{ activity_heads[head] }}:</strong>
         </div>
         <div>
-            <input name="{{ head }}" value="{{ form[head] }}"
+            <input name="{{ head }}" value="{{ request.form[head] }}"
             {% if head == "title" %}
             placeholder="Requerido"
             {% else %}
@@ -20,6 +20,7 @@
             {% endif %}
             {% if head == "due_date" %}
             type="date"
+            min="{{ min_date }}"
             {% endif %}> 
         </div>
         {% endfor %}

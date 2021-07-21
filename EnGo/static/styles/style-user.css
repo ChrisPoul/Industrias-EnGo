@@ -71,6 +71,9 @@
     flex-direction: row;
     justify-content: flex-end;
 }
+.week-activities-head form input {
+    margin-left: 0;
+}
 
 .weekday-head {
     border-right: none !important;
