@@ -7,7 +7,8 @@ from EnGo.models.user import User, UserActivity, UserProduction
 from EnGo.models.calendar import MyCalendar
 from . import (
     permission_required, login_required,
-    get_checked_permissions, get_form
+    get_checked_permissions, get_form,
+    update_obj_attrs
 )
 
 bp = Blueprint("user", __name__, url_prefix="/user")
@@ -290,6 +291,33 @@ def assign_activity(id):
         "user/assign-activity.html",
         activity_heads=activity_heads,
         min_date=min_date
+    )
+
+
+@bp.route('/update_activity/<int:activity_id>', methods=('POST', 'GET'))
+@permission_required(permissions)
+@login_required
+def update_activity(activity_id):
+    activity = UserActivity.query.get(activity_id)
+    activity_attrs = [
+        "title",
+        "description",
+        "status"
+    ]
+    if request.method == "POST":
+        update_obj_attrs(activity, activity_attrs)
+        due_date_str = request.form['due_date']
+        activity.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
+        error = activity.request.update()
+        if not error:
+            return redirect(
+                url_for('user.profile', id=activity.user_id)
+            )
+        flash(error)
+
+    return render_template(
+        'user/update-activity.html',
+        activity=activity
     )
 
 

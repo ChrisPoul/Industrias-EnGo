@@ -1,6 +1,7 @@
 from . import UserViewTest
 from datetime import datetime
 from flask import url_for
+from EnGo.models.user import UserActivity
 
 ### LOGED IN USER (LU) ###
 ### LOGED IN USER HAS PERMISSION (LUHP) ###
@@ -62,7 +63,36 @@ class TestAssignActivityView(UserViewTest):
             )
 
         self.assertStatus(response, 302)
-    
+
+
+class TestUpdateActivity(UserViewTest):
+
+    def setUp(self):
+        UserViewTest.setUp(self)
+        self.activity = UserActivity(
+            user_id=self.user.id,
+            title="New Activity",
+            due_date=datetime.today()
+        )
+        self.activity.add()
+
+    def test_should_update_activity_given_valid_activity_input_and_LUHP(self):
+        self.login_user(self.admin_user)
+        data = dict(
+            title="New Activity",
+            description="Test Description",
+            status="Completada",
+            due_date=datetime.today().strftime('%Y-%m-%d')
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update_activity', activity_id=self.activity.id),
+                data=data
+            )
+        self.db.session.rollback()
+        
+        self.assertEqual(self.activity.status, "Completada")
+
 
 class TestDayActivities(UserViewTest):
 
