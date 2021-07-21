@@ -1,10 +1,23 @@
-<div class="overlay-dropdown">
-    <button class="overlay-dropdown-button icon-button"
-        onclick="displayOverlayDropdown(event)">
-        <i class="fa fa-caret-down" onclick="displayOverlayDropdown(event)"></i>
-    </button>
-    <div class="overlay-dropdown-content">
-        {% include "user/production-table.html" %}
+<div class="user-production-summary">
+    <div>
+        <strong>Producción de la semana</strong>
+        <div class="overlay-dropdown">
+            <button class="overlay-dropdown-button icon-button"
+                onclick="displayOverlayDropdown(event)">
+                <i class="fa fa-caret-down" onclick="displayOverlayDropdown(event)"></i>
+            </button>
+            <div class="overlay-dropdown-content">
+                {% include "user/production-table.html" %}
+            </div>
+            <div class="overlay-dropdown-background" onclick="hideOverlayDropdown(event)"></div>
+        </div>
     </div>
-    <div class="overlay-dropdown-background" onclick="hideOverlayDropdown(event)"></div>
+    <div>
+        <a href="{{ url_for('user.production', user_id=user.id) }}">
+            <button>Desgloce</button>
+        </a>
+        <a href="{{ url_for('user.register_production', user_id=user.id) }}">
+            <button>Registrar Producción</button>
+        </a>
+    </div>
 </div>
