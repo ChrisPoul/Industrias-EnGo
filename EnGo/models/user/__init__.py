@@ -124,6 +124,7 @@ class UserActivity(db.Model, MyModel):
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     title = Column(String(200), nullable=False)
     description = Column(Text, nullable=True)
+    status = Column(String(50), nullable=True, default="Incompleta")
     assignment_date = Column(DateTime, nullable=False, default=datetime.now)
     due_date = Column(DateTime, nullable=False)
 

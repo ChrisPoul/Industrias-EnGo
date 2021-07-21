@@ -8,7 +8,19 @@
 <div>
     {% for activity in activities %}
     <div class="container activity">
-        <strong>{{ activity.title }}</strong>
+        <div>
+            <strong>{{ activity.title }}</strong>
+            <strong
+                {% if activity.status == "Incompleta" %}
+                style="color: orange;"
+                {% elif activity.status == "Terminada" %}
+                style="color: green;"
+                {% elif activity.status == "Cancelada" %}
+                style="color: red;"
+                {% endif %}>
+                {{ activity.status }}
+            </strong>
+        </div>
         <p>{{ activity.description }}</p>
     </div>
     {% endfor %}

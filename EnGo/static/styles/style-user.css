@@ -128,3 +128,7 @@
     text-align: left;
     margin: 0.3em;
 }
+.activity div {
+    flex-direction: row;
+    justify-content: space-between;
+}
