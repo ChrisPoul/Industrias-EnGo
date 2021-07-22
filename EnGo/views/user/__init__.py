@@ -16,20 +16,16 @@ bp = Blueprint("user", __name__, url_prefix="/user")
 username_head = dict(
     username="Nombre de Usuario"
 )
-user_login_heads = dict(
-    username_head,
-    password="Contraseña"
-)
 user_heads = dict(
-    user_login_heads,
+    username_head,
+    password="Contraseña",
     salary="Salario Mensual"
 )
 permissions = [
     "Recursos Humanos"
 ]
 
-from . import auth, activity
-from .production import production_heads
+from . import auth, activity, production
 
 
 @bp.route("/users", methods=('POST', 'GET'))
@@ -108,7 +104,7 @@ def profile(id):
     return render_template(
         "user/profile.html",
         weekday_heads=weekday_heads,
-        production_heads=production_heads,
+        production_heads=production.production_heads,
         week_activities=week_activities,
         weekday_dates=weekday_dates,
         user_production=week_production,
