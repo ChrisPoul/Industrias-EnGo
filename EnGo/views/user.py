@@ -254,7 +254,7 @@ def day_activities(id, date_str):
     day_activities = user.schedule.get_day_activities(date)
     
     return render_template(
-        'user/day-activities.html',
+        'user/activity/day-activities.html',
         user=user,
         activities=day_activities,
         date=date
@@ -288,7 +288,7 @@ def assign_activity(id):
         flash(error)
         
     return render_template(
-        "user/assign-activity.html",
+        "user/activity/assign-activity.html",
         activity_heads=activity_heads,
         min_date=min_date
     )
@@ -316,7 +316,7 @@ def update_activity(activity_id):
         flash(error)
 
     return render_template(
-        'user/update-activity.html',
+        'user/activity/update-activity.html',
         activity=activity
     )
 
