@@ -11,11 +11,11 @@
             </div>
             <div class="overlay-dropdown-background" onclick="hideOverlayDropdown(event)"></div>
         </div>
-    </div>
-    <div>
-        <a href="{{ url_for('user.production', user_id=user.id) }}">
+        <a class="production-breakdown-button" href="{{ url_for('user.production', user_id=user.id) }}">
             <button>Desgloce</button>
         </a>
+    </div>
+    <div>
         <a href="{{ url_for('user.register_production', user_id=user.id) }}">
             <button>Registrar Producción</button>
         </a>

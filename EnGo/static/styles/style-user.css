@@ -52,20 +52,3 @@
 .user-profile-summary {
     margin-bottom: 2em;
 }
-.user-production-summary {
-    flex-direction: row;
-    justify-content: space-between;
-}
-.user-production-summary div {
-    flex-direction: row;
-}
-
-.user-production {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding-top: 0.3em;
-}
-.user-production div {
-    padding: 0.5em;
-    justify-content: center;
-}
