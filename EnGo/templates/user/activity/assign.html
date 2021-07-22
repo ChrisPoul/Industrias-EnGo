@@ -8,6 +8,7 @@
 <form method="post">
     <div class="assign-activity">
         {% for head in activity_heads %}
+        {% if head != "status" %}
         <div>
             <strong>{{ activity_heads[head] }}:</strong>
         </div>
@@ -23,6 +24,7 @@
             min="{{ min_date }}"
             {% endif %}> 
         </div>
+        {% endif %}
         {% endfor %}
     </div>
     <input type="submit" value="Asignar">

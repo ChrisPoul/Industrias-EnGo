@@ -13,8 +13,14 @@ from . import bp
 activity_heads = dict(
     title="Título",
     description="Descripción",
+    status="Estatus",
     due_date="Fecha De Entrega"
 )
+activity_status_options = [
+    "Incompleta",
+    "Completada",
+    "Cancelada"
+]
 permissions = [
     "Recursos Humanos"
 ]
@@ -58,13 +64,9 @@ def assign_activity(id):
 @login_required
 def update_activity(activity_id):
     activity = UserActivity.query.get(activity_id)
-    activity_attrs = [
-        "title",
-        "description",
-        "status"
-    ]
+    min_date = datetime.today().strftime("%Y-%m-%d")
     if request.method == "POST":
-        update_obj_attrs(activity, activity_attrs)
+        update_obj_attrs(activity, activity_heads)
         due_date_str = request.form['due_date']
         try:
             activity.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
@@ -79,6 +81,9 @@ def update_activity(activity_id):
 
     return render_template(
         'user/activity/update.html',
+        activity_heads=activity_heads,
+        activity_status_options=activity_status_options,
+        min_date=min_date,
         activity=activity
     )
 
