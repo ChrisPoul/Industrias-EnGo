@@ -5,7 +5,7 @@ from flask import (
 )
 from EnGo.models.user import User, UserActivity, UserProduction
 from EnGo.models.calendar import MyCalendar
-from . import (
+from EnGo.views import (
     permission_required, login_required,
     get_checked_permissions, get_form,
     update_obj_attrs
@@ -71,62 +71,6 @@ def users():
     )
 
 
-@bp.route("/register", methods=('POST', 'GET'))
-@permission_required(permissions)
-@login_required
-def register():
-    form = get_form(user_heads)
-    if request.method == "POST":
-        error = None
-        if form["password"] != request.form["password_confirm"]:
-            error = "Las contraseñas no coinciden"
-        if not error:
-            user = User(
-                username=form['username'],
-                password=form['password'],
-                salary=form['salary']
-            )
-            error = user.request.register()
-        if not error:
-            checked_permissions = get_checked_permissions()
-            user.add_permissions(checked_permissions)
-            return redirect(
-                url_for('user.users')
-            )
-        flash(error)
-
-    return render_template(
-        "user/register.html",
-        user_heads=user_heads,
-        password_heads=password_heads,
-        form=form
-    )
-
-
-@bp.route("/login", methods=('POST', 'GET'))
-def login():
-    if g.user:
-        return redirect(
-            url_for('home.main_page')
-        )
-    if request.method == "POST":
-        user = User(
-            username=request.form["username"],
-            password=request.form["password"]
-        )
-        error = user.request.login()
-        if not error:
-            return redirect(
-                url_for('home.main_page')
-            )
-        flash(error)
-
-    return render_template(
-        "user/login.html",
-        user_heads=user_login_heads
-    )
-
-
 @bp.route("/update/<int:id>", methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
@@ -155,45 +99,6 @@ def update(id):
     )
 
 
-@bp.route("/update_password/<int:id>", methods=('POST', 'GET'))
-@permission_required(permissions)
-@login_required
-def update_password(id):
-    user = User.get(id)
-    if request.method == "POST":
-        password = request.form["password"]
-        password_confirm = request.form["password_confirm"]
-        if password != password_confirm:
-            error = "Las contraseñas no coinciden"
-        else:
-            user.password = password
-            error = user.validation.validate()
-        if not error:
-            from werkzeug.security import generate_password_hash
-            user.password = generate_password_hash(user.password)
-            user.update()
-            return redirect(
-                url_for('user.update', id=id)
-            )
-        flash(error)
-    
-    return render_template(
-        'user/update-password.html',
-        password_heads=password_heads,
-        user=user
-    )
-
-
-@bp.route("/logout")
-@login_required
-def logout():
-    session.clear()
-
-    return redirect(
-        url_for("user.login")
-    )
-
-
 @bp.route("/delete/<int:id>")
 @permission_required(permissions)
 @login_required
@@ -204,19 +109,6 @@ def delete(id):
     return redirect(
         url_for('user.users')
     )
-
-
-@bp.before_app_request
-def load_loged_in_user():
-    try:
-        user_id = session["user_id"]
-    except KeyError:
-        user_id = None
-
-    if user_id is None:
-        g.user = None
-    else:
-        g.user = User.get(user_id)
 
 
 @bp.route("/profile/<int:id>", methods=('POST', 'GET'))
@@ -358,3 +250,4 @@ def production(user_id):
         user=user
     )
     
+from . import auth
