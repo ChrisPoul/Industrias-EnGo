@@ -4,6 +4,16 @@ from EnGo.models.product import SoldProduct, FinishedProduct
 from EnGo.models.receipt import Receipt
 from EnGo.models.expense import Expense
 
+weekday_heads = {
+    0: "Lunes",
+    1: "Martes",
+    2: "Miércoles",
+    3: "Jueves",
+    4: "Viernes",
+    5: "Sábado",
+    6: "Domingo"
+}
+
 
 class MyCalendar:
 

@@ -4,7 +4,7 @@ from flask import (
     flash, redirect, url_for, g, session
 )
 from EnGo.models.user import User, UserActivity, UserProduction
-from EnGo.models.calendar import MyCalendar
+from EnGo.models.calendar import MyCalendar, weekday_heads
 from EnGo.views import (
     permission_required, login_required,
     get_checked_permissions, get_form,
@@ -27,20 +27,6 @@ user_heads = dict(
 password_heads = dict(
     password="Escribe una contraseña...",
     password_confirm="Confirma la contraseña..."
-)
-weekday_heads = {
-    0: "Lunes",
-    1: "Martes",
-    2: "Miércoles",
-    3: "Jueves",
-    4: "Viernes",
-    5: "Sábado",
-    6: "Domingo"
-}
-activity_heads = dict(
-    title="Título",
-    description="Descripción",
-    due_date="Fecha De Entrega"
 )
 production_heads = dict(
     concept="Concepto",
@@ -137,82 +123,6 @@ def profile(id):
     )
 
 
-@bp.route('/day_activities/<int:id>/<string:date_str>')
-@permission_required(permissions)
-@login_required
-def day_activities(id, date_str):
-    date = datetime.strptime(date_str, "%Y-%m-%d")
-    user = User.get(id)
-    day_activities = user.schedule.get_day_activities(date)
-    
-    return render_template(
-        'user/activity/day-activities.html',
-        user=user,
-        activities=day_activities,
-        date=date
-    )
-
-
-@bp.route("/assign_activity/<int:id>", methods=("POST", "GET"))
-@permission_required(permissions)
-@login_required
-def assign_activity(id):
-    min_date = datetime.today().strftime("%Y-%m-%d")
-    if request.method == "POST":
-        error = None
-        due_date_str = request.form["due_date"]
-        try:
-            due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-        except ValueError:
-            error = "No has seleccionado una fecha, porfavor selecciona una"
-        if not error:
-            activity = UserActivity(
-                user_id=id,
-                title=request.form['title'],
-                description=request.form['description'],
-                due_date=due_date
-            )
-            error = activity.request.add()
-        if not error:
-            return redirect(
-                url_for('user.profile', id=id)
-            )
-        flash(error)
-        
-    return render_template(
-        "user/activity/assign-activity.html",
-        activity_heads=activity_heads,
-        min_date=min_date
-    )
-
-
-@bp.route('/update_activity/<int:activity_id>', methods=('POST', 'GET'))
-@permission_required(permissions)
-@login_required
-def update_activity(activity_id):
-    activity = UserActivity.query.get(activity_id)
-    activity_attrs = [
-        "title",
-        "description",
-        "status"
-    ]
-    if request.method == "POST":
-        update_obj_attrs(activity, activity_attrs)
-        due_date_str = request.form['due_date']
-        activity.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
-        error = activity.request.update()
-        if not error:
-            return redirect(
-                url_for('user.profile', id=activity.user_id)
-            )
-        flash(error)
-
-    return render_template(
-        'user/activity/update-activity.html',
-        activity=activity
-    )
-
-
 @bp.route('/register_production/<int:user_id>', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
@@ -250,4 +160,4 @@ def production(user_id):
         user=user
     )
     
-from . import auth
+from . import auth, activity
