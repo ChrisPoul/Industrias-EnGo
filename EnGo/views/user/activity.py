@@ -108,7 +108,10 @@ def day_activities(id, date_str):
 
 def check_for_overdue_activities(activities):
     for activity in activities:
-        activity_is_overdue = activity.due_date < datetime.today() - timedelta(days=1) and activity.status == "Incompleta"
-        if activity_is_overdue:
+        if activity_is_overdue(activity):
             activity.status = "Atrasada"
             activity.update()
+
+
+def activity_is_overdue(activity):
+    return activity.due_date < datetime.today() - timedelta(days=1) and activity.status == "Incompleta"
