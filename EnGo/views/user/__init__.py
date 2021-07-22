@@ -24,18 +24,12 @@ user_heads = dict(
     user_login_heads,
     salary="Salario Mensual"
 )
-password_heads = dict(
-    password="Escribe una contraseña...",
-    password_confirm="Confirma la contraseña..."
-)
-production_heads = dict(
-    concept="Concepto",
-    quantity="Cantidad",
-    date="Fecha de Registro"
-)
 permissions = [
     "Recursos Humanos"
 ]
+
+from . import auth, activity
+from .production import production_heads
 
 
 @bp.route("/users", methods=('POST', 'GET'))
@@ -121,43 +115,3 @@ def profile(id):
         selected_week_str=selected_week_str,
         user=user
     )
-
-
-@bp.route('/register_production/<int:user_id>', methods=('POST', 'GET'))
-@permission_required(permissions)
-@login_required
-def register_production(user_id):
-    if request.method == "POST":
-        production = UserProduction(
-            user_id=user_id,
-            concept=request.form['concept'],
-            quantity=request.form['quantity']
-        )
-        error = production.request.add()
-        if not error:
-            return redirect(
-                url_for('user.profile', id=user_id)
-            )
-        flash(error)
-    
-    return render_template(
-        "user/production/register-production.html",
-        production_heads=production_heads
-    )
-
-
-@bp.route('/production/<int:user_id>')
-@permission_required(permissions)
-@login_required
-def production(user_id):
-    user = User.query.get(user_id)
-    user_production = user.production
-
-    return render_template(
-        "user/production/production.html",
-        production_heads=production_heads,
-        user_production=user_production,
-        user=user
-    )
-    
-from . import auth, activity

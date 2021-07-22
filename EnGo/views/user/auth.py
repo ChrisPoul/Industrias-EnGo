@@ -8,8 +8,12 @@ from EnGo.views import (
     permission_required, login_required,
     get_checked_permissions, get_form
 )
-from . import bp, user_login_heads, user_heads, password_heads
+from . import bp, user_login_heads, user_heads
 
+password_heads = dict(
+    password="Escribe una contraseña...",
+    password_confirm="Confirma la contraseña..."
+)
 permissions = [
     "Recursos Humanos"
 ]
