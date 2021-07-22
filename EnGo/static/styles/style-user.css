@@ -132,3 +132,8 @@
     flex-direction: row;
     justify-content: space-between;
 }
+
+.activity-status {
+    margin-left: 0.6em;
+    margin-bottom: 0.5em;
+}
