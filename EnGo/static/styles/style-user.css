@@ -49,47 +49,6 @@
     text-decoration: underline;
 }
 
-.week-activities {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto;
-    border: 1px solid black;
-    border-radius: 10px;
-}
-.week-activities div {
-    padding: 1em;
-    text-align: center;
-    border-right: 1px solid black;
-}
-.week-activities-head {
-    flex-direction: row;
-    justify-content: space-between;
-}
-.week-activities-head a input {
-    margin: 0.5em;
-}
-.week-activities-head form {
-    flex-direction: row;
-    justify-content: flex-end;
-}
-.week-activities-head form input {
-    margin-left: 0;
-}
-
-.weekday-head {
-    border-right: none !important;
-    border-bottom: 1px solid black;
-    font-weight: 600;
-}
-
-.assign-activity {
-    display: grid;
-    grid-template-columns: max-content 80%;
-    align-items: center;
-}
-.assign-activity input {
-    width: 100%;
-}
-
 .user-profile-summary {
     margin-bottom: 2em;
 }
@@ -109,31 +68,4 @@
 .user-production div {
     padding: 0.5em;
     justify-content: center;
-}
-
-.weekday {
-    height: 100%;
-    padding: 0 !important;
-}
-.weekday div {
-    border-right: none !important;
-    padding-bottom: 0;
-}
-.weekday div:last-child {
-    padding-bottom: 1em;
-}
-
-.activity {
-    padding-top: 1em;
-    text-align: left;
-    margin: 0.3em;
-}
-.activity div {
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.activity-status {
-    margin-left: 0.6em;
-    margin-bottom: 0.5em;
 }

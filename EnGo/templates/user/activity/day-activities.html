@@ -7,7 +7,7 @@
 {% block content %}
 <div>
     {% for activity in activities %}
-    <div class="container activity">
+    <div class="container day-activity">
         <div>
             <a href="{{ url_for('user.update_activity', activity_id=activity.id) }}">
                 <strong>{{ activity.title }}</strong>
