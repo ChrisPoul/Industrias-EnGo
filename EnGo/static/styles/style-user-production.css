@@ -26,3 +26,8 @@
     border: none;
     border-radius: 10px;
 }
+
+.production-heading {
+    flex-direction: row;
+    justify-content: flex-end;
+}

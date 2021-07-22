@@ -5,7 +5,13 @@
 {% endblock %}
 
 {% block content %}
-<div class='container'>
-    {% include 'user/production/production-table.html' %}
+<div>
+    <form method="post" class="production-heading">
+        <input name="selected_date" type="date" value="{{ selected_date_str }}" required>
+        <input type="submit">
+    </form>
+    <div class='container'>
+        {% include 'user/production/production-table.html' %}
+    </div>
 </div>
 {% endblock %}

@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import (
     render_template, request,
     flash, redirect, url_for
@@ -18,16 +19,22 @@ permissions = [
 ]
 
 
-@bp.route('/production/<int:user_id>')
+@bp.route('/production/<int:user_id>', methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
 def production(user_id):
     user = User.query.get(user_id)
     user_production = user.production
+    selected_date_str = ""
+    if request.method == "POST":
+        selected_date_str = request.form['selected_date']
+        selected_date = datetime.strptime(selected_date_str, "%Y-%m-%d")
+        user_production = user.schedule.get_day_production(selected_date)
 
     return render_template(
         "user/production/production.html",
         production_heads=production_heads,
+        selected_date_str=selected_date_str,
         user_production=user_production,
         user=user
     )
