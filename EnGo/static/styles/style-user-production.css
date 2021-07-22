@@ -19,3 +19,10 @@
 .production-breakdown-button {
     margin-left: 0.5em;
 }
+.production-breakdown-button, .add-production-button {
+    background-color: #333;
+    padding: 0.3em 0.5em;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
