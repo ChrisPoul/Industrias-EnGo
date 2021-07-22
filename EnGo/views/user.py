@@ -178,7 +178,7 @@ def update_password(id):
         flash(error)
     
     return render_template(
-        'user/update_password.html',
+        'user/update-password.html',
         password_heads=password_heads,
         user=user
     )
