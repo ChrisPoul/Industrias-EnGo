@@ -8,7 +8,7 @@
 <form method="post" class="user">
     {% for head in user_heads %}
     {% if head == "password" %}
-    {% include "user/password-fields.html" %}
+    {% include "user/auth/password-fields.html" %}
     {% else %}
     <input name="{{ head }}" id="{{ head }}" value="{{ form[head] }}"
     {% if head == "salary" %}

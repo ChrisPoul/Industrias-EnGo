@@ -44,7 +44,7 @@ def register():
         flash(error)
 
     return render_template(
-        "user/register.html",
+        "user/auth/register.html",
         user_heads=user_heads,
         password_heads=password_heads,
         form=form
@@ -70,7 +70,7 @@ def login():
         flash(error)
 
     return render_template(
-        "user/login.html",
+        "user/auth/login.html",
         user_heads=user_login_heads
     )
 
@@ -121,7 +121,7 @@ def update_password(id):
         flash(error)
     
     return render_template(
-        'user/update-password.html',
+        'user/auth/update-password.html',
         password_heads=password_heads,
         user=user
     )
