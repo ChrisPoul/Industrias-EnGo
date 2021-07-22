@@ -98,6 +98,8 @@ def profile(id):
         selected_week_str = request.form["selected_week"]
         selected_date = datetime.strptime(selected_week_str + "-1", "%Y-W%W-%w")
     week_activities = user.schedule.get_weekday_activities(selected_date)
+    week_finished_activities = user.schedule.get_finished_week_activities(selected_date)
+    week_pending_activities = user.schedule.get_pending_week_activities(selected_date)
     week_production = user.schedule.get_week_production(selected_date)
     weekday_dates = MyCalendar.get_weekday_dates(selected_date)
 
@@ -106,6 +108,8 @@ def profile(id):
         weekday_heads=weekday_heads,
         production_heads=production.production_heads,
         week_activities=week_activities,
+        week_finished_activities=week_finished_activities,
+        week_pending_activities=week_pending_activities,
         weekday_dates=weekday_dates,
         user_production=week_production,
         selected_week_str=selected_week_str,
