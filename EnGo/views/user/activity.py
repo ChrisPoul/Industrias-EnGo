@@ -47,7 +47,7 @@ def assign_activity(id):
         flash(error)
         
     return render_template(
-        "user/activity/assign-activity.html",
+        "user/activity/assign.html",
         activity_heads=activity_heads,
         min_date=min_date
     )
@@ -66,8 +66,11 @@ def update_activity(activity_id):
     if request.method == "POST":
         update_obj_attrs(activity, activity_attrs)
         due_date_str = request.form['due_date']
-        activity.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
-        error = activity.request.update()
+        try:
+            activity.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
+            error = activity.request.update()
+        except ValueError:
+            error = "Fecha invalida"
         if not error:
             return redirect(
                 url_for('user.profile', id=activity.user_id)
@@ -75,7 +78,7 @@ def update_activity(activity_id):
         flash(error)
 
     return render_template(
-        'user/activity/update-activity.html',
+        'user/activity/update.html',
         activity=activity
     )
 

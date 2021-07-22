@@ -93,6 +93,32 @@ class TestUpdateActivity(UserViewTest):
         
         self.assertEqual(self.activity.status, "Completada")
 
+    def test_should_not_update_activity_given_invalid_activity_input_and_LUHP(self):
+        self.login_user(self.admin_user)
+        data = dict(
+            title="New Activity",
+            description="Test Description",
+            status="Completada",
+            due_date="invalid due date"
+        )
+        with self.client as client:
+            client.post(
+                url_for('user.update_activity', activity_id=self.activity.id),
+                data=data
+            )
+        self.db.session.rollback()
+        
+        self.assertNotEqual(self.activity.status, "Completada")
+
+    def test_should_redirect_given_LUHNP(self):
+        self.login_user(self.normal_user)
+        with self.client as client:
+            response = client.get(
+                url_for('user.update_activity', activity_id=self.activity.id)
+            )
+        
+        self.assertStatus(response, 302)
+
 
 class TestDayActivities(UserViewTest):
 
