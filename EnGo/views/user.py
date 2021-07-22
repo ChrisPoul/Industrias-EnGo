@@ -339,7 +339,7 @@ def register_production(user_id):
         flash(error)
     
     return render_template(
-        "user/register-production.html",
+        "user/production/register-production.html",
         production_heads=production_heads
     )
 
@@ -352,7 +352,7 @@ def production(user_id):
     user_production = user.production
 
     return render_template(
-        "user/production.html",
+        "user/production/production.html",
         production_heads=production_heads,
         user_production=user_production,
         user=user
