@@ -9,17 +9,10 @@
     {% for activity in activities %}
     <div class="container activity">
         <div>
-            <strong>{{ activity.title }}</strong>
-            <strong
-                {% if activity.status == "Incompleta" %}
-                style="color: orange;"
-                {% elif activity.status == "Completada" %}
-                style="color: green;"
-                {% elif activity.status == "Cancelada" %}
-                style="color: red;"
-                {% endif %}>
-                {{ activity.status }}
-            </strong>
+            <a href="{{ url_for('user.update_activity', activity_id=activity.id) }}">
+                <strong>{{ activity.title }}</strong>
+            </a>
+            {% include "user/activity/status-dropdown.html" %}
         </div>
         <p>{{ activity.description }}</p>
     </div>

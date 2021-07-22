@@ -98,6 +98,7 @@ def day_activities(id, date_str):
     
     return render_template(
         'user/activity/day-activities.html',
+        activity_status_options=activity_status_options,
         user=user,
         activities=day_activities,
         date=date

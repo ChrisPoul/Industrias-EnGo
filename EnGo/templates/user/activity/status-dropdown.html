@@ -1,0 +1,26 @@
+<select name="{{ head }}" id="{{ head }}">
+    <option
+        {% if activity.status == "Incompleta" %}
+        style="color: orange;"
+        {% elif activity.status == "Completada" %}
+        style="color: green;"
+        {% elif activity.status == "Cancelada" %}
+        style="color: red;"
+        {% endif %}>
+        {{ activity.status }}
+    </option>
+    {% for status in activity_status_options %}
+    {% if status != activity.status %}
+    <option
+        {% if status == "Incompleta" %}
+        style="color: orange;"
+        {% elif status == "Completada" %}
+        style="color: green;"
+        {% elif status == "Cancelada" %}
+        style="color: red;"
+        {% endif %}>
+        {{ status }}
+    </option>
+    {% endif %}
+    {% endfor %}
+</select>
