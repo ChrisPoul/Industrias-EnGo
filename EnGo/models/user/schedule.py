@@ -15,6 +15,25 @@ class UserSchedule:
 
         return weekday_activities
     
+    def get_week_activities(self, date):
+        week_activities = []
+        weekday_dates = MyCalendar.get_weekday_dates(date)
+        for day in weekday_dates.values():
+            day_activities = self.get_day_activities(day)
+            week_activities += day_activities
+
+        return week_activities
+
+    def get_finished_week_activities(self, date):
+        week_activities = self.get_week_activities(date)
+
+        return [activity for activity in week_activities if activity.status == "Completada"]
+
+    def get_pending_week_activities(self, date):
+        week_activities = self.get_week_activities(date)
+
+        return [activity for activity in week_activities if activity.status == "Incompleta"]
+
     def get_day_activities(self, date):
         day_activities = []
         for activity in self.user.activities:

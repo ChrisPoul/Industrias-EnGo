@@ -13,12 +13,7 @@
 <div>
     <div class="user-profile-summary">
         {% include "user/production/production-summary.html" %}
-        <div>
-            Actividades finalizadas: 10
-        </div>
-        <div>
-            Actividades por finalizar: 20
-        </div>
+        {% include "user/activity/activity-summary.html" %}
     </div>
     {% include "user/activity/week-activities.html" %}
 </div>
