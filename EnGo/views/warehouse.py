@@ -132,7 +132,7 @@ def inventory(id):
             selected_expense_type = ExpenseType.query.get(warehouse_inventory.type_id)
         if warehouse_inventory.product:
             return redirect(
-                url_for('product.update', id=warehouse_inventory.product.id)
+                url_for('product.profile', id=warehouse_inventory.product.id)
             )
 
     return render_template(
