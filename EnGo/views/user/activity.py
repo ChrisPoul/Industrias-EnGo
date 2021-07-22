@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from flask import (
     render_template, request,
     flash, redirect, url_for
@@ -95,6 +95,7 @@ def day_activities(id, date_str):
     date = datetime.strptime(date_str, "%Y-%m-%d")
     user = User.query.get(id)
     day_activities = user.schedule.get_day_activities(date)
+    check_for_overdue_activities(day_activities)
     
     return render_template(
         'user/activity/day-activities.html',
@@ -103,3 +104,11 @@ def day_activities(id, date_str):
         activities=day_activities,
         date=date
     )
+
+
+def check_for_overdue_activities(activities):
+    for activity in activities:
+        activity_is_overdue = activity.due_date < datetime.today() - timedelta(days=1) and activity.status == "Incompleta"
+        if activity_is_overdue:
+            activity.status = "Atrasada"
+            activity.update()
