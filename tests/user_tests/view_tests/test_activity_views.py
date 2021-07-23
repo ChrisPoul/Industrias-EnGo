@@ -71,7 +71,7 @@ class TestUpdateActivity(UserViewTest):
             )
         self.db.session.rollback()
         
-        self.assertEqual(self.activity.status, "New Activity")
+        self.assertEqual(self.activity.title, "New Activity")
 
     def test_should_not_update_activity_given_invalid_activity_input_and_LUHP(self):
         self.login_user(self.admin_user)

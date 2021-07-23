@@ -59,8 +59,6 @@ def update_activity(activity_id):
     return render_template(
         'user/activity/update.html',
         activity_heads=activity_heads,
-        activity_status_options=activity_status_options,
-        min_date=min_date,
         activity=activity
     )
 
