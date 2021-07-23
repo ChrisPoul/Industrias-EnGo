@@ -19,3 +19,8 @@ class Order(db.Model, MyModel):
     def validation(self):
         from .validation import OrderValidation
         return OrderValidation(self)
+
+    @property
+    def request(self):
+        from .request import OrderRequest
+        return OrderRequest(self)
