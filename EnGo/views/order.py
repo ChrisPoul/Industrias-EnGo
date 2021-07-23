@@ -28,10 +28,10 @@ permissions = [
 ]
 
 
-@bp.route("/assign/<int:id>", methods=("POST", "GET"))
+@bp.route("/assign", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
-def assign(id):
+def assign():
     min_date = datetime.today().strftime("%Y-%m-%d")
     if request.method == "POST":
         error = None
@@ -41,8 +41,9 @@ def assign(id):
         except ValueError:
             error = "No has seleccionado una fecha, porfavor selecciona una"
         if not error:
+            user_id = request.form['user_id']
             order = Order(
-                user_id=id,
+                user_id=user_id,
                 title=request.form['title'],
                 description=request.form['description'],
                 due_date=due_date
@@ -50,12 +51,12 @@ def assign(id):
             error = order.request.add()
         if not error:
             return redirect(
-                url_for('user.profile', id=id)
+                url_for('user.profile', id=user_id)
             )
         flash(error)
         
     return render_template(
-        "user/order/assign.html",
+        "order/assign.html",
         order_heads=order_heads,
         min_date=min_date
     )
@@ -67,22 +68,29 @@ def assign(id):
 def update(order_id):
     order = Order.query.get(order_id)
     min_date = datetime.today().strftime("%Y-%m-%d")
+    order_attrs = [
+        "title",
+        "description",
+        "user_id"
+    ]
     if request.method == "POST":
-        update_obj_attrs(order, order_heads)
+        error = None
+        update_obj_attrs(order, order_attrs)
         due_date_str = request.form['due_date']
         try:
             order.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
-            error = order.request.update()
         except ValueError:
             error = "Fecha invalida"
         if not error:
+            error = order.request.update()
+        if not error:
             return redirect(
                 url_for('user.profile', id=order.user_id)
-            )
+            ) 
         flash(error)
 
     return render_template(
-        'user/order/update.html',
+        'order/update.html',
         order_heads=order_heads,
         order_status_options=order_status_options,
         min_date=min_date,
@@ -90,17 +98,17 @@ def update(order_id):
     )
 
 
-@bp.route('/day_orders/<int:id>/<string:date_str>')
+@bp.route('/day_orders/<int:user_id>/<string:date_str>')
 @permission_required(permissions)
 @login_required
-def day_orders(id, date_str):
+def day_orders(user_id, date_str):
     date = datetime.strptime(date_str, "%Y-%m-%d")
-    user = User.query.get(id)
+    user = User.query.get(user_id)
     day_orders = user.schedule.get_day_orders(date)
     check_for_overdue_orders(day_orders)
     
     return render_template(
-        'user/order/day-orders.html',
+        'order/day-orders.html',
         order_status_options=order_status_options,
         user=user,
         orders=day_orders,

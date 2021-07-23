@@ -68,4 +68,7 @@ def create_app(test_config=None):
     from .views import calendar
     app.register_blueprint(calendar.bp)
 
+    from .views import order
+    app.register_blueprint(order.bp)
+
     return app
