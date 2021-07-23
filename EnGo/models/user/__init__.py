@@ -1,7 +1,8 @@
 from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    ForeignKey, DateTime, Text
+    ForeignKey, DateTime, Text,
+    Date
 )
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
@@ -25,6 +26,11 @@ class User(db.Model, MyModel):
     )
     activities = db.relationship(
         'UserActivity',
+        backref="user",
+        cascade="all, delete-orphan"
+    )
+    orders = db.relationship(
+        'Order',
         backref="user",
         cascade="all, delete-orphan"
     )
@@ -124,6 +130,7 @@ class UserActivity(db.Model, MyModel):
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     title = Column(String(200), nullable=False)
     description = Column(Text, nullable=True)
+    due_date = Column(Date, nullable=False, default=datetime.today)
 
     @property
     def validation(self):
@@ -161,3 +168,4 @@ class UserPermission(db.Model, MyModel):
 
 
 from .contract import Contract
+from EnGo.models.order import Order

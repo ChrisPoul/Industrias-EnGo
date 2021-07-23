@@ -27,15 +27,10 @@ class UserScheduleTest(UserTest):
             title="Test Activity"
         )
         self.user_activity.add()
-        user_activity2 = UserActivity(
-            user_id=self.user.id,
-            title="Test Activity"
-        )
-        user_activity2.add()
         self.order = Order(
             user_id=self.user.id,
             title="Test Activity",
-            status="Pendiente",
+            status="Cancelada",
             due_date=date.today()
         )
         self.order.add()
