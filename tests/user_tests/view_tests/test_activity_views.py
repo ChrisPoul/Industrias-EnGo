@@ -14,8 +14,7 @@ class TestAssignActivityView(UserViewTest):
         self.login_user(self.dev_user)
         activity_input = dict(
             title="Test Activity",
-            description="",
-            due_date="2020-06-30"
+            description=""
         )
         with self.client as client:
             client.post(
@@ -29,23 +28,7 @@ class TestAssignActivityView(UserViewTest):
         self.login_user(self.dev_user)
         activity_input = dict(
             title="",
-            description="",
-            due_date="2020-06-30"
-        )
-        with self.client as client:
-            client.post(
-                url_for('user.assign_activity', id=self.user.id),
-                data=activity_input
-            )
-        
-        self.assertEqual(len(self.user.activities), 0)
-
-    def test_should_not_add_activity_given_invalid_due_date_and_LUHP(self):
-        self.login_user(self.dev_user)
-        activity_input = dict(
-            title="Test Title",
-            description="",
-            due_date=""
+            description=""
         )
         with self.client as client:
             client.post(
@@ -71,44 +54,39 @@ class TestUpdateActivity(UserViewTest):
         UserViewTest.setUp(self)
         self.activity = UserActivity(
             user_id=self.user.id,
-            title="New Activity",
-            due_date=datetime.today()
+            title="New Activity"
         )
         self.activity.add()
 
     def test_should_update_activity_given_valid_activity_input_and_LUHP(self):
         self.login_user(self.admin_user)
-        data = dict(
+        activity_input = dict(
             title="New Activity",
-            description="Test Description",
-            status="Completada",
-            due_date=datetime.today().strftime('%Y-%m-%d')
+            description="Test Description"
         )
         with self.client as client:
             client.post(
                 url_for('user.update_activity', activity_id=self.activity.id),
-                data=data
+                data=activity_input
             )
         self.db.session.rollback()
         
-        self.assertEqual(self.activity.status, "Completada")
+        self.assertEqual(self.activity.status, "New Activity")
 
     def test_should_not_update_activity_given_invalid_activity_input_and_LUHP(self):
         self.login_user(self.admin_user)
-        data = dict(
-            title="New Activity",
-            description="Test Description",
-            status="Completada",
-            due_date="invalid due date"
+        activity_input = dict(
+            title="",
+            description="Test Description"
         )
         with self.client as client:
             client.post(
                 url_for('user.update_activity', activity_id=self.activity.id),
-                data=data
+                data=activity_input
             )
         self.db.session.rollback()
         
-        self.assertNotEqual(self.activity.status, "Completada")
+        self.assertNotEqual(self.activity.title, "")
 
     def test_should_redirect_given_LUHNP(self):
         self.login_user(self.normal_user)

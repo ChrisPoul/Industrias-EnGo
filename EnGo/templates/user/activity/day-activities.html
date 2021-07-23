@@ -13,7 +13,7 @@
                 <strong>{{ activity.title }}</strong>
             </a>
             <strong class="activity-status" 
-                {% if activity.status == "Incompleta" %}
+                {% if activity.status == "Pendiente" %}
                 style="color: orange;"
                 {% elif activity.status == "Completada" %}
                 style="color: green;"

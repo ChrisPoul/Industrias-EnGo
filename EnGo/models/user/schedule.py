@@ -32,7 +32,7 @@ class UserSchedule:
     def get_pending_week_activities(self, date):
         week_activities = self.get_week_activities(date)
 
-        return [activity for activity in week_activities if activity.status == "Incompleta"]
+        return [activity for activity in week_activities if activity.status == "Pendiente"]
 
     def get_day_activities(self, date):
         day_activities = []

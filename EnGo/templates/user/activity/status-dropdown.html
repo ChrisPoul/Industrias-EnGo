@@ -1,6 +1,6 @@
 <select name="{{ head }}" id="{{ head }}">
     <option
-        {% if activity.status == "Incompleta" %}
+        {% if activity.status == "Pendiente" %}
         style="color: orange;"
         {% elif activity.status == "Completada" %}
         style="color: green;"
@@ -12,7 +12,7 @@
     {% for status in activity_status_options %}
     {% if status != activity.status %}
     <option
-        {% if status == "Incompleta" %}
+        {% if status == "Pendiente" %}
         style="color: orange;"
         {% elif status == "Completada" %}
         style="color: green;"

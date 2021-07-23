@@ -10,8 +10,7 @@ class ActivityTest(UserTest):
         self.activity = UserActivity(
             user_id=self.user.id,
             title="Test Activity",
-            description="Test Description",
-            due_date=date.today()
+            description="Test Description"
         )
         self.activity.add()
 
@@ -22,8 +21,7 @@ class TestValidate(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="Test Activity",
-            description="",
-            due_date=date.today()
+            description=""
         )
         error = activity.validation.validate()
 
@@ -33,8 +31,7 @@ class TestValidate(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="",
-            description="Test Description",
-            due_date=date.today()
+            description="Test Description"
         )
         error = activity.validation.validate()
 
@@ -47,8 +44,7 @@ class TestValidateEmptyValues(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="Test Activity",
-            description="",
-            due_date=date.today()
+            description=""
         )
         error = activity.validation.validate_empty_values()
 
@@ -58,8 +54,7 @@ class TestValidateEmptyValues(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="",
-            description="Test Description",
-            due_date=date.today()
+            description="Test Description"
         )
         error = activity.validation.validate_empty_values()
 
@@ -72,8 +67,7 @@ class TestRequestAdd(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="Test Activity",
-            description="",
-            due_date=date.today()
+            description=""
         )
         activity.request.add()
 
@@ -83,8 +77,7 @@ class TestRequestAdd(ActivityTest):
         activity = UserActivity(
             user_id=self.user.id,
             title="",
-            description="",
-            due_date=date.today()
+            description=""
         )
         activity.request.add()
 
