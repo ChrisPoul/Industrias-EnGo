@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 from flask import (
-    render_template, request,
+    Blueprint, render_template, request,
     flash, redirect, url_for
 )
 from EnGo.models.user import User
@@ -9,7 +9,8 @@ from EnGo.views import (
     permission_required, login_required,
     update_obj_attrs
 )
-from . import bp
+
+bp = Blueprint("order", __name__, url_prefix="/order")
 
 order_heads = dict(
     title="Título",
@@ -27,10 +28,10 @@ permissions = [
 ]
 
 
-@bp.route("/assign_order/<int:id>", methods=("POST", "GET"))
+@bp.route("/assign/<int:id>", methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
-def assign_order(id):
+def assign(id):
     min_date = datetime.today().strftime("%Y-%m-%d")
     if request.method == "POST":
         error = None
@@ -60,10 +61,10 @@ def assign_order(id):
     )
 
 
-@bp.route('/update_order/<int:order_id>', methods=('POST', 'GET'))
+@bp.route('/update/<int:order_id>', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
-def update_order(order_id):
+def update(order_id):
     order = Order.query.get(order_id)
     min_date = datetime.today().strftime("%Y-%m-%d")
     if request.method == "POST":

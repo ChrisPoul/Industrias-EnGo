@@ -14,3 +14,8 @@ class Order(db.Model, MyModel):
     status = Column(String(50), nullable=False, default="Pendiente")
     due_date = Column(Date, nullable=False)
     assignment_date = Column(Date, nullable=False, default=datetime.today)
+
+    @property
+    def validation(self):
+        from .validation import OrderValidation
+        return OrderValidation(self)
