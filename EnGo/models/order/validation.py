@@ -8,6 +8,7 @@ class OrderValidation:
         self.error = None
 
     def validate(self):
+        self.validate_empty_values()
 
         return self.error
 

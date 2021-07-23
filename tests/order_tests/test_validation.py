@@ -16,16 +16,16 @@ class TestValidate(OrderTest):
 
         self.assertEqual(error, None)
 
-    # def test_should_return_error_given_invalid_order(self):
-    #     order = Order(
-    #         user_id=1,
-    #         title="",
-    #         description="Test Description",
-    #         due_date="Invalid date"
-    #     )
-    #     error = order.validation.validate()
+    def test_should_return_error_given_invalid_order(self):
+        order = Order(
+            user_id=1,
+            title="",
+            description="Test Description",
+            due_date="Invalid date"
+        )
+        error = order.validation.validate()
 
-    #     self.assertNotEqual(error, None)
+        self.assertNotEqual(error, None)
 
 
 class TestValidateEmptyValues(OrderTest):
