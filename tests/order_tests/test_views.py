@@ -2,7 +2,6 @@ from datetime import date
 from flask import url_for
 from . import OrderTest
 from EnGo.models.order import Order
-from EnGo.models.user import User
 
 
 class OrderViewTest(OrderTest):
@@ -10,14 +9,13 @@ class OrderViewTest(OrderTest):
     def setUp(self):
         OrderTest.setUp(self)
         self.create_test_users()
-        self.user = User(
-            username="Test User",
-            password="0000",
-        )
-        self.user.add()
 
 
 class TestAssignView(OrderViewTest):
+
+    def setUp(self):
+        OrderViewTest.setUp(self)
+        self.order.delete()
 
     def test_should_assign_order_given_valid_order_input_and_LUHP(self):
         self.login_user(self.dev_user)

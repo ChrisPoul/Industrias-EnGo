@@ -36,3 +36,10 @@ class TestUpdate(OrderTest):
         self.db.session.rollback()
 
         self.assertEqual(self.order.title, "New Valid Title")
+
+    def test_should_update_order_given_valid_due_date_str_format(self):
+        self.order.due_date = date.today().strftime("%Y-%m-%d")
+        self.order.request.update()
+        self.db.session.rollback()
+
+        self.assertEqual(self.order.due_date, date.today())
