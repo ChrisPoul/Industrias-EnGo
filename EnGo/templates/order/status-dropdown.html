@@ -1,16 +1,16 @@
-<select name="{{ head }}" id="{{ head }}">
+<select name="status" id="status">
     <option
-        {% if activity.status == "Pendiente" %}
+        {% if order.status == "Pendiente" %}
         style="color: orange;"
-        {% elif activity.status == "Completada" %}
+        {% elif order.status == "Completada" %}
         style="color: green;"
-        {% elif activity.status == "Cancelada" %}
+        {% elif order.status == "Cancelada" %}
         style="color: red;"
         {% endif %}>
-        {{ activity.status }}
+        {{ order.status }}
     </option>
-    {% for status in activity_status_options %}
-    {% if status != activity.status %}
+    {% for status in order_status_options %}
+    {% if status != order.status %}
     <option
         {% if status == "Pendiente" %}
         style="color: orange;"

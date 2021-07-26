@@ -9,7 +9,6 @@
     {% for head in activity_heads %}
     <label for="{{ head }}">{{ activity_heads[head] }}:</label>
     {% if head == "status" %}
-    {% include "user/activity/status-dropdown.html" %}
     {% else %}
     <input name="{{ head }}" id="{{ head }}"
         {% if head == "due_date" %}

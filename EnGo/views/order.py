@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for
@@ -16,6 +16,7 @@ order_heads = dict(
     title="Título",
     description="Descripción",
     status="Estatus",
+    user_id="Usuario",
     due_date="Fecha De Entrega"
 )
 order_status_options = [
@@ -23,6 +24,10 @@ order_status_options = [
     "Completada",
     "Cancelada"
 ]
+initial_user = dict(
+    id=0,
+    username="Seleccionar Empleado"
+)
 permissions = [
     "Recursos Humanos"
 ]
@@ -33,22 +38,20 @@ permissions = [
 @login_required
 def assign():
     min_date = datetime.today().strftime("%Y-%m-%d")
+    users = [user for user in User.query.all() if not user.is_admin()]
+    selected_user = initial_user
     if request.method == "POST":
-        error = None
-        due_date_str = request.form["due_date"]
-        try:
-            due_date = datetime.strptime(due_date_str, "%Y-%m-%d")
-        except ValueError:
-            error = "No has seleccionado una fecha, porfavor selecciona una"
-        if not error:
-            user_id = request.form['user_id']
-            order = Order(
-                user_id=user_id,
-                title=request.form['title'],
-                description=request.form['description'],
-                due_date=due_date
-            )
-            error = order.request.add()
+        user_id = request.form['user_id']
+        user = User.query.get(user_id)
+        if user is not None:
+            selected_user = user
+        order = Order(
+            user_id=user_id,
+            title=request.form['title'],
+            description=request.form['description'],
+            due_date=request.form["due_date"]
+        )
+        error = order.request.add()
         if not error:
             return redirect(
                 url_for('user.profile', id=user_id)
@@ -58,7 +61,9 @@ def assign():
     return render_template(
         "order/assign.html",
         order_heads=order_heads,
-        min_date=min_date
+        min_date=min_date,
+        selected_user=selected_user,
+        users=users
     )
 
 
@@ -68,21 +73,11 @@ def assign():
 def update(order_id):
     order = Order.query.get(order_id)
     min_date = datetime.today().strftime("%Y-%m-%d")
-    order_attrs = [
-        "title",
-        "description",
-        "user_id"
-    ]
+    users = [user for user in User.query.all() if not user.is_admin()]
+    selected_user = order.user
     if request.method == "POST":
-        error = None
-        update_obj_attrs(order, order_attrs)
-        due_date_str = request.form['due_date']
-        try:
-            order.due_date = datetime.strptime(due_date_str, '%Y-%m-%d')
-        except ValueError:
-            error = "Fecha invalida"
-        if not error:
-            error = order.request.update()
+        update_obj_attrs(order, order_heads)
+        error = order.request.update()
         if not error:
             return redirect(
                 url_for('user.profile', id=order.user_id)
@@ -94,6 +89,8 @@ def update(order_id):
         order_heads=order_heads,
         order_status_options=order_status_options,
         min_date=min_date,
+        selected_user=selected_user,
+        users=users,
         order=order
     )
 
@@ -124,4 +121,4 @@ def check_for_overdue_orders(orders):
 
 
 def order_is_overdue(order):
-    return order.due_date < datetime.today() - timedelta(days=1) and order.status == "Pendiente"
+    return order.due_date < date.today() - timedelta(days=1) and order.status == "Pendiente"

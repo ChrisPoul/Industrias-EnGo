@@ -1,0 +1,8 @@
+<select name="{{ head }}">
+    <option value="{{ selected_user['id'] }}">{{ selected_user['username'] }}</option>
+    {% for user in users %}
+    {% if user != selected_user %}
+    <option value="{{ user.id }}">{{ user.username }}</option>
+    {% endif %}
+    {% endfor %}
+</select>
