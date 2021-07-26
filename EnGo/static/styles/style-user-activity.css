@@ -50,6 +50,12 @@
     width: 100%;
 }
 
+.day-activity {
+    padding-top: 1em;
+    text-align: left;
+    margin: 0.3em;
+}
+
 .activity-status {
     margin-left: 0.6em;
     margin-bottom: 0.5em;
