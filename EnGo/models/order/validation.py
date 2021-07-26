@@ -19,8 +19,7 @@ class OrderValidation:
 
     def validate_empty_values(self):
         order_required_values = [
-            "title",
-            "due_date"
+            "title"
         ]
         self.error = validate_empty_values(self.order, order_required_values)
 

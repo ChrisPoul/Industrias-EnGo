@@ -74,17 +74,6 @@ class TestValidateEmptyValues(OrderTest):
 
         self.assertNotEqual(error, None)
 
-    def test_should_return_error_given_empty_due_date(self):
-        order = Order(
-            user_id=self.user.id,
-            title="Test Title",
-            description="Test Description",
-            due_date=""
-        )
-        error = order.validation.validate_empty_values()
-
-        self.assertNotEqual(error, None)
-
 
 class TestValidateUser(OrderTest):
 
