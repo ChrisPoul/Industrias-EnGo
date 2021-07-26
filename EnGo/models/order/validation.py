@@ -37,7 +37,6 @@ class OrderValidation:
             return self.error
         try:
             due_date = datetime.strptime(self.order.due_date, "%Y-%m-%d")
-            self.order.due_date = due_date
         except ValueError:
             self.error = "No has seleccionado una fecha, porfavor selecciona una"
         
