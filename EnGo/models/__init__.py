@@ -3,7 +3,7 @@ from EnGo.errors.messages import (
     empty_value_error, invalid_num_error
 )
 
-db = SQLAlchemy()
+db = SQLAlchemy(session_options={"autoflush": False})
 
 
 class MyModel:
