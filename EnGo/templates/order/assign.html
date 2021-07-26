@@ -6,27 +6,31 @@
 
 {% block content %}
 <form method="post">
-    <div class="assign-order">
-        {% for head in order_heads %}
-        {% if head != "status" %}
-        <div>
-            <strong>{{ order_heads[head] }}:</strong>
-        </div>
-        <div>
-            <input name="{{ head }}" value="{{ request.form[head] }}"
-            {% if head == "title" %}
-            placeholder="Requerido"
-            {% else %}
-            placeholder="Opcional"
-            {% endif %}
-            {% if head == "due_date" %}
-            type="date"
-            min="{{ min_date }}"
-            {% endif %}> 
-        </div>
+    {% for head in order_heads %}
+    {% if head == "user_id" %}
+    <strong>{{ order_heads[head] }}:</strong>
+    <select name="{{ head }}">
+        <option value="{{ selected_user['id'] }}">{{ selected_user['username'] }}</option>
+        {% for user in users %}
+        {% if user != selected_user %}
+        <option value="{{ user.id }}">{{ user.username }}</option>
         {% endif %}
         {% endfor %}
-    </div>
+    </select>
+    {% elif head != "status" %}
+    <strong>{{ order_heads[head] }}:</strong>
+    <input name="{{ head }}" value="{{ request.form[head] }}"
+    {% if head == "title" %}
+    placeholder="Requerido"
+    {% else %}
+    placeholder="Opcional"
+    {% endif %}
+    {% if head == "due_date" %}
+    type="date"
+    min="{{ min_date }}"
+    {% endif %}> 
+    {% endif %}
+    {% endfor %}
     <input type="submit" value="Asignar">
 </form>
 {% endblock %}
