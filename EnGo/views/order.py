@@ -115,10 +115,6 @@ def day_orders(user_id, date_str):
 
 def check_for_overdue_orders(orders):
     for order in orders:
-        if order_is_overdue(order):
+        if order.is_overdue:
             order.status = "Atrasada"
             order.update()
-
-
-def order_is_overdue(order):
-    return order.due_date < date.today() - timedelta(days=1) and order.status == "Pendiente"
