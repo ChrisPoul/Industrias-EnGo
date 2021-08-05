@@ -3,7 +3,7 @@ from flask import (
     Blueprint, render_template, request,
     flash, redirect, url_for, g, session
 )
-from EnGo.models.user import User, UserProduction
+from EnGo.models.user import User
 from EnGo.models.calendar import MyCalendar, weekday_heads
 from EnGo.views import (
     permission_required, login_required,
@@ -25,7 +25,7 @@ permissions = [
     "Recursos Humanos"
 ]
 
-from . import auth, production
+from . import auth
 
 
 @bp.route("/users", methods=('POST', 'GET'))

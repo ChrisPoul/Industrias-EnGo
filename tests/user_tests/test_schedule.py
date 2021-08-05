@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 from . import UserTest
-from EnGo.models.user import User, UserProduction
+from EnGo.models.user import User, Production
 from EnGo.models.activity import Activity
 from EnGo.models.order import Order
 
@@ -9,14 +9,14 @@ class UserScheduleTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
-        self.user_production = UserProduction(
+        self.user_production = Production(
             user_id=self.user.id,
             concept="Test Production",
             quantity=10,
             date=date.today()
         )
         self.user_production.add()
-        user_production2 = UserProduction(
+        user_production2 = Production(
             user_id=self.user.id,
             concept="Test Production",
             quantity=10,

@@ -1,17 +1,20 @@
 from datetime import datetime
 from flask import (
-    render_template, request,
+    Blueprint, render_template, request,
     flash, redirect, url_for
 )
-from EnGo.models.user import User, UserProduction
+from EnGo.models.user import User
+from EnGo.models.production import Production
 from EnGo.views import (
     permission_required, login_required
 )
-from . import bp
+
+bp = Blueprint("production", __name__, url_prefix="/production")
 
 production_heads = dict(
     concept="Concepto",
     quantity="Cantidad",
+    user_id="Empleado",
     date="Fecha de Registro"
 )
 permissions = [
@@ -32,7 +35,7 @@ def production(user_id):
         user_production = user.schedule.get_day_production(selected_date)
 
     return render_template(
-        "user/production/production.html",
+        "production/production.html",
         production_heads=production_heads,
         selected_date_str=selected_date_str,
         user_production=user_production,
@@ -40,24 +43,24 @@ def production(user_id):
     )
 
 
-@bp.route('/register_production/<int:user_id>', methods=('POST', 'GET'))
+@bp.route('/register', methods=('POST', 'GET'))
 @permission_required(permissions)
 @login_required
-def register_production(user_id):
+def register():
     if request.method == "POST":
-        production = UserProduction(
-            user_id=user_id,
+        production = Production(
+            user_id=request.form['user_id'],
             concept=request.form['concept'],
             quantity=request.form['quantity']
         )
         error = production.request.add()
         if not error:
             return redirect(
-                url_for('user.profile', id=user_id)
+                url_for('user.profile', id=production.user_id)
             )
         flash(error)
     
     return render_template(
-        "user/production/register-production.html",
+        "production/register.html",
         production_heads=production_heads
     )
