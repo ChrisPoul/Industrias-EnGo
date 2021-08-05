@@ -1,14 +1,17 @@
 <div>
-    <div class="week-activities-head">
+    <div class="week-board-head">
         <a href="{{ url_for('user.assign_activity', id=user.id) }}">
             <input type="button" value="Añadir Actividad">
+        </a>
+        <a href="{{ url_for('order.assign') }}">
+            <input type="button" value="Asignar Order">
         </a>
         <form method="post">
             <input name="selected_week" type="week" value="{{ selected_week_str }}">
             <input type="submit" value="Seleccionar">
         </form>
     </div>
-    <div class="week-activities">
+    <div class="week-board-body">
         {% for weekday in weekday_heads %}
         <div class="weekday-head">
             {{ weekday_heads[weekday] }}
