@@ -2,7 +2,7 @@ from EnGo.models.user import User
 from EnGo.models import validate_empty_values
 
 
-class UserActivityValidation:
+class ActivityValidation:
 
     def __init__(self, user_activity):
         self.activity = user_activity

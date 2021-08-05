@@ -15,5 +15,5 @@ class Activity(db.Model, MyModel):
 
     @property
     def validation(self):
-        from .validation import UserActivityValidation
-        return UserActivityValidation(self)
+        from .validation import ActivityValidation
+        return ActivityValidation(self)
