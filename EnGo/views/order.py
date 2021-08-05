@@ -24,10 +24,6 @@ order_status_options = [
     "Completada",
     "Cancelada"
 ]
-initial_user = dict(
-    id=0,
-    username="Seleccionar Empleado"
-)
 permissions = [
     "Recursos Humanos"
 ]
@@ -39,7 +35,10 @@ permissions = [
 def assign():
     min_date = datetime.today().strftime("%Y-%m-%d")
     users = [user for user in User.query.all() if not user.is_admin()]
-    selected_user = initial_user
+    selected_user = dict(
+        id=0,
+        username="Seleccionar Empleado"
+    )
     if request.method == "POST":
         user_id = request.form['user_id']
         user = User.query.get(user_id)
