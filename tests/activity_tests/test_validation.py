@@ -47,3 +47,22 @@ class TestValidateEmptyValues(ActivityTest):
         error = activity.validation.validate_empty_values()
 
         self.assertNotEqual(error, None)
+
+
+class TestValidateUserId(ActivityTest):
+
+    def test_should_not_return_error_given_valid_user_id(self):
+        activity = Activity(
+            user_id=self.user.id
+        )
+        error = activity.validation.validate_user_id()
+
+        self.assertEqual(error, None)
+
+    def test_should_return_error_given_invalid_user_id(self):
+        activity = Activity(
+            user_id=0
+        )
+        error = activity.validation.validate_user_id()
+
+        self.assertNotEqual(error, None)

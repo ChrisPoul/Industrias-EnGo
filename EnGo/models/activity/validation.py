@@ -1,3 +1,4 @@
+from EnGo.models.user import User
 from EnGo.models import validate_empty_values
 
 
@@ -16,3 +17,11 @@ class UserActivityValidation:
         self.error = validate_empty_values(self.activity, ["title"])
 
         return self.error
+
+    def validate_user_id(self):
+        user = User.query.get(self.activity.user_id)
+        if not user:
+            self.error = "El empleado que seleccionaste es invalido"
+        
+        return self.error
+        
