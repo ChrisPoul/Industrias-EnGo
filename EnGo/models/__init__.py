@@ -19,6 +19,11 @@ class MyModel:
         db.session.delete(self)
         commit_to_db()
 
+    @property
+    def request(self):
+        from .request import Request
+        return Request(self)
+
 
 def commit_to_db():
     db.session.commit()

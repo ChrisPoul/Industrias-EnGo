@@ -1,6 +1,6 @@
 from datetime import date, timedelta
 from . import UserTest
-from EnGo.models.user import User, UserActivity, UserProduction
+from EnGo.models.user import User, Activity, UserProduction
 from EnGo.models.order import Order
 
 
@@ -22,7 +22,7 @@ class UserScheduleTest(UserTest):
             date=date.today() + timedelta(days=10)
         )
         user_production2.add()
-        self.user_activity = UserActivity(
+        self.user_activity = Activity(
             user_id=self.user.id,
             title="Test Activity"
         )

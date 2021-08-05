@@ -1,24 +1,33 @@
-from . import UserViewTest
+from . import ActivityTest
 from datetime import datetime
 from flask import url_for
-from EnGo.models.user import UserActivity
+from EnGo.models.activity import Activity
 
 ### LOGED IN USER (LU) ###
 ### LOGED IN USER HAS PERMISSION (LUHP) ###
 ### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
 
 
-class TestAssignActivityView(UserViewTest):
+class ActivityViewTest(ActivityTest):
+
+    def setUp(self):
+        ActivityTest.setUp(self)
+        self.activity.delete()
+        self.create_test_users()
+
+
+class TestAssignView(ActivityViewTest):
 
     def test_should_add_activity_given_valid_activity_input_and_LUHP(self):
         self.login_user(self.dev_user)
         activity_input = dict(
             title="Test Activity",
-            description=""
+            description="",
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.assign_activity', id=self.user.id),
+                url_for('activity.assign'),
                 data=activity_input
             )
         
@@ -28,11 +37,12 @@ class TestAssignActivityView(UserViewTest):
         self.login_user(self.dev_user)
         activity_input = dict(
             title="",
-            description=""
+            description="",
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.assign_activity', id=self.user.id),
+                url_for('activity.assign'),
                 data=activity_input
             )
         
@@ -42,17 +52,17 @@ class TestAssignActivityView(UserViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('user.assign_activity', id=self.user.id)
+                url_for('activity.assign')
             )
 
         self.assertStatus(response, 302)
 
 
-class TestUpdateActivity(UserViewTest):
+class TestUpdateView(ActivityViewTest):
 
     def setUp(self):
-        UserViewTest.setUp(self)
-        self.activity = UserActivity(
+        ActivityViewTest.setUp(self)
+        self.activity = Activity(
             user_id=self.user.id,
             title="New Activity"
         )
@@ -62,11 +72,12 @@ class TestUpdateActivity(UserViewTest):
         self.login_user(self.admin_user)
         activity_input = dict(
             title="New Activity",
-            description="Test Description"
+            description="Test Description",
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.update_activity', activity_id=self.activity.id),
+                url_for('activity.update', activity_id=self.activity.id),
                 data=activity_input
             )
         self.db.session.rollback()
@@ -77,11 +88,12 @@ class TestUpdateActivity(UserViewTest):
         self.login_user(self.admin_user)
         activity_input = dict(
             title="",
-            description="Test Description"
+            description="Test Description",
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.update_activity', activity_id=self.activity.id),
+                url_for('activity.update', activity_id=self.activity.id),
                 data=activity_input
             )
         self.db.session.rollback()
@@ -92,7 +104,7 @@ class TestUpdateActivity(UserViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('user.update_activity', activity_id=self.activity.id)
+                url_for('activity.update', activity_id=self.activity.id)
             )
         
         self.assertStatus(response, 302)

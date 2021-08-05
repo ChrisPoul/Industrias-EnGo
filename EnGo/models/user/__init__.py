@@ -1,8 +1,7 @@
 from datetime import datetime
 from sqlalchemy import (
     Column, Integer, String,
-    ForeignKey, DateTime, Text,
-    Date
+    ForeignKey, DateTime, Text
 )
 from EnGo.models import db, MyModel
 from EnGo.models.view import View
@@ -25,7 +24,7 @@ class User(db.Model, MyModel):
         cascade="all, delete-orphan"
     )
     activities = db.relationship(
-        'UserActivity',
+        'Activity',
         backref="user",
         cascade="all, delete-orphan"
     )
@@ -125,35 +124,12 @@ class UserObservation(db.Model, MyModel):
     date = Column(DateTime, nullable=False, default=datetime.now)
 
 
-class UserActivity(db.Model, MyModel):
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
-    title = Column(String(200), nullable=False)
-    description = Column(Text, nullable=True)
-    due_date = Column(Date, nullable=False, default=datetime.today)
-
-    @property
-    def validation(self):
-        from .validation import UserActivityValidation
-        return UserActivityValidation(self)
-
-    @property
-    def request(self):
-        from .request import UserActivityRequest
-        return UserActivityRequest(self)
-
-
 class UserProduction(db.Model, MyModel):
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), nullable=False)
     concept = Column(String(200), nullable=False, unique=False)
     date = Column(DateTime, nullable=False, default=datetime.now)
     quantity = Column(Integer, nullable=False)
-
-    @property
-    def request(self):
-        from .request import UserProductionRequest
-        return UserProductionRequest(self)
 
     @property
     def validation(self):

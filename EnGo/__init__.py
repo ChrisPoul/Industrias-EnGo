@@ -71,4 +71,7 @@ def create_app(test_config=None):
     from .views import order
     app.register_blueprint(order.bp)
 
+    from .views import activity
+    app.register_blueprint(activity.bp)
+
     return app
