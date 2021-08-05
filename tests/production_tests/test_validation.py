@@ -27,8 +27,8 @@ class TestValidate(ProductionTest):
     def test_should_return_error_given_invalid_user_id(self):
         production = Production(
             user_id=0,
-            title="Test Activity",
-            description=""
+            concept="Test Concept",
+            quantity=10
         )
         error = production.validation.validate()
 
