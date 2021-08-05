@@ -16,7 +16,7 @@ order_heads = dict(
     title="Título",
     description="Descripción",
     status="Estatus",
-    user_id="Usuario",
+    user_id="Empleado",
     due_date="Fecha De Entrega"
 )
 order_status_options = [
