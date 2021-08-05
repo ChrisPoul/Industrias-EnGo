@@ -125,17 +125,11 @@ def day_assignments(user_id, date_str):
     user = User.query.get(user_id)
     day_activities = user.schedule.get_day_activities(date)
     day_orders = user.schedule.get_day_orders(date)
-    check_for_overdue_orders(day_orders)
     
     return render_template(
         'user/day-assignments.html',
         user=user,
-        date=date
+        date=date,
+        activities=day_activities,
+        orders=day_orders
     )
-
-
-def check_for_overdue_orders(orders):
-    for order in orders:
-        if order.is_overdue:
-            order.status = "Atrasada"
-            order.update()

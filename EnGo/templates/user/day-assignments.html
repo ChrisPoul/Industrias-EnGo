@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<h1>{% block title %}Actividades para el dia {{ format_date(date) }}{% endblock %}</h1>
+<h1>{% block title %}Tareas para el dia {{ format_date(date) }}{% endblock %}</h1>
 {% endblock%}
 
 {% block content %}
@@ -12,6 +12,14 @@
             <strong>{{ activity.title }}</strong>
         </a>
         <p>{{ activity.description }}</p>
+    </div>
+    {% endfor %}
+    {% for order in orders %}
+    <div class="container day-activity">
+        <a href="{{ url_for('order.update', order_id=order.id) }}">
+            <strong>{{ order.title }}</strong>
+        </a>
+        <p>{{ order.description }}</p>
     </div>
     {% endfor %}
 </div>
