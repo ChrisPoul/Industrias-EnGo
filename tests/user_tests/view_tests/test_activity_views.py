@@ -96,18 +96,3 @@ class TestUpdateActivity(UserViewTest):
             )
         
         self.assertStatus(response, 302)
-
-
-class TestDayActivities(UserViewTest):
-
-    def test_should_grant_access_given_LUHP(self):
-        self.login_user(self.dev_user)
-        with self.client as client:
-            response = client.get(
-                url_for('user.day_activities', 
-                id=self.normal_user.id,
-                date_str=datetime.today().strftime("%Y-%m-%d")
-                )
-            )
-        
-        self.assert200(response)

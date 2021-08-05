@@ -115,3 +115,27 @@ def profile(id):
         selected_week_str=selected_week_str,
         user=user
     )
+
+
+@bp.route('/day_assignments/<int:user_id>/<string:date_str>')
+@permission_required(permissions)
+@login_required
+def day_assignments(user_id, date_str):
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+    user = User.query.get(user_id)
+    day_activities = user.schedule.get_day_activities(date)
+    day_orders = user.schedule.get_day_orders(date)
+    check_for_overdue_orders(day_orders)
+    
+    return render_template(
+        'user/day-assignments.html',
+        user=user,
+        date=date
+    )
+
+
+def check_for_overdue_orders(orders):
+    for order in orders:
+        if order.is_overdue:
+            order.status = "Atrasada"
+            order.update()

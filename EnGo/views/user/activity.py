@@ -61,19 +61,3 @@ def update_activity(activity_id):
         activity_heads=activity_heads,
         activity=activity
     )
-
-
-@bp.route('/day_activities/<int:id>/<string:date_str>')
-@permission_required(permissions)
-@login_required
-def day_activities(id, date_str):
-    date = datetime.strptime(date_str, "%Y-%m-%d")
-    user = User.query.get(id)
-    day_activities = user.schedule.get_day_activities(date)
-    
-    return render_template(
-        'user/activity/day-activities.html',
-        activities=day_activities,
-        user=user,
-        date=date
-    )

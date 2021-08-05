@@ -136,27 +136,3 @@ class TestUpdateView(OrderViewTest):
             )
 
         self.assertStatus(response, 302)
-    
-
-class TestDayOrdersView(OrderViewTest):
-
-    def test_should_grant_access_given_LUHP(self):
-        self.login_user(self.dev_user)
-        date_str = date.today().strftime("%Y-%m-%d")
-        with self.client as client:
-            response = client.get(
-                url_for("order.day_orders", user_id=self.user.id, date_str=date_str)
-            )
-        
-        self.assert200(response)
-    
-    def test_should_not_grant_access_LUHP(self):
-        self.login_user(self.normal_user)
-        date_str = date.today().strftime("%Y-%m-%d")
-        with self.client as client:
-            response = client.get(
-                url_for("order.day_orders", user_id=self.user.id, date_str=date_str)
-            )
-        
-        self.assertStatus(response, 302)
-

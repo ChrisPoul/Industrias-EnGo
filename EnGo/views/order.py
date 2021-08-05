@@ -93,28 +93,3 @@ def update(order_id):
         users=users,
         order=order
     )
-
-
-@bp.route('/day_orders/<int:user_id>/<string:date_str>')
-@permission_required(permissions)
-@login_required
-def day_orders(user_id, date_str):
-    date = datetime.strptime(date_str, "%Y-%m-%d")
-    user = User.query.get(user_id)
-    day_orders = user.schedule.get_day_orders(date)
-    check_for_overdue_orders(day_orders)
-    
-    return render_template(
-        'order/day-orders.html',
-        order_status_options=order_status_options,
-        user=user,
-        orders=day_orders,
-        date=date
-    )
-
-
-def check_for_overdue_orders(orders):
-    for order in orders:
-        if order.is_overdue:
-            order.status = "Atrasada"
-            order.update()

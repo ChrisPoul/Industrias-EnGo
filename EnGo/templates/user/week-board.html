@@ -18,8 +18,8 @@
         </div>
         {% endfor %}
         {% for weekday in weekday_heads %}
-        <a href="{{ url_for('user.day_activities',
-            id=user.id, date_str=weekday_dates[weekday].strftime('%Y-%m-%d')) }}">
+        <a href="{{ url_for('user.day_assignments',
+            user_id=user.id, date_str=weekday_dates[weekday].strftime('%Y-%m-%d')) }}">
             <div class="weekday">
                 {% for activity in week_activities[weekday] %}
                 <div>
