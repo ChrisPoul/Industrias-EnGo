@@ -5,26 +5,5 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    <div class="assign-activity">
-        {% for head in activity_heads %}
-        <div>
-            <strong>{{ activity_heads[head] }}:</strong>
-        </div>
-        <div>
-            <input name="{{ head }}" value="{{ request.form[head] }}"
-            {% if head == "title" %}
-            placeholder="Requerido"
-            {% else %}
-            placeholder="Opcional"
-            {% endif %}
-            {% if head == "due_date" %}
-            type="date"
-            min="{{ min_date }}"
-            {% endif %}> 
-        </div>
-        {% endfor %}
-    </div>
-    <input type="submit" value="Asignar">
-</form>
+{% include "activity/form.html" %}
 {% endblock %}

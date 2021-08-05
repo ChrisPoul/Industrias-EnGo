@@ -5,19 +5,5 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
-    {% for head in activity_heads %}
-    <label for="{{ head }}">{{ activity_heads[head] }}:</label>
-    <input name="{{ head }}" id="{{ head }}"
-        {% if head == "due_date" %}
-        type="date"
-        value="{{ activity[head].strftime('%Y-%m-%d') }}"
-        min="{{ min_date }}"
-        {% else %}
-        value="{{ activity[head] }}"
-        {% endif %}>
-    {% endfor %}
-    <input type="submit" value="Guardar Cambios">
-</form>
-
+{% include "activity/form.html" %}
 {% endblock %}

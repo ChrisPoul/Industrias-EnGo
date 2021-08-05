@@ -9,7 +9,7 @@
     {% for head in order_heads %}
     {% if head == "user_id" %}
     <strong>{{ order_heads[head] }}:</strong>
-    {% include "order/users-dropdown.html" %}
+    {% include "user/users-dropdown.html" %}
     {% elif head != "status" %}
     <strong>{{ order_heads[head] }}:</strong>
     <input name="{{ head }}" value="{{ request.form[head] }}"

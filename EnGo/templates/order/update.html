@@ -9,7 +9,7 @@
     {% for head in order_heads %}
     <strong>{{ order_heads[head] }}:</strong>
     {% if head == "user_id" %}
-    {% include "order/users-dropdown.html" %}
+    {% include "user/users-dropdown.html" %}
     {% elif head == "status" %}
     {% include "order/status-dropdown.html" %}
     {% else %}
