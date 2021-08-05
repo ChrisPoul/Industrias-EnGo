@@ -17,10 +17,6 @@ activity_heads = dict(
     description="Descripción",
     user_id="Empleado"
 )
-initial_user = dict(
-    id=0,
-    username="Seleccionar Empleado"
-)
 permissions = [
     "Recursos Humanos"
 ]
@@ -31,7 +27,10 @@ permissions = [
 @login_required
 def assign():
     users = [user for user in User.query.all() if not user.is_admin()]
-    selected_user = initial_user
+    selected_user = dict(
+        id=0,
+        username="Seleccionar Empleado"
+    )
     if request.method == "POST":
         activity = Activity(
             user_id=request.form['user_id'],

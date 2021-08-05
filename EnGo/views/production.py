@@ -45,6 +45,11 @@ def production():
 @permission_required(permissions)
 @login_required
 def register():
+    users = [user for user in User.query.all() if not user.is_admin()]
+    selected_user = dict(
+        id=0,
+        username="Seleccionar Empleado"
+    )
     if request.method == "POST":
         production = Production(
             user_id=request.form['user_id'],
@@ -60,5 +65,7 @@ def register():
     
     return render_template(
         "production/register.html",
-        production_heads=production_heads
+        production_heads=production_heads,
+        selected_user=selected_user,
+        users=users
     )
