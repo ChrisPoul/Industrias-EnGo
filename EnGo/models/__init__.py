@@ -21,8 +21,8 @@ class MyModel:
 
     @property
     def request(self):
-        from .request import Request
-        return Request(self)
+        from .request import ObjectRequest
+        return ObjectRequest(self)
 
 
 def commit_to_db():
