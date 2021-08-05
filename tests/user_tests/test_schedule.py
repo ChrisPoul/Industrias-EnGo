@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 from . import UserTest
-from EnGo.models.user import User, Production
+from EnGo.models.user import User
+from EnGo.models.production import Production
 from EnGo.models.activity import Activity
 from EnGo.models.order import Order
 

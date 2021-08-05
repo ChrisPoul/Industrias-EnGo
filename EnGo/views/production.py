@@ -22,12 +22,11 @@ permissions = [
 ]
 
 
-@bp.route('/production/<int:user_id>', methods=("POST", "GET"))
+@bp.route('/production', methods=("POST", "GET"))
 @permission_required(permissions)
 @login_required
-def production(user_id):
-    user = User.query.get(user_id)
-    user_production = user.production
+def production():
+    user_production = Production.query.all()
     selected_date_str = ""
     if request.method == "POST":
         selected_date_str = request.form['selected_date']
@@ -38,8 +37,7 @@ def production(user_id):
         "production/production.html",
         production_heads=production_heads,
         selected_date_str=selected_date_str,
-        user_production=user_production,
-        user=user
+        user_production=user_production
     )
 
 

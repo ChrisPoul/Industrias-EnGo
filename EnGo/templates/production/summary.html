@@ -7,18 +7,18 @@
                 <i class="fa fa-caret-down" onclick="displayOverlayDropdown(event)"></i>
             </button>
             <div class="overlay-dropdown-content">
-                {% include "user/production/production-table.html" %}
+                {% include "production/production-table.html" %}
             </div>
             <div class="overlay-dropdown-background" onclick="hideOverlayDropdown(event)"></div>
         </div>
-        <a href="{{ url_for('user.production', user_id=user.id) }}">
+        <a href="{{ url_for('production.production') }}">
             <button class="production-breakdown-button">
                 Desgloce
             </button>
         </a>
     </div>
     <div>
-        <a href="{{ url_for('user.register_production', user_id=user.id) }}">
+        <a href="{{ url_for('production.register') }}">
             <button class="add-production-button">
                 Registrar Producción
             </button>

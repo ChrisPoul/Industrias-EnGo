@@ -1,4 +1,4 @@
-from . import UserViewTest
+from . import ProductionTest
 from flask import url_for
 
 ### LOGED IN USER (LU) ###
@@ -6,17 +6,26 @@ from flask import url_for
 ### LOGED IN USER HAS NO PERMISSION (LUHNP) ###
 
 
-class TestRegisterProductionView(UserViewTest):
+class ProductionViewTest(ProductionTest):
+
+    def setUp(self):
+        ProductionTest.setUp(self)
+        self.production.delete()
+        self.create_test_users()
+
+
+class TestRegisterView(ProductionViewTest):
 
     def test_should_register_production_given_valid_production_input_and_LUHP(self):
         self.login_user(self.dev_user)
         production_input = dict(
             concept="New Production",
-            quantity=10
+            quantity=10,
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.register_production', user_id=self.user.id),
+                url_for('production.register'),
                 data=production_input
             )
 
@@ -26,11 +35,12 @@ class TestRegisterProductionView(UserViewTest):
         self.login_user(self.dev_user)
         production_input = dict(
             concept="",
-            quantity=10
+            quantity=10,
+            user_id=self.user.id
         )
         with self.client as client:
             client.post(
-                url_for('user.register_production', user_id=self.user.id),
+                url_for('production.register'),
                 data=production_input
             )
         
@@ -40,19 +50,19 @@ class TestRegisterProductionView(UserViewTest):
         self.login_user(self.normal_user)
         with self.client as client:
             response = client.get(
-                url_for('user.register_production', user_id=self.user.id)
+                url_for('production.register')
             )
         
         self.assertStatus(response, 302)
 
 
-class TestProductionView(UserViewTest):
+class TestProductionView(ProductionViewTest):
 
     def test_should_return_valid_response_given_LUHP(self):
         self.login_user(self.dev_user)
         with self.client as client:
             response = client.get(
-                url_for('user.production', user_id=self.user.id)
+                url_for('production.production')
             )
         
         self.assert200(response)

@@ -74,4 +74,7 @@ def create_app(test_config=None):
     from .views import activity
     app.register_blueprint(activity.bp)
 
+    from .views import production
+    app.register_blueprint(production.bp)
+
     return app

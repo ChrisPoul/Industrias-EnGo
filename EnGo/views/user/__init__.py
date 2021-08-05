@@ -10,6 +10,7 @@ from EnGo.views import (
     get_checked_permissions, get_form,
     update_obj_attrs
 )
+from EnGo.views.production import production_heads
 
 bp = Blueprint("user", __name__, url_prefix="/user")
 
@@ -106,7 +107,7 @@ def profile(id):
     return render_template(
         "user/profile.html",
         weekday_heads=weekday_heads,
-        production_heads=production.production_heads,
+        production_heads=production_heads,
         week_activities=week_activities,
         week_finished_orders=week_finished_orders,
         week_pending_orders=week_pending_orders,
