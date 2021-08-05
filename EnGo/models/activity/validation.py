@@ -10,6 +10,7 @@ class UserActivityValidation:
 
     def validate(self):
         self.validate_empty_values()
+        self.validate_user_id()
 
         return self.error
 

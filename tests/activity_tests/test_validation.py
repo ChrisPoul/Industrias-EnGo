@@ -15,11 +15,21 @@ class TestValidate(ActivityTest):
 
         self.assertEqual(error, None)
 
-    def test_should_return_error_given_invalid_activity(self):
+    def test_should_return_error_given_empty_values(self):
         activity = Activity(
             user_id=self.user.id,
             title="",
             description="Test Description"
+        )
+        error = activity.validation.validate()
+
+        self.assertNotEqual(error, None)
+
+    def test_should_return_error_given_invalid_user_id(self):
+        activity = Activity(
+            user_id=0,
+            title="Test Activity",
+            description=""
         )
         error = activity.validation.validate()
 
