@@ -1,17 +1,17 @@
-.user-production-summary {
+.production-summary {
     flex-direction: row;
     justify-content: space-between;
 }
-.user-production-summary div {
+.production-summary div {
     flex-direction: row;
 }
 
-.user-production {
+.production {
     display: grid;
     grid-template-columns: auto auto auto;
     padding-top: 0.3em;
 }
-.user-production div {
+.production div {
     padding: 0.5em;
     justify-content: center;
 }
