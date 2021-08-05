@@ -98,11 +98,6 @@ class SoldProduct(db.Model, MyModel):
         from .validation import SoldProductValidation
         return SoldProductValidation(self)
 
-    @property
-    def request(self):
-        from .request import ProductRequest
-        return ProductRequest(self)
-
     def get_unique_key(self, attribute):
         return f"{attribute}_{self.id}"
 
@@ -133,8 +128,3 @@ class FinishedProduct(db.Model, MyModel):
     def validation(self):
         from .validation import FinishedProductValidation
         return FinishedProductValidation(self)
-
-    @property
-    def request(self):
-        from .request import ProductRequest
-        return ProductRequest(self)
