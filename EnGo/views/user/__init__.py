@@ -112,7 +112,7 @@ def profile(id):
         week_finished_orders=week_finished_orders,
         week_pending_orders=week_pending_orders,
         weekday_dates=weekday_dates,
-        user_production=week_production,
+        production=week_production,
         selected_week_str=selected_week_str,
         user=user
     )

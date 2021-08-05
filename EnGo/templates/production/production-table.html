@@ -8,7 +8,7 @@
         <strong>{{ production_heads[head] }}</strong>
     </div>
     {% endfor %}
-    {% for production in user_production %}
+    {% for production in production %}
     {% for head in production_heads %}
     <div {% if request.endpoint == "user.profile" %}
         style="border-bottom: 1px solid white;"

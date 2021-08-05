@@ -10,20 +10,20 @@ class UserScheduleTest(UserTest):
 
     def setUp(self):
         UserTest.setUp(self)
-        self.user_production = Production(
+        self.production = Production(
             user_id=self.user.id,
             concept="Test Production",
             quantity=10,
             date=date.today()
         )
-        self.user_production.add()
-        user_production2 = Production(
+        self.production.add()
+        production2 = Production(
             user_id=self.user.id,
             concept="Test Production",
             quantity=10,
             date=date.today() + timedelta(days=10)
         )
-        user_production2.add()
+        production2.add()
         self.activity = Activity(
             user_id=self.user.id,
             title="Test Activity"
@@ -180,7 +180,7 @@ class TestGetDayProduction(UserScheduleTest):
     def test_should_return_all_production_registered_on_given_date(self):
         day_production = self.user.schedule.get_day_production(date.today())
 
-        self.assertEqual(day_production, [self.user_production])
+        self.assertEqual(day_production, [self.production])
 
     def test_should_return_empty_list_given_no_production_registered_on_given_date(self):
         day_production = self.user.schedule.get_day_production(
@@ -195,7 +195,7 @@ class TestGetWeekProduction(UserScheduleTest):
     def test_should_return_all_production_registered_on_given_week(self):
         week_production = self.user.schedule.get_week_production(date.today())
 
-        self.assertEqual(week_production, [self.user_production])
+        self.assertEqual(week_production, [self.production])
 
     def test_should_return_empty_list_given_no_production_registered_on_given_week(self):
         week_production = self.user.schedule.get_week_production(

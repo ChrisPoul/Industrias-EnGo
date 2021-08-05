@@ -26,18 +26,18 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def production():
-    user_production = Production.query.all()
+    production = Production.query.all()
     selected_date_str = ""
     if request.method == "POST":
         selected_date_str = request.form['selected_date']
         selected_date = datetime.strptime(selected_date_str, "%Y-%m-%d")
-        user_production = user.schedule.get_day_production(selected_date)
+        production = user.schedule.get_day_production(selected_date)
 
     return render_template(
         "production/production.html",
         production_heads=production_heads,
         selected_date_str=selected_date_str,
-        user_production=user_production
+        production=production
     )
 
 
