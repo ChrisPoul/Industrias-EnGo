@@ -42,11 +42,6 @@ class Product(db.Model, MyModel):
         from .validation import ProductValidation
         return ProductValidation(self)
 
-    @property
-    def request(self):
-        from .request import ProductRequest
-        return ProductRequest(self)
-
     @cached_property
     def inventory(self):
         inventory = {}

@@ -36,11 +36,6 @@ class Expense(db.Model, MyModel):
     def validation(self):
         from .validation import ExpenseValidation
         return ExpenseValidation(self)
-    
-    @property
-    def request(self):
-        from .request import ExpenseRequest
-        return ExpenseRequest(self)
 
 
 class WarehouseExpense(db.Model, MyModel):
@@ -65,11 +60,6 @@ class ExpenseType(db.Model, MyModel):
     def validation(self):
         from .validation import ExpenseTypeValidation
         return ExpenseTypeValidation(self)
-
-    @property
-    def request(self):
-        from .request import ExpenseTypeRequest
-        return ExpenseTypeRequest(self)
 
 
 def filter_expenses_by_type(all_expenses, type_id):

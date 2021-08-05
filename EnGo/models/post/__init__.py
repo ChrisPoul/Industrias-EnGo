@@ -25,8 +25,3 @@ class Post(db.Model, MyModel):
     def validation(self):
         from .validation import PostValidation
         return PostValidation(self)
-    
-    @property
-    def request(self):
-        from .request import PostRequest
-        return PostRequest(self)
