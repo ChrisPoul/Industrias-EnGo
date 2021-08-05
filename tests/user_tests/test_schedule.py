@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 from . import UserTest
-from EnGo.models.user import User, Activity, UserProduction
+from EnGo.models.user import User, UserProduction
+from EnGo.models.activity import Activity
 from EnGo.models.order import Order
 
 
@@ -22,11 +23,11 @@ class UserScheduleTest(UserTest):
             date=date.today() + timedelta(days=10)
         )
         user_production2.add()
-        self.user_activity = Activity(
+        self.activity = Activity(
             user_id=self.user.id,
             title="Test Activity"
         )
-        self.user_activity.add()
+        self.activity.add()
         self.order = Order(
             user_id=self.user.id,
             title="Test Activity",
@@ -48,7 +49,7 @@ class TestGetDayActivities(UserScheduleTest):
     def test_should_return_all_activities_scheduled_for_the_given_day(self):
         day_activities = self.user.schedule.get_day_activities(date.today())
 
-        self.assertEqual(day_activities, [self.user_activity])
+        self.assertEqual(day_activities, [self.activity])
 
 
 class TestGetWeekdayActivities(UserScheduleTest):
@@ -60,7 +61,7 @@ class TestGetWeekdayActivities(UserScheduleTest):
         for day_activities in weekday_activities.values():
             activities += day_activities
 
-        self.assertEqual(activities, [self.user_activity])
+        self.assertEqual(activities, [self.activity])
 
 
 class TestGetWeekActivities(UserScheduleTest):
@@ -68,7 +69,7 @@ class TestGetWeekActivities(UserScheduleTest):
     def test_should_return_all_week_activities_given_date(self):
         week_activities = self.user.schedule.get_week_activities(date.today())
 
-        self.assertEqual(week_activities, [self.user_activity])
+        self.assertEqual(week_activities, [self.activity])
 
 
 class TestGetDayOrders(UserScheduleTest):
