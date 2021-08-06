@@ -5,5 +5,8 @@
 {% endblock %}
 
 {% block content %}
-{% include "activity/form.html" %}
+<form method="post">
+    {% include "activity/inputs.html" %}
+    <input type="submit" value="Guardar Cambios">
+</form>
 {% endblock %}
