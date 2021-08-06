@@ -1,0 +1,21 @@
+{% for head in product_heads %}
+<label for="{{ head }}">
+    {{ product_heads[head] }}:
+</label>
+<input name="{{ head }}" id="{{ head }}"
+    {% if head == "description" %}
+    placeholder="Opcional"
+    {% else %}
+    placeholder="Requerido"
+    {% endif %}
+    {% if head == "price" %}
+    type="number"
+    step=".01"
+    {% endif %}
+    {% if product %}
+    value="{{ product[head] }}"
+    {% else %}
+    value="{{ request.form[head] }}"
+    {% endif %}
+    >
+{% endfor %}

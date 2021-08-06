@@ -8,20 +8,7 @@
 
 {% block content %}
 <form method="post">
-    {% for head in product_heads %}
-    <label for="{{ head }}">{{ product_heads[head] }}:</label>
-    <input name="{{ head }}" id="{{ head }}"
-        {% if head == "description" %}
-        placeholder="Opcional"
-        {% else %}
-        placeholder="Requerido"
-        {% endif %}
-        {% if head == "price" %}
-        type="number"
-        step=".01"
-        {% endif %}
-        value="{{ product[head] }}">
-    {% endfor %}
+    {% include "product/inputs.html" %}
     <div class="product-update-buttons">
         <input type="submit" value="Guardar Cambios">
         <a href="{{ url_for('product.delete', id=product.id) }}">

@@ -64,8 +64,7 @@ def add(warehouse_id):
 
     return render_template(
         "product/add.html",
-        product_heads=product_heads,
-        form=request.form
+        product_heads=product_heads
     )
 
 

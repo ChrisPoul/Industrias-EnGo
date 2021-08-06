@@ -6,20 +6,7 @@
 
 {% block content %}
 <form method="post">
-    {% for head in product_heads %}
-    <label for="{{ head }}">{{ product_heads[head] }}</label>
-    <input name="{{ head }}"
-    {% if head == "price" %}
-    type="number"
-    step=".01"
-    {% endif %}
-    {% if head == "description" %}
-    placeholder="Opcional"
-    {% else %}
-    placeholder="Requerido"
-    {% endif %}
-    id="{{ head }}" value="{{ form[head] }}">
-    {% endfor %}
+    {% include "product/inputs.html" %}
     <input type="submit">
 </form>
 {% endblock %}
