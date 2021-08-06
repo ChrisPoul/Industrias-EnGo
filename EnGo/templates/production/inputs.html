@@ -1,0 +1,22 @@
+{% for head in production_heads %}
+{% if head != "date" %}
+<label for="{{ head }}">
+    {{ production_heads[head] }}
+</label>
+{% if head == "user_id" %}
+{% include "user/users-dropdown.html" %}
+{% else %}
+<input name="{{ head }}"
+    placeholder="Requerido"
+    {% if head == "quantity" %}
+    type="number"
+    {% endif %}
+    {% if production %}
+    value="{{ production[head] }}"
+    {% else %}
+    value="{{ request.form[head] }}"
+    {% endif %}
+    >
+{% endif %}
+{% endif %}
+{% endfor %}
