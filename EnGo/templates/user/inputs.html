@@ -1,0 +1,21 @@
+{% for head in user_heads %}
+{% if head == "password" %}
+{% include "user/auth/password-fields.html" %}
+{% else %}
+<label for="{{ head }}">
+    {{ user_heads[head] }}:
+</label>
+<input name="{{ head }}" id="{{ head }}"
+    placeholder="{{ user_heads[head] }}..."
+    {% if head == "salary" %}
+    type="number"
+    step=".01"
+    {% endif %}
+    {% if user %}
+    value="{{ user[head] }}"
+    {% else %}
+    value="{{ request.form[head] }}"
+    {% endif %}
+    >
+{% endfor %}
+{% include "user/permissions-dropdown.html" %}
