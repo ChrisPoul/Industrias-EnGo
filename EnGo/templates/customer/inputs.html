@@ -1,0 +1,15 @@
+{% for head in customer_heads %}
+<label for="{{ head }}">{{ customer_heads[head] }}:</label>
+<input name="{{ head }}" id="{{ head }}"
+{% if head == "phone" or head == "rfc" %}
+placeholder="Opcional"
+{% else %}
+placeholder="Requerido"
+{% endif %}
+{% if customer %}
+value="{{ customer[head] }}"
+{% else %}
+value="{{ request.form[head] }}"
+{% endif %}
+>
+{% endfor %}
