@@ -1,0 +1,27 @@
+{% for head in expense_heads %}
+<label for="{{ head }}">{{ expense_heads[head] }}</label>
+{% if head == "type_id" %}
+<div class="add-expense-type-dropdown">
+    {% include 'expense/type-dropdown.html' %}
+    <a href="{{ url_for('expense.add_type') }}">
+        <input type="button" value="Añadir Tipo">
+    </a>
+</div>
+{% else %}
+<input name="{{ head }}"
+placeholder="Requerido"
+{% if head == 'quantity' %}
+type="number"
+{% elif head == "cost" %}
+type="number"
+step=".01"
+{% endif %}
+id="{{ head }}"
+{% if expense %}
+value="{{ expense[head] }}"
+{% else %}
+value="{{ request.form[head] }}"
+{% endif %}
+>
+{% endif %}
+{% endfor %}

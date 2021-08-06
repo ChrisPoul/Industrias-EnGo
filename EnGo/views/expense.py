@@ -57,15 +57,14 @@ def expenses():
 @permission_required(permissions)
 @login_required
 def add():
-    form = get_form(expense_heads)
     expense_types = ExpenseType.query.all()
     if request.method == "POST":
         expense = Expense(
-            concept=form['concept'],
-            type_id=form['type_id'],
-            cost=form['cost'],
-            unit=form['unit'],
-            quantity=form['quantity']
+            concept=request.form['concept'],
+            type_id=request.form['type_id'],
+            cost=request.form['cost'],
+            unit=request.form['unit'],
+            quantity=request.form['quantity']
         )
         error = expense.request.add()
         if not error:
@@ -77,7 +76,6 @@ def add():
     return render_template(
         'expense/add.html',
         expense_heads=expense_heads,
-        form=form,
         expense_types=expense_types
     )
 

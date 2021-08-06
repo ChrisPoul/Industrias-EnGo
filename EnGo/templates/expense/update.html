@@ -6,22 +6,7 @@
 
 {% block content %}
 <form method="post">
-    {% for head in expense_heads %}
-    <label for="{{ head }}">{{ expense_heads[head] }}</label>
-    {% if head == "type_id" %}
-    {% include 'expense/type-dropdown.html' %}
-    {% else %}
-    <input name="{{ head }}"
-    placeholder="Requerido"
-    {% if head == 'quantity' %}
-    type="number"
-    {% elif head == "cost" %}
-    type="number"
-    step=".01"
-    {% endif %}
-    id="{{ head }}" value="{{ expense[head] }}">
-    {% endif %}
-    {% endfor %}
+    {% include "expense/inputs.html" %}
     <div>
         <input type="submit" value="Guardar Cambios">
         <a href="{{ url_for('expense.delete', id=expense.id) }}">
