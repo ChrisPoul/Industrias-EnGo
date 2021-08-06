@@ -1,0 +1,14 @@
+{% for head in post_heads %}
+<label for="{{ head }}">{{ post_heads[head] }}:</label>
+{% if head == "description" %}
+<textarea name="{{ head }}" id="{{ head }}">{{ post[head] }}</textarea>
+{% else %}
+<input name="{{ head }}" id="{{ head }}" 
+{% if post[head] %}
+value="{{ post[head] }}"
+{% else %}
+value="{{ request.form[head] }}"
+{% endif %}
+>
+{% endif %}
+{% endfor %}

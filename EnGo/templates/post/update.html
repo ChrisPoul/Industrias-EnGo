@@ -6,14 +6,7 @@
 
 {% block content %}
 <form method="post">
-    {% for head in post_heads %}
-    <label for="{{ head }}">{{ post_heads[head] }}:</label>
-    {% if head == "description" %}
-    <textarea name="{{ head }}" id="{{ head }}">{{ post[head] }}</textarea>
-    {% else %}
-    <input name="{{ head }}" id="{{ head }}" value="{{ post[head] }}">
-    {% endif %}
-    {% endfor %}
+    {% include "customer/inputs.html" %}
     <div>
         <input type="submit" value="Guardar Cambios">
         <a href="{{ url_for('post.delete', id=post.id) }}">

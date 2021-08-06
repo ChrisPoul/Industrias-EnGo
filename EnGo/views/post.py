@@ -23,11 +23,10 @@ permissions = [
 @permission_required(permissions)
 @login_required
 def add():
-    form = get_form(post_heads)
     if request.method == "POST":
         post = Post(
-            title=form["title"],
-            description=form["description"]
+            title=request.form["title"],
+            description=request.form["description"]
         )
         error = post.request.add()
         if not error:
@@ -38,8 +37,7 @@ def add():
         
     return render_template(
         'post/add.html',
-        post_heads=post_heads,
-        form=form
+        post_heads=post_heads
     )
 
 
