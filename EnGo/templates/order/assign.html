@@ -6,24 +6,7 @@
 
 {% block content %}
 <form method="post">
-    {% for head in order_heads %}
-    {% if head == "user_id" %}
-    <strong>{{ order_heads[head] }}:</strong>
-    {% include "user/users-dropdown.html" %}
-    {% elif head != "status" %}
-    <strong>{{ order_heads[head] }}:</strong>
-    <input name="{{ head }}" value="{{ request.form[head] }}"
-    {% if head == "title" %}
-    placeholder="Requerido"
-    {% else %}
-    placeholder="Opcional"
-    {% endif %}
-    {% if head == "due_date" %}
-    type="date"
-    min="{{ min_date }}"
-    {% endif %}> 
-    {% endif %}
-    {% endfor %}
+    {% include "customer/inputs.html" %}
     <input type="submit" value="Asignar">
 </form>
 {% endblock %}

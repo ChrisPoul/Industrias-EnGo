@@ -1,0 +1,25 @@
+{% for head in order_heads %}
+<strong>{{ order_heads[head] }}:</strong>
+{% if head == "user_id" %}
+{% include "user/users-dropdown.html" %}
+{% elif head == "status" and order%}
+{% include "order/status-dropdown.html" %}
+{% else %}
+<input name="{{ head }}"
+{% if head == "title" %}
+placeholder="Requerido"
+{% else %}
+placeholder="Opcional"
+{% endif %}
+{% if head == "due_date" %}
+type="date"
+min="{{ min_date }}"
+{% endif %}
+{% if order %}
+value="{{ order[head] }}"
+{% else %}
+value="{{ request.form[head] }}"
+{% endif %}
+> 
+{% endif %}
+{% endfor %}
