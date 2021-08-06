@@ -7,4 +7,4 @@ bp = Blueprint("error", __name__)
 
 @bp.app_errorhandler(404)
 def error_404(error):
-    return render_template("error/404.html"), 404
+    return render_template("errors/404.html"), 404
