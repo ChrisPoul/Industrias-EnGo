@@ -32,10 +32,9 @@ warehouse_heads = dict(
 @permission_required(accounting_permission)
 @login_required
 def add():
-    form = get_form(warehouse_heads)
     if request.method == "POST":
         warehouse = Warehouse(
-            name=form["name"]
+            name=request.form["name"]
         )
         error = warehouse.request.add()
         if not error:
@@ -46,8 +45,7 @@ def add():
 
     return render_template(
         "warehouse/add.html",
-        warehouse_heads=warehouse_heads,
-        form=form,
+        warehouse_heads=warehouse_heads
     )
 
 

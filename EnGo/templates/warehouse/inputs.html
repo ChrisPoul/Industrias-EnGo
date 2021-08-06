@@ -1,0 +1,10 @@
+{% for head in warehouse_heads %}
+<label for="{{ head }}">{{ warehouse_heads[head] }}:</label>
+<input name="{{ head }}" id="{{ head }}"
+    {% if warehouse %}
+    value="{{ warehouse[head] }}"
+    {% else %}
+    value="{{ request.form[head] }}"
+    {% endif %}
+    >
+{% endfor %}
