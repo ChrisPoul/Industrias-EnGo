@@ -16,8 +16,8 @@ product_heads = dict(
     price="Precio"
 )
 finished_product_heads = dict(
-    unit="Unidad",
     quantity="Cantidad",
+    unit="Unidad",
     date="Fecha de Registro"
 )
 permissions = [
