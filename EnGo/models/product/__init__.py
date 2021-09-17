@@ -1,5 +1,4 @@
 from datetime import datetime
-from functools import cached_property
 from EnGo.models import db, MyModel
 from sqlalchemy import (
     Column, Integer, String,
@@ -42,7 +41,6 @@ class Product(db.Model, MyModel):
         from .validation import ProductValidation
         return ProductValidation(self)
 
-    @cached_property
     def inventory(self):
         inventory = {}
         for sold_product in self.sold_products:
