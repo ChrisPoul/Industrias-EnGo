@@ -7,7 +7,7 @@ def create_app(test_config=None):
         __name__,
         instance_relative_config=True
     )
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{app.instance_path}/EnGo.db"
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:CPA-3858@engo-db.c1wvgf2jetbj.us-east-2.rds.amazonaws.com:3306/EnGo_db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SECRET_KEY'] = "dev"
 
